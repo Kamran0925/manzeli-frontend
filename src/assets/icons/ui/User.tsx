@@ -4,50 +4,39 @@ interface UserProps extends React.SVGProps<SVGSVGElement> {
   width?: string | number;
   height?: string | number;
   fill?: string;
-  style?: React.CSSProperties;
 }
 
-const defaultStyle: React.CSSProperties = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-};
-
-const defaultProps = {
-  width: "50",
-  height: "48",
-  fill: "#001283",
-  style: defaultStyle,
-};
-
-const User: React.FC<UserProps> = (props) => {
-  const {
-    width = defaultProps.width,
-    height = defaultProps.height,
-    fill = defaultProps.fill,
-    style = defaultProps.style,
-    ...rest
-  } = props;
-
-  return (
-    <svg
-      width={width}
-      height={height}
-      viewBox="0 0 50 48"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={style}
-      {...rest}
-    >
-      <path
-        d="M25 0L49.7275 17.9656L40.2824 47.0344H9.71758L0.272532 17.9656L25 0Z"
-        fill={fill}
-      />
-    </svg>
-  );
-};
-
-User.defaultProps = defaultProps;
+const User: React.FC<UserProps> = ({
+  width = "52",
+  height = "52",
+  fill = "#001283",
+  ...props
+}) => (
+  <svg
+    width={width}
+    height={height}
+    viewBox="0 0 52 52"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M26 0L50.7275 17.9656L41.2824 47.0344H10.7176L1.27253 17.9656L26 0Z"
+      fill={fill}
+    />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M19.7204 28.8874C20.5018 28.106 21.5616 27.667 22.6667 27.667H29.3333C30.4384 27.667 31.4982 28.106 32.2796 28.8874C33.061 29.6688 33.5 30.7286 33.5 31.8337V33.5003C33.5 33.9606 33.1269 34.3337 32.6667 34.3337C32.2064 34.3337 31.8333 33.9606 31.8333 33.5003V31.8337C31.8333 31.1706 31.5699 30.5347 31.1011 30.0659C30.6323 29.5971 29.9964 29.3337 29.3333 29.3337H22.6667C22.0036 29.3337 21.3677 29.5971 20.8989 30.0659C20.4301 30.5347 20.1667 31.1706 20.1667 31.8337V33.5003C20.1667 33.9606 19.7936 34.3337 19.3333 34.3337C18.8731 34.3337 18.5 33.9606 18.5 33.5003V31.8337C18.5 30.7286 18.939 29.6688 19.7204 28.8874Z"
+      fill="white"
+    />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M25.9999 19.3337C24.6192 19.3337 23.4999 20.4529 23.4999 21.8337C23.4999 23.2144 24.6192 24.3337 25.9999 24.3337C27.3806 24.3337 28.4999 23.2144 28.4999 21.8337C28.4999 20.4529 27.3806 19.3337 25.9999 19.3337ZM21.8333 21.8337C21.8333 19.5325 23.6987 17.667 25.9999 17.667C28.3011 17.667 30.1666 19.5325 30.1666 21.8337C30.1666 24.1348 28.3011 26.0003 25.9999 26.0003C23.6987 26.0003 21.8333 24.1348 21.8333 21.8337Z"
+      fill="white"
+    />
+  </svg>
+);
 
 export { User };

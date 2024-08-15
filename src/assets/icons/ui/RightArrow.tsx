@@ -4,7 +4,6 @@ interface RightArrowIconProps extends React.SVGProps<SVGSVGElement> {
   width?: string | number;
   height?: string | number;
   fill?: string;
-  style?: React.CSSProperties;
 }
 
 const defaultProps = {
