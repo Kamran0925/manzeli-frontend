@@ -28,8 +28,10 @@ const SecondarySection = () => {
   return (
     <>
       <Box component="section" className={styles.container}>
-        <Box style={{ textAlign: "end", marginLeft: "auto" }}>
-          <Link />
+        <Box style={{ marginLeft: "auto", display: "inline" }}>
+          <Typography variant="body1">
+            Already have an account? <Link>Sign in</Link>
+          </Typography>
         </Box>
 
         <Box
@@ -62,7 +64,6 @@ const SecondarySection = () => {
                     onMouseLeave={() => setHoveredTileIndex(null)}
                   >
                     <Tile
-                      active={index === 0}
                       title={accountType.title}
                       description={accountType.description}
                       isHovered={index === hoveredTileIndex}

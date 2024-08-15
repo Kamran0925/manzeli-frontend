@@ -2,21 +2,19 @@
   box-sizing: border-box;
   background: #f5f9ff;
   outline: 1px solid #001283;
-  box-shadow: 0px 4px 14px 1px rgba(0, 0, 0, 0.04);
   border-radius: 6px;
 }
 
 .tile {
   max-width: 440px;
+  cursor: pointer;
+  box-shadow: 0px 2px 14px 1px #0000000F;
+  margin-top: 20px;
+  border-radius: 6px;
 }
 
-.iconContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80px;
-  flex-direction: column;
-  transition: transform 0.3s ease;
+.tile .action {
+  align-self: center;
 }
 
 .iconContainer:hover .rightArrowIcon {

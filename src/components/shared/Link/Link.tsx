@@ -1,28 +1,22 @@
 import React from "react";
 import { Typography } from "@mui/material";
 
-const Link = () => {
+interface LinkProps {
+  children?: any;
+}
+
+const Link: React.FC<LinkProps> = ({children}) => {
   return (
     <Typography
+      style={{display: "inline", cursor: "pointer"}}  
+      variant="body1"
       sx={{
-        fontFamily: "Poppins, sans-serif",
-        fontStyle: "normal",
-        fontWeight: 400,
-        fontSize: {
-          xs: "14px",
-          md: "18px",
-        },
-        lineHeight: {
-          xs: "20px",
-          md: "28px",
-        },
+        
         color: "#8692A6",
-        textAlign: "end",
       }}
     >
-      Already have an account?{" "}
       <b>
-        <span style={{ color: "#001283" }}>Sign In</span>
+        <span style={{ color: "#001283" }}>{children}</span>
       </b>
     </Typography>
   );

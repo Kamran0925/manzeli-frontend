@@ -8,9 +8,7 @@
 
 .box1 {
   width: 28px;
-  height: 117px;
-  display: flex;
-  align-items: center;
+  height: 55px;
 }
 
 .box2 {
@@ -31,4 +29,8 @@
   height: 33px;
   transform: matrix(-1, 0, 0, 1, 0, 0);
   transform: rotate(360deg);
+}
+
+h2.content {
+  margin: 32px 0px 0px 20px;
 }

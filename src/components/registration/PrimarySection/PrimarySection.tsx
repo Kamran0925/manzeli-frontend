@@ -25,6 +25,7 @@ const PrimarySection = () => {
 
           <Typography
             variant="h2"
+            className={styles.content}
             sx={{
               fontSize: {
                 xs: "20px",

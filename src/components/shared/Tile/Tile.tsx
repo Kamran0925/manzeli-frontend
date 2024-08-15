@@ -20,7 +20,6 @@ interface TileProps {
 }
 
 const Tile: React.FC<TileProps> = ({
-  active = false,
   title,
   description,
   isHovered,
@@ -42,8 +41,11 @@ const Tile: React.FC<TileProps> = ({
       avatar={avatar}
       title={<Typography variant="subtitle1">{title}</Typography>}
       subheader={<Typography variant="body2">{description}</Typography>}
+      classes={{
+        action: style.action
+      }}
       action={
-        active && (
+        isHovered && (
           <div className={style.iconContainer}>
             <RightArrowIcon className={style.rightArrowIcon} />
           </div>
