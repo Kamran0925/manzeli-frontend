@@ -7,7 +7,7 @@ const PrimarySection = () => {
   return (
     <>
       <Box className={styles.box}>
-        <Box style={{ display: "flex" }}>
+        <Box sx={{ display: "flex" }}>
           <Box className={styles.box1}>
             <Typography
               sx={{

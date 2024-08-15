@@ -53,7 +53,6 @@ const theme: Theme = createTheme({
       fontSize: "14px",
       lineHeight: "21px",
       color: "#8692A6",
-      padding: "0px 10px 0px 0px",
     },
     subtitle1: {
       fontFamily: "Poppins",
@@ -73,7 +72,6 @@ const theme: Theme = createTheme({
       xl: 1536,
     },
   },
-  components: {},
 });
 
 export default theme;

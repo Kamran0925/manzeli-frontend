@@ -27,27 +27,17 @@ const SecondarySection = () => {
 
   return (
     <>
-      <Box
-        component="section"
-        sx={{
-          p: {
-            xs: "10px 50px",
-          },
-          border: "1px dashed red",
-        }}
-        className={styles.container}
-      >
-        <Box
-          style={{ textAlign: "end", marginLeft: "auto", marginTop: "70px" }}
-        >
+      <Box component="section" className={styles.container}>
+        <Box style={{ textAlign: "end", marginLeft: "auto" }}>
           <Link />
         </Box>
 
         <Box
           sx={{
-            border: "1px dashed blue",
-            margin: "50px 0px 0px 30px",
-            maxWidth: "486px",
+            margin: {
+              xs: "50px 0px 0px 0px",
+            },
+            maxWidth: "440px",
           }}
         >
           <Typography variant="h3">Join Us!</Typography>
@@ -59,7 +49,6 @@ const SecondarySection = () => {
 
           <Box
             sx={{
-              border: "1px dashed blue",
               margin: "20px 0px 0px 0px",
               maxWidth: "440px",
             }}

@@ -7,14 +7,10 @@
 }
 
 .tile {
-  max-width: 486px;
+  max-width: 440px;
 }
 
 .iconContainer {
-  display: none;
-}
-
-.iconContainer:hover {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,6 +20,6 @@
 }
 
 .iconContainer:hover .rightArrowIcon {
-  transform: translateX(8px);
+  transform: translateX(5px);
   transition: transform 0.3s ease;
 }

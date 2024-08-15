@@ -9,7 +9,7 @@ const Link = () => {
         fontStyle: "normal",
         fontWeight: 400,
         fontSize: {
-          xs: "12px",
+          xs: "14px",
           md: "18px",
         },
         lineHeight: {
