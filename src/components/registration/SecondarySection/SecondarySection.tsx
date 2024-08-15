@@ -67,7 +67,7 @@ const SecondarySection = () => {
             <Grid container spacing={2} direction={"column"}>
               <Grid item xs={12}>
                 {accountTypes.map((accountType, index) => (
-                  <div
+                  <Box
                     key={index}
                     onMouseEnter={() => setHoveredTileIndex(index)}
                     onMouseLeave={() => setHoveredTileIndex(null)}
@@ -79,7 +79,7 @@ const SecondarySection = () => {
                       isHovered={index === hoveredTileIndex}
                       index={index}
                     />
-                  </div>
+                  </Box>
                 ))}
               </Grid>
             </Grid>

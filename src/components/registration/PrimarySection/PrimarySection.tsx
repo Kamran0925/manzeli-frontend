@@ -7,7 +7,7 @@ const PrimarySection = () => {
   return (
     <>
       <Box className={styles.box}>
-        <div style={{ display: "flex" }}>
+        <Box style={{ display: "flex" }}>
           <Box className={styles.box1}>
             <Typography
               sx={{
@@ -43,12 +43,12 @@ const PrimarySection = () => {
           >
             Effortlessly manage your rental properties and grow your business.
           </Typography>
-          <div className={styles.div2}>
-            <div className={styles.div3}>
+          <Box className={styles.div2}>
+            <Box className={styles.div3}>
               <MatrixIcon />
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
       </Box>
     </>
   );
