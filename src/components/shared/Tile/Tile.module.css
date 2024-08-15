@@ -9,3 +9,17 @@
 .tile {
   max-width: 486px;
 }
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.iconContainer:hover .rightArrowIcon {
+  transform: translateX(8px);
+  transition: transform 0.3s ease;
+}

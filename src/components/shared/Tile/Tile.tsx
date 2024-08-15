@@ -6,6 +6,7 @@ import classNames from "classnames";
 import style from "./Tile.module.css";
 import { User } from "../../../assets/icons/ui/User";
 import { Polygon } from "../../../assets/icons/ui/Polygon";
+import { RightArrowIcon } from "../../../assets/icons/ui/RightArrow";
 
 interface TileProps {
   active?: boolean;
@@ -33,6 +34,13 @@ const Tile: React.FC<TileProps> = ({ active = false, title, description }) => {
       }
       title={<Typography variant="subtitle1">{title}</Typography>}
       subheader={<Typography variant="body2">{description}</Typography>}
+      action={
+        active && (
+          <div className={style.iconContainer}>
+            <RightArrowIcon className={style.rightArrowIcon} />
+          </div>
+        )
+      }
     />
   );
 };
