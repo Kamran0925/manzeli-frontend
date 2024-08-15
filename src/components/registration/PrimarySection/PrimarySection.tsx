@@ -1,6 +1,5 @@
 import React from "react";
 import { Typography, Box } from "@mui/material";
-import LeftQuoteMark from "../../LeftQuoteMark/LeftQuoteMark";
 import MatrixIcon from "../../../assets/icons/ui/Matrix";
 import styles from "./PrimarySection.module.css";
 
@@ -9,7 +8,21 @@ const PrimarySection = () => {
     <>
       <Box className={styles.box}>
         <div style={{ display: "flex" }}>
-          <LeftQuoteMark />
+          <Box className={styles.box1}>
+            <Typography
+              sx={{
+                fontFamily: "Gayathri, sans-serif",
+                fontStyle: "normal",
+                fontWeight: 700,
+                fontSize: "96px",
+                lineHeight: "117px",
+                color: "#00DAF7",
+              }}
+            >
+              “
+            </Typography>
+          </Box>
+
           <Typography
             variant="h2"
             sx={{

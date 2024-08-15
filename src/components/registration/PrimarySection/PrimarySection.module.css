@@ -6,6 +6,13 @@
   text-align: center;
 }
 
+.box1 {
+  width: 28px;
+  height: 117px;
+  display: flex;
+  align-items: center;
+}
+
 .box2 {
   display: "flex";
 }
