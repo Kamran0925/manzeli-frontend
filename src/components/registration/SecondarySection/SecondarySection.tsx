@@ -1,0 +1,93 @@
+import React, { useState } from "react";
+import { Grid, Typography, Box } from "@mui/material";
+
+import Tile from "../../shared/Tile/Tile";
+import Link from "../../shared/Link/Link";
+import styles from "./SecondarySection.module.css";
+
+const accountTypes = [
+  {
+    title: "Landlord",
+    description:
+      "Register as a landlord to manage your individual rental properties efficiently.",
+  },
+  {
+    title: "Property Management Company",
+    description:
+      "Register as a property management company to oversee multiple properties and streamline your business operations",
+  },
+  {
+    title: "Tenant",
+    description: "Register as a Tenant to access self-service features",
+  },
+];
+
+const SecondarySection = () => {
+  const [hoveredTileIndex, setHoveredTileIndex] = useState<number | null>(null);
+
+  return (
+    <>
+      <Box
+        component="section"
+        sx={{
+          p: {
+            xs: "10px 50px",
+          },
+          border: "1px dashed red",
+        }}
+        className={styles.container}
+      >
+        <Box
+          style={{ textAlign: "end", marginLeft: "auto", marginTop: "70px" }}
+        >
+          <Link />
+        </Box>
+
+        <Box
+          sx={{
+            border: "1px dashed blue",
+            margin: "50px 0px 0px 30px",
+            maxWidth: "486px",
+          }}
+        >
+          <Typography variant="h3">Join Us!</Typography>
+
+          <Typography variant="body1">
+            To begin, please select the type of account you would like to
+            create.
+          </Typography>
+
+          <Box
+            sx={{
+              border: "1px dashed blue",
+              margin: "20px 0px 0px 0px",
+              maxWidth: "440px",
+            }}
+          >
+            <Grid container spacing={2} direction={"column"}>
+              <Grid item xs={12}>
+                {accountTypes.map((accountType, index) => (
+                  <div
+                    key={index}
+                    onMouseEnter={() => setHoveredTileIndex(index)}
+                    onMouseLeave={() => setHoveredTileIndex(null)}
+                  >
+                    <Tile
+                      active={index === 0}
+                      title={accountType.title}
+                      description={accountType.description}
+                      isHovered={index === hoveredTileIndex}
+                      index={index}
+                    />
+                  </div>
+                ))}
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Box>
+    </>
+  );
+};
+
+export default SecondarySection;

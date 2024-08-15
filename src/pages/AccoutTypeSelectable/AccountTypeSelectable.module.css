@@ -10,6 +10,8 @@
   align-items: center;
   justify-content: center;
 
+  position: fixed;
+
   @media (max-width: 600px) {
     padding: 8px;
     background-color: #e0e0e0;
@@ -24,16 +26,19 @@
 .rightGrid {
   background-color: white;
   height: 100vh;
+  margin-left: 33.333333% !important;
 }
 
 @media (max-width: 599px) {
   .rightGrid {
     height: auto;
+    margin-left: 0;
   }
 }
 
 @media (min-width: 600px) and (max-width: 899px) {
   .rightGrid {
     height: auto;
+    margin-left: 0;
   }
 }
