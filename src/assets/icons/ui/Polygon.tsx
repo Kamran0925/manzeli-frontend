@@ -14,12 +14,19 @@ const defaultStyle: React.CSSProperties = {
   transform: "translate(-50%, -50%)",
 };
 
+const defaultProps = {
+  width: "20",
+  height: "20",
+  fill: "white",
+  style: defaultStyle,
+};
+
 const Polygon: React.FC<PolygonProps> = (props) => {
   const {
-    width = "20",
-    height = "20",
-    fill = "white",
-    style = defaultStyle,
+    width = defaultProps.width,
+    height = defaultProps.height,
+    fill = defaultProps.fill,
+    style = defaultProps.style,
     ...rest
   } = props;
 
@@ -48,5 +55,7 @@ const Polygon: React.FC<PolygonProps> = (props) => {
     </svg>
   );
 };
+
+Polygon.defaultProps = defaultProps;
 
 export { Polygon };

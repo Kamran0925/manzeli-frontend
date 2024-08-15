@@ -14,12 +14,19 @@ const defaultStyle: React.CSSProperties = {
   transform: "translate(-50%, -50%)",
 };
 
+const defaultProps = {
+  width: "50",
+  height: "48",
+  fill: "#001283",
+  style: defaultStyle,
+};
+
 const User: React.FC<UserProps> = (props) => {
   const {
-    width = "50",
-    height = "48",
-    fill = "#001283",
-    style = defaultStyle,
+    width = defaultProps.width,
+    height = defaultProps.height,
+    fill = defaultProps.fill,
+    style = defaultProps.style,
     ...rest
   } = props;
 
@@ -40,5 +47,7 @@ const User: React.FC<UserProps> = (props) => {
     </svg>
   );
 };
+
+User.defaultProps = defaultProps;
 
 export { User };
