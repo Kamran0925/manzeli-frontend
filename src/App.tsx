@@ -1,8 +1,13 @@
-import React from "react";
-import AccountTypeSelectable from "./pages/AccoutTypeSelectable/AccountTypeSelectable";
+import { ThemeProvider } from "@mui/material/styles";
+import AccountTypeSelectable from './pages/AccoutTypeSelectable/AccountTypeSelectable';
+import theme from './theme/theme';
 
 function App() {
-  return <AccountTypeSelectable />;
+  return (
+    <ThemeProvider theme={theme}>
+      <AccountTypeSelectable />;
+    </ThemeProvider>
+  );
 }
 
 export default App;

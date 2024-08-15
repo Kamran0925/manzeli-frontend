@@ -13,24 +13,18 @@ const theme: Theme = createTheme({
       textAlign: "left",
     },
     h3: {
-      fontFamily: "Poppins",
-      fontStyle: "normal",
       fontWeight: 700,
       fontSize: "30px",
       lineHeight: "45px",
       color: "#000000",
     },
     h4: {
-      fontFamily: "Poppins, sans-serif",
-      fontStyle: "normal",
       fontWeight: 400,
       fontSize: "18px",
       lineHeight: "28px",
       color: "#8692A6",
     },
     h6: {
-      fontFamily: "Poppins, sans-serif",
-      fontStyle: "normal",
       fontWeight: 500,
       fontSize: "16px",
       lineHeight: "24px",
@@ -39,24 +33,17 @@ const theme: Theme = createTheme({
       alignItems: "center",
     },
     body1: {
-      fontFamily: "Poppins",
-      fontStyle: "normal",
-      fontWeight: 400,
       fontSize: "18px",
       lineHeight: "28px",
       color: "#8692A6",
     },
     body2: {
-      fontFamily: "Poppins",
-      fontStyle: "normal",
       fontWeight: 400,
       fontSize: "14px",
       lineHeight: "21px",
       color: "#8692A6",
     },
     subtitle1: {
-      fontFamily: "Poppins",
-      fontStyle: "normal",
       fontWeight: 500,
       fontSize: "16px",
       lineHeight: "24px",
@@ -71,6 +58,14 @@ const theme: Theme = createTheme({
       lg: 1200,
       xl: 1536,
     },
+  },
+
+  //define complete pallete as defined here https://mui.com/material-ui/customization/color/
+   palette: {
+    primary: {
+      main: '#001283',
+    },
+    
   },
 });
 

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Grid, Typography, Box } from "@mui/material";
+import { Grid, Typography, Box, Link } from "@mui/material";
 
 import Tile from "../../shared/Tile/Tile";
-import Link from "../../shared/Link/Link";
+// import Link from "../../shared/Link/Link";
 import styles from "./SecondarySection.module.css";
 
 const accountTypes = [
@@ -30,7 +30,10 @@ const SecondarySection = () => {
       <Box component="section" className={styles.container}>
         <Box style={{ marginLeft: "auto", display: "inline" }}>
           <Typography variant="body1">
-            Already have an account? <Link>Sign in</Link>
+            Already have an account?{" "}
+            <Link color="primary" variant="h4">
+              Sign in
+            </Link>
           </Typography>
         </Box>
 
