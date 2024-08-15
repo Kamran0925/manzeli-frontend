@@ -1,0 +1,39 @@
+.leftGrid {
+  height: 100vh;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.52)),
+    url("../../assets/images/building.png");
+  background-size: cover;
+  background-position: center;
+  border-right: 1px solid #e0e0e0;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 600px) {
+    padding: 8px;
+    background-color: #e0e0e0;
+  }
+
+  @media (min-width: 601px) and (max-width: 959px) {
+    padding: 12px;
+    background-color: #cccccc;
+  }
+}
+
+.rightGrid {
+  background-color: white;
+  height: 100vh;
+}
+
+@media (max-width: 599px) {
+  .rightGrid {
+    height: auto;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+  .rightGrid {
+    height: auto;
+  }
+}

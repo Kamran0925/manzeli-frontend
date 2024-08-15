@@ -1,0 +1,11 @@
+.item {
+  box-sizing: border-box;
+  background: #f5f9ff;
+  border: 1px solid #001283;
+  box-shadow: 0px 4px 14px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 6px;
+}
+
+.tile {
+  max-width: 486px;
+}
