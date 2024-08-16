@@ -1,6 +1,9 @@
 import React from "react";
 import { TextField } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import EyeCross from "../../../assets/icons/ui/EyeCross";
 
 interface InputFieldProps {
   type: "text" | "password" | "email";
@@ -23,6 +26,15 @@ const InputField: React.FC<InputFieldProps> = ({
       fullWidth
       disabled={disabled}
       placeholder={disabled ? "Minimum length of 8 characters" : placeholder}
+      InputProps={{
+        endAdornment: type === "password" && (
+          <InputAdornment position="end">
+            <IconButton aria-label="toggle password visibility">
+              <EyeCross />
+            </IconButton>
+          </InputAdornment>
+        ),
+      }}
       sx={{
         height: "45px",
         maxWidth: "554px",
