@@ -85,7 +85,6 @@ const SignUp = () => {
                 error={true}
               />
               <InputField type="password" placeholder="Confirm new password" />
-              <InputField type="text" disabled />
             </Box>
 
             <Box className={styles.box5}>

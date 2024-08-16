@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import EyeCross from "../../../assets/icons/ui/EyeCross";
+import { getInputType } from "../../../utils/inputFIeldHelper";
 
 interface InputFieldProps {
   type: "text" | "password" | "email";
@@ -20,15 +21,22 @@ const InputField: React.FC<InputFieldProps> = ({
 }) => {
   const theme = useTheme();
 
+  const [showPassword, setShowPassword] = useState(false);
+  const inputType = getInputType(type, showPassword);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(prevState => !prevState);
+  };
+
   return (
     <TextField
-      type={type}
+      type={inputType}
       fullWidth
       disabled={disabled}
-      placeholder={disabled ? "Minimum length of 8 characters" : placeholder}
+      placeholder={placeholder}
       InputProps={{
         endAdornment: type === "password" && (
-          <InputAdornment position="end">
+          <InputAdornment position="end" onClick={handleClickShowPassword}>
             <IconButton aria-label="toggle password visibility">
               <EyeCross />
             </IconButton>
