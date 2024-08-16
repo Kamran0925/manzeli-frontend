@@ -1,0 +1,23 @@
+.item {
+  box-sizing: border-box;
+  background: #f5f9ff;
+  outline: 1px solid #001283;
+  border-radius: 6px;
+}
+
+.tile {
+  max-width: 440px;
+  cursor: pointer;
+  box-shadow: 0px 2px 14px 1px #0000000F;
+  margin-top: 20px;
+  border-radius: 6px;
+}
+
+.tile .action {
+  align-self: center;
+}
+
+.iconContainer:hover .rightArrowIcon {
+  transform: translateX(5px);
+  transition: transform 0.3s ease;
+}
