@@ -3,23 +3,7 @@ import { Grid, Typography, Box, Link } from "@mui/material";
 
 import Tile from "../../shared/Tile/Tile";
 import styles from "./SecondarySection.module.css";
-
-const accountTypes = [
-  {
-    title: "Landlord",
-    description:
-      "Register as a landlord to manage your individual rental properties efficiently.",
-  },
-  {
-    title: "Property Management Company",
-    description:
-      "Register as a property management company to oversee multiple properties and streamline your business operations",
-  },
-  {
-    title: "Tenant",
-    description: "Register as a Tenant to access self-service features",
-  },
-];
+import { accountTypes } from "../../shared/AccountTypes/AccountTypes";
 
 const SecondarySection = () => {
   const [hoveredTileIndex, setHoveredTileIndex] = useState<number | null>(null);
