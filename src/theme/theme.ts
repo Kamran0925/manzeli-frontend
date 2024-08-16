@@ -3,15 +3,6 @@ import { createTheme, Theme } from "@mui/material/styles";
 const theme: Theme = createTheme({
   typography: {
     fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
-    h2: {
-      fontFamily: "Kaisei HarunoUmi, sans-serif",
-      fontStyle: "normal",
-      fontWeight: 700,
-      fontSize: "40px",
-      lineHeight: "58px",
-      color: "#FFFFFF",
-      textAlign: "left",
-    },
     h3: {
       fontWeight: 700,
       fontSize: "30px",
@@ -19,20 +10,13 @@ const theme: Theme = createTheme({
       color: "#000000",
     },
     h4: {
-      fontWeight: 400,
-      fontSize: "18px",
-      lineHeight: "28px",
-      color: "#8692A6",
-    },
-    h6: {
       fontWeight: 500,
       fontSize: "16px",
       lineHeight: "24px",
       color: "#000000",
-      display: "flex",
-      alignItems: "center",
     },
     body1: {
+      fontWeight: 400,
       fontSize: "18px",
       lineHeight: "28px",
       color: "#8692A6",
@@ -42,12 +26,6 @@ const theme: Theme = createTheme({
       fontSize: "14px",
       lineHeight: "21px",
       color: "#8692A6",
-    },
-    subtitle1: {
-      fontWeight: 500,
-      fontSize: "16px",
-      lineHeight: "24px",
-      color: "#000000",
     },
   },
   breakpoints: {
@@ -61,11 +39,10 @@ const theme: Theme = createTheme({
   },
 
   //define complete pallete as defined here https://mui.com/material-ui/customization/color/
-   palette: {
+  palette: {
     primary: {
-      main: '#001283',
+      main: "#001283",
     },
-    
   },
 });
 

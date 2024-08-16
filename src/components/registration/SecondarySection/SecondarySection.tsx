@@ -14,7 +14,7 @@ const SecondarySection = () => {
         <Box style={{ marginLeft: "auto", display: "inline" }}>
           <Typography variant="body1">
             Already have an account?{" "}
-            <Link color="primary" variant="h4">
+            <Link color="primary" variant="body1">
               Sign in
             </Link>
           </Typography>

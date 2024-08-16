@@ -39,10 +39,10 @@ const Tile: React.FC<TileProps> = ({
         [style.item]: isHovered,
       })}
       avatar={avatar}
-      title={<Typography variant="subtitle1">{title}</Typography>}
+      title={<Typography variant="h4">{title}</Typography>}
       subheader={<Typography variant="body2">{description}</Typography>}
       classes={{
-        action: style.action
+        action: style.action,
       }}
       action={
         isHovered && (

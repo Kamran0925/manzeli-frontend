@@ -24,9 +24,11 @@ const PrimarySection = () => {
           </Box>
 
           <Typography
-            variant="h2"
             className={styles.content}
             sx={{
+              fontFamily: "Kaisei HarunoUmi, sans-serif",
+              fontStyle: "normal",
+              fontWeight: 700,
               fontSize: {
                 xs: "20px",
                 sm: "30px",
@@ -37,6 +39,8 @@ const PrimarySection = () => {
                 sm: "50px",
                 md: "58px",
               },
+              color: "#FFFFFF",
+              textAlign: "left",
               padding: {
                 xs: "10px 0px",
               },
