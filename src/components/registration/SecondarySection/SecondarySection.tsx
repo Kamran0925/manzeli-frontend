@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Grid, Typography, Box, Link } from "@mui/material";
 
 import Tile from "../../shared/Tile/Tile";
-// import Link from "../../shared/Link/Link";
 import styles from "./SecondarySection.module.css";
 
 const accountTypes = [
