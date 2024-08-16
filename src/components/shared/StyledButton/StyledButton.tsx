@@ -4,11 +4,13 @@ import Button from "@mui/material/Button";
 interface StyledButtonProps {
   fullWidth?: boolean;
   margin?: string;
+  color?: string;
 }
 
 const StyledButton: React.FC<StyledButtonProps> = ({
   fullWidth = false,
   margin,
+  color = "#000000",
 }) => (
   <Button
     variant="contained"
@@ -16,7 +18,7 @@ const StyledButton: React.FC<StyledButtonProps> = ({
     sx={{
       padding: "15px 20px",
       maxWidth: "554px",
-      backgroundColor: "#001283",
+      backgroundColor: color,
       borderRadius: "40px",
       textTransform: "none",
       fontSize: "16px",

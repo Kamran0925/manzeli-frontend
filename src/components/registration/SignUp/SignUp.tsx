@@ -98,7 +98,7 @@ const SignUp = () => {
               </Typography>
             </Box>
 
-            <StyledButton fullWidth={true} margin="10px 0px" />
+            <StyledButton fullWidth={true} margin="10px 0px" color="#001283" />
           </Box>
         </Box>
       </Container>
