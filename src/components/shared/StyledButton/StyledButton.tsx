@@ -5,16 +5,19 @@ interface StyledButtonProps {
   fullWidth?: boolean;
   margin?: string;
   color?: string;
+  disabled?: boolean;
 }
 
 const StyledButton: React.FC<StyledButtonProps> = ({
   fullWidth = false,
   margin,
   color = "#000000",
+  disabled,
 }) => (
   <Button
     variant="contained"
     fullWidth={fullWidth}
+    disabled={disabled}
     sx={{
       padding: "15px 20px",
       maxWidth: "554px",
