@@ -5,16 +5,21 @@ interface StyledButtonProps {
   fullWidth?: boolean;
   margin?: string;
   color?: string;
+  disabled?: boolean;
+  title: string;
 }
 
 const StyledButton: React.FC<StyledButtonProps> = ({
   fullWidth = false,
   margin,
   color = "#000000",
+  disabled,
+  title,
 }) => (
   <Button
     variant="contained"
     fullWidth={fullWidth}
+    disabled={disabled}
     sx={{
       padding: "15px 20px",
       maxWidth: "554px",
@@ -25,7 +30,7 @@ const StyledButton: React.FC<StyledButtonProps> = ({
       margin: margin,
     }}
   >
-    Register Account
+    {title}
   </Button>
 );
 
