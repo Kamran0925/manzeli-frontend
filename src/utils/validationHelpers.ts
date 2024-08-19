@@ -4,56 +4,47 @@ export const validate = (
   type: string,
   value: string,
   passwordValue?: string,
-): { error: boolean; errorMessage: string } => {
+): { errorMessage: string } => {
   switch (type) {
     case "text":
-      if (value.trim() === "") {
-        return { error: true, errorMessage: "Field cannot be empty" };
-      }
-      if (value.trim().length <= 8) {
+      if (value.trim().length <= 8 || value.trim() === "") {
         return {
-          error: true,
           errorMessage: "Minimum length of 8 characters",
         };
       }
-      return { error: false, errorMessage: "" };
+      return { errorMessage: "" };
 
     case "email":
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (value.trim() === "") {
-        return { error: true, errorMessage: "Email cannot be empty" };
+        return { errorMessage: "Email field cannot be empty" };
       }
       if (!emailRegex.test(value)) {
-        return { error: true, errorMessage: "Invalid email format" };
+        return { errorMessage: "Invalid email format" };
       }
-      return { error: false, errorMessage: "" };
+      return { errorMessage: "" };
 
     case "password":
-      if (value.trim() === "") {
-        return { error: true, errorMessage: "Password cannot be empty" };
-      }
-      if (value.trim().length <= 8) {
+      if (value.trim().length <= 8 || value.trim() === "") {
         return {
-          error: true,
           errorMessage: "Password cannot be less than 8 characters",
         };
       }
-      return { error: false, errorMessage: "" };
+      return { errorMessage: "" };
 
-    // case "confirmPassword": // Handle confirm password fields
-    //   if (value.trim() === "") {
-    //     return {
-    //       error: true,
-    //       errorMessage: "Confirm password cannot be empty",
-    //     };
-    //   }
-    //   if (value.trim() !== passwordValue) {
-    //     return { error: true, errorMessage: "Passwords do not match" };
-    //   }
-    //   return { error: false, errorMessage: "" };
+    case "confirmPassword":
+      if (value.trim() === "") {
+        return {
+          errorMessage: "Confirm password cannot be empty",
+        };
+      }
+      if (value.trim() !== passwordValue) {
+        return { errorMessage: "Passwords do not match" };
+      }
+      return { errorMessage: "" };
 
     default:
-      return { error: true, errorMessage: "Unknown field type" };
+      return { errorMessage: "Unknown field type" };
   }
 };
 
