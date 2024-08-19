@@ -7,7 +7,12 @@ import {
 
 interface FormContextType {
   formState: FormState;
-  validateField: (type: string, fieldName: string, value: string) => void;
+  validateField: (
+    type: string,
+    fieldName: string,
+    value: string,
+    password: string,
+  ) => void;
 }
 
 const FormContext = createContext<FormContextType | undefined>(undefined);

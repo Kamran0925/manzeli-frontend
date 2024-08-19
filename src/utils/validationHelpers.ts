@@ -30,15 +30,7 @@ export const validate = (
           errorMessage: "Password cannot be less than 8 characters",
         };
       }
-      return { errorMessage: "" };
-
-    case "confirmPassword":
-      if (value.trim() === "") {
-        return {
-          errorMessage: "Confirm password cannot be empty",
-        };
-      }
-      if (value.trim() !== passwordValue) {
+      if (value.trim() !== passwordValue && value.trim() !== "") {
         return { errorMessage: "Passwords do not match" };
       }
       return { errorMessage: "" };
@@ -50,4 +42,16 @@ export const validate = (
 
 export const hasErrors = (formState: FormState): boolean => {
   return Object.values(formState).some(field => field.error);
+};
+
+export const collectErrors = (formState: FormState): string[] => {
+  return [
+    formState.username.errorMessage,
+    formState.email.errorMessage,
+    formState.password.errorMessage,
+    formState.confirmPassword.errorMessage,
+    !formState.isTermsAccepted
+      ? "You must accept the terms and conditions"
+      : "",
+  ].filter(error => error.length > 0);
 };

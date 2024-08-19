@@ -13,7 +13,8 @@ import StyledButton from "../../shared/StyledButton/StyledButton";
 import LeftArrow from "../../../assets/icons/ui/LeftArrow";
 import MobileStepper from "@mui/material/MobileStepper";
 import { useFormContext } from "../../../context/FormContext";
-import { hasErrors } from "../../../utils/validationHelpers";
+import { collectErrors, hasErrors } from "../../../utils/validationHelpers";
+import Error from "../../shared/Error/Error";
 import styles from "./SignUp.module.css";
 
 const SignUp = () => {
@@ -24,10 +25,12 @@ const SignUp = () => {
     name: string,
     type: string,
   ) => {
-    validateField(type, name, event.target.value);
+    validateField(type, name, event.target.value, formState.password.value);
   };
 
   const isButtonDisabled = hasErrors(formState);
+
+  const errors = collectErrors(formState);
 
   return (
     <>
@@ -91,7 +94,6 @@ const SignUp = () => {
                 name="username"
                 placeholder="Enter name"
                 value={formState.username.value}
-                error={formState.username.error}
                 errorMessage={formState.username.errorMessage}
                 handleChange={handleChange}
               />
@@ -107,7 +109,6 @@ const SignUp = () => {
                 type="email"
                 placeholder="Enter email address"
                 value={formState.email.value}
-                error={formState.email.error}
                 errorMessage={formState.email.errorMessage}
                 handleChange={handleChange}
               />
@@ -123,7 +124,6 @@ const SignUp = () => {
                 name="password"
                 placeholder="Your password"
                 value={formState.password.value}
-                error={formState.password.error}
                 errorMessage={formState.password.errorMessage}
                 handleChange={handleChange}
               />
@@ -132,7 +132,6 @@ const SignUp = () => {
                 name="confirmPassword"
                 placeholder="Confirm new password"
                 value={formState.confirmPassword.value}
-                error={formState.confirmPassword.error}
                 errorMessage={formState.confirmPassword.errorMessage}
                 handleChange={handleChange}
               />
@@ -148,6 +147,7 @@ const SignUp = () => {
                 </Link>
               </Typography>
             </Box>
+            {errors.length > 0 && <Error messages={errors} />}
 
             <StyledButton
               fullWidth={true}
