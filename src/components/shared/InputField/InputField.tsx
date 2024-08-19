@@ -8,16 +8,27 @@ import { getInputType } from "../../../utils/inputFIeldHelper";
 
 interface InputFieldProps {
   type: "text" | "password" | "email";
+  name: string;
   placeholder?: string;
+  value: string;
   disabled?: boolean;
   error?: boolean;
+  errorMessage?: string;
+  handleChange: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    name: string,
+  ) => void;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
   type,
+  name,
+  value,
   placeholder = "",
   disabled,
   error,
+  errorMessage,
+  handleChange,
 }) => {
   const theme = useTheme();
 
@@ -28,25 +39,32 @@ const InputField: React.FC<InputFieldProps> = ({
     setShowPassword(prevState => !prevState);
   };
 
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    handleChange(event, name);
+  };
+
   return (
     <TextField
       type={inputType}
-      fullWidth
-      disabled={disabled}
+      value={value || ""}
+      error={error}
+      helperText={error ? errorMessage : ""}
       placeholder={placeholder}
+      onChange={onChangeHandler}
+      fullWidth
       InputProps={{
         endAdornment: type === "password" && (
           <InputAdornment position="end" onClick={handleClickShowPassword}>
-            <IconButton aria-label="toggle password visibility">
+            <IconButton aria-label="Toggle password visibility">
               <EyeCross />
             </IconButton>
           </InputAdornment>
         ),
       }}
       sx={{
-        height: "45px",
+        height: "44px",
         maxWidth: "554px",
-        margin: "6px 0px",
+        margin: "6px 0px 20px 0px",
         border: disabled
           ? "none"
           : `1px solid ${
@@ -65,7 +83,7 @@ const InputField: React.FC<InputFieldProps> = ({
           margin: 0,
         },
         "& .MuiOutlinedInput-input": {
-          padding: "10px 18px",
+          padding: "8px 16px",
           color: error ? theme.palette.error.main : "inherit",
         },
       }}
