@@ -10,8 +10,8 @@ interface FormContextType {
   validateField: (
     type: string,
     fieldName: string,
-    value: string,
-    password: string,
+    value: any,
+    password?: string,
   ) => void;
 }
 
@@ -37,7 +37,8 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
         const validation = validate(type, value, passwordValue);
         errorMessage = validation.errorMessage;
         break;
-
+      case "checkbox":
+        break;
       default:
         errorMessage = "Unknown field type";
     }
