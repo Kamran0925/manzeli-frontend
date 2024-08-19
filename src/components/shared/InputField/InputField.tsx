@@ -12,7 +12,6 @@ interface InputFieldProps {
   placeholder?: string;
   value: string;
   disabled?: boolean;
-  error?: boolean;
   errorMessage?: string;
   handleChange: (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -27,7 +26,6 @@ const InputField: React.FC<InputFieldProps> = ({
   value,
   placeholder = "",
   disabled,
-  error,
   errorMessage,
   handleChange,
 }) => {
@@ -48,8 +46,6 @@ const InputField: React.FC<InputFieldProps> = ({
     <TextField
       type={inputType}
       value={value || ""}
-      error={error}
-      helperText={error ? errorMessage : ""}
       placeholder={placeholder}
       onChange={onChangeHandler}
       fullWidth
@@ -76,7 +72,7 @@ const InputField: React.FC<InputFieldProps> = ({
         border: disabled
           ? "none"
           : `1px solid ${
-              error ? theme.palette.error.main : "rgba(4, 3, 8, 0.6)"
+              errorMessage ? theme.palette.error.main : "rgba(4, 3, 8, 0.6)"
             }`,
         borderRadius: "40px",
         backgroundColor: disabled ? "rgba(59, 76, 184, 0.11)" : "transparent",
@@ -92,7 +88,7 @@ const InputField: React.FC<InputFieldProps> = ({
         },
         "& .MuiOutlinedInput-input": {
           padding: "15px 0px",
-          color: error ? theme.palette.error.main : "inherit",
+          color: errorMessage ? theme.palette.error.main : "inherit",
         },
       }}
     />
