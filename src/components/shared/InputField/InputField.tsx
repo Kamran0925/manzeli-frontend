@@ -17,6 +17,7 @@ interface InputFieldProps {
   handleChange: (
     event: React.ChangeEvent<HTMLInputElement>,
     name: string,
+    type: "text" | "password" | "email",
   ) => void;
 }
 
@@ -40,7 +41,7 @@ const InputField: React.FC<InputFieldProps> = ({
   };
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    handleChange(event, name);
+    handleChange(event, name, inputType);
   };
 
   return (
@@ -54,7 +55,14 @@ const InputField: React.FC<InputFieldProps> = ({
       fullWidth
       InputProps={{
         endAdornment: type === "password" && (
-          <InputAdornment position="end" onClick={handleClickShowPassword}>
+          <InputAdornment
+            position="end"
+            onClick={handleClickShowPassword}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
             <IconButton aria-label="Toggle password visibility">
               <EyeCross />
             </IconButton>
@@ -62,7 +70,7 @@ const InputField: React.FC<InputFieldProps> = ({
         ),
       }}
       sx={{
-        height: "44px",
+        height: "54px",
         maxWidth: "554px",
         margin: "6px 0px 20px 0px",
         border: disabled
@@ -79,11 +87,11 @@ const InputField: React.FC<InputFieldProps> = ({
           },
         },
         "& .MuiInputBase-root": {
-          padding: 0,
+          padding: "0px 20px",
           margin: 0,
         },
         "& .MuiOutlinedInput-input": {
-          padding: "8px 16px",
+          padding: "15px 0px",
           color: error ? theme.palette.error.main : "inherit",
         },
       }}
