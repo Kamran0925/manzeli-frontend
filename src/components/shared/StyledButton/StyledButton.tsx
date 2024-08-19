@@ -1,18 +1,17 @@
 import React from "react";
 import Button from "@mui/material/Button";
+import { SxProps, Theme } from "@mui/material/styles";
 
 interface StyledButtonProps {
   fullWidth?: boolean;
-  margin?: string;
-  color?: string;
+  styles?: SxProps<Theme>;
   disabled?: boolean;
   title: string;
 }
 
 const StyledButton: React.FC<StyledButtonProps> = ({
   fullWidth = false,
-  margin,
-  color = "#000000",
+  styles,
   disabled,
   title,
 }) => (
@@ -23,11 +22,10 @@ const StyledButton: React.FC<StyledButtonProps> = ({
     sx={{
       padding: "15px 20px",
       maxWidth: "554px",
-      backgroundColor: color,
       borderRadius: "40px",
       textTransform: "none",
       fontSize: "16px",
-      margin: margin,
+      ...styles,
     }}
   >
     {title}

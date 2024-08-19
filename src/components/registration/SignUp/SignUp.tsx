@@ -151,8 +151,10 @@ const SignUp = () => {
 
             <StyledButton
               fullWidth={true}
-              margin="10px 0px"
-              color="#001283"
+              styles={{
+                margin: "10px 0px",
+                backgoundColor: "#001283",
+              }}
               disabled={isButtonDisabled}
               title="Register Account"
             />
