@@ -22,8 +22,9 @@ const SignUp = () => {
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     name: string,
+    type: string,
   ) => {
-    validateField(name, event.target.value);
+    validateField(type, name, event.target.value);
   };
 
   const isButtonDisabled = hasErrors(formState);
@@ -138,7 +139,7 @@ const SignUp = () => {
             </Box>
 
             <Box className={styles.box5}>
-              <Checkbox defaultChecked />
+              <Checkbox defaultChecked={formState.isTermsAccepted} />
 
               <Typography variant="body1">
                 I agree to{" "}
