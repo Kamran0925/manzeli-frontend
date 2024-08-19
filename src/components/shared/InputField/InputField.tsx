@@ -68,7 +68,7 @@ const InputField: React.FC<InputFieldProps> = ({
       sx={{
         height: "54px",
         maxWidth: "554px",
-        margin: "6px 0px 20px 0px",
+        margin: "5px 0px",
         border: disabled
           ? "none"
           : `1px solid ${

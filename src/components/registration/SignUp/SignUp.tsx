@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Box,
@@ -16,6 +16,7 @@ import { useFormContext } from "../../../context/FormContext";
 import { collectErrors, hasErrors } from "../../../utils/validationHelpers";
 import Error from "../../shared/Error/Error";
 import styles from "./SignUp.module.css";
+import TermsAndConditionsPopup from "../TermsAndConditionsPopup/TermsAndConditionsPopup";
 
 const SignUp = () => {
   const { formState, validateField } = useFormContext();
@@ -31,6 +32,11 @@ const SignUp = () => {
   const isButtonDisabled = hasErrors(formState);
 
   const errors = collectErrors(formState);
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
@@ -137,17 +143,20 @@ const SignUp = () => {
               />
             </Box>
 
-            <Box className={styles.box5}>
-              <Checkbox defaultChecked={formState.isTermsAccepted} />
+            {errors.length > 0 && <Error messages={errors} />}
+            <Box mt={2} className={styles.box5}>
+              <Checkbox
+                defaultChecked={formState.isTermsAccepted}
+                onClick={handleOpen}
+              />
 
               <Typography variant="body1">
                 I agree to{" "}
-                <Link color="#001283" variant="body1">
+                <Link color="#001283" variant="body1" onClick={handleOpen}>
                   terms and conditions
                 </Link>
               </Typography>
             </Box>
-            {errors.length > 0 && <Error messages={errors} />}
 
             <StyledButton
               fullWidth={true}
@@ -160,6 +169,7 @@ const SignUp = () => {
             />
           </Box>
         </Box>
+        {open && <TermsAndConditionsPopup onClose={handleClose} />}
       </Container>
     </>
   );
