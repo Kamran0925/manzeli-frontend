@@ -1,132 +1,60 @@
-import { FormState } from "../context/FormContext";
+import { FormState } from "../components/shared/RegistrationFields/RegistrationFields";
 
-export const validateUsername = (
+export const validate = (
+  type: string,
   value: string,
-): { error: boolean; message: string } => {
-  if (value.trim() === "") {
-    return { error: true, message: "Username cannot be empty" };
-  }
+  passwordValue?: string,
+): { error: boolean; errorMessage: string } => {
+  switch (type) {
+    case "text":
+      if (value.trim() === "") {
+        return { error: true, errorMessage: "Field cannot be empty" };
+      }
+      if (value.trim().length <= 8) {
+        return {
+          error: true,
+          errorMessage: "Minimum length of 8 characters",
+        };
+      }
+      return { error: false, errorMessage: "" };
 
-  if (value.trim().length <= 8) {
-    return {
-      error: true,
-      message: "Username cannot be less than 8 characters",
-    };
-  }
+    case "email":
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (value.trim() === "") {
+        return { error: true, errorMessage: "Email cannot be empty" };
+      }
+      if (!emailRegex.test(value)) {
+        return { error: true, errorMessage: "Invalid email format" };
+      }
+      return { error: false, errorMessage: "" };
 
-  if (!/^[a-zA-Z]+$/.test(value)) {
-    return { error: true, message: "Username must only contain letters" };
-  }
-  return { error: false, message: "" };
-};
+    case "password":
+      if (value.trim() === "") {
+        return { error: true, errorMessage: "Password cannot be empty" };
+      }
+      if (value.trim().length <= 8) {
+        return {
+          error: true,
+          errorMessage: "Password cannot be less than 8 characters",
+        };
+      }
+      return { error: false, errorMessage: "" };
 
-export const validateEmail = (
-  value: string,
-): { error: boolean; message: string } => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (value.trim() === "") {
-    return { error: true, message: "Email cannot be empty" };
-  }
-  if (!emailRegex.test(value)) {
-    return { error: true, message: "Invalid email address" };
-  }
-  return { error: false, message: "" };
-};
+    // case "confirmPassword": // Handle confirm password fields
+    //   if (value.trim() === "") {
+    //     return {
+    //       error: true,
+    //       errorMessage: "Confirm password cannot be empty",
+    //     };
+    //   }
+    //   if (value.trim() !== passwordValue) {
+    //     return { error: true, errorMessage: "Passwords do not match" };
+    //   }
+    //   return { error: false, errorMessage: "" };
 
-export const validatePassword = (
-  value: string,
-): { error: boolean; message: string } => {
-  const minLength = 8;
-  const hasUppercase = /[A-Z]/.test(value);
-  const hasLowercase = /[a-z]/.test(value);
-  const hasNumber = /[0-9]/.test(value);
-  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
-
-  if (value.length < minLength) {
-    return {
-      error: true,
-      message: `Password must be at least ${minLength} characters`,
-    };
+    default:
+      return { error: true, errorMessage: "Unknown field type" };
   }
-  if (!hasUppercase) {
-    return {
-      error: true,
-      message: "Password must contain at least one uppercase letter",
-    };
-  }
-  if (!hasLowercase) {
-    return {
-      error: true,
-      message: "Password must contain at least one lowercase letter",
-    };
-  }
-  if (!hasNumber) {
-    return {
-      error: true,
-      message: "Password must contain at least one number",
-    };
-  }
-  if (!hasSpecialChar) {
-    return {
-      error: true,
-      message: "Password must contain at least one special character",
-    };
-  }
-  return { error: false, message: "" };
-};
-
-export const validateConfirmPassword = (
-  passwordValue: string,
-  confirmPasswordValue: string,
-): { error: boolean; message: string } => {
-  const minLength = 8;
-  const hasUppercase = /[A-Z]/.test(confirmPasswordValue);
-  const hasLowercase = /[a-z]/.test(confirmPasswordValue);
-  const hasNumber = /[0-9]/.test(confirmPasswordValue);
-  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(confirmPasswordValue);
-
-  if (confirmPasswordValue.length < minLength) {
-    return {
-      error: true,
-      message: `Password must be at least ${minLength} characters`,
-    };
-  }
-
-  if (!hasUppercase) {
-    return {
-      error: true,
-      message: "Password must contain at least one uppercase letter",
-    };
-  }
-
-  if (!hasLowercase) {
-    return {
-      error: true,
-      message: "Password must contain at least one lowercase letter",
-    };
-  }
-
-  if (!hasNumber) {
-    return {
-      error: true,
-      message: "Password must contain at least one number",
-    };
-  }
-
-  if (!hasSpecialChar) {
-    return {
-      error: true,
-      message: "Password must contain at least one special character",
-    };
-  }
-
-  if (passwordValue !== confirmPasswordValue && confirmPasswordValue !== "") {
-    return {
-      error: true,
-      message: "Confirm password should match password field",
-    };
-  }
-  return { error: false, message: "" };
 };
 
 export const hasErrors = (formState: FormState): boolean => {
