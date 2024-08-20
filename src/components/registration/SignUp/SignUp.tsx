@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Box,
@@ -15,8 +15,8 @@ import MobileStepper from "@mui/material/MobileStepper";
 import { useFormContext } from "../../../context/FormContext";
 import { collectErrors, hasErrors } from "../../../utils/validationHelpers";
 import Error from "../../shared/Error/Error";
-import styles from "./SignUp.module.css";
 import TermsAndConditionsPopup from "../TermsAndConditionsPopup/TermsAndConditionsPopup";
+import styles from "./SignUp.module.css";
 
 const SignUp = () => {
   const { formState, validateField } = useFormContext();
@@ -33,10 +33,13 @@ const SignUp = () => {
 
   const errors = collectErrors(formState);
 
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  useEffect(() => {}, [formState]);
+
+  const handleTermsAccept = () => {
+    validateField("checkbox", "isTermsAccepted", true);
+  };
 
   return (
     <>
@@ -144,15 +147,19 @@ const SignUp = () => {
             </Box>
 
             {errors.length > 0 && <Error messages={errors} />}
-            <Box mt={2} className={styles.box5}>
+            <Box className={styles.box5}>
               <Checkbox
-                defaultChecked={formState.isTermsAccepted}
-                onClick={handleOpen}
+                checked={formState.isTermsAccepted}
+                onClick={() => setIsOpen(true)}
               />
 
               <Typography variant="body1">
                 I agree to{" "}
-                <Link color="#001283" variant="body1" onClick={handleOpen}>
+                <Link
+                  color="#001283"
+                  variant="body1"
+                  onClick={() => setIsOpen(true)}
+                >
                   terms and conditions
                 </Link>
               </Typography>
@@ -169,7 +176,12 @@ const SignUp = () => {
             />
           </Box>
         </Box>
-        {open && <TermsAndConditionsPopup onClose={handleClose} />}
+        {isOpen && (
+          <TermsAndConditionsPopup
+            onClose={() => setIsOpen(false)}
+            onAccept={handleTermsAccept}
+          />
+        )}
       </Container>
     </>
   );
