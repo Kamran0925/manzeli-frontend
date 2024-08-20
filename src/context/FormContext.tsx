@@ -43,13 +43,20 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
         errorMessage = "Unknown field type";
     }
 
-    setFormState(prevState => ({
-      ...prevState,
-      [name]: {
-        value,
-        errorMessage,
-      },
-    }));
+    if (type === "checkbox") {
+      setFormState(prevState => ({
+        ...prevState,
+        [name]: true,
+      }));
+    } else {
+      setFormState(prevState => ({
+        ...prevState,
+        [name]: {
+          value,
+          errorMessage,
+        },
+      }));
+    }
   };
 
   return (

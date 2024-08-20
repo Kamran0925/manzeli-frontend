@@ -15,11 +15,13 @@ import styles from "./TermsAndConditionsPopup.module.css";
 
 const TermsAndConditionsPopup: React.FC<{
   onClose: () => void;
-}> = ({ onClose }) => {
+  onAccept: () => void;
+}> = ({ onClose, onAccept }) => {
   const { formState, validateField } = useFormContext();
 
   const handleAccept = () => {
     validateField("checkbox", "isTermsAccepted", true);
+    onAccept();
     onClose();
   };
 
@@ -258,7 +260,7 @@ const TermsAndConditionsPopup: React.FC<{
               onClick={handleAccept}
               color="primary"
               variant="contained"
-              sx={{ width: "167px" }}
+              sx={{ width: "167px", ml: 1 }}
             >
               Accept
             </Button>

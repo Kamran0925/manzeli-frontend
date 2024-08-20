@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Box,
@@ -15,8 +15,8 @@ import MobileStepper from "@mui/material/MobileStepper";
 import { useFormContext } from "../../../context/FormContext";
 import { collectErrors, hasErrors } from "../../../utils/validationHelpers";
 import Error from "../../shared/Error/Error";
-import styles from "./SignUp.module.css";
 import TermsAndConditionsPopup from "../TermsAndConditionsPopup/TermsAndConditionsPopup";
+import styles from "./SignUp.module.css";
 
 const SignUp = () => {
   const { formState, validateField } = useFormContext();
@@ -34,6 +34,12 @@ const SignUp = () => {
   const errors = collectErrors(formState);
 
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {}, [formState]);
+
+  const handleTermsAccept = () => {
+    validateField("checkbox", "isTermsAccepted", true);
+  };
 
   return (
     <>
@@ -142,7 +148,7 @@ const SignUp = () => {
 
             <Box className={styles.box5}>
               <Checkbox
-                defaultChecked={formState.isTermsAccepted}
+                checked={formState.isTermsAccepted}
                 onClick={() => setIsOpen(true)}
               />
 
@@ -170,7 +176,12 @@ const SignUp = () => {
             />
           </Box>
         </Box>
-        {isOpen && <TermsAndConditionsPopup onClose={() => setIsOpen(false)} />}
+        {isOpen && (
+          <TermsAndConditionsPopup
+            onClose={() => setIsOpen(false)}
+            onAccept={handleTermsAccept}
+          />
+        )}
       </Container>
     </>
   );
