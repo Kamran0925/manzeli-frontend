@@ -19,7 +19,7 @@ import TermsAndConditionsPopup from "../TermsAndConditionsPopup/TermsAndConditio
 import styles from "./SignUp.module.css";
 
 const SignUp = () => {
-  const { formState, validateField } = useFormContext();
+  const { formState, validateField, previousStep } = useFormContext();
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -53,6 +53,10 @@ const SignUp = () => {
     setIsButtonDisabled(errors.length > 0);
   }, [formState]);
 
+  const handleBack = () => {
+    previousStep();
+  };
+
   return (
     <>
       <Container className={styles.box1}>
@@ -60,9 +64,9 @@ const SignUp = () => {
           variant="text"
           steps={4}
           position="static"
-          activeStep={1}
+          activeStep={formState.step}
           backButton={
-            <Button size="small" disabled={true}>
+            <Button size="small" onClick={handleBack}>
               <LeftArrow />
               Back
             </Button>

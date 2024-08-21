@@ -2,11 +2,15 @@ import React from "react";
 import { Container, Grid } from "@mui/material";
 
 import PrimarySection from "../../components/registration/PrimarySection/PrimarySection";
-import SecondarySection from "../../components/registration/SecondarySection/SecondarySection";
 
 import styles from "./AccountTypeSelectable.module.css";
+import { useFormContext } from "../../context/FormContext";
+import { renderPage } from "../../utils/renderPage";
 
 const AccountTypeSelectable = () => {
+  const { formState } = useFormContext();
+  const { step } = formState;
+
   return (
     <Container disableGutters maxWidth={false}>
       <Grid container>
@@ -14,7 +18,7 @@ const AccountTypeSelectable = () => {
           <PrimarySection />
         </Grid>
         <Grid item xs={12} sm={12} md={8} className={styles.rightGrid}>
-          <SecondarySection />
+          {renderPage(step)}
         </Grid>
       </Grid>
     </Container>

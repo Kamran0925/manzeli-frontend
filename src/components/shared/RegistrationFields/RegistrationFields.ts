@@ -13,6 +13,7 @@ export interface FormState {
   password: FieldState;
   confirmPassword: FieldState;
   isTermsAccepted: boolean;
+  step: number;
 }
 
 export const RegistrationFields: FormState = {
@@ -49,4 +50,5 @@ export const RegistrationFields: FormState = {
     placeholder: "Confirm new password",
   },
   isTermsAccepted: false,
+  step: -1,
 };

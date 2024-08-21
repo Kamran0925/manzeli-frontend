@@ -13,6 +13,8 @@ interface FormContextType {
     value: any,
     password?: string,
   ) => void;
+  nextStep: () => void;
+  previousStep: () => void;
 }
 const inputFieldTypes = ["text", "email", "password", "checkbox"];
 
@@ -57,8 +59,24 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
     });
   };
 
+  const nextStep = () => {
+    setFormState(prevState => ({
+      ...prevState,
+      step: prevState.step + 1,
+    }));
+  };
+
+  const previousStep = () => {
+    setFormState(prevState => ({
+      ...prevState,
+      step: prevState.step - 1,
+    }));
+  };
+
   return (
-    <FormContext.Provider value={{ formState, validateField }}>
+    <FormContext.Provider
+      value={{ formState, validateField, nextStep, previousStep }}
+    >
       {children}
     </FormContext.Provider>
   );
