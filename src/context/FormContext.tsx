@@ -34,10 +34,9 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
       case "text":
       case "email":
       case "password":
+      case "checkbox":
         const validation = validate(type, value, passwordValue);
         errorMessage = validation.errorMessage;
-        break;
-      case "checkbox":
         break;
       default:
         errorMessage = "Unknown field type";

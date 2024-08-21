@@ -29,13 +29,15 @@ const SignUp = () => {
     validateField(type, name, event.target.value, formState.password.value);
   };
 
-  const isButtonDisabled = hasErrors(formState);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const errors = collectErrors(formState);
 
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {}, [formState]);
+  useEffect(() => {
+    setIsButtonDisabled(hasErrors(formState));
+  }, [formState]);
 
   const handleTermsAccept = () => {
     validateField("checkbox", "isTermsAccepted", true);
@@ -174,7 +176,7 @@ const SignUp = () => {
                 margin: "10px 0px",
                 backgoundColor: "#001283",
               }}
-              disabled={isButtonDisabled}
+              disabled={errors.length > 0 || isButtonDisabled}
               title="Register Account"
             />
           </Box>

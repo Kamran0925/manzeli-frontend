@@ -34,6 +34,13 @@ export const validate = (
         return { errorMessage: "Passwords do not match" };
       }
       return { errorMessage: "" };
+    case "checkbox":
+      if (!value) {
+        return {
+          errorMessage: "You must accept the terms and conditions",
+        };
+      }
+      return { errorMessage: "" };
 
     default:
       return { errorMessage: "Unknown field type" };
