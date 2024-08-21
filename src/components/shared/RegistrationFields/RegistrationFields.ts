@@ -20,6 +20,7 @@ export interface FormState {
   city: FieldState;
   residence: FieldState;
   identity: FieldState;
+  profilePicture?: Blob | null;
 }
 
 export const RegistrationFields: FormState = {
@@ -105,4 +106,5 @@ export const RegistrationFields: FormState = {
     disabled: false,
     placeholder: "Please select",
   },
+  profilePicture: null,
 };

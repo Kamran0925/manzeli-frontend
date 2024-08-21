@@ -15,6 +15,7 @@ interface FormContextType {
   ) => void;
   nextStep: () => void;
   previousStep: () => void;
+  setProfilePicture: (blob: Blob | null) => void;
 }
 const inputFieldTypes = ["text", "email", "password", "checkbox"];
 
@@ -73,9 +74,22 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
     }));
   };
 
+  const setProfilePicture = (blob: Blob | null) => {
+    setFormState(prevState => ({
+      ...prevState,
+      profilePicture: blob,
+    }));
+  };
+
   return (
     <FormContext.Provider
-      value={{ formState, validateField, nextStep, previousStep }}
+      value={{
+        formState,
+        validateField,
+        nextStep,
+        previousStep,
+        setProfilePicture,
+      }}
     >
       {children}
     </FormContext.Provider>
