@@ -159,6 +159,9 @@ const SignUp = () => {
                   color="#001283"
                   variant="body1"
                   onClick={() => setIsOpen(true)}
+                  sx={{
+                    cursor: "pointer",
+                  }}
                 >
                   terms and conditions
                 </Link>
