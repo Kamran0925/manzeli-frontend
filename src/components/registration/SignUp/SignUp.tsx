@@ -30,6 +30,7 @@ const SignUp = () => {
   };
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [collectedErrors, setCollectedErrors] = useState<string[]>([]);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -42,6 +43,7 @@ const SignUp = () => {
       if (typeof field === "object" && "type" in field) {
         validateField(field.type, key, field.value, formState.password.value);
       }
+      setIsButtonDisabled(collectedErrors.length > 0);
     });
 
     const errors = collectErrors(formState);
@@ -50,6 +52,7 @@ const SignUp = () => {
 
   useEffect(() => {
     const errors = collectErrors(formState);
+    setCollectedErrors(errors);
     setIsButtonDisabled(errors.length > 0);
   }, [formState]);
 
@@ -162,9 +165,7 @@ const SignUp = () => {
               />
             </Box>
 
-            {collectErrors(formState).length > 0 && (
-              <Error messages={collectErrors(formState)} />
-            )}
+            {collectedErrors.length > 0 && <Error messages={collectedErrors} />}
 
             <Box className={styles.box5}>
               <Checkbox
