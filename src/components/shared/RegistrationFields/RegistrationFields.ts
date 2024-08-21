@@ -15,7 +15,7 @@ export interface FormState {
   isTermsAccepted: boolean;
 }
 
-export const RegistrationFields = {
+export const RegistrationFields: FormState = {
   username: {
     title: "Your fullname*",
     type: "text",

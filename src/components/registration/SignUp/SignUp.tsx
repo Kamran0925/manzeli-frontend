@@ -13,7 +13,7 @@ import StyledButton from "../../shared/StyledButton/StyledButton";
 import LeftArrow from "../../../assets/icons/ui/LeftArrow";
 import MobileStepper from "@mui/material/MobileStepper";
 import { useFormContext } from "../../../context/FormContext";
-import { collectErrors, hasErrors } from "../../../utils/validationHelpers";
+import { collectErrors } from "../../../utils/validationHelpers";
 import Error from "../../shared/Error/Error";
 import TermsAndConditionsPopup from "../TermsAndConditionsPopup/TermsAndConditionsPopup";
 import styles from "./SignUp.module.css";
@@ -31,17 +31,27 @@ const SignUp = () => {
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
-  const errors = collectErrors(formState);
-
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    setIsButtonDisabled(hasErrors(formState));
-  }, [formState]);
 
   const handleTermsAccept = () => {
     validateField("checkbox", "isTermsAccepted", true);
   };
+
+  const handleSubmit = () => {
+    Object.entries(formState).forEach(([key, field]) => {
+      if (typeof field === "object" && "type" in field) {
+        validateField(field.type, key, field.value, formState.password.value);
+      }
+    });
+
+    const errors = collectErrors(formState);
+    setIsButtonDisabled(errors.length > 0);
+  };
+
+  useEffect(() => {
+    const errors = collectErrors(formState);
+    setIsButtonDisabled(errors.length > 0);
+  }, [formState]);
 
   return (
     <>
@@ -148,7 +158,10 @@ const SignUp = () => {
               />
             </Box>
 
-            {errors.length > 0 && <Error messages={errors} />}
+            {collectErrors(formState).length > 0 && (
+              <Error messages={collectErrors(formState)} />
+            )}
+
             <Box className={styles.box5}>
               <Checkbox
                 checked={formState.isTermsAccepted}
@@ -174,10 +187,11 @@ const SignUp = () => {
               fullWidth={true}
               styles={{
                 margin: "10px 0px",
-                backgoundColor: "#001283",
+                backgroundColor: "#001283",
               }}
-              disabled={errors.length > 0 || isButtonDisabled}
+              disabled={isButtonDisabled}
               title="Register Account"
+              onClick={handleSubmit}
             />
           </Box>
         </Box>

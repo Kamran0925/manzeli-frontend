@@ -14,6 +14,7 @@ interface FormContextType {
     password?: string,
   ) => void;
 }
+const inputFieldTypes = ["text", "email", "password", "checkbox"];
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
@@ -30,32 +31,30 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
   ) => {
     let errorMessage = "";
 
-    switch (type) {
-      case "text":
-      case "email":
-      case "password":
-      case "checkbox":
-        const validation = validate(type, value, passwordValue);
-        errorMessage = validation.errorMessage;
-        break;
-      default:
-        errorMessage = "Unknown field type";
+    if (inputFieldTypes.includes(type)) {
+      const validation = validate(type, value, passwordValue);
+      errorMessage = validation.errorMessage;
+    } else {
+      errorMessage = "";
     }
 
-    if (type === "checkbox") {
-      setFormState(prevState => ({
-        ...prevState,
-        [name]: true,
-      }));
-    } else {
-      setFormState(prevState => ({
-        ...prevState,
-        [name]: {
-          value,
-          errorMessage,
-        },
-      }));
-    }
+    setFormState(prevState => {
+      if (type === "checkbox") {
+        return {
+          ...prevState,
+          [name]: value,
+        };
+      } else {
+        return {
+          ...prevState,
+          [name]: {
+            type,
+            value,
+            errorMessage,
+          },
+        };
+      }
+    });
   };
 
   return (
