@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -17,13 +17,15 @@ const TermsAndConditionsPopup: React.FC<{
   onClose: () => void;
   onAccept: () => void;
 }> = ({ onClose, onAccept }) => {
-  const { formState, validateField } = useFormContext();
+  const { validateField } = useFormContext();
 
   const handleAccept = () => {
     validateField("checkbox", "isTermsAccepted", true);
     onAccept();
     onClose();
   };
+
+  const [isChecked, setIsChecked] = useState(false);
 
   return (
     <Box className={styles.overlay}>
@@ -234,7 +236,10 @@ const TermsAndConditionsPopup: React.FC<{
 
         <DialogActions className={styles.dialogActions}>
           <Box className={styles.checkboxTextContainer}>
-            <Checkbox defaultChecked={formState.isTermsAccepted} />
+            <Checkbox
+              defaultChecked={isChecked}
+              onClick={() => setIsChecked(!isChecked)}
+            />
             <Typography
               variant="body1"
               sx={{
@@ -260,6 +265,7 @@ const TermsAndConditionsPopup: React.FC<{
               onClick={handleAccept}
               color="primary"
               variant="contained"
+              disabled={!isChecked}
               sx={{ width: "167px", ml: 1 }}
             >
               Accept
