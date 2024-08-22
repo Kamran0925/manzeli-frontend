@@ -56,7 +56,7 @@ export const RegistrationFields: FormState = {
     placeholder: "Confirm new password",
   },
   isTermsAccepted: false,
-  step: -1,
+  step: 1,
   phone: {
     title: "Phone number",
     type: "text",
@@ -92,7 +92,7 @@ export const RegistrationFields: FormState = {
   residence: {
     title: "Country of residence",
     type: "select",
-    value: "",
+    value: "AE",
     errorMessage: "",
     disabled: false,
     placeholder: "Please select",

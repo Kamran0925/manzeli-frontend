@@ -175,6 +175,7 @@ const ContactDetails = () => {
               <FormControl fullWidth>
                 <Select
                   name="residence"
+                  disabled
                   value={formState.residence.value}
                   displayEmpty
                   inputProps={{ "aria-label": "Without label" }}
@@ -191,7 +192,7 @@ const ContactDetails = () => {
                     Please select
                   </MenuItem>
                   {countries.map((country: Country) => (
-                    <MenuItem key={country.code} value={country.name}>
+                    <MenuItem key={country.code} value={country.code}>
                       {country.name}
                     </MenuItem>
                   ))}
