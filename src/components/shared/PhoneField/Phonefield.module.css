@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  padding: 15px 20px;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 40px;
+  border: 1px solid rgba(4, 3, 8, 0.6);
+  position: relative;
+}
+
+.error {
+  border-color: #e80000;
+}
+
+.phoneInput input {
+  border: none;
+  outline: none;
+  padding: 0;
+  font-size: 16px;
+  margin-left: 8px;
+  color: black;
+}
+
+.phoneInput.error input {
+  color: #e80000;
+}
