@@ -46,7 +46,7 @@ export const validate = (
     case "select":
       if (!value) {
         return {
-          errorMessage: "You must select atleast one option",
+          errorMessage: "You must select at least one option",
         };
       }
       return { errorMessage: "" };
