@@ -165,9 +165,10 @@ const ContactDetails = () => {
                 handleChange={handleChange}
               />
             </Box>
+
             <Box mt={2}>
               <Typography variant="h4" color="#696F79">
-                Country of residence{" "}
+                Country of residence
               </Typography>
               <Select
                 label="Country of Residence"
@@ -191,6 +192,7 @@ const ContactDetails = () => {
                 ))}
               </Select>
             </Box>
+
             <Box mt={2}>
               <Typography variant="h4" color="#696F79">
                 Tax Identify Number
@@ -204,6 +206,7 @@ const ContactDetails = () => {
                 handleChange={handleChange}
               />
             </Box>
+
             {collectedErrors.length > 0 && <Error messages={collectedErrors} />}
             <StyledButton
               fullWidth={true}

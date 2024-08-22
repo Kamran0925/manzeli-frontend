@@ -91,7 +91,7 @@ export const RegistrationFields: FormState = {
   },
   residence: {
     title: "Country of residence",
-    type: "text",
+    type: "select",
     value: "",
     errorMessage: "",
     disabled: false,
