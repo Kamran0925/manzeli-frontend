@@ -26,8 +26,6 @@ import styles from "./ContactDetails.module.css";
 const ContactDetails = () => {
   const { formState, validateField, previousStep, nextStep } = useFormContext();
 
-  const [touched, setTouched] = useState(false);
-
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [collectedErrors, setCollectedErrors] = useState<string[]>([]);
 
@@ -37,7 +35,6 @@ const ContactDetails = () => {
     type: string,
   ) => {
     validateField(type, name, event.target.value);
-    setTouched(true);
   };
 
   const onChangeHandler = (event: SelectChangeEvent<string>, name: string) => {
@@ -46,11 +43,9 @@ const ContactDetails = () => {
 
   const handlePhoneChange = (value: any, name: string, type: string) => {
     validateField(type, name, value);
-    setTouched(true);
   };
 
   const handleSubmit = () => {
-    setTouched(true);
     Object.entries(formState).forEach(([key, field]) => {
       if (typeof field === "object" && "type" in field) {
         validateField(field.type, key, field.value, formState.password.value);
@@ -71,12 +66,10 @@ const ContactDetails = () => {
   };
 
   useEffect(() => {
-    if (touched) {
-      const errors = collectContactDetailErrors(formState);
-      setCollectedErrors(errors);
-      setIsButtonDisabled(errors.length > 0);
-    }
-  }, [formState, touched]);
+    const errors = collectContactDetailErrors(formState);
+    setCollectedErrors(errors);
+    setIsButtonDisabled(errors.length > 0);
+  }, [formState]);
 
   return (
     <>
@@ -138,7 +131,7 @@ const ContactDetails = () => {
                 name="phone"
                 value={formState.phone.value}
                 placeholder={formState.phone.placeholder}
-                errorMessage={touched ? formState.phone.errorMessage : ""}
+                errorMessage={formState.phone.errorMessage}
                 handleChange={handlePhoneChange}
               />
             </Box>
@@ -153,7 +146,7 @@ const ContactDetails = () => {
                 name="address"
                 placeholder={formState.address.placeholder}
                 value={formState.address.value}
-                errorMessage={touched ? formState.address.errorMessage : ""}
+                errorMessage={formState.address.errorMessage}
                 handleChange={handleChange}
               />
 
@@ -162,7 +155,7 @@ const ContactDetails = () => {
                 name="street"
                 value={formState.street.value}
                 placeholder={formState.street.placeholder}
-                errorMessage={touched ? formState.street.errorMessage : ""}
+                errorMessage={formState.street.errorMessage}
                 handleChange={handleChange}
               />
               <InputField
@@ -170,7 +163,7 @@ const ContactDetails = () => {
                 name="city"
                 value={formState.city.value}
                 placeholder={formState.city.placeholder}
-                errorMessage={touched ? formState.city.errorMessage : ""}
+                errorMessage={formState.city.errorMessage}
                 handleChange={handleChange}
               />
             </Box>
@@ -215,14 +208,12 @@ const ContactDetails = () => {
                 name="identity"
                 value={formState.identity.value}
                 placeholder={formState.identity.placeholder}
-                errorMessage={touched ? formState.identity.errorMessage : ""}
+                errorMessage={formState.identity.errorMessage}
                 handleChange={handleChange}
               />
             </Box>
 
-            {touched && collectedErrors.length > 0 && (
-              <Error messages={collectedErrors} />
-            )}
+            {collectedErrors.length > 0 && <Error messages={collectedErrors} />}
             <StyledButton
               fullWidth={true}
               disabled={isButtonDisabled}
