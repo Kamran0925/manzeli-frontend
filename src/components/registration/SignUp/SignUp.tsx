@@ -19,7 +19,7 @@ import TermsAndConditionsPopup from "../TermsAndConditionsPopup/TermsAndConditio
 import styles from "./SignUp.module.css";
 
 const SignUp = () => {
-  const { formState, validateField, previousStep } = useFormContext();
+  const { formState, validateField, previousStep, nextStep } = useFormContext();
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -48,6 +48,7 @@ const SignUp = () => {
 
     const errors = collectErrors(formState);
     setIsButtonDisabled(errors.length > 0);
+    nextStep();
   };
 
   useEffect(() => {

@@ -16,7 +16,7 @@ interface FormContextType {
   nextStep: () => void;
   previousStep: () => void;
 }
-const inputFieldTypes = ["text", "email", "password", "checkbox"];
+const inputFieldTypes = ["text", "email", "password", "checkbox", "select"];
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
