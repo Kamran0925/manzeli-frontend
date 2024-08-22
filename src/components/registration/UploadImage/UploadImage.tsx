@@ -64,7 +64,7 @@ const UploadImage = () => {
 
   const handleRemoveFile = () => {
     setFileName(null);
-    setProfilePicture(null);
+    setProfilePicture("");
   };
 
   const handleSave = () => {
