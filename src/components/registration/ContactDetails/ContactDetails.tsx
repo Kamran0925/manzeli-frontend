@@ -25,49 +25,57 @@ import PhoneField from "../../shared/PhoneField/Phonefield";
 const ContactDetails = () => {
   const { formState, validateField, previousStep, nextStep } = useFormContext();
 
+  const [touched, setTouched] = useState(false);
+
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [collectedErrors, setCollectedErrors] = useState<string[]>([]);
+
   const handleChange = (
     event: SelectChangeEvent<string>,
     name: string,
     type: string,
   ) => {
-    console.log(type, name, event.target.value);
     validateField(type, name, event.target.value);
-  };
-
-  const handlePhoneChange = (value: any, name: string, type: string) => {
-    validateField(type, name, value);
-  };
-
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [collectedErrors, setCollectedErrors] = useState<string[]>([]);
-
-  const handleSubmit = () => {
-    Object.entries(formState).forEach(([key, field]) => {
-      if (typeof field === "object" && "type" in field) {
-        validateField(field.type, key, field.value, formState.password.value);
-      }
-      setIsButtonDisabled(collectedErrors.length > 0);
-    });
-
-    const errors = collectContactDetailErrors(formState);
-    setIsButtonDisabled(errors.length > 0);
-    nextStep();
-  };
-
-  useEffect(() => {
-    const errors = collectContactDetailErrors(formState);
-    setCollectedErrors(errors);
-    setIsButtonDisabled(errors.length > 0);
-    console.log("Formstate", formState);
-  }, [formState]);
-
-  const handleBack = () => {
-    previousStep();
+    setTouched(true);
   };
 
   const onChangeHandler = (event: SelectChangeEvent<string>, name: string) => {
     handleChange(event, name, formState.residence.type);
   };
+
+  const handlePhoneChange = (value: any, name: string, type: string) => {
+    validateField(type, name, value);
+    setTouched(true);
+  };
+
+  const handleSubmit = () => {
+    setTouched(true);
+    Object.entries(formState).forEach(([key, field]) => {
+      if (typeof field === "object" && "type" in field) {
+        validateField(field.type, key, field.value, formState.password.value);
+      }
+    });
+
+    const errors = collectContactDetailErrors(formState);
+    setCollectedErrors(errors);
+    setIsButtonDisabled(errors.length > 0);
+
+    if (errors.length === 0) {
+      nextStep();
+    }
+  };
+
+  const handleBack = () => {
+    previousStep();
+  };
+
+  useEffect(() => {
+    if (touched) {
+      const errors = collectContactDetailErrors(formState);
+      setCollectedErrors(errors);
+      setIsButtonDisabled(errors.length > 0);
+    }
+  }, [formState, touched]);
 
   return (
     <>
@@ -129,7 +137,7 @@ const ContactDetails = () => {
                 name="phone"
                 value={formState.phone.value}
                 placeholder={formState.phone.placeholder}
-                errorMessage={formState.phone.errorMessage}
+                errorMessage={touched ? formState.phone.errorMessage : ""}
                 handleChange={handlePhoneChange}
               />
             </Box>
@@ -144,7 +152,7 @@ const ContactDetails = () => {
                 name="address"
                 placeholder={formState.address.placeholder}
                 value={formState.address.value}
-                errorMessage={formState.address.errorMessage}
+                errorMessage={touched ? formState.address.errorMessage : ""}
                 handleChange={handleChange}
               />
 
@@ -153,7 +161,7 @@ const ContactDetails = () => {
                 name="street"
                 value={formState.street.value}
                 placeholder={formState.street.placeholder}
-                errorMessage={formState.street.errorMessage}
+                errorMessage={touched ? formState.street.errorMessage : ""}
                 handleChange={handleChange}
               />
               <InputField
@@ -161,7 +169,7 @@ const ContactDetails = () => {
                 name="city"
                 value={formState.city.value}
                 placeholder={formState.city.placeholder}
-                errorMessage={formState.city.errorMessage}
+                errorMessage={touched ? formState.city.errorMessage : ""}
                 handleChange={handleChange}
               />
             </Box>
@@ -202,19 +210,21 @@ const ContactDetails = () => {
                 name="identity"
                 value={formState.identity.value}
                 placeholder={formState.identity.placeholder}
-                errorMessage={formState.identity.errorMessage}
+                errorMessage={touched ? formState.identity.errorMessage : ""}
                 handleChange={handleChange}
               />
             </Box>
 
-            {collectedErrors.length > 0 && <Error messages={collectedErrors} />}
+            {touched && collectedErrors.length > 0 && (
+              <Error messages={collectedErrors} />
+            )}
             <StyledButton
               fullWidth={true}
               disabled={isButtonDisabled}
               title="Save & Continue"
               styles={{
                 margin: "20px 0px",
-                backgoundColor: "#001283",
+                backgroundColor: "#001283",
               }}
               onClick={handleSubmit}
             />
