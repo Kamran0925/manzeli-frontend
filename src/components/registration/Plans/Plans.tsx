@@ -66,7 +66,6 @@ const Plans = () => {
             >
               Plans & Pricing
             </Typography>
-
             <Box className={styles.box3}>
               <Typography
                 variant="body1"
