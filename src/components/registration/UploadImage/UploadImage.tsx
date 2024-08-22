@@ -91,7 +91,7 @@ const UploadImage = () => {
           }
           nextButton={null}
         />
-        <Typography variant="body1" sx={{ textAlign: "right" }} color="#8692A6">
+        <Typography variant="h4" sx={{ textAlign: "right" }} color="#8692A6">
           Personal Info.
         </Typography>
 
@@ -128,7 +128,11 @@ const UploadImage = () => {
 
           <Box className={styles.box3}>
             <Box>
-              <Typography variant="h4" color="#696F79" mb={1}>
+              <Typography
+                variant="h4"
+                color="#696F79"
+                sx={{ marginBottom: "12px" }}
+              >
                 Upload Profile Picture
               </Typography>
               <Circle />
@@ -140,7 +144,7 @@ const UploadImage = () => {
                   fontStyle: "normal",
                   fontWeight: 400,
                   lineHeight: "normal",
-                  marginTop: "6px",
+                  marginTop: "7px",
                 }}
               >
                 {fileError ? (
@@ -162,13 +166,14 @@ const UploadImage = () => {
                     background: "#001283",
                     padding: "0px 19.276px",
                     height: "35.34px",
+                    maxWidth: "134.531px",
                     fontSize: {
-                      xs: "12.079px",
-                      sm: "10px",
+                      xs: "10px",
+                      lg: "11.079px",
                     },
                   }}
                 >
-                  {fileName ? `File: ${fileName}` : "Choose File"}
+                  {fileName ? `${fileName.substring(0, 8)}...` : "Choose File"}
 
                   <VisuallyHiddenInput
                     type="file"
@@ -199,6 +204,8 @@ const UploadImage = () => {
               fullWidth={true}
               title="Save & Continue"
               styles={{
+                height: "54px",
+                padding: "15px 20px",
                 margin: "30px 0px",
                 backgroundColor: "#001283",
               }}
@@ -215,7 +222,7 @@ const UploadImage = () => {
                 display: "flex",
                 alignItems: "center",
                 width: "100%",
-                margin: "10px auto",
+                margin: "0 auto",
                 textAlign: "center",
                 color: "#8692A6",
                 justifyContent: "center",
