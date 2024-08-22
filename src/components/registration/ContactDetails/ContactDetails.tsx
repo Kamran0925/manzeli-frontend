@@ -20,8 +20,8 @@ import { collectContactDetailErrors } from "../../../utils/validationHelpers";
 import LockIcon from "../../../assets/icons/ui/LockIcon";
 import { Country, countries } from "../../common/data/countries";
 import Error from "../../shared/Error/Error";
-import styles from "./ContactDetails.module.css";
 import PhoneField from "../../shared/PhoneField/Phonefield";
+import styles from "./ContactDetails.module.css";
 
 const ContactDetails = () => {
   const { formState, validateField, previousStep, nextStep } = useFormContext();
@@ -131,16 +131,16 @@ const ContactDetails = () => {
           <Box className={styles.box3}>
             <Box>
               <Typography variant="h4" color="#696F79">
-                {formState.phone.title}
+                Phone number
               </Typography>
-              {/* <PhoneField
+              <PhoneField
                 type="text"
                 name="phone"
                 value={formState.phone.value}
                 placeholder={formState.phone.placeholder}
                 errorMessage={touched ? formState.phone.errorMessage : ""}
                 handleChange={handlePhoneChange}
-              /> */}
+              />
             </Box>
 
             <Box mt={2}>

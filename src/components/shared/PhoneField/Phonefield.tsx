@@ -1,8 +1,9 @@
 import React from "react";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
+
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+
 import { Box } from "@mui/material";
-import styles from "./Phonefield.module.css";
 
 interface PhoneFieldProps {
   type: string;
@@ -28,19 +29,46 @@ const PhoneField: React.FC<PhoneFieldProps> = ({
   };
 
   return (
-    <Box className={`${styles.container} ${errorMessage ? styles.error : ""}`}>
+    <Box
+      sx={{
+        height: "54px",
+        width: "520px",
+        maxWidth: "554px",
+      }}
+    >
       <PhoneInput
-        international
-        countryCallingCodeEditable={false}
-        country={"US"}
+        country={"us"}
         value={value}
         onChange={onChangeHandler}
         placeholder={placeholder}
         disabled={disabled}
-        inputClassName={`${styles.phoneInput} ${
-          errorMessage ? styles.error : ""
-        }`}
-        buttonClassName={styles.phoneInput}
+        countryCodeEditable={false}
+        containerStyle={{
+          border: errorMessage
+            ? "1px solid #E80000"
+            : "1px solid rgba(4, 3, 8, 0.60)",
+          borderRadius: "40px",
+          padding: "15px 20px",
+          display: "flex",
+          alignItems: "center",
+        }}
+        inputStyle={{
+          height: "20px",
+          border: "none",
+          padding: "0px 70px",
+          color: "#494949",
+          fontFamily: "Poppins",
+          fontSize: "14px",
+          fontStyle: "normal",
+          fontWeight: "500",
+          lineHeight: "normal",
+        }}
+        buttonStyle={{
+          width: "50px",
+          height: "50px",
+          border: "none",
+          backgroundColor: "white",
+        }}
       />
     </Box>
   );
