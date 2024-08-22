@@ -135,7 +135,20 @@ const UploadImage = () => {
               >
                 Upload Profile Picture
               </Typography>
-              <Circle />
+
+              {formState.profilePicture ? (
+                <img
+                  style={{
+                    height: "114px",
+                    width: "114px",
+                    borderRadius: "100%",
+                  }}
+                  alt="The house from the offer."
+                  src={URL.createObjectURL(formState.profilePicture)}
+                />
+              ) : (
+                <Circle />
+              )}
               <Typography
                 sx={{
                   color: fileError ? "#E80000" : "#7F7F7F",
