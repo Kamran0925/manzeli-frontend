@@ -1,5 +1,5 @@
 .box1 {
-  padding: 20px 140px;
+  padding: 79px 80px;
 }
 
 .box2 {
@@ -11,8 +11,9 @@
 
 .box3 {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  margin-top: 25px;
+  gap: 122px;
 }
 
 .box4 {
@@ -23,26 +24,19 @@
 .pricingContainer {
   border-radius: 26px;
   background: rgba(255, 255, 255, 0.5);
-  max-width: 1440px;
-  margin: 100px auto;
-  display: flex;
-  align-items: center;
-  position: relative;
+  margin: 120px auto;
   color: #848199;
-  padding: 0px 30px;
-}
-
-.pricingItem {
-  padding: 40px;
+  padding: 0px 68px;
 }
 
 .pricingItem2 {
   border-radius: 26px;
   background-color: #001283;
   box-shadow: 0px 42px 34px 0px rgba(82, 67, 194, 0.3);
+  padding: 20px 30px;
   position: absolute;
-  right: 0;
-  top: -45px;
+  left: 0px;
+  top: -50px;
 }
 
 .pricingFeature {
@@ -50,8 +44,8 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 20px;
-  width: 232px;
-  height: 370px;
+  max-width: 232px;
+  height: 350px;
 }
 
 @media (max-width: 600px) {
@@ -96,6 +90,14 @@
 @media (min-width: 601px) and (max-width: 900px) {
   .box1 {
     padding: 20px 80px;
+  }
+
+  .pricingItem2 {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    margin-top: 50px;
   }
 }
 

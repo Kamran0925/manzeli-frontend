@@ -16,8 +16,8 @@ const PlanFeatures: React.FC<PlanFeaturesProps> = ({ plantype, features }) => {
           sx={{
             display: "flex",
             alignItems: "center",
-            gap: "8px",
             marginBottom: "8px",
+            gap: "10px",
           }}
         >
           <CheckmarkIcon />
