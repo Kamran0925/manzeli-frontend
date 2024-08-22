@@ -63,3 +63,11 @@ export const collectErrors = (formState: FormState): string[] => {
       : "",
   ].filter(error => error.length > 0);
 };
+
+export const collectContactDetailErrors = (formState: FormState): string[] => {
+  return [
+    formState.address.errorMessage,
+    formState.street.errorMessage,
+    formState.city.errorMessage,
+  ].filter(error => error.length > 0);
+};
