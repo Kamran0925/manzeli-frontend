@@ -130,7 +130,7 @@ const ContactDetails = () => {
                 type="text"
                 name="phone"
                 value={formState.phone.value}
-                placeholder={formState.phone.placeholder}
+                placeholder="Enter phone"
                 errorMessage={formState.phone.errorMessage}
                 handleChange={handlePhoneChange}
               />
@@ -144,7 +144,7 @@ const ContactDetails = () => {
               <InputField
                 type="text"
                 name="address"
-                placeholder={formState.address.placeholder}
+                placeholder="Enter address"
                 value={formState.address.value}
                 errorMessage={formState.address.errorMessage}
                 handleChange={handleChange}
@@ -154,7 +154,7 @@ const ContactDetails = () => {
                 type="text"
                 name="street"
                 value={formState.street.value}
-                placeholder={formState.street.placeholder}
+                placeholder="Enter street"
                 errorMessage={formState.street.errorMessage}
                 handleChange={handleChange}
               />
@@ -162,7 +162,7 @@ const ContactDetails = () => {
                 type="text"
                 name="city"
                 value={formState.city.value}
-                placeholder={formState.city.placeholder}
+                placeholder="Enter city"
                 errorMessage={formState.city.errorMessage}
                 handleChange={handleChange}
               />
@@ -207,7 +207,7 @@ const ContactDetails = () => {
                 type="text"
                 name="identity"
                 value={formState.identity.value}
-                placeholder={formState.identity.placeholder}
+                placeholder="Please select"
                 errorMessage={formState.identity.errorMessage}
                 handleChange={handleChange}
               />
