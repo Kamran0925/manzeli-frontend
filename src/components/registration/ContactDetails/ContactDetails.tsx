@@ -15,14 +15,12 @@ import LeftArrow from "../../../assets/icons/ui/LeftArrow";
 import MobileStepper from "@mui/material/MobileStepper";
 
 import { useFormContext } from "../../../context/FormContext";
-import {
-  collectContactDetailErrors,
-  collectErrors,
-} from "../../../utils/validationHelpers";
+import { collectContactDetailErrors } from "../../../utils/validationHelpers";
 import LockIcon from "../../../assets/icons/ui/LockIcon";
 import { Country, countries } from "../../common/data/countries";
 import Error from "../../shared/Error/Error";
 import styles from "./ContactDetails.module.css";
+import PhoneField from "../../shared/PhoneField/Phonefield";
 
 const ContactDetails = () => {
   const { formState, validateField, previousStep, nextStep } = useFormContext();
@@ -34,6 +32,10 @@ const ContactDetails = () => {
   ) => {
     console.log(type, name, event.target.value);
     validateField(type, name, event.target.value);
+  };
+
+  const handlePhoneChange = (value: any, name: string, type: string) => {
+    validateField(type, name, value);
   };
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -122,6 +124,14 @@ const ContactDetails = () => {
               <Typography variant="h4" color="#696F79">
                 {formState.phone.title}
               </Typography>
+              <PhoneField
+                type="text"
+                name="phone"
+                value={formState.phone.value}
+                placeholder={formState.phone.placeholder}
+                errorMessage={formState.phone.errorMessage}
+                handleChange={handlePhoneChange}
+              />
             </Box>
 
             <Box mt={2}>

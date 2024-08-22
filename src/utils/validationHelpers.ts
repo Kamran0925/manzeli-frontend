@@ -70,5 +70,6 @@ export const collectContactDetailErrors = (formState: FormState): string[] => {
     formState.street.errorMessage,
     formState.city.errorMessage,
     formState.phone.errorMessage,
+    formState.identity.errorMessage,
   ].filter(error => error.length > 0);
 };
