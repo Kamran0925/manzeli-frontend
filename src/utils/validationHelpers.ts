@@ -43,6 +43,14 @@ export const validate = (
       }
       return { errorMessage: "" };
 
+    case "select":
+      if (!value) {
+        return {
+          errorMessage: "You must select atleast one option",
+        };
+      }
+      return { errorMessage: "" };
+
     default:
       return { errorMessage: "Unknown field type" };
   }
@@ -61,5 +69,16 @@ export const collectErrors = (formState: FormState): string[] => {
     !formState.isTermsAccepted
       ? "You must accept the terms and conditions"
       : "",
+  ].filter(error => error.length > 0);
+};
+
+export const collectContactDetailErrors = (formState: FormState): string[] => {
+  return [
+    formState.address.errorMessage,
+    formState.street.errorMessage,
+    formState.city.errorMessage,
+    formState.phone.errorMessage,
+    formState.identity.errorMessage,
+    formState.residence.errorMessage,
   ].filter(error => error.length > 0);
 };

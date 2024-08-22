@@ -1,87 +1,76 @@
 import React from "react";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
-import { TextField, InputAdornment } from "@mui/material";
-import { E164Number } from "libphonenumber-js/types.cjs";
-import { useTheme } from "@mui/material/styles";
-import styles from "./Phonefield.module.css";
 
-interface InputFieldProps {
-  type: "number";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+
+import { Box } from "@mui/material";
+
+interface PhoneFieldProps {
+  type: string;
   name: string;
-  placeholder?: string;
-  value: string;
+  value: any;
   disabled?: boolean;
+  placeholder?: string;
   errorMessage?: string;
-  handleChange: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    name: string,
-    type: "number",
-  ) => void;
+  handleChange: (value: any, name: string, type: string) => void;
 }
 
-const PhoneField: React.FC<InputFieldProps> = ({
+const PhoneField: React.FC<PhoneFieldProps> = ({
   type,
   name,
-  placeholder = "",
   value,
-  disabled,
+  disabled = false,
   errorMessage,
+  placeholder,
   handleChange,
 }) => {
-  const theme = useTheme();
-
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    handleChange(event, name, type);
+  const onChangeHandler = (value: any) => {
+    handleChange(value, name, type);
   };
 
   return (
-    <TextField
-      type={type}
-      value={value || ""}
-      placeholder={placeholder}
-      onChange={onChangeHandler}
-      fullWidth
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <PhoneInput
-              international
-              value={value}
-              defaultCountry="US"
-              className={styles.phoneInput}
-              onChange={function (value?: E164Number | undefined): void {}}
-            />
-          </InputAdornment>
-        ),
-      }}
+    <Box
       sx={{
         height: "54px",
+        width: "520px",
         maxWidth: "554px",
-        margin: "5px 0px",
-        border: disabled
-          ? "none"
-          : `1px solid ${
-              errorMessage ? theme.palette.error.main : "rgba(4, 3, 8, 0.6)"
-            }`,
-        borderRadius: "40px",
-        backgroundColor: disabled ? "rgba(59, 76, 184, 0.11)" : "transparent",
-        "& fieldset": {
-          border: "none",
-          "&::placeholder": {
-            color: "#6D6D6D",
-          },
-        },
-        "& .MuiInputBase-root": {
-          padding: "0px 20px",
-          margin: 0,
-        },
-        "& .MuiOutlinedInput-input": {
-          padding: "15px 0px",
-          color: errorMessage ? theme.palette.error.main : "#494949",
-        },
       }}
-    />
+    >
+      <PhoneInput
+        country={"us"}
+        value={value}
+        onChange={onChangeHandler}
+        placeholder={placeholder}
+        disabled={disabled}
+        countryCodeEditable={false}
+        containerStyle={{
+          border: errorMessage
+            ? "1px solid #E80000"
+            : "1px solid rgba(4, 3, 8, 0.60)",
+          borderRadius: "40px",
+          padding: "15px 20px",
+          display: "flex",
+          alignItems: "center",
+        }}
+        inputStyle={{
+          height: "20px",
+          border: "none",
+          padding: "0px 70px",
+          color: "#494949",
+          fontFamily: "Poppins",
+          fontSize: "14px",
+          fontStyle: "normal",
+          fontWeight: "500",
+          lineHeight: "normal",
+        }}
+        buttonStyle={{
+          width: "50px",
+          height: "50px",
+          border: "none",
+          backgroundColor: "white",
+        }}
+      />
+    </Box>
   );
 };
 

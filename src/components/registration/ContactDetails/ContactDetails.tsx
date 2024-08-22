@@ -7,6 +7,7 @@ import {
   Select,
   MenuItem,
   SelectChangeEvent,
+  FormControl,
 } from "@mui/material";
 
 import InputField from "../../shared/InputField/InputField";
@@ -14,54 +15,61 @@ import StyledButton from "../../shared/StyledButton/StyledButton";
 import LeftArrow from "../../../assets/icons/ui/LeftArrow";
 import MobileStepper from "@mui/material/MobileStepper";
 
-import PhoneField from "../../shared/PhoneField/Phonefield";
 import { useFormContext } from "../../../context/FormContext";
-import { collectErrors } from "../../../utils/validationHelpers";
+import { collectContactDetailErrors } from "../../../utils/validationHelpers";
 import LockIcon from "../../../assets/icons/ui/LockIcon";
 import { Country, countries } from "../../common/data/countries";
 import Error from "../../shared/Error/Error";
+import PhoneField from "../../shared/PhoneField/Phonefield";
 import styles from "./ContactDetails.module.css";
 
 const ContactDetails = () => {
   const { formState, validateField, previousStep, nextStep } = useFormContext();
+
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [collectedErrors, setCollectedErrors] = useState<string[]>([]);
 
   const handleChange = (
     event: SelectChangeEvent<string>,
     name: string,
     type: string,
   ) => {
-    validateField(type, name, event.target.value, formState.password.value);
+    validateField(type, name, event.target.value);
   };
 
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [collectedErrors, setCollectedErrors] = useState<string[]>([]);
+  const onChangeHandler = (event: SelectChangeEvent<string>, name: string) => {
+    handleChange(event, name, formState.residence.type);
+  };
+
+  const handlePhoneChange = (value: any, name: string, type: string) => {
+    validateField(type, name, value);
+  };
 
   const handleSubmit = () => {
     Object.entries(formState).forEach(([key, field]) => {
       if (typeof field === "object" && "type" in field) {
         validateField(field.type, key, field.value, formState.password.value);
       }
-      setIsButtonDisabled(collectedErrors.length > 0);
     });
 
-    const errors = collectErrors(formState);
-    setIsButtonDisabled(errors.length > 0);
-    nextStep();
-  };
-
-  useEffect(() => {
-    const errors = collectErrors(formState);
+    const errors = collectContactDetailErrors(formState);
     setCollectedErrors(errors);
     setIsButtonDisabled(errors.length > 0);
-  }, [formState]);
+
+    if (errors.length === 0) {
+      nextStep();
+    }
+  };
 
   const handleBack = () => {
     previousStep();
   };
 
-  const onChangeHandler = (event: SelectChangeEvent<string>, name: string) => {
-    handleChange(event, name, formState.residence.type);
-  };
+  useEffect(() => {
+    const errors = collectContactDetailErrors(formState);
+    setCollectedErrors(errors);
+    setIsButtonDisabled(errors.length > 0);
+  }, [formState]);
 
   return (
     <>
@@ -116,17 +124,18 @@ const ContactDetails = () => {
           <Box className={styles.box3}>
             <Box>
               <Typography variant="h4" color="#696F79">
-                {formState.phone.title}
+                Phone number
               </Typography>
-
               <PhoneField
-                type="number"
+                type="text"
                 name="phone"
                 value={formState.phone.value}
                 placeholder={formState.phone.placeholder}
-                handleChange={handleChange}
+                errorMessage={formState.phone.errorMessage}
+                handleChange={handlePhoneChange}
               />
             </Box>
+
             <Box mt={2}>
               <Typography variant="h4" color="#696F79">
                 Your address
@@ -158,32 +167,38 @@ const ContactDetails = () => {
                 handleChange={handleChange}
               />
             </Box>
+
             <Box mt={2}>
               <Typography variant="h4" color="#696F79">
-                Country of residence{" "}
+                Country of residence
               </Typography>
-              <Select
-                label="Country of Residence"
-                labelId="country-select-label"
-                id="country-select"
-                value={formState.residence.value}
-                name="residence"
-                onChange={(e: SelectChangeEvent<string>) =>
-                  onChangeHandler(e, "residence")
-                }
-                fullWidth
-                sx={{
-                  borderRadius: "40px",
-                  outline: "1px solid rgba(4, 3, 8, 0.60)",
-                }}
-              >
-                {countries.map((country: Country) => (
-                  <MenuItem key={country.code} value={country.name}>
-                    {country.name}
+              <FormControl fullWidth>
+                <Select
+                  name="residence"
+                  value={formState.residence.value}
+                  displayEmpty
+                  inputProps={{ "aria-label": "Without label" }}
+                  onChange={(e: SelectChangeEvent<string>) =>
+                    onChangeHandler(e, "residence")
+                  }
+                  fullWidth
+                  sx={{
+                    borderRadius: "40px",
+                    outline: "1px solid rgba(4, 3, 8, 0.60)",
+                  }}
+                >
+                  <MenuItem value="" disabled>
+                    Please select
                   </MenuItem>
-                ))}
-              </Select>
+                  {countries.map((country: Country) => (
+                    <MenuItem key={country.code} value={country.name}>
+                      {country.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </Box>
+
             <Box mt={2}>
               <Typography variant="h4" color="#696F79">
                 Tax Identify Number
@@ -197,16 +212,15 @@ const ContactDetails = () => {
                 handleChange={handleChange}
               />
             </Box>
-            {collectErrors(formState).length > 0 && (
-              <Error messages={collectErrors(formState)} />
-            )}
+
+            {collectedErrors.length > 0 && <Error messages={collectedErrors} />}
             <StyledButton
               fullWidth={true}
               disabled={isButtonDisabled}
               title="Save & Continue"
               styles={{
                 margin: "20px 0px",
-                backgoundColor: "#001283",
+                backgroundColor: "#001283",
               }}
               onClick={handleSubmit}
             />
