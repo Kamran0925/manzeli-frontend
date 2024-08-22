@@ -7,6 +7,7 @@ import {
   Select,
   MenuItem,
   SelectChangeEvent,
+  FormControl,
 } from "@mui/material";
 
 import InputField from "../../shared/InputField/InputField";
@@ -132,14 +133,14 @@ const ContactDetails = () => {
               <Typography variant="h4" color="#696F79">
                 {formState.phone.title}
               </Typography>
-              <PhoneField
+              {/* <PhoneField
                 type="text"
                 name="phone"
                 value={formState.phone.value}
                 placeholder={formState.phone.placeholder}
                 errorMessage={touched ? formState.phone.errorMessage : ""}
                 handleChange={handlePhoneChange}
-              />
+              /> */}
             </Box>
 
             <Box mt={2}>
@@ -178,27 +179,31 @@ const ContactDetails = () => {
               <Typography variant="h4" color="#696F79">
                 Country of residence
               </Typography>
-              <Select
-                label="Country of Residence"
-                labelId="country-select-label"
-                id="country-select"
-                value={formState.residence.value}
-                name="residence"
-                onChange={(e: SelectChangeEvent<string>) =>
-                  onChangeHandler(e, "residence")
-                }
-                fullWidth
-                sx={{
-                  borderRadius: "40px",
-                  outline: "1px solid rgba(4, 3, 8, 0.60)",
-                }}
-              >
-                {countries.map((country: Country) => (
-                  <MenuItem key={country.code} value={country.name}>
-                    {country.name}
+              <FormControl fullWidth>
+                <Select
+                  name="residence"
+                  value={formState.residence.value}
+                  displayEmpty
+                  inputProps={{ "aria-label": "Without label" }}
+                  onChange={(e: SelectChangeEvent<string>) =>
+                    onChangeHandler(e, "residence")
+                  }
+                  fullWidth
+                  sx={{
+                    borderRadius: "40px",
+                    outline: "1px solid rgba(4, 3, 8, 0.60)",
+                  }}
+                >
+                  <MenuItem value="" disabled>
+                    Please select
                   </MenuItem>
-                ))}
-              </Select>
+                  {countries.map((country: Country) => (
+                    <MenuItem key={country.code} value={country.name}>
+                      {country.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </Box>
 
             <Box mt={2}>
