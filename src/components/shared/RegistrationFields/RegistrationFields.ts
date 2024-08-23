@@ -4,7 +4,6 @@ export interface FieldState {
   value: string;
   errorMessage: string;
   disabled: boolean;
-  placeholder: string;
   step: number;
 }
 
@@ -31,7 +30,6 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    placeholder: "Enter name",
     step: 0,
   },
   email: {
@@ -40,7 +38,6 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    placeholder: "Enter email address",
     step: 0,
   },
   password: {
@@ -49,7 +46,6 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    placeholder: "Your password",
     step: 0,
   },
   confirmPassword: {
@@ -58,7 +54,6 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    placeholder: "Confirm new password",
     step: 0,
   },
   isTermsAccepted: false,
@@ -69,7 +64,6 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    placeholder: "Enter phone number",
     step: 1,
   },
   address: {
@@ -78,7 +72,6 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    placeholder: "Enter address",
     step: 1,
   },
   street: {
@@ -87,7 +80,6 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    placeholder: "Enter street",
     step: 1,
   },
   city: {
@@ -96,7 +88,6 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    placeholder: "Enter city",
     step: 1,
   },
   residence: {
@@ -105,7 +96,6 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    placeholder: "Please select",
     step: 1,
   },
   identity: {
@@ -114,7 +104,6 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    placeholder: "Please select",
     step: 1,
   },
   profilePicture: "",
