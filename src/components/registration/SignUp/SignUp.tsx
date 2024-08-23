@@ -22,6 +22,11 @@ const SignUp = () => {
   const { formState, validateField, validatePassword, previousStep, nextStep } =
     useFormContext();
 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [collectedErrors, setCollectedErrors] = useState<string[]>([]);
+
+  const [isOpen, setIsOpen] = useState(false);
+
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     name: string,
@@ -29,11 +34,6 @@ const SignUp = () => {
   ) => {
     validateField(type, name, event.target.value);
   };
-
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [collectedErrors, setCollectedErrors] = useState<string[]>([]);
-
-  const [isOpen, setIsOpen] = useState(false);
 
   const handleTermsAccept = () => {
     validateField("checkbox", "isTermsAccepted", true);
@@ -76,16 +76,26 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    validatePassword(
-      "password",
-      "confirmPassword",
-      formState.confirmPassword.value,
-    );
+    if (
+      formState.password.value !== "" &&
+      formState.confirmPassword.value !== ""
+    ) {
+      validatePassword(
+        "password",
+        "confirmPassword",
+        formState.confirmPassword.value,
+      );
+    }
   }, [formState.password.value]);
 
   useEffect(() => {
-    validateField("password", "password", formState.password.value);
-  }, [formState.confirmPassword]);
+    if (
+      formState.password.value !== "" &&
+      formState.confirmPassword.value !== ""
+    ) {
+      validateField("password", "password", formState.password.value);
+    }
+  }, [formState.confirmPassword.value]);
 
   return (
     <>
