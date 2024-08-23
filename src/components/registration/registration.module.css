@@ -27,8 +27,8 @@
 
 div.rightGrid {
   background-color: white;
-  margin-left: 33.333333% !important;
-  padding: 50px 40px;
+  margin-left: 33.333333%;
+  padding: 40px;
 }
 
 @media (max-width: 599px) {
