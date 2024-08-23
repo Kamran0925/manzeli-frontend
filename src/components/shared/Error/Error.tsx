@@ -16,6 +16,7 @@ const Error: React.FC<ErrorProps> = ({ messages }) => {
         maxWidth: "554px",
         bgcolor: "rgba(59, 76, 184, 0.11)",
         borderRadius: "20px",
+        marginTop: "12px",
       }}
     >
       {messages.map((msg, index) => (
