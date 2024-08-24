@@ -19,36 +19,50 @@ import TermsAndConditionsPopup from "../TermsAndConditionsPopup/TermsAndConditio
 import styles from "./SignUp.module.css";
 
 const SignUp = () => {
-  const { formState, validateField, previousStep, nextStep } = useFormContext();
-
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    name: string,
-    type: string,
-  ) => {
-    validateField(type, name, event.target.value, formState.password.value);
-  };
+  const { formState, validateField, validatePassword, previousStep, nextStep } =
+    useFormContext();
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [collectedErrors, setCollectedErrors] = useState<string[]>([]);
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    name: string,
+    type: string,
+  ) => {
+    validateField(type, name, event.target.value);
+  };
+
   const handleTermsAccept = () => {
     validateField("checkbox", "isTermsAccepted", true);
   };
 
+  const handleConfirmPasswordChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    name: string,
+    type: string,
+  ) => {
+    validatePassword(type, name, event.target.value);
+  };
+
   const handleSubmit = () => {
     Object.entries(formState).forEach(([key, field]) => {
-      if (typeof field === "object" && "type" in field) {
-        validateField(field.type, key, field.value, formState.password.value);
+      if (
+        field.step === formState.step &&
+        typeof field === "object" &&
+        "type" in field
+      ) {
+        validateField(field.type, key, field.value);
       }
-      setIsButtonDisabled(collectedErrors.length > 0);
     });
 
     const errors = collectErrors(formState);
     setIsButtonDisabled(errors.length > 0);
-    nextStep();
+    if (errors.length === 0) {
+      nextStep();
+    }
   };
 
   useEffect(() => {
@@ -60,6 +74,28 @@ const SignUp = () => {
   const handleBack = () => {
     previousStep();
   };
+
+  useEffect(() => {
+    if (
+      formState.password.value !== "" &&
+      formState.confirmPassword.value !== ""
+    ) {
+      validatePassword(
+        "password",
+        "confirmPassword",
+        formState.confirmPassword.value,
+      );
+    }
+  }, [formState.password.value]);
+
+  useEffect(() => {
+    if (
+      formState.password.value !== "" &&
+      formState.confirmPassword.value !== ""
+    ) {
+      validateField("password", "password", formState.password.value);
+    }
+  }, [formState.confirmPassword.value]);
 
   return (
     <>
@@ -162,7 +198,7 @@ const SignUp = () => {
                 placeholder="Confirm new password"
                 value={formState.confirmPassword.value}
                 errorMessage={formState.confirmPassword.errorMessage}
-                handleChange={handleChange}
+                handleChange={handleConfirmPasswordChange}
               />
             </Box>
 
