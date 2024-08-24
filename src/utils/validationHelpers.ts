@@ -35,6 +35,22 @@ export const validate = (
       }
       return { errorMessage: "" };
 
+    case "checkbox":
+      if (!value) {
+        return {
+          errorMessage: "You must accept the terms and conditions",
+        };
+      }
+      return { errorMessage: "" };
+
+    case "select":
+      if (!value) {
+        return {
+          errorMessage: "You must select at least one option",
+        };
+      }
+      return { errorMessage: "" };
+
     default:
       return { errorMessage: "Unknown field type" };
   }
@@ -53,5 +69,16 @@ export const collectErrors = (formState: FormState): string[] => {
     !formState.isTermsAccepted
       ? "You must accept the terms and conditions"
       : "",
+  ].filter(error => error.length > 0);
+};
+
+export const collectContactDetailErrors = (formState: FormState): string[] => {
+  return [
+    formState.address.errorMessage,
+    formState.street.errorMessage,
+    formState.city.errorMessage,
+    formState.phone.errorMessage,
+    formState.identity.errorMessage,
+    formState.residence.errorMessage,
   ].filter(error => error.length > 0);
 };

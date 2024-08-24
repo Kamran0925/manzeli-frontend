@@ -13,9 +13,16 @@ export interface FormState {
   password: FieldState;
   confirmPassword: FieldState;
   isTermsAccepted: boolean;
+  step: number;
+  phone: FieldState;
+  address: FieldState;
+  street: FieldState;
+  city: FieldState;
+  residence: FieldState;
+  identity: FieldState;
 }
 
-export const RegistrationFields = {
+export const RegistrationFields: FormState = {
   username: {
     title: "Your fullname*",
     type: "text",
@@ -49,4 +56,53 @@ export const RegistrationFields = {
     placeholder: "Confirm new password",
   },
   isTermsAccepted: false,
+  step: 1,
+  phone: {
+    title: "Phone number",
+    type: "text",
+    value: "",
+    errorMessage: "",
+    disabled: false,
+    placeholder: "Enter phone number",
+  },
+  address: {
+    title: "Your Address",
+    type: "text",
+    value: "",
+    errorMessage: "",
+    disabled: false,
+    placeholder: "Enter address",
+  },
+  street: {
+    title: "",
+    type: "text",
+    value: "",
+    errorMessage: "",
+    disabled: false,
+    placeholder: "Enter street",
+  },
+  city: {
+    title: "",
+    type: "text",
+    value: "",
+    errorMessage: "",
+    disabled: false,
+    placeholder: "Enter city",
+  },
+  residence: {
+    title: "Country of residence",
+    type: "select",
+    value: "AE",
+    errorMessage: "",
+    disabled: false,
+    placeholder: "Please select",
+  },
+  identity: {
+    title: "Tax Identity Number",
+    type: "text",
+    value: "",
+    errorMessage: "",
+    disabled: false,
+    placeholder: "Please select",
+  },
 };

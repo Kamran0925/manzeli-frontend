@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import {
   Dialog,
   DialogContent,
@@ -18,6 +18,10 @@ const TermsAndConditionsPopup: React.FC<{
   onAccept: () => void;
 }> = ({ onClose, onAccept }) => {
   const { formState, validateField } = useFormContext();
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    validateField("checkbox", "isTermsAccepted", event.target.checked);
+  };
 
   const handleAccept = () => {
     validateField("checkbox", "isTermsAccepted", true);
@@ -234,7 +238,10 @@ const TermsAndConditionsPopup: React.FC<{
 
         <DialogActions className={styles.dialogActions}>
           <Box className={styles.checkboxTextContainer}>
-            <Checkbox defaultChecked={formState.isTermsAccepted} />
+            <Checkbox
+              checked={formState.isTermsAccepted}
+              onChange={handleChange}
+            />
             <Typography
               variant="body1"
               sx={{
@@ -260,6 +267,7 @@ const TermsAndConditionsPopup: React.FC<{
               onClick={handleAccept}
               color="primary"
               variant="contained"
+              disabled={!formState.isTermsAccepted}
               sx={{ width: "167px", ml: 1 }}
             >
               Accept

@@ -20,16 +20,17 @@
 
   @media (min-width: 601px) and (max-width: 959px) {
     position: relative;
+
     padding: 12px;
     background-color: #cccccc;
   }
 }
 
-div.rightGrid {
+.rightGrid {
   background-color: white;
+  height: 100%;
   margin-left: 33.333333% !important;
-  padding: 50px 40px;
-  
+  padding: 30px 20px;
 }
 
 @media (max-width: 599px) {

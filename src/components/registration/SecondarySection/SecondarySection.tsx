@@ -2,11 +2,18 @@ import React, { useState } from "react";
 import { Grid, Typography, Box, Link } from "@mui/material";
 
 import Tile from "../../shared/Tile/Tile";
-import styles from "./SecondarySection.module.css";
 import { accountTypes } from "../../shared/AccountTypes/AccountTypes";
+import { useFormContext } from "../../../context/FormContext";
+import styles from "./SecondarySection.module.css";
 
 const SecondarySection = () => {
   const [hoveredTileIndex, setHoveredTileIndex] = useState<number | null>(null);
+
+  const { nextStep } = useFormContext();
+
+  const handleStep = () => {
+    nextStep();
+  };
 
   return (
     <>
@@ -42,7 +49,7 @@ const SecondarySection = () => {
             }}
           >
             <Grid container spacing={2} direction={"column"}>
-              <Grid item xs={12}>
+              <Grid item xs={12} onClick={handleStep}>
                 {accountTypes.map((accountType, index) => (
                   <Box
                     key={index}

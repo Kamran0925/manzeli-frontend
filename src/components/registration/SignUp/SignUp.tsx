@@ -13,13 +13,13 @@ import StyledButton from "../../shared/StyledButton/StyledButton";
 import LeftArrow from "../../../assets/icons/ui/LeftArrow";
 import MobileStepper from "@mui/material/MobileStepper";
 import { useFormContext } from "../../../context/FormContext";
-import { collectErrors, hasErrors } from "../../../utils/validationHelpers";
+import { collectErrors } from "../../../utils/validationHelpers";
 import Error from "../../shared/Error/Error";
 import TermsAndConditionsPopup from "../TermsAndConditionsPopup/TermsAndConditionsPopup";
 import styles from "./SignUp.module.css";
 
 const SignUp = () => {
-  const { formState, validateField } = useFormContext();
+  const { formState, validateField, previousStep, nextStep } = useFormContext();
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -29,16 +29,36 @@ const SignUp = () => {
     validateField(type, name, event.target.value, formState.password.value);
   };
 
-  const isButtonDisabled = hasErrors(formState);
-
-  const errors = collectErrors(formState);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [collectedErrors, setCollectedErrors] = useState<string[]>([]);
 
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {}, [formState]);
-
   const handleTermsAccept = () => {
     validateField("checkbox", "isTermsAccepted", true);
+  };
+
+  const handleSubmit = () => {
+    Object.entries(formState).forEach(([key, field]) => {
+      if (typeof field === "object" && "type" in field) {
+        validateField(field.type, key, field.value, formState.password.value);
+      }
+      setIsButtonDisabled(collectedErrors.length > 0);
+    });
+
+    const errors = collectErrors(formState);
+    setIsButtonDisabled(errors.length > 0);
+    nextStep();
+  };
+
+  useEffect(() => {
+    const errors = collectErrors(formState);
+    setCollectedErrors(errors);
+    setIsButtonDisabled(errors.length > 0);
+  }, [formState]);
+
+  const handleBack = () => {
+    previousStep();
   };
 
   return (
@@ -48,9 +68,9 @@ const SignUp = () => {
           variant="text"
           steps={4}
           position="static"
-          activeStep={1}
+          activeStep={formState.step}
           backButton={
-            <Button size="small" disabled={true}>
+            <Button size="small" onClick={handleBack}>
               <LeftArrow />
               Back
             </Button>
@@ -146,7 +166,8 @@ const SignUp = () => {
               />
             </Box>
 
-            {errors.length > 0 && <Error messages={errors} />}
+            {collectedErrors.length > 0 && <Error messages={collectedErrors} />}
+
             <Box className={styles.box5}>
               <Checkbox
                 checked={formState.isTermsAccepted}
@@ -159,6 +180,9 @@ const SignUp = () => {
                   color="#001283"
                   variant="body1"
                   onClick={() => setIsOpen(true)}
+                  sx={{
+                    cursor: "pointer",
+                  }}
                 >
                   terms and conditions
                 </Link>
@@ -169,10 +193,11 @@ const SignUp = () => {
               fullWidth={true}
               styles={{
                 margin: "10px 0px",
-                backgoundColor: "#001283",
+                backgroundColor: "#001283",
               }}
               disabled={isButtonDisabled}
               title="Register Account"
+              onClick={handleSubmit}
             />
           </Box>
         </Box>

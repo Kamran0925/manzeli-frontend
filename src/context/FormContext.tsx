@@ -13,7 +13,10 @@ interface FormContextType {
     value: any,
     password?: string,
   ) => void;
+  nextStep: () => void;
+  previousStep: () => void;
 }
+const inputFieldTypes = ["text", "email", "password", "checkbox", "select"];
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
@@ -30,37 +33,50 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
   ) => {
     let errorMessage = "";
 
-    switch (type) {
-      case "text":
-      case "email":
-      case "password":
-        const validation = validate(type, value, passwordValue);
-        errorMessage = validation.errorMessage;
-        break;
-      case "checkbox":
-        break;
-      default:
-        errorMessage = "Unknown field type";
+    if (inputFieldTypes.includes(type)) {
+      const validation = validate(type, value, passwordValue);
+      errorMessage = validation.errorMessage;
+    } else {
+      errorMessage = "";
     }
 
-    if (type === "checkbox") {
-      setFormState(prevState => ({
-        ...prevState,
-        [name]: true,
-      }));
-    } else {
-      setFormState(prevState => ({
-        ...prevState,
-        [name]: {
-          value,
-          errorMessage,
-        },
-      }));
-    }
+    setFormState(prevState => {
+      if (type === "checkbox") {
+        return {
+          ...prevState,
+          [name]: value,
+        };
+      } else {
+        return {
+          ...prevState,
+          [name]: {
+            type,
+            value,
+            errorMessage,
+          },
+        };
+      }
+    });
+  };
+
+  const nextStep = () => {
+    setFormState(prevState => ({
+      ...prevState,
+      step: prevState.step + 1,
+    }));
+  };
+
+  const previousStep = () => {
+    setFormState(prevState => ({
+      ...prevState,
+      step: prevState.step - 1,
+    }));
   };
 
   return (
-    <FormContext.Provider value={{ formState, validateField }}>
+    <FormContext.Provider
+      value={{ formState, validateField, nextStep, previousStep }}
+    >
       {children}
     </FormContext.Provider>
   );

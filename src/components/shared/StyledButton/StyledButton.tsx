@@ -7,6 +7,7 @@ interface StyledButtonProps {
   styles?: SxProps<Theme>;
   disabled?: boolean;
   title: string;
+  onClick?: () => void;
 }
 
 const StyledButton: React.FC<StyledButtonProps> = ({
@@ -14,11 +15,13 @@ const StyledButton: React.FC<StyledButtonProps> = ({
   styles,
   disabled,
   title,
+  onClick,
 }) => (
   <Button
     variant="contained"
     fullWidth={fullWidth}
     disabled={disabled}
+    onClick={onClick}
     sx={{
       padding: "15px 20px",
       maxWidth: "554px",

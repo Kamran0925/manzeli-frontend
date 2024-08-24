@@ -3,14 +3,10 @@ import { Container, Grid } from "@mui/material";
 
 import PrimarySection from "../../components/registration/PrimarySection/PrimarySection";
 
-import styles from "./AccountTypeSelectable.module.css";
-import { useFormContext } from "../../context/FormContext";
-import { renderPage } from "../../utils/renderPage";
+import ContactDetails from "../../components/registration/ContactDetails/ContactDetails";
+import styles from "./PersonalDetails.module.css";
 
-const AccountTypeSelectable = () => {
-  const { formState } = useFormContext();
-  const { step } = formState;
-
+const PersonalDetails = () => {
   return (
     <Container disableGutters maxWidth={false}>
       <Grid container>
@@ -18,11 +14,11 @@ const AccountTypeSelectable = () => {
           <PrimarySection />
         </Grid>
         <Grid item xs={12} sm={12} md={8} className={styles.rightGrid}>
-          {renderPage(step)}
+          <ContactDetails />
         </Grid>
       </Grid>
     </Container>
   );
 };
 
-export default AccountTypeSelectable;
+export default PersonalDetails;
