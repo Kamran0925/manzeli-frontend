@@ -7,7 +7,7 @@ export const validate = (
 ): { errorMessage: string } => {
   switch (type) {
     case "text":
-      if (value.trim().length <= 8 || value.trim() === "") {
+      if (value.trim().length < 8 || value.trim() === "") {
         return {
           errorMessage: "Minimum length of 8 characters",
         };
@@ -25,12 +25,12 @@ export const validate = (
       return { errorMessage: "" };
 
     case "password":
-      if (value.trim().length <= 8 || value.trim() === "") {
+      if (value.trim().length < 8) {
         return {
           errorMessage: "Password cannot be less than 8 characters",
         };
       }
-      if (value.trim() !== passwordValue && value.trim() !== "") {
+      if (value.trim() !== passwordValue) {
         return { errorMessage: "Passwords do not match" };
       }
       return { errorMessage: "" };
@@ -48,6 +48,28 @@ export const validate = (
         return {
           errorMessage: "You must select at least one option",
         };
+      }
+      return { errorMessage: "" };
+
+    default:
+      return { errorMessage: "Unknown field type" };
+  }
+};
+
+export const validateConfirmPassword = (
+  type: string,
+  confirmPasswordValue: string,
+  passwordValue: string,
+): { errorMessage: string } => {
+  switch (type) {
+    case "password":
+      if (confirmPasswordValue.trim().length < 8) {
+        return {
+          errorMessage: "Confirm Password cannot be less than 8 characters",
+        };
+      }
+      if (confirmPasswordValue.trim() !== passwordValue) {
+        return { errorMessage: "Passwords do not match" };
       }
       return { errorMessage: "" };
 

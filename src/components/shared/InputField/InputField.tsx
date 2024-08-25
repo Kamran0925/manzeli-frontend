@@ -39,13 +39,13 @@ const InputField: React.FC<InputFieldProps> = ({
   };
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    handleChange(event, name, inputType);
+    handleChange(event, name, type);
   };
 
   return (
     <TextField
       type={inputType}
-      value={value || ""}
+      value={value}
       placeholder={placeholder}
       onChange={onChangeHandler}
       fullWidth
