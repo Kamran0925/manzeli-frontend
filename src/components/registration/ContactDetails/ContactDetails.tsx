@@ -47,8 +47,12 @@ const ContactDetails = () => {
 
   const handleSubmit = () => {
     Object.entries(formState).forEach(([key, field]) => {
-      if (typeof field === "object" && "type" in field) {
-        validateField(field.type, key, field.value, formState.password.value);
+      if (
+        field.step == formState.step &&
+        typeof field === "object" &&
+        "type" in field
+      ) {
+        validateField(field.type, key, field.value);
       }
     });
 

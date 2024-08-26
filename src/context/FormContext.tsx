@@ -1,20 +1,18 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
-import { validate } from "../utils/validationHelpers";
+import { validate, validateConfirmPassword } from "../utils/validationHelpers";
 import {
+  FieldState,
   FormState,
   RegistrationFields,
 } from "../components/shared/RegistrationFields/RegistrationFields";
 
 interface FormContextType {
   formState: FormState;
-  validateField: (
-    type: string,
-    fieldName: string,
-    value: any,
-    password?: string,
-  ) => void;
+  validateField: (type: string, fieldName: string, value: any) => void;
+  validatePassword: (type: string, fieldName: string, value: any) => void;
   nextStep: () => void;
   previousStep: () => void;
+  setProfilePicture: (blob: Blob | "") => void;
 }
 const inputFieldTypes = ["text", "email", "password", "checkbox", "select"];
 
@@ -25,20 +23,25 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [formState, setFormState] = useState<FormState>(RegistrationFields);
 
-  const validateField = (
-    type: string,
-    name: string,
-    value: string,
-    passwordValue?: string,
-  ) => {
+  const validateField = (type: string, name: string, value: string) => {
     let errorMessage = "";
+    let confirmPassword = formState.confirmPassword.value;
 
     if (inputFieldTypes.includes(type)) {
-      const validation = validate(type, value, passwordValue);
+      const validation = validate(type, value, confirmPassword);
       errorMessage = validation.errorMessage;
     } else {
       errorMessage = "";
     }
+
+    let newFieldData: FieldState = {
+      title: name,
+      type: type,
+      value: value,
+      errorMessage: errorMessage,
+      disabled: false,
+      step: formState.step,
+    };
 
     setFormState(prevState => {
       if (type === "checkbox") {
@@ -49,13 +52,33 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
       } else {
         return {
           ...prevState,
-          [name]: {
-            type,
-            value,
-            errorMessage,
-          },
+          [name]: newFieldData,
         };
       }
+    });
+  };
+
+  const validatePassword = (type: string, name: string, value: string) => {
+    let errorMessage = "";
+    let password = formState.password.value;
+
+    const validation = validateConfirmPassword(type, value, password);
+    errorMessage = validation.errorMessage;
+
+    let newConfirmPassword: FieldState = {
+      title: name,
+      type: type,
+      value: value,
+      errorMessage: errorMessage,
+      disabled: false,
+      step: formState.step,
+    };
+
+    setFormState(prevState => {
+      return {
+        ...prevState,
+        [name]: newConfirmPassword,
+      };
     });
   };
 
@@ -73,9 +96,23 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
     }));
   };
 
+  const setProfilePicture = (blob: Blob | "") => {
+    setFormState(prevState => ({
+      ...prevState,
+      profilePicture: blob,
+    }));
+  };
+
   return (
     <FormContext.Provider
-      value={{ formState, validateField, nextStep, previousStep }}
+      value={{
+        formState,
+        validateField,
+        validatePassword,
+        nextStep,
+        previousStep,
+        setProfilePicture,
+      }}
     >
       {children}
     </FormContext.Provider>
