@@ -124,7 +124,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ onNext }) => {
 
           <Box
             sx={{
-              width: "554px",
+              maxWidth: "554px",
               marginTop: "10px",
             }}
           >
