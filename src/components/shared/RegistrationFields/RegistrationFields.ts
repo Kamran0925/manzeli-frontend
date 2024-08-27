@@ -57,7 +57,7 @@ export const RegistrationFields: FormState = {
     step: 0,
   },
   isTermsAccepted: false,
-  step: -1,
+  step: 1,
   phone: {
     title: "Phone number",
     type: "text",
@@ -93,7 +93,7 @@ export const RegistrationFields: FormState = {
   residence: {
     title: "Country of residence",
     type: "select",
-    value: "",
+    value: "AE",
     errorMessage: "",
     disabled: false,
     step: 1,
