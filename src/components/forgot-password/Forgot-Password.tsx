@@ -3,8 +3,6 @@ import { Container, Grid } from "@mui/material";
 
 import EmailVerification from "./EmailVerfication/EmailVerification";
 import LinkExpired from "./LinkExpired/LinkExpired";
-import ResetPassword from "./ResetPassword/ResetPassword";
-import ResetPasswordSuccess from "./ResetPasswordSuccess/ResetPasswordSuccess";
 import SecondarySection from "./SecondarySection/SecondarySection";
 import styles from "./Forgot-Password.module.css";
 
@@ -23,10 +21,6 @@ const ForgotPassword = () => {
         return <EmailVerification onNext={handleNext} />;
       case 2:
         return <LinkExpired onNext={handleNext} />;
-      case 3:
-        return <ResetPassword onNext={handleNext} />;
-      case 4:
-        return <ResetPasswordSuccess />;
       default:
         return <SecondarySection onNext={handleNext} />;
     }
