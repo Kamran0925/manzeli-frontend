@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { Typography, Box, Link, Button } from "@mui/material";
+import { Typography, Box, Button, Link as MuiLink } from "@mui/material";
 import InputField from "../../../shared/InputField/InputField";
+import { Link } from "react-router-dom";
+
 import styles from "./ForgotPasswordForm.module.css";
 
 interface ForgotPasswordProps {
@@ -16,6 +18,8 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({ onNext }) => {
     const value = e.target.value;
     if (value.length < 8) {
       setIsButtonDisabled(true);
+    } else {
+      setIsButtonDisabled(false);
     }
     setName(value);
   };
@@ -95,8 +99,9 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({ onNext }) => {
               fontWeight: 600,
             }}
           >
-            <Link
-              href="/forgot-password"
+            <MuiLink
+              component={Link}
+              to="/login"
               sx={{
                 textDecoration: "none",
                 color: "#000",
@@ -106,7 +111,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({ onNext }) => {
               }}
             >
               Back to Login
-            </Link>
+            </MuiLink>
           </Box>
         </Box>
       </Box>

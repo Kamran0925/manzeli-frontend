@@ -1,5 +1,5 @@
-import { Typography, Box, Link, Button } from "@mui/material";
-
+import { Typography, Box, Link as MuiLink, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import styles from "./EmailVerification.module.css";
 
 interface EmailVerificationProps {
@@ -86,8 +86,9 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext }) => {
               fontWeight: 600,
             }}
           >
-            <Link
-              href="/forgot-password"
+            <MuiLink
+              component={Link}
+              to="/login"
               sx={{
                 textDecoration: "none",
                 color: "#000",
@@ -97,7 +98,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext }) => {
               }}
             >
               Back to Login
-            </Link>
+            </MuiLink>
           </Box>
         </Box>
       </Box>
