@@ -12,7 +12,7 @@ interface ForgotPasswordProps {
 const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({ onNext }) => {
   const [name, setName] = useState<string>("");
 
-  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
