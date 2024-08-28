@@ -1,4 +1,6 @@
 import { Typography, Box, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+
 import styles from "./ResetPasswordSuccess.module.css";
 
 const ResetPasswordSuccess = () => {
@@ -35,6 +37,8 @@ const ResetPasswordSuccess = () => {
         >
           <Button
             variant="contained"
+            component={Link}
+            to="/login"
             sx={{
               margin: "30px 0px",
               padding: "15px 20px",
