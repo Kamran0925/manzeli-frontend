@@ -1,4 +1,5 @@
 .leftGrid {
+  width: 33.333333%;
   height: 100vh;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.52)),
     url("../../assets/images/building.png");
@@ -9,40 +10,37 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  position: fixed;
-
-  @media (max-width: 600px) {
-    position: relative;
-    padding: 8px;
-    background-color: #e0e0e0;
-  }
-
-  @media (min-width: 601px) and (max-width: 959px) {
-    position: relative;
-    padding: 12px;
-    background-color: #cccccc;
-  }
+  position: relative;
 }
 
-div.rightGrid {
+.rightGrid {
   background-color: white;
   margin-left: 33.333333%;
   padding: 40px;
 }
 
-@media (max-width: 599px) {
+.loginImage {
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    ),
+    url("../../assets/images/building2.jpg") lightgray -112px -100.62px /
+      188.043% 111.23% no-repeat;
+}
+
+@media (max-width: 600px) {
   .rightGrid {
     height: auto;
     margin-left: 0 !important;
-    padding: 20px 20px;
+    padding: 20px;
   }
 }
 
-@media (min-width: 600px) and (max-width: 899px) {
+@media (min-width: 601px) and (max-width: 900px) {
   .rightGrid {
     height: auto;
     margin-left: 0 !important;
-    padding: 30px 20px;
+    padding: 20px;
   }
 }

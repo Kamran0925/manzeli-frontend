@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Typography, Box, Link, Button } from "@mui/material";
 import InputField from "../../shared/InputField/InputField";
 import Error from "../../shared/Error/Error";
-
-import styles from "./SecondarySection.module.css";
+import styles from "./Login.module.css";
 
 const validateEmail = (email: string): string => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -16,68 +15,87 @@ const validatePassword = (password: string): string => {
     : "";
 };
 
-const SecondarySection = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [emailError, setEmailError] = useState<string>("");
-  const [passwordError, setPasswordError] = useState<string>("");
+const validateField = (name: string, value: string) => {
+  switch (name) {
+    case "email":
+      return validateEmail(value);
+    case "password":
+      return validatePassword(value);
+    default:
+      return "";
+  }
+};
+
+const Login = () => {
+  const [formState, setFormState] = useState({
+    email: {
+      value: "",
+      errorMessage: "",
+    },
+    password: {
+      value: "",
+      errorMessage: "",
+    },
+  });
+
   const [formErrors, setFormErrors] = useState<string[]>([]);
-  const [failedAttempts, setFailedAttempts] = useState<number>(0);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (failedAttempts >= 3) {
-      setIsButtonDisabled(true);
-      setFormErrors([
-        "Error: Account locked due to 3 failed attempts. Please check your email for unlock instructions.",
-      ]);
-      const timer = setTimeout(() => {
-        setFailedAttempts(0);
-        setIsButtonDisabled(false);
-        setFormErrors([]);
-      }, 30000);
-      return () => clearTimeout(timer);
-    }
-  }, [failedAttempts]);
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    name: string,
+  ) => {
+    const { value } = e.target;
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setEmail(value);
-    if (value) {
-      setEmailError(validateEmail(value));
-    } else {
-      setEmailError("");
-    }
-  };
+    setFormState(prevState => {
+      const errorMessage = validateField(name, value);
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setPassword(value);
-    if (value) {
-      setPasswordError(validatePassword(value));
-    } else {
-      setPasswordError("");
-    }
+      const updatedState = {
+        ...prevState,
+        [name]: {
+          value,
+          errorMessage,
+        },
+      };
+
+      const emailError = validateField("email", updatedState.email.value);
+      const passwordError = validateField(
+        "password",
+        updatedState.password.value,
+      );
+
+      const updatedErrors = [emailError, passwordError].filter(Boolean);
+
+      setFormErrors(updatedErrors);
+      setIsButtonDisabled(updatedErrors.length > 0);
+
+      return updatedState;
+    });
   };
 
   const handleSubmit = () => {
-    const emailError = validateEmail(email);
-    const passwordError = validatePassword(password);
+    const emailError = validateEmail(formState.email.value);
+    const passwordError = validatePassword(formState.password.value);
 
     if (emailError || passwordError) {
-      setEmailError(emailError);
-      setPasswordError(passwordError);
-      setFormErrors([emailError, passwordError]);
-      setFailedAttempts(prevAttempts => prevAttempts + 1);
+      setFormState(prevState => ({
+        email: {
+          ...prevState.email,
+          errorMessage: emailError,
+        },
+        password: {
+          ...prevState.password,
+          errorMessage: passwordError,
+        },
+      }));
+      setFormErrors([emailError, passwordError].filter(Boolean));
+      setIsButtonDisabled(true);
       return;
     }
 
-    console.log("Logging in with:", { email, password });
     setFormErrors([]);
-    setFailedAttempts(0);
+    setIsButtonDisabled(false);
   };
-
-  const isSubmitDisabled = !!emailError || !!passwordError;
 
   return (
     <Box component="section" className={styles.box1}>
@@ -125,17 +143,17 @@ const SecondarySection = () => {
             name="email"
             type="email"
             placeholder="Email"
-            value={email}
-            errorMessage={emailError}
-            handleChange={handleEmailChange}
+            value={formState.email.value}
+            errorMessage={formState.email.errorMessage}
+            handleChange={e => handleInputChange(e, "email")}
           />
           <InputField
             type="password"
             name="password"
             placeholder="Password"
-            value={password}
-            errorMessage={passwordError}
-            handleChange={handlePasswordChange}
+            value={formState.password.value}
+            errorMessage={formState.password.errorMessage}
+            handleChange={e => handleInputChange(e, "password")}
           />
           <Box
             sx={{
@@ -160,7 +178,7 @@ const SecondarySection = () => {
               },
             }}
           >
-            Forgot Password
+            Forgot Password?
           </Link>
         </Box>
 
@@ -181,7 +199,7 @@ const SecondarySection = () => {
             },
           }}
           onClick={handleSubmit}
-          disabled={isButtonDisabled || isSubmitDisabled}
+          disabled={isButtonDisabled}
         >
           Login
         </Button>
@@ -190,4 +208,4 @@ const SecondarySection = () => {
   );
 };
 
-export default SecondarySection;
+export default Login;

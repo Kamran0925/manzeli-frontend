@@ -4,9 +4,9 @@ import { Grid, Typography, Box, Link } from "@mui/material";
 import Tile from "../../shared/Tile/Tile";
 import { accountTypes } from "../../shared/AccountTypes/AccountTypes";
 import { useFormContext } from "../../../context/FormContext";
-import styles from "./SecondarySection.module.css";
+import styles from "./AccountSelectable.module.css";
 
-const SecondarySection = () => {
+const AccountSelectable = () => {
   const [hoveredTileIndex, setHoveredTileIndex] = useState<number | null>(null);
 
   const { nextStep } = useFormContext();
@@ -73,4 +73,4 @@ const SecondarySection = () => {
   );
 };
 
-export default SecondarySection;
+export default AccountSelectable;
