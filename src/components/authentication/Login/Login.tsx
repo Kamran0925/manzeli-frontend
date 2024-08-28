@@ -178,7 +178,7 @@ const Login = () => {
               },
             }}
           >
-            Forgot Password
+            Forgot Password?
           </Link>
         </Box>
 
