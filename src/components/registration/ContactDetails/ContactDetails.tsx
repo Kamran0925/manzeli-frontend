@@ -77,7 +77,7 @@ const ContactDetails = () => {
 
   return (
     <>
-      <Container className={styles.box1}>
+      <Container className={styles.box1} disableGutters={true}>
         <MobileStepper
           variant="text"
           steps={4}

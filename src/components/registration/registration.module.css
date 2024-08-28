@@ -9,40 +9,39 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   position: fixed;
+}
 
-  @media (max-width: 600px) {
+.rightGrid {
+  background-color: white;
+  margin-left: 33.333333% !important;
+  padding: 40px;
+}
+
+@media (max-width: 600px) {
+  .leftGrid {
     position: relative;
     padding: 8px;
     background-color: #e0e0e0;
   }
 
-  @media (min-width: 601px) and (max-width: 959px) {
+  .rightGrid {
+    height: auto;
+    margin-left: 0 !important;
+    padding: 20px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .leftGrid {
     position: relative;
-    padding: 12px;
+    padding: 16px;
     background-color: #cccccc;
   }
-}
 
-div.rightGrid {
-  background-color: white;
-  margin-left: 33.333333%;
-  padding: 40px;
-}
-
-@media (max-width: 599px) {
   .rightGrid {
     height: auto;
     margin-left: 0 !important;
-    padding: 20px 20px;
-  }
-}
-
-@media (min-width: 600px) and (max-width: 899px) {
-  .rightGrid {
-    height: auto;
-    margin-left: 0 !important;
-    padding: 30px 20px;
+    padding: 20px;
   }
 }
