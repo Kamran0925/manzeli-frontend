@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Typography, Box, Link, Button } from "@mui/material";
 import InputField from "../../shared/InputField/InputField";
 import Error from "../../shared/Error/Error";
@@ -22,23 +22,7 @@ const Login = () => {
   const [emailError, setEmailError] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
   const [formErrors, setFormErrors] = useState<string[]>([]);
-  const [failedAttempts, setFailedAttempts] = useState<number>(0);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (failedAttempts >= 3) {
-      setIsButtonDisabled(true);
-      setFormErrors([
-        "Error: Account locked due to 3 failed attempts. Please check your email for unlock instructions.",
-      ]);
-      const timer = setTimeout(() => {
-        setFailedAttempts(0);
-        setIsButtonDisabled(false);
-        setFormErrors([]);
-      }, 30000);
-      return () => clearTimeout(timer);
-    }
-  }, [failedAttempts]);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -68,13 +52,11 @@ const Login = () => {
       setEmailError(emailError);
       setPasswordError(passwordError);
       setFormErrors([emailError, passwordError]);
-      setFailedAttempts(prevAttempts => prevAttempts + 1);
       return;
     }
 
     console.log("Logging in with:", { email, password });
     setFormErrors([]);
-    setFailedAttempts(0);
   };
 
   const isSubmitDisabled = !!emailError || !!passwordError;
