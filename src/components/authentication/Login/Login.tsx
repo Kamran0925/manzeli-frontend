@@ -155,13 +155,15 @@ const Login = () => {
             errorMessage={formState.password.errorMessage}
             handleChange={e => handleInputChange(e, "password")}
           />
-          <Box
-            sx={{
-              width: "554px",
-            }}
-          >
-            {formErrors.length > 0 && <Error messages={formErrors} />}
-          </Box>
+          {formErrors.length > 0 && (
+            <Box
+              sx={{
+                width: "554px",
+              }}
+            >
+              <Error messages={formErrors} />
+            </Box>
+          )}
           <Link
             href="/forgot-password"
             sx={{
