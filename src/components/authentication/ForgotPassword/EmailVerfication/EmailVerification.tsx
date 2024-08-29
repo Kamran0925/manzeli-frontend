@@ -18,9 +18,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext }) => {
           variant="h4"
           sx={{
             color: "#040308",
-            fontFamily: "Poppins, sans-serif",
             fontSize: "32px",
-            fontStyle: "normal",
             fontWeight: 700,
             lineHeight: "normal",
           }}
@@ -45,9 +43,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext }) => {
             variant="h2"
             sx={{
               color: "#040308",
-              fontFamily: "Poppins, sans-serif",
               fontSize: "16px",
-              fontStyle: "normal",
               fontWeight: 400,
               lineHeight: "normal",
             }}
@@ -63,13 +59,10 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext }) => {
               height: "54px",
               width: "100%",
               borderRadius: "40px",
-              backgroundColor: "#001283",
-              color: "#fff",
               fontSize: "16px",
               textTransform: "none",
               "&:hover": {
                 cursor: "pointer",
-                backgroundColor: "#000a4e",
               },
             }}
             onClick={handleSubmit}

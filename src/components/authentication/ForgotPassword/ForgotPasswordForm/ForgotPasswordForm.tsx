@@ -35,9 +35,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({ onNext }) => {
           variant="h4"
           sx={{
             color: "#040308",
-            fontFamily: "Poppins, sans-serif",
             fontSize: "32px",
-            fontStyle: "normal",
             fontWeight: 700,
             lineHeight: "normal",
           }}
@@ -76,12 +74,9 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({ onNext }) => {
               width: "100%",
               fontSize: "16px",
               borderRadius: "40px",
-              backgroundColor: "#001283",
-              color: "#fff",
               textTransform: "none",
               "&:hover": {
                 cursor: "pointer",
-                backgroundColor: "#000a4e",
               },
             }}
             onClick={handleSubmit}
