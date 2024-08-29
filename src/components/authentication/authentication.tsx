@@ -1,5 +1,6 @@
 import { Container, Grid } from "@mui/material";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import classNames from "classnames";
 import PrimarySection from "./PrimarySection/PrimarySection";
 import Login from "./Login/Login";
 import Registration from "./Registration/Registration";
@@ -17,7 +18,9 @@ const Authentication = () => {
           xs={12}
           sm={12}
           md={4}
-          className={isLoginRoute ? styles.loginImage : styles.leftGrid}
+          className={classNames(styles.leftGrid, {
+            [styles.loginImage]: isLoginRoute,
+          })}
         >
           {!isLoginRoute && <PrimarySection />}
         </Grid>
