@@ -33,8 +33,7 @@ const PhoneField: React.FC<PhoneFieldProps> = ({
     <Box
       sx={{
         height: "54px",
-        width: "520px",
-        maxWidth: "554px",
+        maxWidth: { xs: "240px", sm: "335px", md: "514px" },
       }}
     >
       <PhoneInput
@@ -46,7 +45,7 @@ const PhoneField: React.FC<PhoneFieldProps> = ({
         countryCodeEditable={false}
         onlyCountries={["ae"]}
         containerStyle={{
-          border: errorMessage
+          outline: errorMessage
             ? "1px solid #E80000"
             : "1px solid rgba(4, 3, 8, 0.60)",
           borderRadius: "40px",
@@ -56,8 +55,8 @@ const PhoneField: React.FC<PhoneFieldProps> = ({
         }}
         inputStyle={{
           height: "20px",
+          width: "240px",
           border: "none",
-          padding: "0px 70px",
           color: "#494949",
           fontFamily: "Poppins",
           fontSize: "14px",

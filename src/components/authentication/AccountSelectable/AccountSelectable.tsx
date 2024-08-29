@@ -17,8 +17,8 @@ const AccountSelectable = () => {
 
   return (
     <>
-      <Box component="section" className={styles.container}>
-        <Box style={{ marginLeft: "auto", display: "inline" }}>
+      <Box component="section" className={styles.box1}>
+        <Box sx={{ marginLeft: "auto", display: "flex" }}>
           <Typography variant="body1">
             Already have an account?{" "}
             <Link color="primary" variant="body1">
@@ -27,24 +27,25 @@ const AccountSelectable = () => {
           </Typography>
         </Box>
 
-        <Box
-          sx={{
-            margin: {
-              xs: "50px 0px 0px 0px",
-            },
-            maxWidth: "440px",
-          }}
-        >
+        <Box className={styles.box2}>
           <Typography variant="h3">Join Us!</Typography>
 
-          <Typography variant="body1">
+          <Typography
+            variant="body1"
+            sx={{
+              width: {
+                xs: "100%",
+                sm: "80%",
+              },
+            }}
+          >
             To begin, please select the type of account you would like to
             create.
           </Typography>
 
           <Box
             sx={{
-              margin: "20px 0px 0px 0px",
+              marginTop: "20px",
               maxWidth: "440px",
             }}
           >
