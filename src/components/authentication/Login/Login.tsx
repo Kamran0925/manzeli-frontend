@@ -165,7 +165,7 @@ const Login = () => {
           <Link
             href="/forgot-password"
             sx={{
-              color: "#000",
+              color: "#001283",
               fontFamily: "Poppins, sans-serif",
               fontSize: "14px",
               fontStyle: "normal",
@@ -190,12 +190,9 @@ const Login = () => {
             height: "54px",
             width: "100%",
             borderRadius: "40px",
-            backgroundColor: "#001283",
-            color: "#fff",
             textTransform: "none",
             "&:hover": {
               cursor: "pointer",
-              backgroundColor: "#000a4e",
             },
           }}
           onClick={handleSubmit}
