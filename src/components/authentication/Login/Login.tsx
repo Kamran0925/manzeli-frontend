@@ -1,9 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Typography, Box, Link as MuiLink, Button } from "@mui/material";
 import InputField from "../../shared/InputField/InputField";
 import { Link } from "react-router-dom";
 import Error from "../../shared/Error/Error";
 import styles from "./Login.module.css";
+
+interface FormField {
+  value: string;
+  errorMessage: string;
+}
+
+interface FormState {
+  email: FormField;
+  password: FormField;
+}
 
 const validateEmail = (email: string): string => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -28,7 +38,7 @@ const validateField = (name: string, value: string) => {
 };
 
 const Login = () => {
-  const [formState, setFormState] = useState({
+  const initialFormState: FormState = {
     email: {
       value: "",
       errorMessage: "",
@@ -37,9 +47,10 @@ const Login = () => {
       value: "",
       errorMessage: "",
     },
-  });
+  };
 
-  const [formErrors, setFormErrors] = useState<string[]>([]);
+  const [formState, setFormState] = useState<FormState>(initialFormState);
+
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
 
   const handleInputChange = (
@@ -59,17 +70,9 @@ const Login = () => {
         },
       };
 
-      const emailError = validateField("email", updatedState.email.value);
-      const passwordError = validateField(
-        "password",
-        updatedState.password.value,
-      );
-
-      const updatedErrors = [emailError, passwordError].filter(Boolean);
-
-      setFormErrors(updatedErrors);
-      setIsButtonDisabled(updatedErrors.length > 0);
-
+      if (errorMessage) {
+        setIsButtonDisabled(true);
+      }
       return updatedState;
     });
   };
@@ -89,14 +92,45 @@ const Login = () => {
           errorMessage: passwordError,
         },
       }));
-      setFormErrors([emailError, passwordError].filter(Boolean));
       setIsButtonDisabled(true);
       return;
     }
 
-    setFormErrors([]);
     setIsButtonDisabled(false);
   };
+
+  const collectErrors = (formState: FormState): string[] => {
+    return Object.values(formState)
+      .map(field => field.errorMessage)
+      .filter(message => message !== "");
+  };
+
+  useEffect(() => {
+    if (formState.email.value === "" && formState.password.value === "") {
+      return;
+    }
+
+    const emailError =
+      formState.email.value !== "" ? validateEmail(formState.email.value) : "";
+    const passwordError =
+      formState.password.value !== ""
+        ? validatePassword(formState.password.value)
+        : "";
+
+    setFormState(prevState => ({
+      email: {
+        ...prevState.email,
+        errorMessage: emailError,
+      },
+      password: {
+        ...prevState.password,
+        errorMessage: passwordError,
+      },
+    }));
+
+    const hasErrors = emailError || passwordError;
+    setIsButtonDisabled(!!hasErrors);
+  }, [formState.email.value, formState.password.value]);
 
   return (
     <Box component="section" className={styles.box1}>
@@ -157,15 +191,15 @@ const Login = () => {
             errorMessage={formState.password.errorMessage}
             handleChange={e => handleInputChange(e, "password")}
           />
-          {formErrors.length > 0 && (
-            <Box
-              sx={{
-                width: "554px",
-              }}
-            >
-              <Error messages={formErrors} />
-            </Box>
-          )}
+          <Box
+            sx={{
+              width: "554px",
+            }}
+          >
+            {collectErrors(formState).length > 0 && (
+              <Error messages={collectErrors(formState)} />
+            )}
+          </Box>
           <MuiLink
             component={Link}
             to="/forgot-password"
