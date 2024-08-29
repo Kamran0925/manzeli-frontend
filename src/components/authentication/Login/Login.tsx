@@ -171,11 +171,8 @@ const Login = () => {
             to="/forgot-password"
             sx={{
               color: "#001283",
-              fontFamily: "Poppins, sans-serif",
               fontSize: "14px",
-              fontStyle: "normal",
               fontWeight: 400,
-              lineHeight: "normal",
               marginLeft: "auto",
               textDecoration: "none",
               "&:hover": {
