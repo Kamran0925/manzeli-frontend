@@ -10,12 +10,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  position: fixed;
 }
 
 .rightGrid {
   background-color: white;
-  margin-left: 33.333333%;
+  margin-left: 33.333333% !important;
   padding: 40px;
 }
 
@@ -30,6 +30,10 @@
 }
 
 @media (max-width: 600px) {
+  .leftGrid {
+    position: relative;
+  }
+
   .rightGrid {
     height: auto;
     margin-left: 0 !important;
@@ -38,6 +42,10 @@
 }
 
 @media (min-width: 601px) and (max-width: 900px) {
+  .leftGrid {
+    position: relative;
+  }
+
   .rightGrid {
     height: auto;
     margin-left: 0 !important;
