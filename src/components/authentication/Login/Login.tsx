@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Typography, Box, Link, Button } from "@mui/material";
+import { Typography, Box, Link as MuiLink, Button } from "@mui/material";
 import InputField from "../../shared/InputField/InputField";
 import Error from "../../shared/Error/Error";
+import { Link } from "react-router-dom";
 import styles from "./Login.module.css";
 
 const validateEmail = (email: string): string => {
@@ -116,8 +117,9 @@ const Login = () => {
 
         <Typography variant="h4" fontWeight={400}>
           Don’t have an account?{" "}
-          <Link
-            href="/sign-up"
+          <MuiLink
+            component={Link}
+            to="/registration"
             sx={{
               color: "#000",
               textDecoration: "none",
@@ -127,7 +129,7 @@ const Login = () => {
             }}
           >
             Sign Up
-          </Link>
+          </MuiLink>
         </Typography>
 
         <Box
@@ -162,8 +164,9 @@ const Login = () => {
           >
             {formErrors.length > 0 && <Error messages={formErrors} />}
           </Box>
-          <Link
-            href="/forgot-password"
+          <MuiLink
+            component={Link}
+            to="/forgot-password"
             sx={{
               color: "#001283",
               fontSize: "14px",
@@ -176,7 +179,7 @@ const Login = () => {
             }}
           >
             Forgot Password?
-          </Link>
+          </MuiLink>
         </Box>
 
         <Button
