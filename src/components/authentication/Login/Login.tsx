@@ -191,15 +191,15 @@ const Login = () => {
             errorMessage={formState.password.errorMessage}
             handleChange={e => handleInputChange(e, "password")}
           />
-          <Box
-            sx={{
-              width: "554px",
-            }}
-          >
-            {collectErrors(formState).length > 0 && (
+          {collectErrors(formState).length > 0 && (
+            <Box
+              sx={{
+                width: "554px",
+              }}
+            >
               <Error messages={collectErrors(formState)} />
-            )}
-          </Box>
+            </Box>
+          )}
           <MuiLink
             component={Link}
             to="/forgot-password"
