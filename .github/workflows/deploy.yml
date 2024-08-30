@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build-and-deploy:
@@ -37,7 +34,6 @@ jobs:
         aws-region: me-central-1
 
     - name: Deploy to S3
-      if: github.ref == 'refs/heads/main'
       run: |
         aws s3 sync build/ s3://${{ secrets.AWS_S3_BUCKET }} --delete
         aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
