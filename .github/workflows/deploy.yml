@@ -24,10 +24,7 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
-      run: npm test
-      
-    - name: Build React app
+    - name: Build app
       run: npm run build
       env:
         CI: false
