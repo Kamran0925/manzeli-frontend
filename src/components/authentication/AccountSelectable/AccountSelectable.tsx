@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Typography, Box, Link as MuiLInk } from "@mui/material";
+import { Grid, Typography, Box, Link as MuiLink } from "@mui/material";
 import { Link } from "react-router-dom";
 import Tile from "../../shared/Tile/Tile";
 import { accountTypes } from "../../shared/AccountTypes/AccountTypes";
@@ -21,14 +21,14 @@ const AccountSelectable = () => {
         <Box sx={{ marginLeft: "auto", display: "flex" }}>
           <Typography variant="body1">
             Already have an account?{" "}
-            <MuiLInk
+            <MuiLink
               component={Link}
               color="primary"
               variant="body1"
               to="/login"
             >
               Sign in
-            </MuiLInk>
+            </MuiLink>
           </Typography>
         </Box>
 
