@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Typography, Box, Link, Button } from "@mui/material";
 import InputField from "../../../shared/InputField/InputField";
 import Error from "../../../shared/Error/Error";
+import { validate } from "../../../../utils/validationHelpers";
 import styles from "./ResetPasswordForm.module.css";
 
 interface ResetPasswordFormProps {
@@ -18,13 +19,6 @@ interface ResetFormState {
   confirmPassword: PasswordField;
 }
 
-const validatePassword = (field: string, password: string): string => {
-  const name = field === "password" ? "Password" : "Confirm Password";
-  return password.length < 8
-    ? `${name} must contain at least 8 characters`
-    : "";
-};
-
 const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
   const [formState, setFormState] = useState<ResetFormState>({
     password: { value: "", errorMessage: "" },
@@ -39,7 +33,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
       const { value } = e.target;
 
       setFormState(prevState => {
-        const errorMessage = validatePassword(field, value);
+        const errorMessage = validate(field, value).errorMessage;
 
         const updatedState = {
           ...prevState,
@@ -57,14 +51,15 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
     };
 
   const handleSubmit = () => {
-    const passwordError = validatePassword(
+    const passwordError = validate(
       "password",
       formState.password.value,
-    );
-    const confirmPasswordError = validatePassword(
+    ).errorMessage;
+
+    const confirmPasswordError = validate(
       "confirmPassword",
       formState.confirmPassword.value,
-    );
+    ).errorMessage;
 
     if (passwordError || confirmPasswordError) {
       setFormState(prevState => ({
@@ -113,11 +108,13 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
 
     const passwordError =
       formState.password.value !== ""
-        ? validatePassword("password", formState.password.value)
+        ? validate("password", formState.password.value).errorMessage
         : "";
+
     const confirmPasswordError =
       formState.confirmPassword.value !== ""
-        ? validatePassword("confirmPassword", formState.confirmPassword.value)
+        ? validate("confirmPassword", formState.confirmPassword.value)
+            .errorMessage
         : "";
 
     setFormState(prevState => ({

@@ -35,6 +35,14 @@ export const validate = (
       }
       return { errorMessage: "" };
 
+    case "confirmPassword":
+      if (value.trim().length < 8) {
+        return {
+          errorMessage: "Confirm Password cannot be less than 8 characters",
+        };
+      }
+      return { errorMessage: "" };
+
     case "checkbox":
       if (!value) {
         return {
