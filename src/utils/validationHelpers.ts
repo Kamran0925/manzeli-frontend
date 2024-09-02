@@ -30,7 +30,7 @@ export const validate = (
           errorMessage: "Password cannot be less than 8 characters",
         };
       }
-      if (value.trim() !== passwordValue) {
+      if (value.trim() !== passwordValue && passwordValue !== undefined) {
         return { errorMessage: "Passwords do not match" };
       }
       return { errorMessage: "" };
