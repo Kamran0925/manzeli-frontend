@@ -48,7 +48,8 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext }) => {
               lineHeight: "normal",
             }}
           >
-            Didn’t receive the email? Check spam or promotion folder or
+            Didn't receive the email? Check your spam, junk, or promotion
+            folders or
           </Typography>
 
           <Button
