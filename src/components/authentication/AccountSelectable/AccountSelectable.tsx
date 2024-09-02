@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Grid, Typography, Box, Link } from "@mui/material";
-
+import { Grid, Typography, Box, Link as MuiLink } from "@mui/material";
+import { Link } from "react-router-dom";
 import Tile from "../../shared/Tile/Tile";
 import { accountTypes } from "../../shared/AccountTypes/AccountTypes";
 import { useFormContext } from "../../../context/FormContext";
-import styles from "./SecondarySection.module.css";
+import styles from "./AccountSelectable.module.css";
 
-const SecondarySection = () => {
+const AccountSelectable = () => {
   const [hoveredTileIndex, setHoveredTileIndex] = useState<number | null>(null);
 
   const { nextStep } = useFormContext();
@@ -21,9 +21,14 @@ const SecondarySection = () => {
         <Box sx={{ marginLeft: "auto", display: "flex" }}>
           <Typography variant="body1">
             Already have an account?{" "}
-            <Link color="primary" variant="body1">
+            <MuiLink
+              component={Link}
+              color="primary"
+              variant="body1"
+              to="/login"
+            >
               Sign in
-            </Link>
+            </MuiLink>
           </Typography>
         </Box>
 
@@ -74,4 +79,4 @@ const SecondarySection = () => {
   );
 };
 
-export default SecondarySection;
+export default AccountSelectable;

@@ -1,10 +1,15 @@
 import { FormProvider } from "./context/FormContext";
-import Registration from "./components/registration/registration";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Authentication from "./components/authentication/authentication";
 
 function App() {
   return (
     <FormProvider>
-      <Registration />
+      <Router>
+        <Routes>
+          <Route path="/*" element={<Authentication />} />
+        </Routes>
+      </Router>
     </FormProvider>
   );
 }

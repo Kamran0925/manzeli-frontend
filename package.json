@@ -13,11 +13,13 @@
     "@types/node": "^22.4.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "@types/react-router-dom": "^5.3.3",
     "classnames": "^2.5.1",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-phone-input-2": "^2.15.1",
+    "react-router-dom": "^6.26.1",
     "react-scripts": "5.0.1",
     "typescript": "^5.5.4",
     "web-vitals": "^4.2.3"

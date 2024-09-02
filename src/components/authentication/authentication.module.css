@@ -1,4 +1,5 @@
 .leftGrid {
+  width: 33.333333%;
   height: 100vh;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.52)),
     url("../../assets/images/building.png");
@@ -18,11 +19,20 @@
   padding: 40px;
 }
 
+.loginImage {
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    ),
+    url("../../assets/images/building2.jpg") no-repeat center center / cover;
+  height: 100vh;
+  width: 100vw;
+}
+
 @media (max-width: 600px) {
   .leftGrid {
     position: relative;
-    padding: 8px;
-    background-color: #e0e0e0;
   }
 
   .rightGrid {
@@ -35,8 +45,6 @@
 @media (min-width: 601px) and (max-width: 900px) {
   .leftGrid {
     position: relative;
-    padding: 16px;
-    background-color: #cccccc;
   }
 
   .rightGrid {
