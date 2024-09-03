@@ -206,7 +206,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
             }}
           >
             <Link
-              href="/forgot-password"
+              href="/login"
               sx={{
                 textDecoration: "none",
                 color: "#000",
