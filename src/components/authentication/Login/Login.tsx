@@ -150,7 +150,7 @@ const Login = () => {
             component={Link}
             to="/registration"
             sx={{
-              color: "#000",
+              color: "#001283",
               textDecoration: "none",
               "&:hover": {
                 textDecoration: "underline",
