@@ -9,7 +9,7 @@ export const validate = (
     case "text":
       if (value.trim().length < 8 || value.trim() === "") {
         return {
-          errorMessage: "Minimum length of 8 characters",
+          errorMessage: "Minimum of 8 characters",
         };
       }
       return { errorMessage: "" };
@@ -111,4 +111,10 @@ export const collectContactDetailErrors = (formState: FormState): string[] => {
     formState.identity.errorMessage,
     formState.residence.errorMessage,
   ].filter(error => error.length > 0);
+};
+
+export const displayError = (field: string, error: string): string => {
+  return `${
+    field.charAt(0).toUpperCase() + field.slice(1)
+  } should have ${error.toLowerCase()}`;
 };
