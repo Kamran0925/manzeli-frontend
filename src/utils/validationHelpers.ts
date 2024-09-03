@@ -6,6 +6,15 @@ export const validate = (
   passwordValue?: string,
 ): { errorMessage: string } => {
   switch (type) {
+    case "username":
+      if (value.trim().length < 5) {
+        return {
+          errorMessage: "Minimum of 5 characters",
+        };
+      }
+
+      return { errorMessage: "" };
+
     case "text":
       if (value.trim().length < 8 || value.trim() === "") {
         return {
@@ -57,25 +66,6 @@ export const validate = (
           errorMessage: "You must select at least one option",
         };
       }
-      return { errorMessage: "" };
-
-    default:
-      return { errorMessage: "Unknown field type" };
-  }
-};
-
-export const validateName = (
-  type: string,
-  value: string,
-): { errorMessage: string } => {
-  switch (type) {
-    case "text":
-      if (value.trim().length < 5) {
-        return {
-          errorMessage: "Minimum of 5 characters",
-        };
-      }
-
       return { errorMessage: "" };
 
     default:

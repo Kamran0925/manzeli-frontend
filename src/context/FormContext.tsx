@@ -3,7 +3,6 @@ import {
   displayError,
   validate,
   validateConfirmPassword,
-  validateName,
 } from "../utils/validationHelpers";
 import {
   FieldState,
@@ -34,7 +33,7 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
     let confirmPassword = formState.confirmPassword.value;
 
     if (inputFieldTypes.includes(type) && name === "username") {
-      const validation = validateName(type, value);
+      const validation = validate(name, value);
       errorMessage = validation.errorMessage;
     } else if (inputFieldTypes.includes(type)) {
       const validation = validate(type, value, confirmPassword);
