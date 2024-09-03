@@ -38,7 +38,7 @@ export const validate = (
     case "confirmPassword":
       if (value.trim().length < 8) {
         return {
-          errorMessage: "Confirm Password cannot be less than 8 characters",
+          errorMessage: "Confirm password cannot be less than 8 characters",
         };
       }
       return { errorMessage: "" };
@@ -73,7 +73,7 @@ export const validateConfirmPassword = (
     case "password":
       if (confirmPasswordValue.trim().length < 8) {
         return {
-          errorMessage: "Confirm Password cannot be less than 8 characters",
+          errorMessage: "Confirm password cannot be less than 8 characters",
         };
       }
       if (confirmPasswordValue.trim() !== passwordValue) {
