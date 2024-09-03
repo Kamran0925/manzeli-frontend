@@ -3,6 +3,7 @@ import {
   displayError,
   validate,
   validateConfirmPassword,
+  validateName,
 } from "../utils/validationHelpers";
 import {
   FieldState,
@@ -19,7 +20,7 @@ interface FormContextType {
   setProfilePicture: (blob: Blob | "") => void;
 }
 const inputFieldTypes = ["text", "email", "password", "checkbox", "select"];
-const contactFields = ["address", "street", "city"];
+const contactFields = ["username", "address", "street", "city"];
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
@@ -32,7 +33,10 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
     let errorMessage = "";
     let confirmPassword = formState.confirmPassword.value;
 
-    if (inputFieldTypes.includes(type)) {
+    if (inputFieldTypes.includes(type) && name === "username") {
+      const validation = validateName(type, value);
+      errorMessage = validation.errorMessage;
+    } else if (inputFieldTypes.includes(type)) {
       const validation = validate(type, value, confirmPassword);
       errorMessage = validation.errorMessage;
     } else {

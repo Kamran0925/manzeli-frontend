@@ -64,6 +64,25 @@ export const validate = (
   }
 };
 
+export const validateName = (
+  type: string,
+  value: string,
+): { errorMessage: string } => {
+  switch (type) {
+    case "text":
+      if (value.trim().length < 5) {
+        return {
+          errorMessage: "Minimum of 5 characters",
+        };
+      }
+
+      return { errorMessage: "" };
+
+    default:
+      return { errorMessage: "Unknown field type" };
+  }
+};
+
 export const validateConfirmPassword = (
   type: string,
   confirmPasswordValue: string,

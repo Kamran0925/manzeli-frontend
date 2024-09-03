@@ -152,7 +152,7 @@ const SignUp = () => {
           <Box className={styles.box3}>
             <Box>
               <Typography variant="h4" color="#696F79">
-                Your fullname*
+                Full Name
               </Typography>
 
               <InputField
