@@ -189,7 +189,8 @@ const Login = () => {
           {collectErrors(formState).length > 0 && (
             <Box
               sx={{
-                width: "554px",
+                maxWidth: "554px",
+                width: "100%",
               }}
             >
               <Error messages={collectErrors(formState)} />
