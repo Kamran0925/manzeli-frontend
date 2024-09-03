@@ -104,7 +104,7 @@ const SignUp = () => {
           variant="text"
           steps={4}
           position="static"
-          activeStep={formState.step}
+          activeStep={0}
           backButton={
             <Button size="small" onClick={handleBack}>
               <LeftArrow />
