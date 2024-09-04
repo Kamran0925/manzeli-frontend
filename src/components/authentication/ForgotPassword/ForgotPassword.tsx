@@ -8,7 +8,7 @@ const ForgotPassword = () => {
   const [step, setStep] = useState(0);
 
   const handleNext = () => {
-    setStep(prevStep => Math.min(prevStep + 1, 4));
+    setStep(prevStep => Math.min(prevStep + 1, 2));
   };
 
   const renderStep = () => {

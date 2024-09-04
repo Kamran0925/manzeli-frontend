@@ -57,7 +57,7 @@ export const RegistrationFields: FormState = {
     step: 0,
   },
   isTermsAccepted: false,
-  step: 1,
+  step: 0,
   phone: {
     title: "Phone number",
     type: "text",

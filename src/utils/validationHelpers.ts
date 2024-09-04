@@ -6,10 +6,19 @@ export const validate = (
   passwordValue?: string,
 ): { errorMessage: string } => {
   switch (type) {
+    case "username":
+      if (value.trim().length < 5) {
+        return {
+          errorMessage: "Minimum of 5 characters",
+        };
+      }
+
+      return { errorMessage: "" };
+
     case "text":
       if (value.trim().length < 8 || value.trim() === "") {
         return {
-          errorMessage: "Minimum length of 8 characters",
+          errorMessage: "Minimum of 8 characters",
         };
       }
       return { errorMessage: "" };
@@ -30,8 +39,16 @@ export const validate = (
           errorMessage: "Password cannot be less than 8 characters",
         };
       }
-      if (value.trim() !== passwordValue) {
+      if (value.trim() !== passwordValue && passwordValue !== undefined) {
         return { errorMessage: "Passwords do not match" };
+      }
+      return { errorMessage: "" };
+
+    case "confirmPassword":
+      if (value.trim().length < 8) {
+        return {
+          errorMessage: "Confirm password cannot be less than 8 characters",
+        };
       }
       return { errorMessage: "" };
 
@@ -65,7 +82,7 @@ export const validateConfirmPassword = (
     case "password":
       if (confirmPasswordValue.trim().length < 8) {
         return {
-          errorMessage: "Confirm Password cannot be less than 8 characters",
+          errorMessage: "Confirm password cannot be less than 8 characters",
         };
       }
       if (confirmPasswordValue.trim() !== passwordValue) {
@@ -103,4 +120,10 @@ export const collectContactDetailErrors = (formState: FormState): string[] => {
     formState.identity.errorMessage,
     formState.residence.errorMessage,
   ].filter(error => error.length > 0);
+};
+
+export const displayError = (field: string, error: string): string => {
+  return `${
+    field.charAt(0).toUpperCase() + field.slice(1)
+  } should have ${error.toLowerCase()}`;
 };

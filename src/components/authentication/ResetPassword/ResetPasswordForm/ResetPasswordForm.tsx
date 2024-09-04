@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Typography, Box, Link, Button } from "@mui/material";
 import InputField from "../../../shared/InputField/InputField";
 import Error from "../../../shared/Error/Error";
-
+import { validate } from "../../../../utils/validationHelpers";
 import styles from "./ResetPasswordForm.module.css";
 
 interface ResetPasswordFormProps {
@@ -14,72 +14,123 @@ interface PasswordField {
   errorMessage: string;
 }
 
+interface ResetFormState {
+  password: PasswordField;
+  confirmPassword: PasswordField;
+}
+
 const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
-  const [passwordFields, setPasswordFields] = useState<{
-    password: PasswordField;
-    confirmPassword: PasswordField;
-  }>({
+  const [formState, setFormState] = useState<ResetFormState>({
     password: { value: "", errorMessage: "" },
     confirmPassword: { value: "", errorMessage: "" },
   });
 
-  const [formErrors, setFormErrors] = useState<string[]>([]);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
 
-  const validateFields = () => {
-    const errors: string[] = [];
-
-    const password = passwordFields.password.value;
-    const confirmPassword = passwordFields.confirmPassword.value;
-
-    if (password.length < 8) {
-      errors.push("Password must contain at least 8 characters");
-    }
-
-    if (confirmPassword.length < 8) {
-      errors.push("Confirm password must contain at least 8 characters");
-    }
-
-    if (password && confirmPassword && password !== confirmPassword) {
-      errors.push("Passwords do not match. Please try again");
-    }
-
-    return errors;
-  };
-
-  useEffect(() => {
-    if (passwordFields.password.value || passwordFields.confirmPassword.value) {
-      const errors = validateFields();
-      setFormErrors(errors);
-      setIsButtonDisabled(errors.length > 0);
-    }
-  }, [passwordFields]);
-
   const handleChange =
-    (field: "password" | "confirmPassword") =>
+    (field: keyof ResetFormState) =>
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-      setPasswordFields(prevState => ({
-        ...prevState,
-        [field]: {
-          ...prevState[field],
-          value,
-          errorMessage: "",
-        },
-      }));
+      const { value } = e.target;
+
+      setFormState(prevState => {
+        const errorMessage = validate(field, value).errorMessage;
+
+        const updatedState = {
+          ...prevState,
+          [field]: {
+            value,
+            errorMessage,
+          },
+        };
+
+        if (errorMessage) {
+          setIsButtonDisabled(true);
+        }
+        return updatedState;
+      });
     };
 
   const handleSubmit = () => {
-    const errors = validateFields();
-    setFormErrors(errors);
+    const passwordError = validate(
+      "password",
+      formState.password.value,
+    ).errorMessage;
 
-    if (errors.length === 0) {
-      console.log("Resetting password with:", passwordFields.password.value);
-      onNext();
+    const confirmPasswordError = validate(
+      "confirmPassword",
+      formState.confirmPassword.value,
+    ).errorMessage;
+
+    if (passwordError || confirmPasswordError) {
+      setFormState(prevState => ({
+        password: {
+          ...prevState.password,
+          errorMessage: passwordError,
+        },
+        confirmPassword: {
+          ...prevState.confirmPassword,
+          errorMessage: confirmPasswordError,
+        },
+      }));
+      setIsButtonDisabled(true);
+      return;
     }
 
-    setIsButtonDisabled(errors.length > 0);
+    if (formState.password.value !== formState.confirmPassword.value) {
+      setFormState(prevState => ({
+        ...prevState,
+        confirmPassword: {
+          ...prevState.confirmPassword,
+          errorMessage: "Passwords do not match. Please try again!",
+        },
+      }));
+      setIsButtonDisabled(true);
+      return;
+    }
+
+    setIsButtonDisabled(false);
+    onNext();
   };
+
+  const collectErrors = (formState: ResetFormState): string[] => {
+    return Object.values(formState)
+      .map(field => field.errorMessage)
+      .filter(message => message !== "");
+  };
+
+  useEffect(() => {
+    if (
+      formState.password.value === "" &&
+      formState.confirmPassword.value === ""
+    ) {
+      return;
+    }
+
+    const passwordError =
+      formState.password.value !== ""
+        ? validate("password", formState.password.value).errorMessage
+        : "";
+
+    const confirmPasswordError =
+      formState.confirmPassword.value !== ""
+        ? validate("confirmPassword", formState.confirmPassword.value)
+            .errorMessage
+        : "";
+
+    setFormState(prevState => ({
+      password: {
+        ...prevState.password,
+        errorMessage: passwordError,
+      },
+      confirmPassword: {
+        ...prevState.confirmPassword,
+        errorMessage: confirmPasswordError,
+      },
+    }));
+
+    const hasErrors = passwordError || confirmPasswordError;
+    setIsButtonDisabled(!!hasErrors);
+  }, [formState.password.value, formState.confirmPassword.value]);
 
   return (
     <Box component="section" className={styles.box1}>
@@ -90,18 +141,15 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
             color: "#040308",
             fontFamily: "Poppins, sans-serif",
             fontSize: "32px",
-            fontStyle: "normal",
             fontWeight: 700,
             lineHeight: "normal",
           }}
         >
           Reset Password
         </Typography>
-
         <Typography variant="h4" fontWeight={400}>
           Choose a new password for your account
         </Typography>
-
         <Box
           sx={{
             display: "flex",
@@ -114,29 +162,23 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
             type="password"
             name="password"
             placeholder="Your new password"
-            value={passwordFields.password.value}
-            errorMessage={passwordFields.password.errorMessage}
+            value={formState.password.value}
+            errorMessage={formState.password.errorMessage}
             handleChange={handleChange("password")}
           />
-
           <InputField
             type="password"
             name="confirmPassword"
             placeholder="Confirm your new password"
-            value={passwordFields.confirmPassword.value}
-            errorMessage={passwordFields.confirmPassword.errorMessage}
+            value={formState.confirmPassword.value}
+            errorMessage={formState.confirmPassword.errorMessage}
             handleChange={handleChange("confirmPassword")}
           />
-
-          <Box
-            sx={{
-              maxWidth: "554px",
-              marginTop: "10px",
-            }}
-          >
-            {formErrors.length > 0 && <Error messages={formErrors} />}
-          </Box>
-
+          {collectErrors(formState).length > 0 && (
+            <Box sx={{ maxWidth: "554px", marginTop: "10px", width: "100%" }}>
+              <Error messages={collectErrors(formState)} />
+            </Box>
+          )}
           <Button
             variant="contained"
             sx={{
@@ -146,20 +188,13 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
               width: "100%",
               fontSize: "16px",
               borderRadius: "40px",
-              backgroundColor: "#001283",
-              color: "#fff",
               textTransform: "none",
-              "&:hover": {
-                cursor: "pointer",
-                backgroundColor: "#000a4e",
-              },
             }}
             onClick={handleSubmit}
             disabled={isButtonDisabled}
           >
             Reset Password
           </Button>
-
           <Box
             sx={{
               display: "flex",
@@ -171,13 +206,11 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
             }}
           >
             <Link
-              href="/forgot-password"
+              href="/login"
               sx={{
                 textDecoration: "none",
                 color: "#000",
-                "&:hover": {
-                  textDecoration: "underline",
-                },
+                "&:hover": { textDecoration: "underline" },
               }}
             >
               Back to Login

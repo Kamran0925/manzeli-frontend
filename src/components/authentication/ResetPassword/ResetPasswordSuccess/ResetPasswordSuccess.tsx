@@ -46,12 +46,9 @@ const ResetPasswordSuccess = () => {
               height: "54px",
               width: "100%",
               borderRadius: "40px",
-              backgroundColor: "#001283",
-              color: "#fff",
               textTransform: "none",
               "&:hover": {
                 cursor: "pointer",
-                backgroundColor: "#000a4e",
               },
             }}
             onClick={handleSubmit}

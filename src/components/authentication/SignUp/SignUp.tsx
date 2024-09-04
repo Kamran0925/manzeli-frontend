@@ -99,12 +99,12 @@ const SignUp = () => {
 
   return (
     <>
-      <Container className={styles.box1}>
+      <Container className={styles.box1} disableGutters={true}>
         <MobileStepper
           variant="text"
           steps={4}
           position="static"
-          activeStep={formState.step}
+          activeStep={0}
           backButton={
             <Button size="small" onClick={handleBack}>
               <LeftArrow />
@@ -141,7 +141,8 @@ const SignUp = () => {
             sx={{
               marginRight: "auto",
               width: {
-                xs: "80%",
+                xs: "100%",
+                sm: "80%",
               },
             }}
           >
@@ -151,7 +152,7 @@ const SignUp = () => {
           <Box className={styles.box3}>
             <Box>
               <Typography variant="h4" color="#696F79">
-                Your fullname*
+                Full Name
               </Typography>
 
               <InputField
@@ -210,7 +211,15 @@ const SignUp = () => {
                 onClick={() => setIsOpen(true)}
               />
 
-              <Typography variant="body1">
+              <Typography
+                variant="body1"
+                sx={{
+                  fontSize: {
+                    xs: "14px",
+                    sm: "18px",
+                  },
+                }}
+              >
                 I agree to{" "}
                 <Link
                   color="#001283"
@@ -218,6 +227,10 @@ const SignUp = () => {
                   onClick={() => setIsOpen(true)}
                   sx={{
                     cursor: "pointer",
+                    fontSize: {
+                      xs: "14px",
+                      sm: "18px",
+                    },
                   }}
                 >
                   terms and conditions

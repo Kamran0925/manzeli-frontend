@@ -13,16 +13,16 @@ const Registration = () => {
 
   useEffect(() => {
     switch (step) {
-      case -1:
+      case 0:
         setContent(<AccountSelectable />);
         break;
-      case 0:
+      case 1:
         setContent(<SignUp />);
         break;
-      case 1:
+      case 2:
         setContent(<ContactDetails />);
         break;
-      case 2:
+      case 3:
         setContent(<UploadImage />);
         break;
       default:
