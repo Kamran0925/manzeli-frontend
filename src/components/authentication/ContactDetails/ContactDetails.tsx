@@ -46,27 +46,25 @@ const ContactDetails = () => {
   };
 
   const handleSubmit = () => {
+    let isValidForm = true;
     Object.entries(formState).forEach(([key, field]) => {
       if (
-        field.step == formState.step &&
+        field.step === formState.step &&
         typeof field === "object" &&
         "type" in field
       ) {
-        validateField(field.type, key, field.value);
+        const isValidField = validateField(field.type, key, field.value);
+        if (!isValidField) {
+          isValidForm = false;
+        }
       }
     });
 
-    const errors = collectContactDetailErrors(formState);
-    setCollectedErrors(errors);
-    setIsButtonDisabled(errors.length > 0);
-
-    if (errors.length === 0) {
+    if (isValidForm) {
       nextStep();
+    } else {
+      setIsButtonDisabled(true);
     }
-  };
-
-  const handleBack = () => {
-    previousStep();
   };
 
   useEffect(() => {
@@ -84,7 +82,7 @@ const ContactDetails = () => {
           position="static"
           activeStep={1}
           backButton={
-            <Button size="small" onClick={handleBack}>
+            <Button size="small" onClick={previousStep}>
               <LeftArrow />
               Back
             </Button>

@@ -11,7 +11,6 @@ export const validate = (
           errorMessage: "Minimum of 5 characters",
         };
       }
-
       return { errorMessage: "" };
 
     case "text":

@@ -21,6 +21,7 @@ const contactFields = [
   "address",
   "street",
   "city",
+  "identity",
 ];
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
