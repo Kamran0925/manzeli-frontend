@@ -28,19 +28,52 @@ const Tile: React.FC<TileProps> = ({
   let avatar = null;
 
   if (index === 0) {
-    avatar = isHovered ? <UserFill /> : <User />;
-  } else {
     avatar = isHovered ? <BriefcaseFill /> : <Briefcase />;
+  } else {
+    avatar = isHovered ? <UserFill /> : <User />;
   }
 
   return (
     <CardHeader
+      sx={{
+        marginTop: index > 0 ? "19px" : "0px",
+        padding: {
+          xs: "8px 18px",
+          sm: "0px 28px",
+        },
+      }}
       className={classNames(style.tile, {
         [style.item]: isHovered,
       })}
       avatar={avatar}
-      title={<Typography variant="h4">{title}</Typography>}
-      subheader={<Typography variant="body2">{description}</Typography>}
+      title={
+        <Typography
+          variant="h4"
+          sx={{
+            fontSize: {
+              xs: "12px",
+              sm: "16px",
+            },
+            lineHeight: { xs: "20px", sm: "24px" },
+          }}
+        >
+          {title}
+        </Typography>
+      }
+      subheader={
+        <Typography
+          variant="body2"
+          sx={{
+            fontSize: {
+              xs: "8px",
+              sm: "14px",
+            },
+            lineHeight: { xs: "14px", sm: "21px" },
+          }}
+        >
+          {description}
+        </Typography>
+      }
       classes={{
         action: style.action,
       }}
