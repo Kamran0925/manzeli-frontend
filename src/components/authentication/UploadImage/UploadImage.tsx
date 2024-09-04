@@ -23,7 +23,8 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const UploadImage = () => {
-  const { formState, setProfilePicture, nextStep } = useFormContext();
+  const { formState, setProfilePicture, nextStep, previousStep } =
+    useFormContext();
   const [fileName, setFileName] = useState<string | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
 
@@ -84,7 +85,7 @@ const UploadImage = () => {
           position="static"
           activeStep={2}
           backButton={
-            <Button size="small" disabled={true}>
+            <Button size="small" onClick={previousStep}>
               <LeftArrow />
               Back
             </Button>
