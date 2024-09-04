@@ -1,10 +1,10 @@
-import AccountTypeSelectable from "./pages/AccoutTypeSelectable/AccountTypeSelectable";
 import { FormProvider } from "./context/FormContext";
+import Authentication from "./components/authentication/authentication";
 
 function App() {
   return (
     <FormProvider>
-      <AccountTypeSelectable />;
+      <Authentication />
     </FormProvider>
   );
 }

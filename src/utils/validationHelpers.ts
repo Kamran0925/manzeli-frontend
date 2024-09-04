@@ -6,10 +6,19 @@ export const validate = (
   passwordValue?: string,
 ): { errorMessage: string } => {
   switch (type) {
-    case "text":
-      if (value.trim().length <= 8 || value.trim() === "") {
+    case "username":
+      if (value.trim().length < 5) {
         return {
-          errorMessage: "Minimum length of 8 characters",
+          errorMessage: "Minimum of 5 characters",
+        };
+      }
+
+      return { errorMessage: "" };
+
+    case "text":
+      if (value.trim().length < 8 || value.trim() === "") {
+        return {
+          errorMessage: "Minimum of 8 characters",
         };
       }
       return { errorMessage: "" };
@@ -25,13 +34,21 @@ export const validate = (
       return { errorMessage: "" };
 
     case "password":
-      if (value.trim().length <= 8 || value.trim() === "") {
+      if (value.trim().length < 8) {
         return {
           errorMessage: "Password cannot be less than 8 characters",
         };
       }
-      if (value.trim() !== passwordValue && value.trim() !== "") {
+      if (value.trim() !== passwordValue && passwordValue !== undefined) {
         return { errorMessage: "Passwords do not match" };
+      }
+      return { errorMessage: "" };
+
+    case "confirmPassword":
+      if (value.trim().length < 8) {
+        return {
+          errorMessage: "Confirm password cannot be less than 8 characters",
+        };
       }
       return { errorMessage: "" };
 
@@ -46,8 +63,30 @@ export const validate = (
     case "select":
       if (!value) {
         return {
-          errorMessage: "You must select atleast one option",
+          errorMessage: "You must select at least one option",
         };
+      }
+      return { errorMessage: "" };
+
+    default:
+      return { errorMessage: "Unknown field type" };
+  }
+};
+
+export const validateConfirmPassword = (
+  type: string,
+  confirmPasswordValue: string,
+  passwordValue: string,
+): { errorMessage: string } => {
+  switch (type) {
+    case "password":
+      if (confirmPasswordValue.trim().length < 8) {
+        return {
+          errorMessage: "Confirm password cannot be less than 8 characters",
+        };
+      }
+      if (confirmPasswordValue.trim() !== passwordValue) {
+        return { errorMessage: "Passwords do not match" };
       }
       return { errorMessage: "" };
 
@@ -81,4 +120,10 @@ export const collectContactDetailErrors = (formState: FormState): string[] => {
     formState.identity.errorMessage,
     formState.residence.errorMessage,
   ].filter(error => error.length > 0);
+};
+
+export const displayError = (field: string, error: string): string => {
+  return `${
+    field.charAt(0).toUpperCase() + field.slice(1)
+  } should have ${error.toLowerCase()}`;
 };

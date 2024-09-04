@@ -10,6 +10,7 @@ interface PhoneFieldProps {
   name: string;
   value: any;
   disabled?: boolean;
+  onlyCountries?: string[];
   placeholder?: string;
   errorMessage?: string;
   handleChange: (value: any, name: string, type: string) => void;
@@ -32,19 +33,19 @@ const PhoneField: React.FC<PhoneFieldProps> = ({
     <Box
       sx={{
         height: "54px",
-        width: "520px",
-        maxWidth: "554px",
+        maxWidth: { xs: "240px", sm: "335px", md: "514px" },
       }}
     >
       <PhoneInput
-        country={"us"}
+        country={"ae"}
         value={value}
         onChange={onChangeHandler}
         placeholder={placeholder}
         disabled={disabled}
         countryCodeEditable={false}
+        onlyCountries={["ae"]}
         containerStyle={{
-          border: errorMessage
+          outline: errorMessage
             ? "1px solid #E80000"
             : "1px solid rgba(4, 3, 8, 0.60)",
           borderRadius: "40px",
@@ -54,8 +55,8 @@ const PhoneField: React.FC<PhoneFieldProps> = ({
         }}
         inputStyle={{
           height: "20px",
+          width: "240px",
           border: "none",
-          padding: "0px 70px",
           color: "#494949",
           fontFamily: "Poppins",
           fontSize: "14px",
