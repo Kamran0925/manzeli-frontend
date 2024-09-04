@@ -33,28 +33,14 @@ const AccountSelectable = () => {
         </Box>
 
         <Box className={styles.box2}>
-          <Typography variant="h3">Join Us!</Typography>
-
-          <Typography
-            variant="body1"
-            sx={{
-              width: {
-                xs: "100%",
-                sm: "80%",
-              },
-            }}
-          >
-            To begin, please select the type of account you would like to
-            create.
-          </Typography>
-
+          <Typography variant="h3">Are you?</Typography>
           <Box
             sx={{
-              marginTop: "20px",
-              maxWidth: "440px",
+              marginTop: "5px",
+              maxWidth: "486px",
             }}
           >
-            <Grid container spacing={2} direction={"column"}>
+            <Grid container direction={"column"}>
               <Grid item xs={12} onClick={handleStep}>
                 {accountTypes.map((accountType, index) => (
                   <Box
