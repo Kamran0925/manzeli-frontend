@@ -1,9 +1,5 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
-import {
-  displayError,
-  validate,
-  validateConfirmPassword,
-} from "../utils/validationHelpers";
+import { displayError, validate } from "../utils/validationHelpers";
 import {
   FieldState,
   FormState,
@@ -12,14 +8,20 @@ import {
 
 interface FormContextType {
   formState: FormState;
-  validateField: (type: string, fieldName: string, value: any) => void;
-  validatePassword: (type: string, fieldName: string, value: any) => void;
+  validateField: (type: string, fieldName: string, value: any) => boolean;
   nextStep: () => void;
   previousStep: () => void;
   setProfilePicture: (blob: Blob | "") => void;
 }
 const inputFieldTypes = ["text", "email", "password", "checkbox", "select"];
-const contactFields = ["username", "address", "street", "city"];
+const contactFields = [
+  "username",
+  "password",
+  "confirmPassword",
+  "address",
+  "street",
+  "city",
+];
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
@@ -30,13 +32,12 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
 
   const validateField = (type: string, name: string, value: string) => {
     let errorMessage = "";
-    let confirmPassword = formState.confirmPassword.value;
 
     if (inputFieldTypes.includes(type) && name === "username") {
       const validation = validate(name, value);
       errorMessage = validation.errorMessage;
     } else if (inputFieldTypes.includes(type)) {
-      const validation = validate(type, value, confirmPassword);
+      const validation = validate(type, value);
       errorMessage = validation.errorMessage;
     } else {
       errorMessage = "";
@@ -68,30 +69,8 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
         };
       }
     });
-  };
 
-  const validatePassword = (type: string, name: string, value: string) => {
-    let errorMessage = "";
-    let password = formState.password.value;
-
-    const validation = validateConfirmPassword(type, value, password);
-    errorMessage = validation.errorMessage;
-
-    let newConfirmPassword: FieldState = {
-      title: name,
-      type: type,
-      value: value,
-      errorMessage: errorMessage,
-      disabled: false,
-      step: formState.step,
-    };
-
-    setFormState(prevState => {
-      return {
-        ...prevState,
-        [name]: newConfirmPassword,
-      };
-    });
+    return !errorMessage ? true : false;
   };
 
   const nextStep = () => {
@@ -120,7 +99,6 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
       value={{
         formState,
         validateField,
-        validatePassword,
         nextStep,
         previousStep,
         setProfilePicture,

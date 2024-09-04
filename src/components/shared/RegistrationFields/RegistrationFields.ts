@@ -50,7 +50,7 @@ export const RegistrationFields: FormState = {
   },
   confirmPassword: {
     title: "Confirm new password",
-    type: "confirmPassword",
+    type: "password",
     value: "",
     errorMessage: "",
     disabled: false,
