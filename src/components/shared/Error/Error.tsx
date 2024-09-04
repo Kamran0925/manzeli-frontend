@@ -22,7 +22,7 @@ const Error: React.FC<ErrorProps> = ({ messages }) => {
       }}
     >
       {messages.map((msg, index) => (
-        <Typography key={index} variant="body2" color="#E80000">
+        <Typography key={index} variant="body2" color="error">
           {msg}
         </Typography>
       ))}
