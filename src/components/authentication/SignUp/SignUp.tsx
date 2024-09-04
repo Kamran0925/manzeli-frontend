@@ -104,7 +104,7 @@ const SignUp = () => {
           variant="text"
           steps={4}
           position="static"
-          activeStep={formState.step}
+          activeStep={0}
           backButton={
             <Button size="small" onClick={handleBack}>
               <LeftArrow />
@@ -152,7 +152,7 @@ const SignUp = () => {
           <Box className={styles.box3}>
             <Box>
               <Typography variant="h4" color="#696F79">
-                Your fullname*
+                Full Name
               </Typography>
 
               <InputField

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Typography, Box, Link as MuiLink, Button } from "@mui/material";
 import InputField from "../../shared/InputField/InputField";
-import Error from "../../shared/Error/Error";
 import { Link } from "react-router-dom";
+import { validate } from "../../../utils/validationHelpers";
+import Error from "../../shared/Error/Error";
 import styles from "./Login.module.css";
 
 interface FormField {
@@ -15,23 +16,12 @@ interface FormState {
   password: FormField;
 }
 
-const validateEmail = (email: string): string => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email) ? "" : "Invalid email address";
-};
-
-const validatePassword = (password: string): string => {
-  return password.length < 8
-    ? "Password must contain at least 8 characters"
-    : "";
-};
-
 const validateField = (name: string, value: string) => {
   switch (name) {
     case "email":
-      return validateEmail(value);
+      return validate("email", value).errorMessage;
     case "password":
-      return validatePassword(value);
+      return validate("password", value).errorMessage;
     default:
       return "";
   }
@@ -78,8 +68,11 @@ const Login = () => {
   };
 
   const handleSubmit = () => {
-    const emailError = validateEmail(formState.email.value);
-    const passwordError = validatePassword(formState.password.value);
+    const emailError = validate("email", formState.email.value).errorMessage;
+    const passwordError = validate(
+      "password",
+      formState.password.value,
+    ).errorMessage;
 
     if (emailError || passwordError) {
       setFormState(prevState => ({
@@ -111,10 +104,12 @@ const Login = () => {
     }
 
     const emailError =
-      formState.email.value !== "" ? validateEmail(formState.email.value) : "";
+      formState.email.value !== ""
+        ? validate("email", formState.email.value).errorMessage
+        : "";
     const passwordError =
       formState.password.value !== ""
-        ? validatePassword(formState.password.value)
+        ? validate("password", formState.password.value).errorMessage
         : "";
 
     setFormState(prevState => ({
@@ -155,7 +150,7 @@ const Login = () => {
             component={Link}
             to="/registration"
             sx={{
-              color: "#000",
+              color: "#001283",
               textDecoration: "none",
               "&:hover": {
                 textDecoration: "underline",
@@ -191,15 +186,16 @@ const Login = () => {
             errorMessage={formState.password.errorMessage}
             handleChange={e => handleInputChange(e, "password")}
           />
-          <Box
-            sx={{
-              width: "554px",
-            }}
-          >
-            {collectErrors(formState).length > 0 && (
+          {collectErrors(formState).length > 0 && (
+            <Box
+              sx={{
+                maxWidth: "554px",
+                width: "100%",
+              }}
+            >
               <Error messages={collectErrors(formState)} />
-            )}
-          </Box>
+            </Box>
+          )}
           <MuiLink
             component={Link}
             to="/forgot-password"
