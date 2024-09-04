@@ -29,6 +29,11 @@ const TermsAndConditionsPopup: React.FC<{
     onClose();
   };
 
+  const handleCancel = () => {
+    validateField("checkbox", "isTermsAccepted", false);
+    onClose();
+  };
+
   return (
     <Box className={styles.overlay}>
       <Dialog
@@ -260,7 +265,7 @@ const TermsAndConditionsPopup: React.FC<{
           </Box>
 
           <Box className={styles.buttonsContainer}>
-            <Button onClick={onClose} color="primary" variant="text">
+            <Button onClick={handleCancel} color="primary" variant="text">
               Cancel
             </Button>
             <Button

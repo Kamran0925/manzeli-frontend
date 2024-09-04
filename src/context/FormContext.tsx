@@ -1,5 +1,9 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
-import { validate, validateConfirmPassword } from "../utils/validationHelpers";
+import {
+  displayError,
+  validate,
+  validateConfirmPassword,
+} from "../utils/validationHelpers";
 import {
   FieldState,
   FormState,
@@ -15,6 +19,7 @@ interface FormContextType {
   setProfilePicture: (blob: Blob | "") => void;
 }
 const inputFieldTypes = ["text", "email", "password", "checkbox", "select"];
+const contactFields = ["username", "address", "street", "city"];
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
@@ -27,11 +32,18 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
     let errorMessage = "";
     let confirmPassword = formState.confirmPassword.value;
 
-    if (inputFieldTypes.includes(type)) {
+    if (inputFieldTypes.includes(type) && name === "username") {
+      const validation = validate(name, value);
+      errorMessage = validation.errorMessage;
+    } else if (inputFieldTypes.includes(type)) {
       const validation = validate(type, value, confirmPassword);
       errorMessage = validation.errorMessage;
     } else {
       errorMessage = "";
+    }
+
+    if (contactFields.includes(name) && errorMessage !== "") {
+      errorMessage = displayError(name, errorMessage);
     }
 
     let newFieldData: FieldState = {
