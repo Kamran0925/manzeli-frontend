@@ -25,12 +25,12 @@ export interface FormState {
 
 export const RegistrationFields: FormState = {
   username: {
-    title: "Your fullname*",
+    title: "Full name*",
     type: "text",
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 0,
+    step: 1,
   },
   email: {
     title: "Email address*",
@@ -38,7 +38,7 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 0,
+    step: 1,
   },
   password: {
     title: "Create password*",
@@ -46,7 +46,7 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 0,
+    step: 1,
   },
   confirmPassword: {
     title: "Confirm new password",
@@ -54,7 +54,7 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 0,
+    step: 1,
   },
   isTermsAccepted: false,
   step: 0,
@@ -64,7 +64,7 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 1,
+    step: 2,
   },
   address: {
     title: "Your Address",
@@ -72,7 +72,7 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 1,
+    step: 2,
   },
   street: {
     title: "",
@@ -80,7 +80,7 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 1,
+    step: 2,
   },
   city: {
     title: "",
@@ -88,7 +88,7 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 1,
+    step: 2,
   },
   residence: {
     title: "Country of residence",
@@ -96,7 +96,7 @@ export const RegistrationFields: FormState = {
     value: "AE",
     errorMessage: "",
     disabled: false,
-    step: 1,
+    step: 2,
   },
   identity: {
     title: "Tax Identity Number",
@@ -104,7 +104,7 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 1,
+    step: 2,
   },
   profilePicture: "",
 };
