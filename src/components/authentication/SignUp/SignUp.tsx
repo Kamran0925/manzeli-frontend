@@ -120,6 +120,10 @@ const SignUp = () => {
             variant="body1"
             sx={{
               marginRight: "auto",
+              fontSize: {
+                xs: "14px",
+                sm: "18px",
+              },
               width: {
                 xs: "100%",
                 sm: "80%",
