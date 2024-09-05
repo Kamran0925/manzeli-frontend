@@ -24,9 +24,11 @@ const PlanFeatures: React.FC<PlanFeaturesProps> = ({ plantype, features }) => {
           <Typography
             sx={{
               color: plantype === "Company" ? "#FFFFFF" : "#848199",
-              fontFamily: "Poppins, sans-serif",
-              fontSize: "15px",
-              fontStyle: "normal",
+              fontSize: {
+                xs: "15px",
+                md: "12px",
+                lg: "15px",
+              },
               fontWeight: 500,
               lineHeight: "normal",
               flexShrink: 0,
