@@ -60,7 +60,7 @@ export const RegistrationFields: FormState = {
   step: 0,
   phone: {
     title: "Phone number",
-    type: "text",
+    type: "phone",
     value: "",
     errorMessage: "",
     disabled: false,

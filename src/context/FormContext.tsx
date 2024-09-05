@@ -13,11 +13,19 @@ interface FormContextType {
   previousStep: () => void;
   setProfilePicture: (blob: Blob | "") => void;
 }
-const inputFieldTypes = ["text", "email", "password", "checkbox", "select"];
+const inputFieldTypes = [
+  "text",
+  "email",
+  "password",
+  "checkbox",
+  "select",
+  "phone",
+];
 const contactFields = [
   "username",
   "password",
   "confirmPassword",
+  "phone",
   "address",
   "street",
   "city",

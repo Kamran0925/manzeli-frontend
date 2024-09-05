@@ -55,6 +55,14 @@ export const validate = (
       }
       return { errorMessage: "" };
 
+    case "phone":
+      if (value.trim().length < 12) {
+        return {
+          errorMessage: "Minimum of 12 digits",
+        };
+      }
+      return { errorMessage: "" };
+
     default:
       return { errorMessage: "Unknown field type" };
   }

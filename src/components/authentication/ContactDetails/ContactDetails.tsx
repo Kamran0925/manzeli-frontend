@@ -134,7 +134,7 @@ const ContactDetails = () => {
                 Phone number
               </Typography>
               <PhoneField
-                type="text"
+                type="phone"
                 name="phone"
                 value={formState.phone.value}
                 placeholder="Enter phone"
