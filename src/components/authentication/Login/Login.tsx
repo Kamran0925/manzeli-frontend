@@ -149,8 +149,8 @@ const Login = () => {
           <MuiLink
             component={Link}
             to="/registration"
+            color="primary"
             sx={{
-              color: "#001283",
               textDecoration: "none",
               "&:hover": {
                 textDecoration: "underline",
