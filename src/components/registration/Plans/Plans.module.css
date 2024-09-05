@@ -1,5 +1,5 @@
 .box1 {
-  padding: 79px 80px;
+  padding: 79px 10%;
 }
 
 .box2 {
@@ -24,9 +24,9 @@
 .pricingContainer {
   border-radius: 26px;
   background: rgba(255, 255, 255, 0.5);
-  margin: 120px auto;
+  margin: 90px auto;
   color: #848199;
-  padding: 0px 68px;
+  padding: 0px 45px;
 }
 
 .pricingItem2 {
@@ -89,7 +89,7 @@
 
 @media (min-width: 601px) and (max-width: 900px) {
   .box1 {
-    padding: 20px 80px;
+    padding: 30px 8%;
   }
 
   .pricingItem2 {
@@ -101,8 +101,8 @@
   }
 }
 
-@media (min-width: 900px) and (max-width: 1200px) {
+@media (min-width: 901px) and (max-width: 1200px) {
   .box1 {
-    padding: 20px 40px;
+    padding: 55px 8%;
   }
 }

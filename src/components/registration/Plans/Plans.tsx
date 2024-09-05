@@ -2,26 +2,20 @@ import React from "react";
 import { Box, Typography, Button, Grid } from "@mui/material";
 import MobileStepper from "@mui/material/MobileStepper";
 import LeftArrow from "../../../assets/icons/ui/LeftArrow";
-
 import plans from "../../common/data/planTypes";
 import PlanFeatures from "./PlanFeatures/PlanFeatures";
 import { useFormContext } from "../../../context/FormContext";
 import styles from "./Plans.module.css";
 
 const Plans = () => {
-  const { formState, previousStep } = useFormContext();
+  const { previousStep } = useFormContext();
 
-  const handleBack = () => {
-    previousStep();
-  };
   return (
     <>
       <Box
         sx={{
           padding: {
             xs: "20px",
-            sm: "20px",
-            md: "20px",
             lg: "40px",
           },
           background: "white",
@@ -31,9 +25,9 @@ const Plans = () => {
           variant="text"
           steps={4}
           position="static"
-          activeStep={formState.step}
+          activeStep={3}
           backButton={
-            <Button size="small" onClick={handleBack}>
+            <Button size="small" onClick={previousStep}>
               <LeftArrow />
               Back
             </Button>
@@ -75,14 +69,11 @@ const Plans = () => {
                     sm: "60%",
                   },
                   color: "#848199",
-                  fontFamily: "Poppins",
                   fontSize: {
                     xs: "14px",
                     sm: "18px",
                   },
-                  fontStyle: "normal",
                   fontWeight: 500,
-                  lineHeight: "normal",
                 }}
               >
                 Whether your time-saving automation needs are large or small,
@@ -141,7 +132,6 @@ const Plans = () => {
                 key={index}
                 sx={{
                   minWidth: "232px",
-                  marginTop: "20px",
                   position: {
                     md: plan.type === "Company" ? "relative" : "",
                   },
@@ -160,11 +150,8 @@ const Plans = () => {
                         flexShrink: 0,
                         color: "#001283",
                         textAlign: "center",
-                        fontFamily: "Poppins, sans-serif",
                         fontSize: "10px",
-                        fontStyle: "normal",
                         fontWeight: 800,
-                        lineHeight: "normal",
                         letterSpacing: "0.833px",
                         display: "flex",
                         alignItems: "center",
@@ -193,9 +180,7 @@ const Plans = () => {
                           sx={{
                             color:
                               plan.type === "Company" ? "#FFFFFF" : "#001283",
-                            fontFamily: "Poppins, sans-serif",
                             fontSize: "36px",
-                            fontStyle: "normal",
                             fontWeight: 700,
                             lineHeight: "46px",
                           }}
@@ -206,11 +191,8 @@ const Plans = () => {
                           sx={{
                             color:
                               plan.type === "Company" ? "#FFFFFF" : "#848199",
-                            fontFamily: "Poppins, sans-serif",
                             fontSize: "17px",
-                            fontStyle: "normal",
                             fontWeight: 500,
-                            lineHeight: "normal",
                             alignSelf: "center",
                           }}
                         >
@@ -224,22 +206,16 @@ const Plans = () => {
                         style={{
                           color:
                             plan.type === "Company" ? "#FFFFFF" : "#001283",
-                          fontFamily: "Poppins, sans-serif",
                           fontSize: "28px",
-                          fontStyle: "normal",
                           fontWeight: 500,
-                          lineHeight: "normal",
                         }}
                       >
                         {plan.type}
                       </Typography>
                       <Typography
                         style={{
-                          fontFamily: "Poppins, sans-serif",
                           fontSize: "15px",
-                          fontStyle: "normal",
                           fontWeight: 500,
-                          lineHeight: "normal",
                           maxWidth: "232px",
                           color: plan.type === "Company" ? "#FFF" : "#848199",
                         }}
@@ -275,6 +251,14 @@ const Plans = () => {
                         },
                         height: "45px",
                         margin: "0 auto",
+                        textTransform: "none",
+                        "&:hover": {
+                          outline: "1px solid white",
+                          backgroundColor:
+                            plan.type === "Company" ? "#FFF" : "#E5E3F6",
+                          color:
+                            plan.type === "Company" ? "#E5E3F6" : "#838199",
+                        },
                       }}
                     >
                       Choose Plan
