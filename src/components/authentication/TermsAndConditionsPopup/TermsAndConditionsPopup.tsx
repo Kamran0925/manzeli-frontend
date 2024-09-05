@@ -10,7 +10,6 @@ import {
   Checkbox,
 } from "@mui/material";
 import { useFormContext } from "../../../context/FormContext";
-
 import styles from "./TermsAndConditionsPopup.module.css";
 
 const TermsAndConditionsPopup: React.FC<{
@@ -42,7 +41,7 @@ const TermsAndConditionsPopup: React.FC<{
         maxWidth="md"
         className={styles.dialog}
       >
-        <DialogTitle className={styles.dialogTitle}>
+        <DialogTitle>
           <Typography
             variant="h6"
             sx={{

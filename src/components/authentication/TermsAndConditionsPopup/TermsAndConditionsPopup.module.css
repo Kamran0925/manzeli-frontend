@@ -1,16 +1,12 @@
 .overlay {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .dialog {
-  margin: 60px auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 80vh;
+  margin: 60px auto 0px;
+  height: 85vh;
   max-width: 1100px;
 }
 
@@ -18,9 +14,6 @@
   max-width: 965px;
   max-height: 408px;
   overflow-y: scroll;
-}
-
-.scrollableContent {
   scrollbar-width: 11px;
   scrollbar-color: #001283 #f8f8f8;
 }
@@ -62,6 +55,7 @@
 @media (min-width: 601px) and (max-width: 900px) {
   .dialog {
     margin: 20px 0px;
+    height: 90vh;
   }
 
   .dialogActions {
