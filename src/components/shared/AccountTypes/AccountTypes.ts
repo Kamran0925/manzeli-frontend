@@ -5,17 +5,13 @@ type AccountType = {
 
 export const accountTypes: AccountType[] = [
   {
-    title: "Landlord",
+    title: "Property Management Firm",
+    description:
+      "Register as a property management company to oversee multiple properties and streamline your business operations",
+  },
+  {
+    title: "Individual Property Owner",
     description:
       "Register as a landlord to manage your individual rental properties efficiently.",
-  },
-  {
-    title: "Property Management Company",
-    description:
-      "Register as a property management company to oversee multiple properties and streamline your business operations.",
-  },
-  {
-    title: "Tenant",
-    description: "Register as a Tenant to access self-service features.",
   },
 ];
