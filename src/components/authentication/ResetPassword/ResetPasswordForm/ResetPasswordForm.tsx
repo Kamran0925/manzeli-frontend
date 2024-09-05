@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Typography, Box, Link, Button } from "@mui/material";
 import InputField from "../../../shared/InputField/InputField";
 import Error from "../../../shared/Error/Error";
-import { validate } from "../../../../utils/validationHelpers";
+import { displayError, validate } from "../../../../utils/validationHelpers";
 import styles from "./ResetPasswordForm.module.css";
 
 interface ResetPasswordFormProps {
@@ -27,39 +27,47 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
 
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
 
-  const handleChange =
-    (field: keyof ResetFormState) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
+  const formatError = (type: string, field: string, value: any): string => {
+    const { errorMessage } = validate(type, value);
+    return errorMessage ? displayError(field, errorMessage) : "";
+  };
 
-      setFormState(prevState => {
-        const errorMessage = validate(field, value).errorMessage;
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    field: string,
+    type: string,
+  ) => {
+    const { value } = event.target;
+    let errorMessage = formatError(type, field, value);
 
-        const updatedState = {
-          ...prevState,
-          [field]: {
-            value,
-            errorMessage,
-          },
-        };
+    setFormState(prevState => {
+      const updatedState = {
+        ...prevState,
+        [field]: {
+          value,
+          errorMessage,
+        },
+      };
 
-        if (errorMessage) {
-          setIsButtonDisabled(true);
-        }
-        return updatedState;
-      });
-    };
+      if (errorMessage) {
+        setIsButtonDisabled(true);
+      }
+      return updatedState;
+    });
+  };
 
   const handleSubmit = () => {
-    const passwordError = validate(
+    const passwordError = formatError(
+      "password",
       "password",
       formState.password.value,
-    ).errorMessage;
+    );
 
-    const confirmPasswordError = validate(
+    const confirmPasswordError = formatError(
+      "password",
       "confirmPassword",
       formState.confirmPassword.value,
-    ).errorMessage;
+    );
 
     if (passwordError || confirmPasswordError) {
       setFormState(prevState => ({
@@ -81,7 +89,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
         ...prevState,
         confirmPassword: {
           ...prevState.confirmPassword,
-          errorMessage: "Passwords do not match. Please try again!",
+          errorMessage: "Passwords do not match! Please try again",
         },
       }));
       setIsButtonDisabled(true);
@@ -99,23 +107,19 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
   };
 
   useEffect(() => {
-    if (
-      formState.password.value === "" &&
-      formState.confirmPassword.value === ""
-    ) {
+    const { password, confirmPassword } = formState;
+
+    if (password.value === "" && confirmPassword.value === "") {
       return;
     }
 
-    const passwordError =
-      formState.password.value !== ""
-        ? validate("password", formState.password.value).errorMessage
-        : "";
+    let passwordError = password.value
+      ? formatError("password", "password", password.value)
+      : "";
 
-    const confirmPasswordError =
-      formState.confirmPassword.value !== ""
-        ? validate("confirmPassword", formState.confirmPassword.value)
-            .errorMessage
-        : "";
+    let confirmPasswordError = confirmPassword.value
+      ? formatError("password", "confirmPassword", confirmPassword.value)
+      : "";
 
     setFormState(prevState => ({
       password: {
@@ -128,8 +132,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
       },
     }));
 
-    const hasErrors = passwordError || confirmPasswordError;
-    setIsButtonDisabled(!!hasErrors);
+    setIsButtonDisabled(!!(passwordError || confirmPasswordError));
   }, [formState.password.value, formState.confirmPassword.value]);
 
   return (
@@ -164,7 +167,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
             placeholder="Your new password"
             value={formState.password.value}
             errorMessage={formState.password.errorMessage}
-            handleChange={handleChange("password")}
+            handleChange={handleChange}
           />
           <InputField
             type="password"
@@ -172,7 +175,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
             placeholder="Confirm your new password"
             value={formState.confirmPassword.value}
             errorMessage={formState.confirmPassword.errorMessage}
-            handleChange={handleChange("confirmPassword")}
+            handleChange={handleChange}
           />
           {collectErrors(formState).length > 0 && (
             <Box sx={{ maxWidth: "554px", marginTop: "10px", width: "100%" }}>
