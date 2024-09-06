@@ -15,7 +15,7 @@ const Error: React.FC<ErrorProps> = ({ messages }) => {
         padding: "14px 20px",
         gap: "8px",
         maxWidth: "554px",
-        bgcolor: "rgba(232, 0, 0, 0.08)",
+        bgcolor: "error.light",
         borderRadius: "40px",
         marginTop: "12px",
         width: "100%",
