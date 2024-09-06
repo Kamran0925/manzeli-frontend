@@ -238,7 +238,11 @@ const Plans = () => {
                     </Box>
                   </Box>
 
-                  <Box>
+                  <Box
+                    sx={{
+                      textAlign: plan.type === "Company" ? "center" : "none",
+                    }}
+                  >
                     <Button
                       sx={{
                         borderRadius: "24px",
