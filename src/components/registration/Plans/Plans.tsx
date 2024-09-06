@@ -255,9 +255,8 @@ const Plans = () => {
                         "&:hover": {
                           outline: "1px solid white",
                           backgroundColor:
-                            plan.type === "Company" ? "#FFF" : "#E5E3F6",
-                          color:
-                            plan.type === "Company" ? "#E5E3F6" : "#838199",
+                            plan.type === "Company" ? "#001283" : "#E5E3F6",
+                          color: plan.type === "Company" ? "#FFF" : "#838199",
                         },
                       }}
                     >
