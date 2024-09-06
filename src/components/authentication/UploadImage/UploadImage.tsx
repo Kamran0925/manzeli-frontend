@@ -92,7 +92,7 @@ const UploadImage = () => {
           }
           nextButton={null}
         />
-        <Typography variant="h4" sx={{ textAlign: "right" }} color="#8692A6">
+        <Typography variant="h4" sx={{ textAlign: "right" }} color="secondary">
           Personal Info.
         </Typography>
 
@@ -233,6 +233,7 @@ const UploadImage = () => {
             />
 
             <Typography
+              color="secondary"
               sx={{
                 fontWeight: 400,
                 fontSize: "12px",
@@ -241,7 +242,6 @@ const UploadImage = () => {
                 alignItems: "center",
                 width: "100%",
                 margin: "0 auto 20px",
-                color: "#8692A6",
                 justifyContent: "center",
               }}
             >

@@ -89,7 +89,11 @@ const ContactDetails = () => {
           }
           nextButton={null}
         />
-        <Typography variant="body1" sx={{ textAlign: "right" }} color="#8692A6">
+        <Typography
+          variant="body1"
+          sx={{ textAlign: "right" }}
+          color="secondary"
+        >
           Personal Info.
         </Typography>
 
@@ -234,6 +238,7 @@ const ContactDetails = () => {
             />
 
             <Typography
+              color="secondary"
               sx={{
                 fontFamily: "Poppins",
                 fontStyle: "normal",
@@ -245,7 +250,6 @@ const ContactDetails = () => {
                 width: "100%",
                 margin: "10px auto",
                 textAlign: "center",
-                color: "#8692A6",
                 justifyContent: "center",
               }}
             >

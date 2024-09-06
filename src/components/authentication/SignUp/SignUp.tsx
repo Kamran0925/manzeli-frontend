@@ -93,7 +93,11 @@ const SignUp = () => {
           }
           nextButton={null}
         />
-        <Typography variant="body1" sx={{ textAlign: "right" }} color="#8692A6">
+        <Typography
+          variant="body1"
+          sx={{ textAlign: "right" }}
+          color="secondary"
+        >
           Personal Info.
         </Typography>
 
