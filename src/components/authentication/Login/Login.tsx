@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Typography, Box, Link as MuiLink, Button } from "@mui/material";
 import InputField from "../../shared/InputField/InputField";
 import { Link } from "react-router-dom";
-import { validate } from "../../../utils/validationHelpers";
+import { displayError, validate } from "../../../utils/validationHelpers";
 import Error from "../../shared/Error/Error";
 import styles from "./Login.module.css";
 
@@ -50,7 +50,11 @@ const Login = () => {
     const { value } = e.target;
 
     setFormState(prevState => {
-      const errorMessage = validateField(name, value);
+      let errorMessage = validateField(name, value);
+
+      if (errorMessage && name === "password") {
+        errorMessage = displayError(name, errorMessage);
+      }
 
       const updatedState = {
         ...prevState,
@@ -69,10 +73,15 @@ const Login = () => {
 
   const handleSubmit = () => {
     const emailError = validate("email", formState.email.value).errorMessage;
-    const passwordError = validate(
+
+    let passwordError = validate(
       "password",
       formState.password.value,
     ).errorMessage;
+
+    if (passwordError) {
+      passwordError = displayError("password", passwordError);
+    }
 
     if (emailError || passwordError) {
       setFormState(prevState => ({
@@ -107,24 +116,17 @@ const Login = () => {
       formState.email.value !== ""
         ? validate("email", formState.email.value).errorMessage
         : "";
-    const passwordError =
+
+    let passwordError =
       formState.password.value !== ""
         ? validate("password", formState.password.value).errorMessage
         : "";
 
-    setFormState(prevState => ({
-      email: {
-        ...prevState.email,
-        errorMessage: emailError,
-      },
-      password: {
-        ...prevState.password,
-        errorMessage: passwordError,
-      },
-    }));
+    if (passwordError) {
+      passwordError = displayError("password", passwordError);
+    }
 
-    const hasErrors = emailError || passwordError;
-    setIsButtonDisabled(!!hasErrors);
+    setIsButtonDisabled(!!(emailError || passwordError));
   }, [formState.email.value, formState.password.value]);
 
   return (
@@ -149,8 +151,8 @@ const Login = () => {
           <MuiLink
             component={Link}
             to="/registration"
+            color="primary"
             sx={{
-              color: "#001283",
               textDecoration: "none",
               "&:hover": {
                 textDecoration: "underline",

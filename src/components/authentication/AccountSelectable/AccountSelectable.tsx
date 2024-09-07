@@ -23,9 +23,15 @@ const AccountSelectable = () => {
             Already have an account?{" "}
             <MuiLink
               component={Link}
-              color="primary"
               variant="body1"
               to="/login"
+              color="primary"
+              sx={{
+                textDecoration: "none",
+                "&:hover": {
+                  textDecoration: "underline",
+                },
+              }}
             >
               Sign in
             </MuiLink>
