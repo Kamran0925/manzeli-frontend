@@ -47,12 +47,13 @@ const AccountSelectable = () => {
             }}
           >
             <Grid container direction={"column"}>
-              <Grid item xs={12} onClick={handleStep}>
+              <Grid item xs={12}>
                 {accountTypes.map((accountType, index) => (
                   <Box
                     key={index}
                     onMouseEnter={() => setHoveredTileIndex(index)}
                     onMouseLeave={() => setHoveredTileIndex(null)}
+                    onClick={index !== 0 ? handleStep : undefined}
                   >
                     <Tile
                       title={accountType.title}
