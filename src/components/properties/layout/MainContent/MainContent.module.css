@@ -1,0 +1,16 @@
+.mainContent {
+  flex-grow: 1;
+  padding: 42px 24px;
+  background: #f4f4f4;
+}
+
+.mainBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mainBarIcons {
+  display: flex;
+  gap: 24px;
+}
