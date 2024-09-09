@@ -6,6 +6,8 @@ export const validate = (
 ): { errorMessage: string } => {
   switch (type) {
     case "username":
+    case "address":
+    case "street":
       if (value.trim().length < 5) {
         return {
           errorMessage: "Minimum of 5 characters",

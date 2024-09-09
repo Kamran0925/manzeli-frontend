@@ -42,7 +42,10 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
   const validateField = (type: string, name: string, value: string) => {
     let errorMessage = "";
 
-    if (inputFieldTypes.includes(type) && name === "username") {
+    if (
+      inputFieldTypes.includes(type) &&
+      (name === "username" || name === "address" || name === "street")
+    ) {
       const validation = validate(name, value);
       errorMessage = validation.errorMessage;
     } else if (inputFieldTypes.includes(type)) {
