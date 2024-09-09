@@ -15,6 +15,14 @@ export const validate = (
       }
       return { errorMessage: "" };
 
+    case "city":
+      if (value.trim().length < 3) {
+        return {
+          errorMessage: "Minimum of 3 characters",
+        };
+      }
+      return { errorMessage: "" };
+
     case "text":
       if (value.trim().length < 8 || value.trim() === "") {
         return {

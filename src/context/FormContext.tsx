@@ -32,6 +32,8 @@ const contactFields = [
   "identity",
 ];
 
+const fieldNames = ["username", "address", "street", "city"];
+
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
 export const FormProvider: React.FC<{ children: ReactNode }> = ({
@@ -42,10 +44,7 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
   const validateField = (type: string, name: string, value: string) => {
     let errorMessage = "";
 
-    if (
-      inputFieldTypes.includes(type) &&
-      (name === "username" || name === "address" || name === "street")
-    ) {
+    if (inputFieldTypes.includes(type) && fieldNames.includes(name)) {
       const validation = validate(name, value);
       errorMessage = validation.errorMessage;
     } else if (inputFieldTypes.includes(type)) {
