@@ -8,7 +8,9 @@ const MainContent = () => {
   return (
     <Box className={styles.mainContent}>
       <Box className={styles.mainBar}>
-        <Typography variant="h1">Welcome, John Doe!</Typography>
+        <Typography variant="h1" className={styles.mainHeading}>
+          Welcome, John Doe!
+        </Typography>
         <Box className={styles.mainBarIcons}>
           <Notification />
           <Profile />
