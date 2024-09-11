@@ -25,7 +25,7 @@ interface FieldConfig {
   validation?: {
     required: boolean;
   };
-  options?: { value: string | number; label: string }[];
+  options?: { value: any; label: string }[];
 }
 
 interface FormInputProps {
@@ -35,7 +35,7 @@ interface FormInputProps {
   fieldConfig: FieldConfig;
   value: string;
   error: string | undefined;
-  onChange: (fieldId: string, value: string, fieldConfig: FieldConfig) => void;
+  onChange: (fieldId: string, value: any, fieldConfig: FieldConfig) => void;
   showLabel: boolean;
 }
 
@@ -55,8 +55,8 @@ const FormInput: React.FC<FormInputProps> = props => {
   };
 
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = event.target;
-    props.onChange(props.fieldId, checked ? value : "", props.fieldConfig);
+    const { checked } = event.target;
+    props.onChange(props.fieldId, checked, props.fieldConfig);
   };
 
   switch (props.fieldConfig.type) {
@@ -112,7 +112,7 @@ const FormInput: React.FC<FormInputProps> = props => {
             }}
           >
             {props.fieldConfig.options?.map(option => (
-              <MenuItem key={option.value} value={option.value}>
+              <MenuItem key={option.label} value={option.value}>
                 {option.label}
               </MenuItem>
             ))}
@@ -126,14 +126,19 @@ const FormInput: React.FC<FormInputProps> = props => {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
             sx={{
-              color: "#7F7F7F",
-              fontFamily: "Poppins, sans-serif",
-              fontSize: "12px",
-              fontWeight: 500,
-              lineHeight: "100%",
-              boxSizing: "border-box",
-              height: "32px",
-              padding: 0,
+              "& .css-1s267lr-MuiInputBase-root-MuiOutlinedInput-root": {
+                color: "#7F7F7F",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: "12px",
+                fontWeight: 500,
+                lineHeight: "100%",
+                boxSizing: "border-box",
+                height: "32px",
+                padding: "0 15px",
+              },
+              "& .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input": {
+                padding: 0,
+              },
             }}
           />
         </LocalizationProvider>
@@ -155,7 +160,7 @@ const FormInput: React.FC<FormInputProps> = props => {
               key={index}
               control={
                 <Checkbox
-                  checked={false}
+                  checked={option.value}
                   onChange={e => handleCheckboxChange(e)}
                   className={styles.checkbox}
                 />
