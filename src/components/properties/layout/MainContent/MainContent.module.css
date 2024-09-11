@@ -7,13 +7,13 @@
   width: calc(100vw - 320px);
 }
 
-.mainBar {
+.mainContent .mainBar {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.mainBarIcons {
+.mainContent .mainBar .mainBarIcons {
   display: flex;
   gap: 24px;
 }
@@ -33,9 +33,11 @@
 @media (max-width: 600px) {
   .mainContent {
     padding: 24px 14px;
+    position: static;
+    width: calc(100% - 28px);
   }
 
-  .mainBar {
+  .mainContent .mainBar {
     display: flex;
     align-items: flex-end;
     flex-direction: column-reverse;
@@ -45,9 +47,19 @@
   .mainContent .mainBar .mainHeading {
     font-size: 24px;
   }
+
+  .mainContent .subTitleBar .subTitle {
+    font-size: 22px;
+  }
 }
 
 @media (min-width: 601px) and (max-width: 900px) {
+  .mainContent {
+    padding: 24px 14px;
+    position: static;
+    width: calc(100% - 28px);
+  }
+
   .mainContent .mainBar .mainHeading {
     font-size: 30px;
   }
