@@ -12,6 +12,8 @@ interface FormState {
   };
 }
 
+const AutoLabelFields = ["buildingId", "contractType"];
+
 const PropertyForm = () => {
   const [formData, setFormData] = useState<FormState>({});
 
@@ -55,7 +57,14 @@ const PropertyForm = () => {
       <Box className={styles.content}>
         <Grid container>
           {ApartmentBuildingDetails.map((field, key) => (
-            <Grid item md={field.fieldType === "checkbox" ? 12 : 4} key={key}>
+            <Grid
+              item
+              xs={12}
+              sm={field.fieldType === "checkbox" ? 12 : 6}
+              md={field.fieldType === "checkbox" ? 12 : 4}
+              lg={field.fieldType === "checkbox" ? 12 : 4}
+              key={key}
+            >
               <FormInput
                 fieldId={field.fieldId}
                 fieldLabel={field.fieldLabel}
@@ -64,9 +73,7 @@ const PropertyForm = () => {
                 value={formData[field.fieldId]?.value}
                 onChange={validate}
                 error={formData[field.fieldId]?.error}
-                showLabel={
-                  ["buildingId", "contractType"].includes(field.fieldId) && true
-                }
+                showLabel={AutoLabelFields.includes(field.fieldId) && true}
               />
             </Grid>
           ))}

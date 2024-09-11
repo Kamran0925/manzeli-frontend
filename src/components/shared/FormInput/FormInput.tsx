@@ -73,10 +73,19 @@ const FormInput: React.FC<FormInputProps> = props => {
               color: "#7F7F7F",
               fontFamily: "Poppins, sans-serif",
               fontSize: "12px",
-              fontStyle: "normal",
               fontWeight: 500,
               lineHeight: "100%",
               boxSizing: "border-box",
+            },
+          }}
+          sx={{
+            "& .MuiInputBase-root": {
+              padding: "0px 15px",
+              margin: 0,
+            },
+            "& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input": {
+              padding: "0px",
+              height: "32px",
             },
           }}
         />
@@ -96,7 +105,6 @@ const FormInput: React.FC<FormInputProps> = props => {
                 color: "#7F7F7F",
                 fontFamily: "Poppins, sans-serif",
                 fontSize: "12px",
-                fontStyle: "normal",
                 fontWeight: 500,
                 lineHeight: "100%",
                 boxSizing: "border-box",
@@ -121,7 +129,6 @@ const FormInput: React.FC<FormInputProps> = props => {
               color: "#7F7F7F",
               fontFamily: "Poppins, sans-serif",
               fontSize: "12px",
-              fontStyle: "normal",
               fontWeight: 500,
               lineHeight: "100%",
               boxSizing: "border-box",
@@ -168,7 +175,12 @@ const FormInput: React.FC<FormInputProps> = props => {
   return (
     <Box
       className={styles.field}
-      sx={{ width: props.fieldType === "checkbox" ? "100%" : "300px" }}
+      sx={{
+        width: {
+          xs: props.fieldType === "checkbox" ? "100%" : "80%",
+          sm: props.fieldType === "checkbox" ? "100%" : "300px",
+        },
+      }}
     >
       <Box className={styles.align}>
         <InputLabel htmlFor={props.fieldId} className={styles.label}>
@@ -178,7 +190,9 @@ const FormInput: React.FC<FormInputProps> = props => {
           <Typography className={styles.smallText}>(Auto-generated)</Typography>
         )}
       </Box>
+
       {inputElement}
+
       {props.error && (
         <Typography color="error.main" variant="body2">
           {props.error}
