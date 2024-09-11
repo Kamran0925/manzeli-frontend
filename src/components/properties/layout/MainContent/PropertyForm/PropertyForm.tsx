@@ -62,7 +62,6 @@ const PropertyForm = () => {
               xs={12}
               sm={field.fieldType === "checkbox" ? 12 : 6}
               md={field.fieldType === "checkbox" ? 12 : 4}
-              lg={field.fieldType === "checkbox" ? 12 : 4}
               key={key}
             >
               <FormInput
