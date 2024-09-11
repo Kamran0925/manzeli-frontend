@@ -4,6 +4,9 @@
   max-width: 256px;
   background-color: #fafafa;
   display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .sideNav .navList {

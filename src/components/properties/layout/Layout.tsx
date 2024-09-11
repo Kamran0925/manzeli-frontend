@@ -5,8 +5,8 @@ import SideBar from "./SideBar/SideBar";
 
 const Layout = () => {
   return (
-    <Container disableGutters={true} maxWidth={false} sx={{ p: 0 }}>
-      <Box sx={{ display: "flex", height: "100vh" }}>
+    <Container disableGutters={true} maxWidth={false}>
+      <Box sx={{ position: "relative" }}>
         <SideBar />
         <MainContent />
       </Box>
