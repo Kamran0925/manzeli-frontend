@@ -1,5 +1,4 @@
 .mainContent {
-  flex-grow: 1;
   padding: 42px 24px;
   background: #f4f4f4;
   position: absolute;
@@ -17,6 +16,18 @@
 .mainBarIcons {
   display: flex;
   gap: 24px;
+}
+
+.subTitleBar {
+  margin-top: 27px;
+}
+
+.subTitleBar .subTitle {
+  color: #000;
+  font-family: "Poppins";
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 110%;
 }
 
 @media (max-width: 600px) {
