@@ -11,7 +11,7 @@ export const ApartmentBuildingDetails = [
     },
   },
   {
-    fieldId: "localAuthorityId",
+    fieldId: "localAuthorityID",
     fieldLabel: "Local Authority ID",
     fieldType: "input",
     fieldConfig: {

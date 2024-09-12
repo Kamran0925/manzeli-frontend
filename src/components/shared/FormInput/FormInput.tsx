@@ -37,6 +37,7 @@ interface FormInputProps {
   error: string | undefined;
   onChange: (fieldId: string, value: any, fieldConfig: FieldConfig) => void;
   showLabel: boolean;
+  showOptional: boolean;
 }
 
 const FormInput: React.FC<FormInputProps> = props => {
@@ -207,6 +208,9 @@ const FormInput: React.FC<FormInputProps> = props => {
         </InputLabel>
         {props.showLabel && (
           <Typography className={styles.smallText}>(Auto-generated)</Typography>
+        )}
+        {props.showOptional && (
+          <Typography className={styles.smallText}>(Optional)</Typography>
         )}
       </Box>
 

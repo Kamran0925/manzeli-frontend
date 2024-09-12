@@ -13,7 +13,7 @@ export const StandAlonePropertyDetails = [
   },
   {
     fieldId: "compoundId",
-    fieldLabel: "Compound Id",
+    fieldLabel: "Compound ID",
     fieldType: "input",
     fieldConfig: {
       type: "text",
