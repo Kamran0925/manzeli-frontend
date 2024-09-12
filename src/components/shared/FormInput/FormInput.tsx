@@ -54,9 +54,12 @@ const FormInput: React.FC<FormInputProps> = props => {
     props.onChange(props.fieldId, value, props.fieldConfig);
   };
 
-  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleCheckboxChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    label: string,
+  ) => {
     const { checked } = event.target;
-    props.onChange(props.fieldId, checked, props.fieldConfig);
+    props.onChange(props.fieldId, { value: checked, label }, props.fieldConfig);
   };
 
   switch (props.fieldConfig.type) {
@@ -152,7 +155,6 @@ const FormInput: React.FC<FormInputProps> = props => {
             display: "flex",
             flexDirection: "row",
             gap: "20px",
-            paddingLeft: "19px",
           }}
         >
           {props.fieldConfig.options?.map((option, index) => (
@@ -161,11 +163,10 @@ const FormInput: React.FC<FormInputProps> = props => {
               control={
                 <Checkbox
                   checked={option.value}
-                  onChange={e => handleCheckboxChange(e)}
+                  onChange={e => handleCheckboxChange(e, option.label)}
                   className={styles.checkbox}
                 />
               }
-              className={styles.checkboxLabel}
               label={option.label}
               sx={{
                 "& .MuiFormControlLabel-label": {
@@ -175,6 +176,8 @@ const FormInput: React.FC<FormInputProps> = props => {
                   fontWeight: 400,
                   lineHeight: "100%",
                 },
+                margin: "0px",
+                padding: "0px",
               }}
             />
           ))}
