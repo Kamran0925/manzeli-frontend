@@ -91,10 +91,10 @@ export const SelectField: React.FC<SelectFieldProps> = ({
                 alignItems: "center",
                 alignSelf: "stretch",
                 marginBottom: "8px",
+                borderRadius: "5px",
                 "&:hover": {
                   color: "#3B4CB8",
                   backgroundColor: "#EBEDF8",
-                  bordeRadius: "5px",
                 },
               }}
             >

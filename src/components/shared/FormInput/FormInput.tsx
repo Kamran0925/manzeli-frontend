@@ -107,22 +107,70 @@ const FormInput: React.FC<FormInputProps> = props => {
           <Select
             id={props.fieldId}
             value={props.value}
-            label={props.fieldLabel}
             onChange={handleSelectChange}
-            className={styles.textField}
-            inputProps={{
-              style: {
-                color: "#7F7F7F",
-                fontFamily: "Poppins, sans-serif",
-                fontSize: "12px",
-                fontWeight: 500,
-                lineHeight: "100%",
-                boxSizing: "border-box",
+            MenuProps={{
+              PaperProps: {
+                sx: {
+                  borderRadius: "10px",
+                  backgroundColor: "#FFF",
+                  boxShadow: "0px 4px 15.3px 0px rgba(0, 0, 0, 0.25)",
+                  padding: "20px 7px 5px",
+                },
+              },
+              MenuListProps: {
+                sx: {
+                  padding: "0",
+                },
+              },
+            }}
+            sx={{
+              borderRadius: "6px",
+              border: "1px solid #E3E3E3",
+              height: "32px",
+              color: "#7F7F7F",
+              fontFamily: "Poppins",
+              fontSize: "12px",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "100%",
+              padding: "10px 15px 4px",
+              "& .MuiSelect-select": {
+                padding: "0 !important",
+              },
+              "& .css-yf8vq0-MuiSelect-nativeInput": {
+                padding: "0px !important",
+              },
+              "& .MuiSelect-nativeInput": {
+                border: "none !important",
+              },
+              "& .MuiOutlinedInput-notchedOutline": {
+                border: "none !important",
               },
             }}
           >
             {props.fieldConfig.options?.map(option => (
-              <MenuItem key={option.label} value={option.value}>
+              <MenuItem
+                key={option.label}
+                value={option.value}
+                sx={{
+                  color: "#7F7F7F",
+                  fontFamily: "Poppins",
+                  fontSize: "12px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "100%",
+                  display: "flex",
+                  padding: "10.552px 10px 9.448px 10px",
+                  alignItems: "center",
+                  alignSelf: "stretch",
+                  marginBottom: "8px",
+                  borderRadius: "5px",
+                  "&:hover": {
+                    color: "#3B4CB8",
+                    backgroundColor: "#EBEDF8",
+                  },
+                }}
+              >
                 {option.label}
               </MenuItem>
             ))}
