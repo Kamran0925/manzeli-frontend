@@ -37,7 +37,8 @@
   }
 
   .selectContainer .select {
-    width: 90vw;
+    width: 250px;
+    margin-bottom: 20px;
   }
 }
 
