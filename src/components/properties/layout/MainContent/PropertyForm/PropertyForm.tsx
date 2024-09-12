@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import classNames from "classnames";
-import FormInput from "../../../../shared/FormInput/FormInput";
-import { ApartmentBuildingDetails } from "../ApartmentBuildingDetails/ApartmentBuildingDetails";
+import FormInput, { FieldConfig } from "../../../../shared/FormInput/FormInput";
 import styles from "./PropertyForm.module.css";
 
 interface FormState {
@@ -12,9 +11,21 @@ interface FormState {
   };
 }
 
+interface FormField {
+  fieldId: string;
+  fieldLabel: string;
+  fieldType: string;
+  fieldConfig: FieldConfig;
+}
+
+interface PropertyFormProps {
+  title: string;
+  formFields: FormField[];
+}
+
 const AutoLabelFields = ["buildingId", "contractType"];
 
-const PropertyForm = () => {
+const PropertyForm: React.FC<PropertyFormProps> = ({ title, formFields }) => {
   const [formData, setFormData] = useState<FormState>({});
 
   const validate = (fieldId: string, value: string, fieldConfig: any) => {
@@ -49,14 +60,12 @@ const PropertyForm = () => {
   return (
     <Box className={styles.propertyForm}>
       <Box className={styles.header}>
-        <Typography className={styles.title}>
-          Apartment Building Details
-        </Typography>
+        <Typography className={styles.title}>{title}</Typography>
       </Box>
 
       <Box className={styles.content}>
         <Grid container>
-          {ApartmentBuildingDetails.map((field, key) => (
+          {formFields.map((field, key) => (
             <Grid
               item
               xs={12}

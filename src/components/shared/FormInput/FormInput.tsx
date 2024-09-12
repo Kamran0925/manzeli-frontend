@@ -18,7 +18,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 
 import styles from "./FormInput.module.css";
 
-interface FieldConfig {
+export interface FieldConfig {
   type: string;
   placeholder?: string;
   value?: string;
