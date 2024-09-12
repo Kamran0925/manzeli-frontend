@@ -5,9 +5,9 @@ import Profile from "../../../../assets/icons/ui/Profile";
 import PropertyFilters from "./PropertyFilters/PropertyFilters";
 import PropertyForm from "./PropertyForm/PropertyForm";
 import { Routes, Route } from "react-router-dom";
-import { ResidentialCompoundDetails } from "./ResidentialCompoundDetails/ResidentialCompoundDetails";
-import { ApartmentBuildingDetails } from "./ApartmentBuildingDetails/ApartmentBuildingDetails";
-import { StandAlonePropertyDetails } from "./StandAloneProperty/StandAloneProperty";
+import { ResidentialCompoundDetails } from "./PropertyFormFields/ResidentialCompoundDetails/ResidentialCompoundDetails";
+import { ApartmentBuildingDetails } from "./PropertyFormFields/ApartmentBuildingDetails/ApartmentBuildingDetails";
+import { StandAlonePropertyDetails } from "./PropertyFormFields/StandAloneProperty/StandAloneProperty";
 import styles from "./MainContent.module.css";
 
 const Main = () => {
