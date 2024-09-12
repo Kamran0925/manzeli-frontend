@@ -167,6 +167,15 @@ const FormInput: React.FC<FormInputProps> = props => {
               }
               className={styles.checkboxLabel}
               label={option.label}
+              sx={{
+                "& .MuiFormControlLabel-label": {
+                  color: "#7f7f7f",
+                  fontFamily: "Poppins",
+                  fontSize: "12px",
+                  fontWeight: 400,
+                  lineHeight: "100%",
+                },
+              }}
             />
           ))}
         </FormGroup>
