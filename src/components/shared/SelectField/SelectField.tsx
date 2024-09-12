@@ -38,6 +38,15 @@ export const SelectField: React.FC<SelectFieldProps> = ({
           onChange={onChange}
           displayEmpty
           className={styles.select}
+          sx={{
+            "& .MuiSelect-select": {
+              color: "#9A9A9A",
+              fontFamily: "Poppins",
+              fontSize: "14px",
+              fontWeight: 500,
+              lineHeight: "23.462px",
+            },
+          }}
         >
           {options.map(option => (
             <MenuItem
