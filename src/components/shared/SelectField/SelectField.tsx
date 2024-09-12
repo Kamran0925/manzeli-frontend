@@ -32,12 +32,27 @@ export const SelectField: React.FC<SelectFieldProps> = ({
       <Typography variant="h4" className={styles.label}>
         {label}
       </Typography>
+
       <FormControl sx={{ mt: "8px" }}>
         <Select
           value={value}
           onChange={onChange}
-          displayEmpty
           className={styles.select}
+          MenuProps={{
+            PaperProps: {
+              sx: {
+                top: "290px !important",
+                width: "300px !important",
+                borderRadius: "10px",
+                backgroundColor: "#FFF",
+                boxShadow: "0px 4px 15.3px 0px rgba(0, 0, 0, 0.25)",
+                padding: "10px 7px",
+                "& .MuiMenu-list": {
+                  padding: "0 !important",
+                },
+              },
+            },
+          }}
           sx={{
             "& .MuiSelect-select": {
               color: "#9A9A9A",
@@ -46,13 +61,42 @@ export const SelectField: React.FC<SelectFieldProps> = ({
               fontWeight: 500,
               lineHeight: "23.462px",
             },
+            "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select":
+              {
+                height: "43px",
+                padding: "9px 20px 10px 16px",
+                boxSizing: "border-box",
+              },
+            "& .css-yf8vq0-MuiSelect-nativeInput": {
+              border: "none",
+            },
+            "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
+              border: "none",
+            },
           }}
         >
           {options.map(option => (
             <MenuItem
               key={option.value}
               value={option.value}
-              className={styles.menuItem}
+              sx={{
+                color: "#7F7F7F",
+                fontFamily: "Poppins",
+                fontSize: "12px",
+                fontStyle: "normal",
+                fontWeight: 500,
+                lineHeight: "100%",
+                display: "flex",
+                padding: "11.006px 10px 8.994px 10px",
+                alignItems: "center",
+                alignSelf: "stretch",
+                marginBottom: "8px",
+                "&:hover": {
+                  color: "#3B4CB8",
+                  backgroundColor: "#EBEDF8",
+                  bordeRadius: "5px",
+                },
+              }}
             >
               {option.label}
             </MenuItem>

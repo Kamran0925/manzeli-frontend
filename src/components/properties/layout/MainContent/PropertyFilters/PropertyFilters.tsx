@@ -9,13 +9,11 @@ const PropertyFilters = () => {
   };
 
   const propertyTypeOptions = [
-    { value: "", label: "None" },
     { value: "Residential", label: "Residential" },
     { value: "Commercial", label: "Commercial" },
   ];
 
   const contractTypeOptions = [
-    { value: "", label: "None" },
     { value: "Investing", label: "Investing" },
     { value: "Management", label: "Management" },
     {
@@ -25,7 +23,6 @@ const PropertyFilters = () => {
   ];
 
   const propertySubTypeOptions = [
-    { value: "", label: "None" },
     { value: "Apartment Building", label: "Apartment Building" },
     { value: "Residential Compound", label: "Residential Compound" },
     {
