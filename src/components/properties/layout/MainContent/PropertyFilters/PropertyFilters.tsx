@@ -2,7 +2,6 @@ import React from "react";
 import { Grid } from "@mui/material";
 import { SelectField } from "../../../../shared/SelectField/SelectField";
 import { SelectChangeEvent } from "@mui/material";
-import styles from "./PropertyFilters.module.css";
 
 const PropertyFilters = () => {
   const handleChange = (event: SelectChangeEvent<string | number>) => {
