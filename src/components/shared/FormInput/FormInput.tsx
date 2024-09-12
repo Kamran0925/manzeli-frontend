@@ -64,6 +64,7 @@ const FormInput: React.FC<FormInputProps> = props => {
 
   switch (props.fieldConfig.type) {
     case "text":
+    case "number":
       inputElement = (
         <TextField
           placeholder={props.fieldConfig.placeholder}
@@ -94,6 +95,7 @@ const FormInput: React.FC<FormInputProps> = props => {
         />
       );
       break;
+
     case "select":
       inputElement = (
         <FormControl fullWidth>

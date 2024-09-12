@@ -117,7 +117,7 @@ export const StandAlonePropertyDetails = [
     fieldLabel: "Community Name",
     fieldType: "input",
     fieldConfig: {
-      type: "text",
+      type: "number",
       placeholder: "4",
       value: "",
       validation: { required: true },
@@ -128,7 +128,7 @@ export const StandAlonePropertyDetails = [
     fieldLabel: "Number of Rooms",
     fieldType: "input",
     fieldConfig: {
-      type: "text",
+      type: "number",
       placeholder: "4",
       value: "",
       validation: { required: true },
@@ -139,7 +139,7 @@ export const StandAlonePropertyDetails = [
     fieldLabel: "Number of Master Bedrooms",
     fieldType: "input",
     fieldConfig: {
-      type: "text",
+      type: "number",
       placeholder: "2",
       value: "",
       validation: { required: true },
@@ -150,7 +150,7 @@ export const StandAlonePropertyDetails = [
     fieldLabel: "Number of Toilets",
     fieldType: "input",
     fieldConfig: {
-      type: "text",
+      type: "number",
       placeholder: "4",
       value: "",
       validation: { required: true },
