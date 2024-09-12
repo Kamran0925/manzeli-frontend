@@ -83,7 +83,7 @@ export const ResidentialCompoundDetails = [
     fieldLabel: "Number of Villas",
     fieldType: "input",
     fieldConfig: {
-      type: "input",
+      type: "number",
       placeholder: "10",
       value: "",
       validation: { required: true },
@@ -94,7 +94,7 @@ export const ResidentialCompoundDetails = [
     fieldLabel: "Number of Buildings",
     fieldType: "input",
     fieldConfig: {
-      type: "input",
+      type: "number",
       placeholder: "4",
       value: "",
       validation: { required: true },
