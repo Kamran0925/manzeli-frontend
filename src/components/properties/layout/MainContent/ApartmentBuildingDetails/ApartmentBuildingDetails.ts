@@ -116,7 +116,7 @@ export const ApartmentBuildingDetails = [
     fieldLabel: "Number of Floors",
     fieldType: "input",
     fieldConfig: {
-      type: "text",
+      type: "number",
       placeholder: "12",
       value: "",
       validation: { required: true },
@@ -127,7 +127,7 @@ export const ApartmentBuildingDetails = [
     fieldLabel: "Number of Apartments",
     fieldType: "input",
     fieldConfig: {
-      type: "text",
+      type: "number",
       placeholder: "48",
       value: "",
       validation: { required: true },
@@ -138,7 +138,7 @@ export const ApartmentBuildingDetails = [
     fieldLabel: "Commercial Spaces",
     fieldType: "input",
     fieldConfig: {
-      type: "text",
+      type: "number",
       placeholder: "4",
       value: "",
       validation: { required: true },
@@ -149,7 +149,7 @@ export const ApartmentBuildingDetails = [
     fieldLabel: "Number of Parking Spaces",
     fieldType: "input",
     fieldConfig: {
-      type: "text",
+      type: "number",
       placeholder: "60",
       value: "",
       validation: { required: true },
