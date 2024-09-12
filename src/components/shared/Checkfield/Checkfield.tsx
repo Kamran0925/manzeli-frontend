@@ -1,7 +1,7 @@
 import Checkbox, { CheckboxProps } from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";
 
-const CheckIcon = styled("span")(() => ({
+export const CheckIcon = styled("span")(() => ({
   width: "15px",
   height: "15px",
   borderRadius: "4px",
@@ -11,7 +11,7 @@ const CheckIcon = styled("span")(() => ({
   },
 }));
 
-const CheckedIcon = styled(CheckIcon)({
+export const CheckedIcon = styled(CheckIcon)({
   backgroundColor: "#001283",
   outline: "1px solid #001283",
 });

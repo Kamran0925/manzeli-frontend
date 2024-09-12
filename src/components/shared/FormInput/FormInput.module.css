@@ -13,7 +13,7 @@
 
 .field .align .label {
   color: #21272a;
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 12px;
   font-weight: 500;
   margin-bottom: 8px;
@@ -46,15 +46,6 @@
   font-weight: 500;
   line-height: 100%;
   box-sizing: border-box;
-}
-
-.field .checkbox {
-  width: 15px;
-  height: 15px;
-  flex-shrink: 0;
-  margin-right: 6px;
-  border-radius: 4px;
-  outline: 1px solid #e3e3e3;
 }
 
 @media (max-width: 600px) {

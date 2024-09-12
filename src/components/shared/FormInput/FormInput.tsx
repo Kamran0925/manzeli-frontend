@@ -8,14 +8,13 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
-  Checkbox,
   FormControlLabel,
   FormGroup,
 } from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
-
+import { Checkfield } from "../Checkfield/Checkfield";
 import styles from "./FormInput.module.css";
 
 export interface FieldConfig {
@@ -205,34 +204,28 @@ const FormInput: React.FC<FormInputProps> = props => {
 
     case "checkbox":
       inputElement = (
-        <FormGroup
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            gap: "20px",
-          }}
-        >
+        <FormGroup sx={{ display: "flex", flexDirection: "row", gap: "20px" }}>
           {props.fieldConfig.options?.map((option, index) => (
             <FormControlLabel
               key={index}
+              label={option.label}
               control={
-                <Checkbox
+                <Checkfield
+                  defaultChecked
                   checked={option.value}
                   onChange={e => handleCheckboxChange(e, option.label)}
-                  className={styles.checkbox}
                 />
               }
-              label={option.label}
               sx={{
-                "& .MuiFormControlLabel-label": {
-                  color: "#7f7f7f",
+                margin: 0,
+                padding: 0,
+                "& .css-6pkdlj-MuiTypography-root": {
+                  color: "#7F7F7F",
                   fontFamily: "Poppins",
                   fontSize: "12px",
                   fontWeight: 400,
                   lineHeight: "100%",
                 },
-                margin: "0px",
-                padding: "0px",
               }}
             />
           ))}
