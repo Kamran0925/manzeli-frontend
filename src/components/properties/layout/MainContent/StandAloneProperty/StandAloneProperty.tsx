@@ -1,0 +1,183 @@
+export const StandAlonePropertyDetails = [
+  {
+    fieldId: "type",
+    fieldLabel: "Type",
+    fieldType: "select",
+    fieldConfig: {
+      type: "select",
+      placeholder: "Villa",
+      options: [{ value: "Villa", label: "Villa" }],
+      value: "",
+      validation: { required: true },
+    },
+  },
+  {
+    fieldId: "compoundId",
+    fieldLabel: "Compound Id",
+    fieldType: "input",
+    fieldConfig: {
+      type: "text",
+      placeholder: "#AB-12345",
+      value: "",
+      validation: { required: true },
+    },
+  },
+  {
+    fieldId: "localAuthorityId",
+    fieldLabel: "Local Authority ID",
+    fieldType: "input",
+    fieldConfig: {
+      type: "text",
+      placeholder: "LA-98765",
+      value: "",
+      validation: { required: true },
+    },
+  },
+  {
+    fieldId: "currentOccupantName",
+    fieldLabel: "Current Occupant Name",
+    fieldType: "input",
+    fieldConfig: {
+      type: "text",
+      placeholder: "Enter Current Occupant Name",
+      value: "",
+      validation: { required: true },
+    },
+  },
+  {
+    fieldId: "occupied",
+    fieldLabel: "Occupied",
+    fieldType: "input",
+    fieldConfig: {
+      type: "text",
+      placeholder: "Yes/No",
+      value: "",
+      validation: { required: true },
+    },
+  },
+  {
+    fieldId: "tenancyContract",
+    fieldLabel: "Tenancy contract",
+    fieldType: "date",
+    fieldConfig: {
+      type: "date",
+      placeholder: "31/08/2024",
+      value: "",
+      validation: { required: true },
+    },
+  },
+  {
+    fieldId: "country",
+    fieldLabel: "Country",
+    fieldType: "select",
+    fieldConfig: {
+      type: "select",
+      placeholder: "United Arab Emirates",
+      options: [{ value: "UAE", label: "United Arab Emirates" }],
+      value: "",
+      validation: { required: true },
+    },
+  },
+  {
+    fieldId: "city",
+    fieldLabel: "City",
+    fieldType: "select",
+    fieldConfig: {
+      type: "select",
+      placeholder: "Dubai",
+      options: [{ value: "Dubai", label: "Dubai" }],
+      value: "",
+      validation: { required: true },
+    },
+  },
+  {
+    fieldId: "street",
+    fieldLabel: "Street",
+    fieldType: "input",
+    fieldConfig: {
+      type: "text",
+      placeholder: "Sheikh Zayed Road",
+      value: "",
+      validation: { required: true },
+    },
+  },
+  {
+    fieldId: "gpsCoordinates",
+    fieldLabel: "GPS Coordinates",
+    fieldType: "input",
+    fieldConfig: {
+      type: "text",
+      placeholder: "25.2048° N, 55.2708° E",
+      value: "",
+      validation: { required: true },
+    },
+  },
+  {
+    fieldId: "communityName",
+    fieldLabel: "Community Name",
+    fieldType: "input",
+    fieldConfig: {
+      type: "text",
+      placeholder: "4",
+      value: "",
+      validation: { required: true },
+    },
+  },
+  {
+    fieldId: "numberOfRooms",
+    fieldLabel: "Number of Rooms",
+    fieldType: "input",
+    fieldConfig: {
+      type: "text",
+      placeholder: "4",
+      value: "",
+      validation: { required: true },
+    },
+  },
+  {
+    fieldId: "numberOfMasterBedrooms",
+    fieldLabel: "Number of Master Bedrooms",
+    fieldType: "input",
+    fieldConfig: {
+      type: "text",
+      placeholder: "2",
+      value: "",
+      validation: { required: true },
+    },
+  },
+  {
+    fieldId: "numberOfToilets",
+    fieldLabel: "Number of Toilets",
+    fieldType: "input",
+    fieldConfig: {
+      type: "text",
+      placeholder: "4",
+      value: "",
+      validation: { required: true },
+    },
+  },
+  {
+    fieldId: "totalArea",
+    fieldLabel: "Total area (sq ft)",
+    fieldType: "input",
+    fieldConfig: {
+      type: "text",
+      placeholder: "3000 sq ft",
+      value: "",
+      validation: { required: true },
+    },
+  },
+  {
+    fieldId: "features",
+    fieldLabel: "Features",
+    fieldType: "checkbox",
+    fieldConfig: {
+      type: "checkbox",
+      options: [
+        { value: false, label: "Gym" },
+        { value: false, label: "Swimming Pool" },
+        { value: false, label: "Sea View" },
+      ],
+    },
+  },
+];
