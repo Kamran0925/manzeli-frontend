@@ -23,7 +23,7 @@ interface PropertyFormProps {
   formFields: FormField[];
 }
 
-const AutoLabelFields = ["buildingId", "contractType"];
+const AutoLabelFields = ["buildingId", "contractType", "compoundId"];
 
 const PropertyForm: React.FC<PropertyFormProps> = ({ title, formFields }) => {
   const [formData, setFormData] = useState<FormState>({});
