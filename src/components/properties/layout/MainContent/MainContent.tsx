@@ -4,6 +4,10 @@ import Notification from "../../../../assets/icons/ui/Notification";
 import Profile from "../../../../assets/icons/ui/Profile";
 import PropertyFilters from "./PropertyFilters/PropertyFilters";
 import PropertyForm from "./PropertyForm/PropertyForm";
+import { Routes, Route } from "react-router-dom";
+import { ResidentialCompoundDetails } from "./ResidentialCompoundDetails/ResidentialCompoundDetails";
+import { ApartmentBuildingDetails } from "./ApartmentBuildingDetails/ApartmentBuildingDetails";
+import { StandAlonePropertyDetails } from "./StandAloneProperty/StandAloneProperty";
 import styles from "./MainContent.module.css";
 
 const Main = () => {
@@ -25,7 +29,35 @@ const Main = () => {
 
       <PropertyFilters />
 
-      <PropertyForm />
+      <Routes>
+        <Route
+          path="residential-compound"
+          element={
+            <PropertyForm
+              title="Residential Compound Details"
+              formFields={ResidentialCompoundDetails}
+            />
+          }
+        />
+        <Route
+          path="apartment-building"
+          element={
+            <PropertyForm
+              title="Apartment Building Details"
+              formFields={ApartmentBuildingDetails}
+            />
+          }
+        />
+        <Route
+          path="stand-alone-property"
+          element={
+            <PropertyForm
+              title="Stand Alone Property Details"
+              formFields={StandAlonePropertyDetails}
+            />
+          }
+        />
+      </Routes>
     </Box>
   );
 };
