@@ -81,6 +81,7 @@ const FormInput: React.FC<FormInputProps> = props => {
               fontWeight: 500,
               lineHeight: "100%",
               boxSizing: "border-box",
+              border: "none",
             },
           }}
           sx={{
@@ -91,6 +92,9 @@ const FormInput: React.FC<FormInputProps> = props => {
             "& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input": {
               padding: "0px",
               height: "32px",
+            },
+            "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
+              border: "1px solid #E3E3E3",
             },
           }}
         />
