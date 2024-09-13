@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 import {
   Box,
   TextField,
@@ -7,7 +7,6 @@ import {
   FormControl,
   MenuItem,
   Select,
-  SelectChangeEvent,
   FormControlLabel,
   FormGroup,
 } from "@mui/material";
@@ -15,63 +14,38 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { Checkfield } from "../Checkfield/Checkfield";
+import { SelectChangeEvent } from "@mui/material/Select";
+import { PropertyFieldConfig } from "../../properties/layout/MainContent/PropertyFormFields/PropertyFieldConfig";
 import styles from "./FormInput.module.css";
 
-export interface FieldConfig {
-  type: string;
-  placeholder?: string;
-  value?: string;
-  validation?: {
-    required: boolean;
-  };
-  options?: { value: any; label: string }[];
-}
-
 interface FormInputProps {
-  fieldId: string;
-  fieldLabel: string;
-  fieldType: string;
-  fieldConfig: FieldConfig;
-  value: string;
+  field: PropertyFieldConfig;
+  value: any;
   error: string | undefined;
-  onChange: (fieldId: string, value: any, fieldConfig: FieldConfig) => void;
-  showLabel: boolean;
-  showOptional: boolean;
-  showFont: boolean;
+  onChange: (value: any, field: PropertyFieldConfig) => void;
 }
 
 const FormInput: React.FC<FormInputProps> = props => {
   let inputElement: JSX.Element | null = null;
+  const { field, value, onChange, error } = props;
 
-  const handleTextFieldChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+  const handleChange = (
+    event:
+      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | SelectChangeEvent<unknown>,
   ) => {
-    const { value } = event.target;
-    props.onChange(props.fieldId, value, props.fieldConfig);
+    onChange(event.target.value, field);
   };
 
-  const handleSelectChange = (event: SelectChangeEvent<string>) => {
-    const { value } = event.target;
-    props.onChange(props.fieldId, value, props.fieldConfig);
-  };
-
-  const handleCheckboxChange = (
-    event: ChangeEvent<HTMLInputElement>,
-    label: string,
-  ) => {
-    const { checked } = event.target;
-    props.onChange(props.fieldId, { value: checked, label }, props.fieldConfig);
-  };
-
-  switch (props.fieldConfig.type) {
+  switch (field.fieldConfig.type) {
     case "text":
     case "number":
       inputElement = (
         <TextField
-          placeholder={props.fieldConfig.placeholder}
-          value={props.value}
-          required={props.fieldConfig?.validation?.required}
-          onChange={handleTextFieldChange}
+          placeholder={field.fieldConfig.placeholder}
+          value={value}
+          required={field.fieldConfig?.validation?.required}
+          onChange={e => handleChange(e)}
           className={styles.textField}
           inputProps={{
             style: {
@@ -105,9 +79,9 @@ const FormInput: React.FC<FormInputProps> = props => {
       inputElement = (
         <FormControl fullWidth>
           <Select
-            id={props.fieldId}
-            value={props.value}
-            onChange={handleSelectChange}
+            id={field.fieldId}
+            value={value}
+            onChange={e => handleChange(e)}
             MenuProps={{
               PaperProps: {
                 sx: {
@@ -148,7 +122,7 @@ const FormInput: React.FC<FormInputProps> = props => {
               },
             }}
           >
-            {props.fieldConfig.options?.map(option => (
+            {field.fieldConfig.options?.map(option => (
               <MenuItem
                 key={option.label}
                 value={option.value}
@@ -206,16 +180,12 @@ const FormInput: React.FC<FormInputProps> = props => {
     case "checkbox":
       inputElement = (
         <FormGroup sx={{ display: "flex", flexDirection: "row", gap: "20px" }}>
-          {props.fieldConfig.options?.map((option, index) => (
+          {field.fieldConfig.options?.map((option, index) => (
             <FormControlLabel
               key={index}
               label={option.label}
               control={
-                <Checkfield
-                  defaultChecked
-                  checked={option.value}
-                  onChange={e => handleCheckboxChange(e, option.label)}
-                />
+                <Checkfield checked={value} onChange={e => handleChange(e)} />
               }
               sx={{
                 margin: 0,
@@ -243,33 +213,28 @@ const FormInput: React.FC<FormInputProps> = props => {
       className={styles.field}
       sx={{
         width: {
-          xs: props.fieldType === "checkbox" ? "100%" : "80%",
-          sm: props.fieldType === "checkbox" ? "100%" : "300px",
+          xs: field.fieldConfig.type === "checkbox" ? "100%" : "80%",
+          sm: field.fieldConfig.type === "checkbox" ? "100%" : "300px",
         },
       }}
     >
       <Box className={styles.align}>
-        <InputLabel
-          htmlFor={props.fieldId}
-          className={`${styles.label} ${
-            props.showFont ? styles.robotoFont : ""
-          }`}
-        >
-          {props.fieldLabel}
+        <InputLabel htmlFor={field.fieldId} className={`${styles.label}`}>
+          {field.fieldLabel}
         </InputLabel>
-        {props.showLabel && (
+        {field.fieldConfig?.isAutoGenerated && (
           <Typography className={styles.smallText}>(Auto-generated)</Typography>
         )}
-        {props.showOptional && (
+        {field.fieldConfig?.isOptional && (
           <Typography className={styles.smallText}>(Optional)</Typography>
         )}
       </Box>
 
       {inputElement}
 
-      {props.error && (
+      {error && (
         <Typography color="error.main" variant="body2">
-          {props.error}
+          {error}
         </Typography>
       )}
     </Box>

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import classNames from "classnames";
-import FormInput, { FieldConfig } from "../../../../shared/FormInput/FormInput";
+import FormInput from "../../../../shared/FormInput/FormInput";
+import { PropertyFieldConfig } from "../PropertyFormFields/PropertyFieldConfig";
 import styles from "./PropertyForm.module.css";
 
 interface FormState {
@@ -11,34 +12,23 @@ interface FormState {
   };
 }
 
-interface FormField {
-  fieldId: string;
-  fieldLabel: string;
-  fieldType: string;
-  fieldConfig: FieldConfig;
-}
-
 interface PropertyFormProps {
   title: string;
-  formFields: FormField[];
+  formFields: PropertyFieldConfig[];
 }
-
-const AutoLabelFields = ["buildingId", "contractType", "compoundId"];
-const OptionalFields = ["localAuthorityId", "communityName"];
-const RobotoFontFields = ["buildingName", "country", "type"];
 
 const PropertyForm: React.FC<PropertyFormProps> = ({ title, formFields }) => {
   const [formData, setFormData] = useState<FormState>({});
 
-  const validate = (fieldId: string, value: string, fieldConfig: any) => {
+  const validate = (value: string, field: PropertyFieldConfig) => {
     let errorStatements = "";
-    const { validation } = fieldConfig;
+    const { validation } = field.fieldConfig;
 
     if (validation && validation.required && !value.trim()) {
       errorStatements = "This field is required";
     }
 
-    handleChange(fieldId, value, errorStatements);
+    handleChange(field.fieldId, value, errorStatements);
   };
 
   const handleChange = (
@@ -71,21 +61,15 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ title, formFields }) => {
             <Grid
               item
               xs={12}
-              sm={field.fieldType === "checkbox" ? 12 : 6}
-              md={field.fieldType === "checkbox" ? 12 : 4}
+              sm={field.fieldConfig.type === "checkbox" ? 12 : 6}
+              md={field.fieldConfig.type === "checkbox" ? 12 : 4}
               key={key}
             >
               <FormInput
-                fieldId={field.fieldId}
-                fieldLabel={field.fieldLabel}
-                fieldType={field.fieldType}
-                fieldConfig={field.fieldConfig}
+                field={field}
                 value={formData[field.fieldId]?.value}
                 onChange={validate}
                 error={formData[field.fieldId]?.error}
-                showLabel={AutoLabelFields.includes(field.fieldId)}
-                showOptional={OptionalFields.includes(field.fieldId)}
-                showFont={RobotoFontFields.includes(field.fieldId)}
               />
             </Grid>
           ))}
