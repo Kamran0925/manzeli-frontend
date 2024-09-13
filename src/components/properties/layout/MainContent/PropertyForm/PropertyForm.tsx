@@ -25,6 +25,7 @@ interface PropertyFormProps {
 
 const AutoLabelFields = ["buildingId", "contractType", "compoundId"];
 const OptionalFields = ["localAuthorityId", "communityName"];
+const RobotoFontFields = ["buildingName", "country", "type"];
 
 const PropertyForm: React.FC<PropertyFormProps> = ({ title, formFields }) => {
   const [formData, setFormData] = useState<FormState>({});
@@ -84,6 +85,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ title, formFields }) => {
                 error={formData[field.fieldId]?.error}
                 showLabel={AutoLabelFields.includes(field.fieldId)}
                 showOptional={OptionalFields.includes(field.fieldId)}
+                showFont={RobotoFontFields.includes(field.fieldId)}
               />
             </Grid>
           ))}

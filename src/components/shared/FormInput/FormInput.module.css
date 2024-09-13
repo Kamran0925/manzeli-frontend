@@ -19,6 +19,10 @@
   margin-bottom: 8px;
 }
 
+.robotoFont {
+  font-family: "Roboto", sans-serif !important;
+}
+
 .field .align .smallText {
   color: #7f7f7f;
   font-family: "Poppins";

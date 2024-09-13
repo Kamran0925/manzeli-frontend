@@ -37,6 +37,7 @@ interface FormInputProps {
   onChange: (fieldId: string, value: any, fieldConfig: FieldConfig) => void;
   showLabel: boolean;
   showOptional: boolean;
+  showFont: boolean;
 }
 
 const FormInput: React.FC<FormInputProps> = props => {
@@ -248,7 +249,12 @@ const FormInput: React.FC<FormInputProps> = props => {
       }}
     >
       <Box className={styles.align}>
-        <InputLabel htmlFor={props.fieldId} className={styles.label}>
+        <InputLabel
+          htmlFor={props.fieldId}
+          className={`${styles.label} ${
+            props.showFont ? styles.robotoFont : ""
+          }`}
+        >
           {props.fieldLabel}
         </InputLabel>
         {props.showLabel && (
