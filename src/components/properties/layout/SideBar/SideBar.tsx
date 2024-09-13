@@ -6,12 +6,10 @@ import {
   ListItemIcon,
   ListItemText,
   Box,
-  Typography,
 } from "@mui/material";
 import classNames from "classnames";
 import { useTheme } from "@mui/material/styles";
 import { NAV_LINKS } from "./NavLinks";
-import Ellipse from "../../../../assets/icons/ui/Ellipse";
 
 import styles from "./SideBar.module.css";
 
@@ -46,27 +44,6 @@ const SideBar = () => {
                 className={styles.navItemText}
                 disableTypography
               />
-              {link.label === "Messages" && (
-                <Box sx={{ position: "relative", display: "inline-block" }}>
-                  <Ellipse width={20} height={20} fill="#FF5B19" />
-                  <Typography
-                    sx={{
-                      position: "absolute",
-                      left: "0px",
-                      top: "4px",
-                      color: "#FFF",
-                      fontFamily: "Inter",
-                      fontSize: "12px",
-                      fontWeight: 600,
-                      lineHeight: "12px",
-                      textAlign: "center",
-                      width: "100%",
-                    }}
-                  >
-                    3
-                  </Typography>
-                </Box>
-              )}
             </ListItemButton>
           </ListItem>
         ))}
