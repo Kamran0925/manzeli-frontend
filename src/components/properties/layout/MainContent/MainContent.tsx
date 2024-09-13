@@ -7,7 +7,7 @@ import PropertyForm from "./PropertyForm/PropertyForm";
 import { Routes, Route } from "react-router-dom";
 import { ResidentialCompoundDetails } from "./PropertyFormFields/ResidentialCompoundDetails/ResidentialCompoundDetails";
 import { ApartmentBuildingDetails } from "./PropertyFormFields/ApartmentBuildingDetails/ApartmentBuildingDetails";
-import { StandAlonePropertyDetails } from "./PropertyFormFields/StandAloneProperty/StandAloneProperty";
+import { StandAlonePropertyDetails } from "./PropertyFormFields/StandAlonePropertyDetails/StandAlonePropertyDetails";
 import styles from "./MainContent.module.css";
 
 const Main = () => {
