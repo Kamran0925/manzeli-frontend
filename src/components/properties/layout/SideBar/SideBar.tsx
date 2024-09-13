@@ -20,7 +20,11 @@ const SideBar = () => {
     <Box className={styles.sideNav}>
       <List className={styles.navList}>
         {NAV_LINKS.map(link => (
-          <ListItem key={link.route} disablePadding>
+          <ListItem
+            key={link.route}
+            disablePadding
+            className={styles.navListItem}
+          >
             <ListItemButton
               className={classNames(styles.navBtn, {
                 [styles.activeBtn]: window.location.pathname === link.route,
