@@ -15,6 +15,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  border-radius: 20px;
 }
 
 .sideNav .navList .activeBtn {
@@ -31,6 +32,10 @@
   border-radius: 20px;
   background: linear-gradient(90deg, #e1e1e4 -34.58%, #fff 164.97%);
   color: #001283;
+}
+
+.navListItem {
+  border-radius: 20px;
 }
 
 .sideNav .navList .navBtn .navItemText {
