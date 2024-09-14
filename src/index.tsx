@@ -5,7 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme/theme";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Layout from "./components/properties/layout/Layout";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -14,7 +15,10 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <Router>
-        <App />
+        <Routes>
+          <Route path="dashboard" element={<Layout />} />
+          <Route path="*" element={<App />} />
+        </Routes>
       </Router>
     </ThemeProvider>
   </React.StrictMode>,

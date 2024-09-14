@@ -3,6 +3,14 @@ import { createTheme, Theme } from "@mui/material/styles";
 const theme: Theme = createTheme({
   typography: {
     fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+
+    //Large Heading
+    h1: {
+      fontWeight: 700,
+      fontSize: "48px",
+      lineHeight: "110%",
+      color: "#000",
+    },
     // Main heading
     h3: {
       fontWeight: 700,

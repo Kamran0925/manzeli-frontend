@@ -1,0 +1,50 @@
+.sideNav {
+  height: 100vh;
+  width: 256px;
+  max-width: 256px;
+  background-color: #fafafa;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.sideNav .navList {
+  margin-top: 125px;
+  padding: 0px 10px 0px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sideNav .navList .activeBtn {
+  border-radius: 20px;
+  background: linear-gradient(90deg, #e1e1e4 -34.58%, #fff 164.97%);
+  color: #001283;
+}
+
+.sideNav .navList .navBtn {
+  padding: 12px;
+}
+
+.sideNav .navList .navBtn:hover {
+  border-radius: 20px;
+  background: linear-gradient(90deg, #e1e1e4 -34.58%, #fff 164.97%);
+  color: #001283;
+}
+
+.sideNav .navList .navBtn .navItemText {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 600px) {
+  .sideNav {
+    display: none;
+  }
+}
