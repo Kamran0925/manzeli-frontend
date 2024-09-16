@@ -16,7 +16,7 @@ root.render(
     <ThemeProvider theme={theme}>
       <Router>
         <Routes>
-          <Route path="dashboard" element={<Layout />} />
+          <Route path="property/*" element={<Layout />} />
           <Route path="*" element={<App />} />
         </Routes>
       </Router>

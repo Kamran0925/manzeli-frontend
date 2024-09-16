@@ -15,6 +15,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  border-radius: 20px;
 }
 
 .sideNav .navList .activeBtn {
@@ -33,17 +34,28 @@
   color: #001283;
 }
 
+.navListItem {
+  border-radius: 20px;
+}
+
 .sideNav .navList .navBtn .navItemText {
   font-family: "Poppins", sans-serif;
+  color: #7f7f7f;
   font-size: 16px;
   font-style: normal;
-  font-weight: 500;
-  line-height: 1;
+  font-weight: 400;
+  line-height: 100%;
   margin: 0;
   padding: 0;
 }
 
 @media (max-width: 600px) {
+  .sideNav {
+    display: none;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
   .sideNav {
     display: none;
   }
