@@ -1,54 +1,86 @@
 .overlay {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .dialog {
-  margin: 60px auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 649px;
-  width: 100%;
+  margin: 60px auto 0px;
+  height: 85vh;
   max-width: 1100px;
-  border-radius: 15px;
-  padding: "37px 46px";
 }
 
 .scrollableContent {
-  max-width: "965px";
-  height: 2451px;
+  max-width: 965px;
+  max-height: 408px;
   overflow-y: scroll;
-}
-
-.scrollableContent {
   scrollbar-width: 11px;
   scrollbar-color: #001283 #f8f8f8;
 }
 
-.box5 {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-}
-
 .dialogActions {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 16px;
+  padding: 8px 16px !important;
 }
 
 .checkboxTextContainer {
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex: 1;
+  width: 100%;
+  gap: 4px;
 }
 
 .buttonsContainer {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@media (max-width: 600px) {
+  .dialog {
+    margin: 20px 0px;
+  }
+
+  .buttonsContainer {
+    gap: 20px;
+  }
+
+  .dialogActions {
+    flex-direction: column;
+    padding: 24px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .dialog {
+    margin: 20px 0px;
+    height: 90vh;
+  }
+
+  .dialogActions {
+    flex-direction: column;
+    padding: 24px;
+  }
+
+  .buttonsContainer {
+    justify-content: flex-end;
+    width: 100%;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  .dialog {
+    margin: 40px 0px;
+  }
+
+  .dialogActions {
+    flex-direction: column;
+    padding: 24px;
+  }
+
+  .buttonsContainer {
+    justify-content: flex-end;
+    width: 100%;
+  }
 }

@@ -25,12 +25,12 @@ export interface FormState {
 
 export const RegistrationFields: FormState = {
   username: {
-    title: "Your fullname*",
+    title: "Full name*",
     type: "text",
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 0,
+    step: 2,
   },
   email: {
     title: "Email address*",
@@ -38,7 +38,7 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 0,
+    step: 2,
   },
   password: {
     title: "Create password*",
@@ -46,25 +46,25 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 0,
+    step: 2,
   },
   confirmPassword: {
     title: "Confirm new password",
-    type: "confirmPassword",
+    type: "password",
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 0,
+    step: 2,
   },
   isTermsAccepted: false,
   step: 0,
   phone: {
     title: "Phone number",
-    type: "text",
+    type: "phone",
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 1,
+    step: 3,
   },
   address: {
     title: "Your Address",
@@ -72,7 +72,7 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 1,
+    step: 3,
   },
   street: {
     title: "",
@@ -80,7 +80,7 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 1,
+    step: 3,
   },
   city: {
     title: "",
@@ -88,7 +88,7 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 1,
+    step: 3,
   },
   residence: {
     title: "Country of residence",
@@ -96,7 +96,7 @@ export const RegistrationFields: FormState = {
     value: "AE",
     errorMessage: "",
     disabled: false,
-    step: 1,
+    step: 3,
   },
   identity: {
     title: "Tax Identity Number",
@@ -104,7 +104,7 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 1,
+    step: 3,
   },
   profilePicture: "",
 };

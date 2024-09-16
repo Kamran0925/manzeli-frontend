@@ -46,27 +46,25 @@ const ContactDetails = () => {
   };
 
   const handleSubmit = () => {
+    let isValidForm = true;
     Object.entries(formState).forEach(([key, field]) => {
       if (
-        field.step == formState.step &&
+        field.step === formState.step &&
         typeof field === "object" &&
         "type" in field
       ) {
-        validateField(field.type, key, field.value);
+        const isValidField = validateField(field.type, key, field.value);
+        if (!isValidField) {
+          isValidForm = false;
+        }
       }
     });
 
-    const errors = collectContactDetailErrors(formState);
-    setCollectedErrors(errors);
-    setIsButtonDisabled(errors.length > 0);
-
-    if (errors.length === 0) {
+    if (isValidForm) {
       nextStep();
+    } else {
+      setIsButtonDisabled(true);
     }
-  };
-
-  const handleBack = () => {
-    previousStep();
   };
 
   useEffect(() => {
@@ -84,14 +82,18 @@ const ContactDetails = () => {
           position="static"
           activeStep={1}
           backButton={
-            <Button size="small" onClick={handleBack}>
+            <Button size="small" onClick={previousStep}>
               <LeftArrow />
               Back
             </Button>
           }
           nextButton={null}
         />
-        <Typography variant="body1" sx={{ textAlign: "right" }} color="#8692A6">
+        <Typography
+          variant="body1"
+          sx={{ textAlign: "right" }}
+          color="secondary"
+        >
           Personal Info.
         </Typography>
 
@@ -117,8 +119,13 @@ const ContactDetails = () => {
             variant="body1"
             sx={{
               marginRight: "auto",
+              fontSize: {
+                xs: "14px",
+                sm: "18px",
+              },
               width: {
-                xs: "80%",
+                xs: "100%",
+                sm: "80%",
               },
             }}
           >
@@ -131,7 +138,7 @@ const ContactDetails = () => {
                 Phone number
               </Typography>
               <PhoneField
-                type="text"
+                type="phone"
                 name="phone"
                 value={formState.phone.value}
                 placeholder="Enter phone"
@@ -231,6 +238,7 @@ const ContactDetails = () => {
             />
 
             <Typography
+              color="secondary"
               sx={{
                 fontFamily: "Poppins",
                 fontStyle: "normal",
@@ -242,7 +250,6 @@ const ContactDetails = () => {
                 width: "100%",
                 margin: "10px auto",
                 textAlign: "center",
-                color: "#8692A6",
                 justifyContent: "center",
               }}
             >

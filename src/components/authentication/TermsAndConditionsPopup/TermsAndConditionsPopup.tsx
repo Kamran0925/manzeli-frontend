@@ -10,7 +10,6 @@ import {
   Checkbox,
 } from "@mui/material";
 import { useFormContext } from "../../../context/FormContext";
-
 import styles from "./TermsAndConditionsPopup.module.css";
 
 const TermsAndConditionsPopup: React.FC<{
@@ -45,13 +44,13 @@ const TermsAndConditionsPopup: React.FC<{
         <DialogTitle>
           <Typography
             variant="h6"
-            mt={1}
             sx={{
               fontFamily: "Roboto",
-              fontStyle: "normal",
               fontWeight: 700,
-              fontSize: "24px",
-              lineHeight: "150%",
+              fontSize: {
+                xs: "16px",
+                sm: "24px",
+              },
               color: "#001283",
             }}
           >
@@ -60,19 +59,26 @@ const TermsAndConditionsPopup: React.FC<{
 
           <Typography
             variant="body1"
-            mt={1}
             sx={{
               fontFamily: "Roboto Flex",
               fontStyle: "normal",
               fontWeight: 700,
-              fontSize: "18px",
+              fontSize: {
+                xs: "13px",
+                sm: "18px",
+              },
               lineHeight: "150%",
               color: "#132F41",
+              marginTop: {
+                xs: "12px",
+                sm: "16px",
+              },
             }}
           >
             Your Agreement
           </Typography>
         </DialogTitle>
+
         <DialogContent className={styles.scrollableContent}>
           <Typography
             component="pre"
@@ -81,7 +87,10 @@ const TermsAndConditionsPopup: React.FC<{
               fontFamily: "Roboto Flex",
               fontStyle: "normal",
               fontWeight: 500,
-              fontSize: "17px",
+              fontSize: {
+                xs: "10px",
+                sm: "17px",
+              },
               lineHeight: "150%",
               textAlign: "justify",
               color: "#6B6B6B",
@@ -133,28 +142,36 @@ const TermsAndConditionsPopup: React.FC<{
             DOES NOT WARRANT THE ACCURACY OR COMPLETENESS OF THE MATERIALS OR
             THE RELIABILITY OF ANY ADVICE, OPINION, STATEMENT OR OTHER
             INFORMATION DISPLAYED OR DISTRIBUTED THROUGH THE SITE. YOU EXPRESSLY
-            UNDERSTAND AND AGREE THAT: (i) YOUR USE OF THE SITE, INCLUDING ANY
-            RELIANCE ON ANY SUCH OPINION, ADVICE, STATEMENT, MEMORANDUM, OR
-            INFORMATION CONTAINED HEREIN, SHALL BE AT YOUR SOLE RISK; (ii) THE
-            SITE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS; (iii)
-            EXCEPT AS EXPRESSLY PROVIDED HEREIN WE DISCLAIM ALL WARRANTIES OF
-            ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO
-            IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-            PURPOSE, WORKMANLIKE EFFORT, TITLE AND NON-INFRINGEMENT; (iv) WE
-            MAKE NO WARRANTY WITH RESPECT TO THE RESULTS THAT MAY BE OBTAINED
-            FROM THIS SITE, THE PRODUCTS OR SERVICES ADVERTISED OR OFFERED OR
-            MERCHANTS INVOLVED; (v) ANY MATERIAL DOWNLOADED OR OTHERWISE
-            OBTAINED THROUGH THE USE OF THE SITE IS DONE AT YOUR OWN DISCRETION
-            AND RISK; and (vi) YOU WILL BE SOLELY RESPONSIBLE FOR ANY DAMAGE TO
-            YOUR COMPUTER SYSTEM OR FOR ANY LOSS OF DATA THAT RESULTS FROM THE
-            DOWNLOAD OF ANY SUCH MATERIAL. B. YOU UNDERSTAND AND AGREE THAT
-            UNDER NO CIRCUMSTANCES, INCLUDING, BUT NOT LIMITED TO, NEGLIGENCE,
-            SHALL WE BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-            PUNITIVE OR CONSEQUENTIAL DAMAGES THAT RESULT FROM THE USE OF, OR
-            THE INABILITY TO USE, ANY OF OUR SITES OR MATERIALS OR FUNCTIONS ON
-            ANY SUCH SITE, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF
-            SUCH DAMAGES. THE FOREGOING LIMITATIONS SHALL APPLY NOTWITHSTANDING
-            ANY FAILURE OF ESSENTIAL PURPOSE OF ANY LIMITED REMEDY. <br />
+            UNDERSTAND AND AGREE THAT:
+            <br />
+            (i) YOUR USE OF THE SITE, INCLUDING ANY RELIANCE ON ANY SUCH
+            OPINION, ADVICE, STATEMENT, MEMORANDUM, OR INFORMATION CONTAINED
+            HEREIN, SHALL BE AT YOUR SOLE RISK;
+            <br />
+            (ii) THE SITE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS;
+            <br />
+            (iii) EXCEPT AS EXPRESSLY PROVIDED HEREIN WE DISCLAIM ALL WARRANTIES
+            OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED
+            TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+            PURPOSE, WORKMANLIKE EFFORT, TITLE AND NON-INFRINGEMENT;
+            <br />
+            (iv) WE MAKE NO WARRANTY WITH RESPECT TO THE RESULTS THAT MAY BE
+            OBTAINED FROM THIS SITE, THE PRODUCTS OR SERVICES ADVERTISED OR
+            OFFERED OR MERCHANTS INVOLVED; <br />
+            (v) ANY MATERIAL DOWNLOADED OR OTHERWISE OBTAINED THROUGH THE USE OF
+            THE SITE IS DONE AT YOUR OWN DISCRETION AND RISK; and <br />
+            (vi) YOU WILL BE SOLELY RESPONSIBLE FOR ANY DAMAGE TO YOUR COMPUTER
+            SYSTEM OR FOR ANY LOSS OF DATA THAT RESULTS FROM THE DOWNLOAD OF ANY
+            SUCH MATERIAL. <br />
+            <br />
+            B. YOU UNDERSTAND AND AGREE THAT UNDER NO CIRCUMSTANCES, INCLUDING,
+            BUT NOT LIMITED TO, NEGLIGENCE, SHALL WE BE LIABLE FOR ANY DIRECT,
+            INDIRECT, INCIDENTAL, SPECIAL, PUNITIVE OR CONSEQUENTIAL DAMAGES
+            THAT RESULT FROM THE USE OF, OR THE INABILITY TO USE, ANY OF OUR
+            SITES OR MATERIALS OR FUNCTIONS ON ANY SUCH SITE, EVEN IF WE HAVE
+            BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THE FOREGOING
+            LIMITATIONS SHALL APPLY NOTWITHSTANDING ANY FAILURE OF ESSENTIAL
+            PURPOSE OF ANY LIMITED REMEDY. <br />
             6. EXCLUSIONS AND LIMITATIONS <br />
             SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF CERTAIN WARRANTIES
             OR THE LIMITATION OR EXCLUSION OF LIABILITY FOR INCIDENTAL OR
@@ -170,20 +187,24 @@ const TermsAndConditionsPopup: React.FC<{
             of the foregoing, you acknowledge and agree that all content
             available through and used to operate the Site and its services is
             protected by copyright, trademark, patent, or other proprietary
-            rights. You agree not to: (a) modify, alter, or deface any of the
-            trademarks, service marks, trade dress (collectively "Trademarks")
-            or other intellectual property made available by us in connection
-            with the Site; (b) hold yourself out as in any way sponsored by,
-            affiliated with, or endorsed by us, or any of our affiliates or
-            service providers; (c) use any of the Trademarks or other content
-            accessible through the Site for any purpose other than the purpose
-            for which we have made it available to you; (d) defame or disparage
-            us, our Trademarks, or any aspect of the Site; and (e) adapt,
-            translate, modify, decompile, disassemble, or reverse engineer the
-            Site or any software or programs used in connection with it or its
-            products and services. The framing, mirroring, scraping or data
-            mining of the Site or any of its content in any form and by any
-            method is expressly prohibited. <br />
+            rights. You agree not to: <br />
+            (a) modify, alter, or deface any of the trademarks, service marks,
+            trade dress (collectively "Trademarks") or other intellectual
+            property made available by us in connection with the Site; <br />
+            (b) hold yourself out as in any way sponsored by, affiliated with,
+            or endorsed by us, or any of our affiliates or service providers;
+            <br />
+            (c) use any of the Trademarks or other content accessible through
+            the Site for any purpose other than the purpose for which we have
+            made it available to you;
+            <br />
+            (d) defame or disparage us, our Trademarks, or any aspect of the
+            Site; and <br />
+            (e) adapt, translate, modify, decompile, disassemble, or reverse
+            engineer the Site or any software or programs used in connection
+            with it or its products and services. The framing, mirroring,
+            scraping or data mining of the Site or any of its content in any
+            form and by any method is expressly prohibited. <br />
             8. INDEMNITY <br />
             By using the Site web sites you agree to indemnify us and affiliated
             entities (collectively "Indemnities") and hold them harmless from
@@ -228,16 +249,17 @@ const TermsAndConditionsPopup: React.FC<{
             any other agreement, proposals and communications, written or oral,
             between our representatives and you with respect to the subject
             matter hereof, including any terms and conditions on any of
-            customer's documents or purchase orders. B. No Joint Venture, No
-            Derogation of Rights. You agree that no joint venture, partnership,
-            employment, or agency relationship exists between you and us as a
-            result of these Terms and Conditions or your use of the Site. Our
-            performance of these Terms and Conditions is subject to existing
-            laws and legal process, and nothing contained herein is in
-            derogation of our right to comply with governmental, court and law
-            enforcement requests or requirements relating to your use of the
-            Site or information provided to or gathered by us with respect to
-            such use.
+            customer's documents or purchase orders.
+            <br />
+            B. No Joint Venture, No Derogation of Rights. You agree that no
+            joint venture, partnership, employment, or agency relationship
+            exists between you and us as a result of these Terms and Conditions
+            or your use of the Site. Our performance of these Terms and
+            Conditions is subject to existing laws and legal process, and
+            nothing contained herein is in derogation of our right to comply
+            with governmental, court and law enforcement requests or
+            requirements relating to your use of the Site or information
+            provided to or gathered by us with respect to such use.
           </Typography>
         </DialogContent>
 
@@ -253,9 +275,8 @@ const TermsAndConditionsPopup: React.FC<{
                 fontFamily: "Roboto Flex",
                 fontStyle: "normal",
                 fontWeight: 500,
-                fontSize: "14px",
+                fontSize: { xs: "9px", sm: "14px" },
                 lineHeight: "150%",
-                textAlign: "justify",
                 color: "#000000",
               }}
             >
@@ -265,7 +286,12 @@ const TermsAndConditionsPopup: React.FC<{
           </Box>
 
           <Box className={styles.buttonsContainer}>
-            <Button onClick={handleCancel} color="primary" variant="text">
+            <Button
+              onClick={handleCancel}
+              color="primary"
+              variant="text"
+              sx={{ textTransform: "none" }}
+            >
               Cancel
             </Button>
             <Button
@@ -273,7 +299,11 @@ const TermsAndConditionsPopup: React.FC<{
               color="primary"
               variant="contained"
               disabled={!formState.isTermsAccepted}
-              sx={{ width: "167px", ml: 1 }}
+              sx={{
+                width: { xs: "100%", sm: "167px" },
+                ml: { xs: 0, sm: 1 },
+                textTransform: "none",
+              }}
             >
               Accept
             </Button>

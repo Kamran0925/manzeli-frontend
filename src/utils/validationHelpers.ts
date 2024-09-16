@@ -3,16 +3,24 @@ import { FormState } from "../components/shared/RegistrationFields/RegistrationF
 export const validate = (
   type: string,
   value: string,
-  passwordValue?: string,
 ): { errorMessage: string } => {
   switch (type) {
     case "username":
+    case "address":
+    case "street":
       if (value.trim().length < 5) {
         return {
           errorMessage: "Minimum of 5 characters",
         };
       }
+      return { errorMessage: "" };
 
+    case "city":
+      if (value.trim().length < 3) {
+        return {
+          errorMessage: "Minimum of 3 characters",
+        };
+      }
       return { errorMessage: "" };
 
     case "text":
@@ -36,18 +44,7 @@ export const validate = (
     case "password":
       if (value.trim().length < 8) {
         return {
-          errorMessage: "Password cannot be less than 8 characters",
-        };
-      }
-      if (value.trim() !== passwordValue && passwordValue !== undefined) {
-        return { errorMessage: "Passwords do not match" };
-      }
-      return { errorMessage: "" };
-
-    case "confirmPassword":
-      if (value.trim().length < 8) {
-        return {
-          errorMessage: "Confirm password cannot be less than 8 characters",
+          errorMessage: "Minimum of 8 characters",
         };
       }
       return { errorMessage: "" };
@@ -64,6 +61,14 @@ export const validate = (
       if (!value) {
         return {
           errorMessage: "You must select at least one option",
+        };
+      }
+      return { errorMessage: "" };
+
+    case "phone":
+      if (value.trim().length < 12) {
+        return {
+          errorMessage: "Minimum of 12 digits",
         };
       }
       return { errorMessage: "" };
@@ -122,8 +127,15 @@ export const collectContactDetailErrors = (formState: FormState): string[] => {
   ].filter(error => error.length > 0);
 };
 
+const formatFieldName = (field: string): string => {
+  const formatted = field
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/_/g, " ")
+    .toLowerCase();
+
+  return formatted.charAt(0).toUpperCase() + formatted.slice(1);
+};
+
 export const displayError = (field: string, error: string): string => {
-  return `${
-    field.charAt(0).toUpperCase() + field.slice(1)
-  } should have ${error.toLowerCase()}`;
+  return `${formatFieldName(field)} should have ${error.toLowerCase()}`;
 };

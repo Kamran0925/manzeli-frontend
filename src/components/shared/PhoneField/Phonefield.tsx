@@ -1,8 +1,6 @@
 import React from "react";
-
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-
 import { Box } from "@mui/material";
 
 interface PhoneFieldProps {
@@ -33,7 +31,7 @@ const PhoneField: React.FC<PhoneFieldProps> = ({
     <Box
       sx={{
         height: "54px",
-        maxWidth: { xs: "240px", sm: "335px", md: "514px" },
+        maxWidth: { xs: "240px", sm: "514px", md: "514px" },
       }}
     >
       <PhoneInput
@@ -57,7 +55,7 @@ const PhoneField: React.FC<PhoneFieldProps> = ({
           height: "20px",
           width: "240px",
           border: "none",
-          color: "#494949",
+          color: errorMessage ? "#E80000" : "#494949",
           fontFamily: "Poppins",
           fontSize: "14px",
           fontStyle: "normal",

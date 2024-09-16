@@ -3,6 +3,14 @@ import { createTheme, Theme } from "@mui/material/styles";
 const theme: Theme = createTheme({
   typography: {
     fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
+
+    //Large Heading
+    h1: {
+      fontWeight: 700,
+      fontSize: "48px",
+      lineHeight: "110%",
+      color: "#000",
+    },
     // Main heading
     h3: {
       fontWeight: 700,
@@ -47,7 +55,12 @@ const theme: Theme = createTheme({
     primary: {
       main: "#001283",
     },
+    secondary: {
+      main: "#8692A6",
+      dark: "#848199",
+    },
     error: {
+      light: "#FBE9EA",
       main: "#E80000",
     },
   },

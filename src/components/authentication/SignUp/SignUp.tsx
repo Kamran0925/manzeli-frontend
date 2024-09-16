@@ -19,8 +19,7 @@ import TermsAndConditionsPopup from "../TermsAndConditionsPopup/TermsAndConditio
 import styles from "./SignUp.module.css";
 
 const SignUp = () => {
-  const { formState, validateField, validatePassword, previousStep, nextStep } =
-    useFormContext();
+  const { formState, validateField, previousStep, nextStep } = useFormContext();
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [collectedErrors, setCollectedErrors] = useState<string[]>([]);
@@ -39,63 +38,44 @@ const SignUp = () => {
     validateField("checkbox", "isTermsAccepted", true);
   };
 
-  const handleConfirmPasswordChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    name: string,
-    type: string,
-  ) => {
-    validatePassword(type, name, event.target.value);
-  };
-
   const handleSubmit = () => {
+    let isValidForm = true;
     Object.entries(formState).forEach(([key, field]) => {
       if (
         field.step === formState.step &&
         typeof field === "object" &&
         "type" in field
       ) {
-        validateField(field.type, key, field.value);
+        const isValidField = validateField(field.type, key, field.value);
+        if (!isValidField) {
+          isValidForm = false;
+        }
       }
     });
 
-    const errors = collectErrors(formState);
-    setIsButtonDisabled(errors.length > 0);
-    if (errors.length === 0) {
+    if (isValidForm) {
       nextStep();
+    } else {
+      setIsButtonDisabled(true);
     }
   };
 
   useEffect(() => {
     const errors = collectErrors(formState);
+    if (
+      formState.password.value !== "" &&
+      formState.confirmPassword.value !== "" &&
+      formState.password.value !== formState.confirmPassword.value
+    ) {
+      errors.push("Passwords do not match!");
+    }
     setCollectedErrors(errors);
     setIsButtonDisabled(errors.length > 0);
-  }, [formState]);
+  }, [formState, formState.confirmPassword.value, formState.password.value]);
 
   const handleBack = () => {
     previousStep();
   };
-
-  useEffect(() => {
-    if (
-      formState.password.value !== "" &&
-      formState.confirmPassword.value !== ""
-    ) {
-      validatePassword(
-        "password",
-        "confirmPassword",
-        formState.confirmPassword.value,
-      );
-    }
-  }, [formState.password.value]);
-
-  useEffect(() => {
-    if (
-      formState.password.value !== "" &&
-      formState.confirmPassword.value !== ""
-    ) {
-      validateField("password", "password", formState.password.value);
-    }
-  }, [formState.confirmPassword.value]);
 
   return (
     <>
@@ -113,7 +93,11 @@ const SignUp = () => {
           }
           nextButton={null}
         />
-        <Typography variant="body1" sx={{ textAlign: "right" }} color="#8692A6">
+        <Typography
+          variant="body1"
+          sx={{ textAlign: "right" }}
+          color="secondary"
+        >
           Personal Info.
         </Typography>
 
@@ -140,6 +124,10 @@ const SignUp = () => {
             variant="body1"
             sx={{
               marginRight: "auto",
+              fontSize: {
+                xs: "14px",
+                sm: "18px",
+              },
               width: {
                 xs: "100%",
                 sm: "80%",
@@ -199,7 +187,7 @@ const SignUp = () => {
                 placeholder="Confirm new password"
                 value={formState.confirmPassword.value}
                 errorMessage={formState.confirmPassword.errorMessage}
-                handleChange={handleConfirmPasswordChange}
+                handleChange={handleChange}
               />
             </Box>
 

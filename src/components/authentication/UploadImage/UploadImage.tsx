@@ -23,7 +23,8 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const UploadImage = () => {
-  const { formState, setProfilePicture, nextStep } = useFormContext();
+  const { formState, setProfilePicture, nextStep, previousStep } =
+    useFormContext();
   const [fileName, setFileName] = useState<string | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
 
@@ -84,14 +85,14 @@ const UploadImage = () => {
           position="static"
           activeStep={2}
           backButton={
-            <Button size="small" disabled={true}>
+            <Button size="small" onClick={previousStep}>
               <LeftArrow />
               Back
             </Button>
           }
           nextButton={null}
         />
-        <Typography variant="h4" sx={{ textAlign: "right" }} color="#8692A6">
+        <Typography variant="h4" sx={{ textAlign: "right" }} color="secondary">
           Personal Info.
         </Typography>
 
@@ -117,6 +118,10 @@ const UploadImage = () => {
             variant="body1"
             sx={{
               marginRight: "auto",
+              fontSize: {
+                xs: "14px",
+                sm: "18px",
+              },
               width: {
                 xs: "100%",
                 sm: "80%",
@@ -180,6 +185,7 @@ const UploadImage = () => {
                     padding: "0px 19.276px",
                     height: "35.34px",
                     maxWidth: "134.531px",
+                    textTransform: "none",
                     fontSize: {
                       xs: "10px",
                       lg: "11.079px",
@@ -206,6 +212,7 @@ const UploadImage = () => {
                     height: "35.34px",
                     padding: "0px 19.276px",
                     fontSize: "12.079px",
+                    textTransform: "none",
                   }}
                 >
                   Remove
@@ -226,18 +233,15 @@ const UploadImage = () => {
             />
 
             <Typography
+              color="secondary"
               sx={{
-                fontFamily: "Poppins",
-                fontStyle: "normal",
                 fontWeight: 400,
                 fontSize: "12px",
                 lineHeight: "18px",
                 display: "flex",
                 alignItems: "center",
                 width: "100%",
-                margin: "0 auto",
-                textAlign: "center",
-                color: "#8692A6",
+                margin: "0 auto 20px",
                 justifyContent: "center",
               }}
             >
