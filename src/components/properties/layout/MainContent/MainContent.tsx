@@ -1,16 +1,42 @@
-import React from "react";
-import { Box, Typography } from "@mui/material";
-import Notification from "../../../../assets/icons/ui/Notification";
-import Profile from "../../../../assets/icons/ui/Profile";
-import PropertyFilters from "./PropertyFilters/PropertyFilters";
-import PropertyForm from "./PropertyForm/PropertyForm";
+import { useState } from "react";
+import {
+  Box,
+  Button,
+  InputAdornment,
+  Select,
+  SelectChangeEvent,
+  TextField,
+  Typography,
+  MenuItem,
+} from "@mui/material";
 import { Routes, Route } from "react-router-dom";
+import PropertyForm from "./PropertyForm/PropertyForm";
+import ProfileActions from "./ProfileActions/ProfileActions";
 import { ResidentialCompoundDetails } from "./PropertyFormFields/ResidentialCompoundDetails/ResidentialCompoundDetails";
 import { ApartmentBuildingDetails } from "./PropertyFormFields/ApartmentBuildingDetails/ApartmentBuildingDetails";
 import { StandAlonePropertyDetails } from "./PropertyFormFields/StandAloneProperty/StandAloneProperty";
+import PropertyListings from "./PropertyListings/PropertyListings";
+import { properties } from "./PropertyListings/properties";
+import { Search } from "../../../../assets/icons/ui/Search";
+import Menu from "../../../../assets/icons/ui/Menu";
+import Plus from "../../../../assets/icons/ui/Plus";
+import GridItem from "../../../../assets/icons/ui/GridItem";
+import Profile from "../../../../assets/icons/ui/Profile";
+import Notification from "../../../../assets/icons/ui/Notification";
 import styles from "./MainContent.module.css";
 
 const Main = () => {
+  const handleChange = (event: SelectChangeEvent<string | number>) => {
+    console.log(event.target.value);
+  };
+
+  const propertyTypeOptions = [
+    { value: "Residential", label: "Residential" },
+    { value: "Commercial", label: "Commercial" },
+  ];
+
+  const [profileActions, setProfileActions] = useState(false);
+
   return (
     <Box className={styles.mainContent}>
       <Box className={styles.mainBar}>
@@ -19,15 +45,123 @@ const Main = () => {
         </Typography>
         <Box className={styles.mainBarIcons}>
           <Notification />
-          <Profile />
+          <Profile
+            background="#001283"
+            fill="#FFFFFF"
+            onClick={() => setProfileActions(true)}
+          />
+          {profileActions && (
+            <ProfileActions handleClose={() => setProfileActions(false)} />
+          )}
         </Box>
       </Box>
 
       <Box className={styles.subTitleBar}>
-        <Typography className={styles.subTitle}>Add Property</Typography>
+        <Typography className={styles.subTitle}>Property List</Typography>
+
+        <Box className={styles.subTitleActions}>
+          <Button className={styles.addPropertyButton} variant="contained">
+            <Plus /> Add New Property
+          </Button>
+
+          <TextField
+            className={styles.searchBar}
+            placeholder="Search here..."
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search />
+                </InputAdornment>
+              ),
+            }}
+            sx={{
+              "& .css-maty06-MuiInputBase-root-MuiOutlinedInput-root": {
+                paddingLeft: "22px",
+              },
+              "& .MuiOutlinedInput-notchedOutline ": {
+                border: "none",
+              },
+              "& .css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input": {
+                padding: "12px",
+              },
+            }}
+          />
+        </Box>
       </Box>
 
-      <PropertyFilters />
+      <Box className={styles.filterBar}>
+        <Typography className={styles.pageResults}>
+          Showing 1-9 of 13 Results
+        </Typography>
+
+        <Box className={styles.sortContainer}>
+          <Box className={styles.sortingBar}>
+            <Typography className={styles.sort}>Sort by:</Typography>
+            <Select
+              defaultValue="Default"
+              className={styles.sortSelect}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    top: "240px !important",
+                    width: "196px !important",
+                    borderRadius: "10px",
+                    backgroundColor: "#FFF",
+                    boxShadow: "0px 4px 15.3px 0px rgba(0, 0, 0, 0.25)",
+                    padding: "10px 7px",
+                    "& .MuiMenu-list": {
+                      padding: "0 !important",
+                    },
+                    "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
+                      {
+                        padding: "0 !important",
+                      },
+                  },
+                },
+              }}
+              sx={{
+                "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
+                  {
+                    padding: "0px",
+                  },
+                "& .css-yf8vq0-MuiSelect-nativeInput": {
+                  padding: "0px",
+                },
+              }}
+            >
+              <MenuItem
+                value="Default"
+                sx={{
+                  color: "#7F7F7F",
+                  fontFamily: "Poppins",
+                  fontSize: "12px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "100%",
+                  padding: "11.006px 10px 8.994px 10px",
+                  marginBottom: "8px",
+                  borderRadius: "5px",
+                  "&:hover": {
+                    color: "#3B4CB8",
+                    backgroundColor: "#EBEDF8",
+                  },
+                }}
+              >
+                Default
+              </MenuItem>
+            </Select>
+          </Box>
+
+          <Box className={styles.iconContainer}>
+            <Box className={styles.menuContainer}>
+              <Menu />
+            </Box>
+            <Box className={styles.gridContainer}>
+              <GridItem />
+            </Box>
+          </Box>
+        </Box>
+      </Box>
 
       <Routes>
         <Route
@@ -56,6 +190,10 @@ const Main = () => {
               formFields={StandAlonePropertyDetails}
             />
           }
+        />
+        <Route
+          path="listings"
+          element={<PropertyListings properties={properties} />}
         />
       </Routes>
     </Box>
