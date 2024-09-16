@@ -7,6 +7,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme/theme";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Layout from "./components/properties/layout/Layout";
+import Plans from "./components/registration/Plans/Plans";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -17,6 +18,7 @@ root.render(
       <Router>
         <Routes>
           <Route path="property/*" element={<Layout />} />
+          <Route path="/pricing" element={<Plans />} />
           <Route path="*" element={<App />} />
         </Routes>
       </Router>
