@@ -4,12 +4,9 @@ import MobileStepper from "@mui/material/MobileStepper";
 import LeftArrow from "../../../assets/icons/ui/LeftArrow";
 import plans from "../../common/data/planTypes";
 import PlanFeatures from "./PlanFeatures/PlanFeatures";
-import { useFormContext } from "../../../context/FormContext";
 import styles from "./Plans.module.css";
 
 const Plans = () => {
-  const { previousStep } = useFormContext();
-
   return (
     <>
       <Box
@@ -27,7 +24,7 @@ const Plans = () => {
           position="static"
           activeStep={3}
           backButton={
-            <Button size="small" onClick={previousStep}>
+            <Button size="small">
               <LeftArrow />
               Back
             </Button>
