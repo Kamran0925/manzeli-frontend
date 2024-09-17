@@ -9,7 +9,7 @@ import {
   Typography,
   MenuItem,
 } from "@mui/material";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import PropertyForm from "./PropertyForm/PropertyForm";
 import ProfileActions from "./ProfileActions/ProfileActions";
 import { ResidentialCompoundDetails } from "./PropertyFormFields/ResidentialCompoundDetails/ResidentialCompoundDetails";
@@ -23,6 +23,7 @@ import Plus from "../../../../assets/icons/ui/Plus";
 import GridItem from "../../../../assets/icons/ui/GridItem";
 import Profile from "../../../../assets/icons/ui/Profile";
 import Notification from "../../../../assets/icons/ui/Notification";
+import PropertyDetails from "./PropertyDetails/PropertyDetails";
 import styles from "./MainContent.module.css";
 
 const Main = () => {
@@ -36,6 +37,9 @@ const Main = () => {
   ];
 
   const [profileActions, setProfileActions] = useState(false);
+
+  const location = useLocation();
+  console.log("Current Path:", location.pathname); // Debugging line
 
   return (
     <Box className={styles.mainContent}>
@@ -57,7 +61,7 @@ const Main = () => {
       </Box>
 
       <Box className={styles.subTitleBar}>
-        <Typography className={styles.subTitle}>Property List</Typography>
+        <Typography className={styles.subTitle}>Property Details</Typography>
 
         <Box className={styles.subTitleActions}>
           <Button className={styles.addPropertyButton} variant="contained">
@@ -89,11 +93,18 @@ const Main = () => {
         </Box>
       </Box>
 
-      <Box className={styles.filterBar}>
-        <Typography className={styles.pageResults}>
-          Showing 1-9 of 13 Results
-        </Typography>
-
+      <Box
+        className={styles.filterBar}
+        sx={{
+          justifyContent:
+            location.pathname === "/property/details" ? "flex-end" : "initial",
+        }}
+      >
+        {location.pathname !== "/property/details" && (
+          <Typography className={styles.pageResults}>
+            Showing 1-9 of 13 Results
+          </Typography>
+        )}
         <Box className={styles.sortContainer}>
           <Box className={styles.sortingBar}>
             <Typography className={styles.sort}>Sort by:</Typography>
@@ -194,6 +205,10 @@ const Main = () => {
         <Route
           path="listings"
           element={<PropertyListings properties={properties} />}
+        />
+        <Route
+          path="details"
+          element={<PropertyDetails property={properties[0]} />}
         />
       </Routes>
     </Box>
