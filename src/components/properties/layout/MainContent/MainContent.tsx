@@ -47,7 +47,7 @@ const Main = () => {
           <Notification />
           <Profile
             background="#001283"
-            fill="#FFFFFF"
+            fill="#FFF"
             onClick={() => setProfileActions(true)}
           />
           {profileActions && (

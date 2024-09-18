@@ -1,14 +1,14 @@
 import React from "react";
 
-interface LocationIconProps {
+interface LocationProps {
   width?: number;
   height?: number;
   fill?: string;
 }
 
-const LocationIcon: React.FC<LocationIconProps> = ({
-  width = 17.077,
-  height = 17.077,
+const Location: React.FC<LocationProps> = ({
+  width = 17.08,
+  height = 17.08,
   fill = "#273240",
 }) => (
   <svg
@@ -25,4 +25,4 @@ const LocationIcon: React.FC<LocationIconProps> = ({
   </svg>
 );
 
-export default LocationIcon;
+export default Location;
