@@ -1,4 +1,4 @@
-.propertyCard {
+.propertyItem {
   padding: 35px 37px 25px 37px;
   width: calc(100% - 74px);
   border-radius: 10px;
@@ -9,20 +9,21 @@
   justify-content: space-between;
   flex-direction: row;
 }
-.cardContent {
+
+.propertyItem .itemContent {
   gap: 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.propertyCard .align1 {
+.propertyItem .align1 {
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-.propertyCard .align1 .title {
+.propertyItem .align1 .title {
   color: #000;
   font-family: "Poppins";
   font-size: 20px;
@@ -31,7 +32,7 @@
   letter-spacing: 0.2px;
 }
 
-.propertyCard .align1 .tag {
+.propertyItem .align1 .tag {
   display: flex;
   width: 86px;
   padding: 0.705px 7.754px;
@@ -45,15 +46,16 @@
   font-size: 16.918px;
   font-weight: 500;
   line-height: 140%;
+  box-sizing: border-box;
 }
 
-.propertyCard .align2 {
+.propertyItem .align2 {
   display: flex;
   align-items: center;
   gap: 5.25px;
 }
 
-.propertyCard .align2 .location {
+.propertyItem .align2 .location {
   color: #7f7f7f;
   font-family: "Poppins";
   font-size: 16px;
@@ -61,7 +63,7 @@
   line-height: 110%;
 }
 
-.propertyCard .actionBtn {
+.propertyItem .actionBtn {
   padding: 0;
   min-width: 0;
   width: auto;
@@ -72,25 +74,25 @@
 }
 
 @media (max-width: 600px) {
-  .propertyCard {
+  .propertyItem {
     padding: 20px 10px;
     width: calc(100% - 14px);
   }
 
-  .propertyCard .align1 .title {
+  .propertyItem .align1 .title {
     font-size: 14px;
   }
 
-  .propertyCard .align2 .location {
+  .propertyItem .align2 .location {
     font-size: 12px;
   }
 
-  .propertyCard .align1 .tag {
+  .propertyItem .align1 .tag {
     font-size: 12px;
     padding: 5px 15px;
   }
 
-  .propertyCard .actionBtn {
+  .propertyItem .actionBtn {
     align-items: end;
     height: 100%;
   }

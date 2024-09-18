@@ -3,17 +3,17 @@ import { Box, Typography } from "@mui/material";
 import Pencil from "../../../../../../../assets/icons/ui/Pencil";
 import Trash from "../../../../../../../assets/icons/ui/Trash";
 import Cross from "../../../../../../../assets/icons/ui/Cross";
-import styles from "./PropertyCardActions.module.css";
+import styles from "./PropertyItemActions.module.css";
 
-interface PropertyCardActionsProps {
+interface PropertyItemActionsProps {
   handleClose: React.MouseEventHandler<HTMLDivElement>;
 }
 
-const PropertyCardActions: React.FC<PropertyCardActionsProps> = ({
+const PropertyItemActions: React.FC<PropertyItemActionsProps> = ({
   handleClose,
 }) => {
   return (
-    <Box className={styles.propertyCardActions}>
+    <Box className={styles.propertyItemActions}>
       <Box component="div" className={styles.closeIcon} onClick={handleClose}>
         <Cross />
       </Box>
@@ -31,4 +31,4 @@ const PropertyCardActions: React.FC<PropertyCardActionsProps> = ({
   );
 };
 
-export default PropertyCardActions;
+export default PropertyItemActions;

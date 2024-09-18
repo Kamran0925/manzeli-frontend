@@ -1,7 +1,7 @@
 import React from "react";
 import { Property } from "./properties";
-import { PropertyCard } from "./PropertyCard/PropertyCard";
 import { Box } from "@mui/material";
+import { PropertyListItem } from "./PropertyListItem/PropertyListItem";
 import styles from "./PropertyListings.module.css";
 
 interface PropertyListingsProps {
@@ -12,7 +12,7 @@ const PropertyListings: React.FC<PropertyListingsProps> = ({ properties }) => {
   return (
     <Box className={styles.container}>
       {properties.map(property => (
-        <PropertyCard key={property.id} property={property} />
+        <PropertyListItem key={property.id} property={property} />
       ))}
     </Box>
   );

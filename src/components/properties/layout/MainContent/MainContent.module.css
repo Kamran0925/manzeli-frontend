@@ -28,14 +28,14 @@
 }
 
 .subTitleBar {
-  margin-top: 27px;
+  margin-top: 22px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .subTitleBar .subTitle {
-  color: #000;
+  color: #020615;
   font-family: "Poppins";
   font-size: 32px;
   font-weight: 500;
@@ -165,7 +165,7 @@
   height: 36px;
   align-items: center;
   flex-shrink: 0;
-  background-color: #fff;
+  background-color: #f4f4f4;
 }
 
 @media (max-width: 600px) {
