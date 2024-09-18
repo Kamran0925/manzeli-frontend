@@ -3,6 +3,8 @@ import Bath from "../../../../../assets/icons/ui/Bath";
 import Area from "../../../../../assets/icons/ui/Area";
 import Apartment from "../../../../../assets/icons/ui/Apartment";
 import Stairs from "../../../../../assets/icons/ui/Stairs";
+import Property1 from "../../../../../assets/images/property1.png";
+import Property2 from "../../../../../assets/images/property2.png";
 
 export interface Property {
   id: number;
@@ -16,6 +18,7 @@ export interface Property {
   apartments?: any;
   features?: string[];
   geoPoints?: {};
+  images?: any[];
 }
 
 export const properties: Property[] = [
@@ -45,6 +48,7 @@ export const properties: Property[] = [
       icon: <Apartment />,
     },
     features: ["Gym Available", "Swimming Pool", "Parking Spaces"],
+    images: [Property1, Property2],
   },
   {
     id: 2,
