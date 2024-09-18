@@ -12,6 +12,9 @@ import {
 } from "@mui/material";
 import { Property } from "../PropertyListings/properties";
 import LocationIcon from "../../../../../assets/icons/ui/Location";
+import LeftIcon from "../../../../../assets/icons/ui/LeftIcon";
+import RightIcon from "../../../../../assets/icons/ui/RightIcon";
+import Carousel from "react-material-ui-carousel";
 import styles from "./PropertyDetails.module.css";
 
 interface PropertyDetailsProps {
@@ -30,7 +33,6 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) => {
         <Typography className={styles.location}>{property.location}</Typography>
       </Box>
       <Box className={styles.tag}>{property.type}</Box>
-
       <Box className={styles.featuresContainer}>
         <Box className={styles.featureItem}>
           {property.beds.icon}
@@ -63,7 +65,6 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) => {
           </Typography>
         </Box>
       </Box>
-
       <Box className={styles.featuresContainer2}>
         <Typography className={styles.additionalFeature}>
           Additional Features
@@ -79,7 +80,6 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) => {
           })}
         </FormGroup>
       </Box>
-
       <List disablePadding className={styles.circleList}>
         <ListItem disablePadding className={styles.circleListItem}>
           <ListItemText
@@ -112,10 +112,50 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) => {
           />
         </ListItem>
       </List>
-
       <Typography className={styles.propertyLocation}>
         Property Location
       </Typography>
+      <Typography className={styles.images}>Image Gallery</Typography>
+      <Carousel
+        sx={{
+          width: "100%",
+          height: "312px",
+          flexShrink: 0,
+          borderRadius: "16.537px",
+          backgroundSize: "cover",
+          backgroundPosition: "top left",
+          padding: 0,
+          "& .css-e1mnrr": {
+            right: "-45px",
+          },
+          "& .css-zbwuqm": {
+            left: "-45px",
+          },
+        }}
+        navButtonsProps={{
+          style: {
+            backgroundColor: "transparent",
+            color: "#000",
+            display: "block",
+            opacity: 1,
+          },
+        }}
+        navButtonsWrapperProps={{
+          style: {
+            padding: 0,
+          },
+        }}
+        animation="slide"
+        indicators={false}
+        navButtonsAlwaysVisible={true}
+        PrevIcon={<LeftIcon />}
+        NextIcon={<RightIcon />}
+        fullHeightHover={false}
+      >
+        {property?.images?.map((image, i) => (
+          <img key={i} src={image} alt="Property" />
+        ))}
+      </Carousel>
     </Box>
   );
 };

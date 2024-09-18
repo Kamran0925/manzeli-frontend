@@ -116,7 +116,7 @@
   gap: 53.34px;
 }
 
-.propertyLocation {
+.container .propertyLocation {
   margin-top: 39px;
   color: #000;
   font-family: "Poppins";
@@ -146,4 +146,13 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+}
+
+.container .images {
+  color: #000;
+  font-family: "Poppins";
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 110%;
+  letter-spacing: 0.2px;
 }
