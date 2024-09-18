@@ -1,18 +1,17 @@
 import React from "react";
 import {
   Box,
+  Button,
   Checkbox,
   FormControlLabel,
   FormGroup,
+  List,
+  ListItem,
+  ListItemText,
   Typography,
 } from "@mui/material";
 import { Property } from "../PropertyListings/properties";
 import LocationIcon from "../../../../../assets/icons/ui/Location";
-import AreaIcon from "../../../../../assets/icons/ui/AreaIcon";
-import Stairs from "../../../../../assets/icons/ui/Stairs";
-import Apartment from "../../../../../assets/icons/ui/Apartment";
-import Bath from "../../../../../assets/icons/ui/Bath";
-import Bed from "../../../../../assets/icons/ui/Bed";
 import styles from "./PropertyDetails.module.css";
 
 interface PropertyDetailsProps {
@@ -22,7 +21,10 @@ interface PropertyDetailsProps {
 const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) => {
   return (
     <Box className={styles.container}>
-      <Typography className={styles.title}>{property.title}</Typography>
+      <Box className={styles.titleContainer}>
+        <Typography className={styles.title}>{property.title}</Typography>
+        <Button className={styles.unitsBtn}>View Units</Button>
+      </Box>
       <Box className={styles.locationContainer}>
         <LocationIcon />
         <Typography className={styles.location}>{property.location}</Typography>
@@ -31,33 +33,33 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) => {
 
       <Box className={styles.featuresContainer}>
         <Box className={styles.featureItem}>
-          <Bed />
+          {property.beds.icon}
           <Typography className={styles.featureText}>
-            {property.beds} Beds
+            {property.beds.value} Beds
           </Typography>
         </Box>
         <Box className={styles.featureItem}>
-          <Bath />
+          {property.baths.icon}
           <Typography className={styles.featureText}>
-            {property.baths} Bath
+            {property.baths.value} Bath
           </Typography>
         </Box>
         <Box className={styles.featureItem}>
-          <AreaIcon />
+          {property.area.icon}
           <Typography className={styles.featureText}>
-            {property.area} Sqft
+            {property.area.value} Sqft
           </Typography>
         </Box>
         <Box className={styles.featureItem}>
-          <Stairs />
+          {property.floors.icon}
           <Typography className={styles.featureText}>
-            Number of Floors {property.floors}
+            Number of Floors {property.floors.value}
           </Typography>
         </Box>
         <Box className={styles.featureItem}>
-          <Apartment />
+          {property.apartments.icon}
           <Typography className={styles.featureText}>
-            {property.apartments} Number of Apartments
+            {property.apartments.value} Number of Apartments
           </Typography>
         </Box>
       </Box>
@@ -77,6 +79,39 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) => {
           })}
         </FormGroup>
       </Box>
+
+      <List disablePadding className={styles.circleList}>
+        <ListItem disablePadding className={styles.circleListItem}>
+          <ListItemText
+            primary={
+              <Typography component="span" className={styles.listItemText}>
+                Electricity and Water Registered Number:
+              </Typography>
+            }
+            secondary={
+              <Typography component="span" color="primary">
+                {" "}
+                12345678
+              </Typography>
+            }
+          />
+        </ListItem>
+        <ListItem disablePadding className={styles.circleListItem}>
+          <ListItemText
+            primary={
+              <Typography component="span" className={styles.listItemText}>
+                Management Contract Expiry:
+              </Typography>
+            }
+            secondary={
+              <Typography component="span" color="primary">
+                {" "}
+                12/31/2025
+              </Typography>
+            }
+          />
+        </ListItem>
+      </List>
 
       <Typography className={styles.propertyLocation}>
         Property Location

@@ -1,12 +1,12 @@
 import React from "react";
 
-interface AreaIconProps {
+interface AreaProps {
   width?: number;
   height?: number;
   fill?: string;
 }
 
-const AreaIcon: React.FC<AreaIconProps> = ({
+const Area: React.FC<AreaProps> = ({
   width = 25,
   height = 26,
   fill = "#001283",
@@ -25,4 +25,4 @@ const AreaIcon: React.FC<AreaIconProps> = ({
   </svg>
 );
 
-export default AreaIcon;
+export default Area;

@@ -1,0 +1,103 @@
+import Bed from "../../../../../assets/icons/ui/Bed";
+import Bath from "../../../../../assets/icons/ui/Bath";
+import Area from "../../../../../assets/icons/ui/Area";
+import Apartment from "../../../../../assets/icons/ui/Apartment";
+import Stairs from "../../../../../assets/icons/ui/Stairs";
+
+export interface Property {
+  id: number;
+  type: string;
+  title: string;
+  location: string;
+  beds?: any;
+  baths?: any;
+  area?: any;
+  floors?: any;
+  apartments?: any;
+  features?: string[];
+  geoPoints?: {};
+}
+
+export const properties: Property[] = [
+  {
+    id: 1,
+    type: "Villa",
+    title: "221 Franklin State Residence London",
+    location: "Gunnersbury House, London",
+    beds: {
+      value: 3,
+      icon: <Bed />,
+    },
+    baths: {
+      value: 2,
+      icon: <Bath />,
+    },
+    area: {
+      value: 500,
+      icon: <Area />,
+    },
+    floors: {
+      value: 2,
+      icon: <Stairs />,
+    },
+    apartments: {
+      value: 1,
+      icon: <Apartment />,
+    },
+    features: ["Gym Available", "Swimming Pool", "Parking Spaces"],
+  },
+  {
+    id: 2,
+    type: "Villa",
+    title: "221 Franklin State Residence London",
+    location: "Gunnersbury House, London",
+    beds: {
+      value: 3,
+      icon: <Bed />,
+    },
+    baths: {
+      value: 2,
+      icon: <Bath />,
+    },
+    area: {
+      value: 500,
+      icon: <Area />,
+    },
+    floors: {
+      value: 2,
+      icon: <Stairs />,
+    },
+    apartments: {
+      value: 1,
+      icon: <Apartment />,
+    },
+    features: ["Gym Available", "Swimming Pool", "Parking Spaces"],
+  },
+  {
+    id: 3,
+    type: "Villa",
+    title: "221 Franklin State Residence London",
+    location: "Gunnersbury House, London",
+    beds: {
+      value: 3,
+      icon: <Bed />,
+    },
+    baths: {
+      value: 2,
+      icon: <Bath />,
+    },
+    area: {
+      value: 500,
+      icon: <Area />,
+    },
+    floors: {
+      value: 2,
+      icon: <Stairs />,
+    },
+    apartments: {
+      value: 1,
+      icon: <Apartment />,
+    },
+    features: ["Gym Available", "Swimming Pool", "Parking Spaces"],
+  },
+];
