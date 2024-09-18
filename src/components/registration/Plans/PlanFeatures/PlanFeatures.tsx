@@ -16,8 +16,9 @@ const PlanFeatures: React.FC<PlanFeaturesProps> = ({ plantype, features }) => {
           sx={{
             display: "flex",
             alignItems: "center",
-            marginBottom: "8px",
             gap: "10px",
+            marginBottom: "8px",
+            flexShrink: 0,
           }}
         >
           <CheckmarkIcon />
@@ -30,7 +31,6 @@ const PlanFeatures: React.FC<PlanFeaturesProps> = ({ plantype, features }) => {
                 lg: "15px",
               },
               fontWeight: 500,
-              lineHeight: "normal",
               flexShrink: 0,
             }}
           >

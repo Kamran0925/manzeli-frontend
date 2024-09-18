@@ -1,5 +1,11 @@
-import React from "react";
-import { Box, Typography, Button, Grid } from "@mui/material";
+import React, { useState } from "react";
+import {
+  Box,
+  Typography,
+  Button,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
 import MobileStepper from "@mui/material/MobileStepper";
 import LeftArrow from "../../../assets/icons/ui/LeftArrow";
 import plans from "../../common/data/planTypes";
@@ -7,17 +13,18 @@ import PlanFeatures from "./PlanFeatures/PlanFeatures";
 import styles from "./Plans.module.css";
 
 const Plans = () => {
+  const [planType, setPlanType] = useState("monthly");
+
+  const handleChange = (
+    event: React.MouseEvent<HTMLElement>,
+    value: string,
+  ) => {
+    setPlanType(value);
+  };
+
   return (
     <>
-      <Box
-        sx={{
-          padding: {
-            xs: "20px",
-            lg: "40px",
-          },
-          background: "white",
-        }}
-      >
+      <Box className={styles.container}>
         <MobileStepper
           variant="text"
           steps={4}
@@ -31,243 +38,153 @@ const Plans = () => {
           }
           nextButton={null}
         />
-        <Typography variant="h4" sx={{ textAlign: "right" }} color="#8692A6">
+        <Typography variant="h4" align="right" color="#8692A6">
           Personal Info.
         </Typography>
 
-        <Box className={styles.box1}>
-          <Box className={styles.box2}>
-            <Typography
-              variant="h3"
-              sx={{
-                marginRight: "auto",
-                color: "#231D4F",
-                width: {
-                  xs: "100%",
-                },
-                fontSize: {
-                  xs: "24px",
-                  sm: "40px",
-                },
-                lineHeight: {
-                  xs: "30px",
-                  sm: "normal",
-                },
-              }}
-            >
+        <Box className={styles.contentWrapper}>
+          <Box className={styles.pricingContainer1}>
+            <Typography variant="h3" className={styles.plansTitle}>
               Plans & Pricing
             </Typography>
-            <Box className={styles.box3}>
+
+            <Box className={styles.align}>
               <Typography
                 variant="body1"
-                sx={{
-                  width: {
-                    xs: "100%",
-                    sm: "60%",
-                  },
-                  color: "#848199",
-                  fontSize: {
-                    xs: "14px",
-                    sm: "18px",
-                  },
-                  fontWeight: 500,
-                }}
+                align="right"
+                className={styles.plansText}
               >
                 Whether your time-saving automation needs are large or small,
                 we’re here to help you scale.
               </Typography>
-              <Box className={styles.box4}>
-                <Button
+              <ToggleButtonGroup
+                value={planType}
+                exclusive
+                onChange={handleChange}
+                className={styles.btnGroup}
+              >
+                <ToggleButton
+                  value="monthly"
+                  className={styles.monthlyButton}
                   sx={{
-                    borderRadius: "22px",
-                    background: "#001283",
-                    boxShadow: "0px 5px 7px 0px rgba(82, 67, 194, 0.23)",
-                    padding: "13px 24px",
-                    color: "#fff",
-                    fontSize: "12px",
-                    height: "44px",
-                    width: "110px",
-                    textTransform: "none",
-                    "&:hover": {
-                      backgroundColor: "white",
-                      boxShadow: "0px 5px 7px 0px rgba(82, 67, 194, 0.35)",
-                      color: "#001283",
-                    },
+                    color: "monthly" === planType ? "#FFF" : "#001283",
+                    backgroundColor:
+                      "monthly" === planType ? "#001283" : "#FFF",
                   }}
                 >
                   MONTHLY
-                </Button>
-                <Button
+                </ToggleButton>
+                <ToggleButton
+                  value="yearly"
+                  className={styles.yearlyButton}
                   sx={{
-                    background: "white",
-                    boxShadow: "0px 5px 7px 0px rgba(82, 67, 194, 0.23)",
-                    padding: "13px 24px",
-                    color: "#3B3472",
-                    fontSize: "12px",
-                    height: "44px",
-                    textTransform: "none",
-                    "&:hover": {
-                      backgroundColor: "#001283",
-                      boxShadow: "0px 5px 7px 0px rgba(82, 67, 194, 0.35)",
-                      color: "white",
-                    },
+                    color: "yearly" === planType ? "#FFF" : "#3B3472",
+                    backgroundColor: "yearly" === planType ? "#3B3472" : "#FFF",
                   }}
                 >
                   YEARLY
-                </Button>
-              </Box>
+                </ToggleButton>
+              </ToggleButtonGroup>
             </Box>
           </Box>
 
-          <Grid container className={styles.pricingContainer}>
+          <Box className={styles.pricingContainer2}>
             {plans.map((plan, index) => (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={4}
+              <Box
                 key={index}
+                className={styles.pricingItem}
                 sx={{
-                  minWidth: "232px",
-                  position: {
-                    md: plan.type === "Company" ? "relative" : "",
-                  },
+                  backgroundColor:
+                    plan.type === "Company"
+                      ? "#001283"
+                      : "rgba(255, 255, 255, 0.50)",
+                  boxShadow:
+                    plan.type === "Company"
+                      ? "0px 42px 34px 0px rgba(82, 67, 194, 0.3)"
+                      : "none,",
                 }}
               >
+                {plan.type === "Company" && (
+                  <Typography className={styles.popularTag}>
+                    MOST POPULAR
+                  </Typography>
+                )}
                 <Box
-                  className={plan.type === "Company" ? styles.pricingItem2 : ""}
+                  sx={{ marginTop: plan.type === "Company" ? "0px" : "47px" }}
+                  className={styles.pricingFeature}
                 >
-                  {plan.type === "Company" && (
+                  <Box className={styles.mainPricingTitle}>
                     <Typography
+                      className={styles.price}
                       sx={{
-                        borderRadius: "13.5px",
-                        backgroundColor: "#FFF",
-                        maxWidth: "121px",
-                        height: "27px",
-                        flexShrink: 0,
-                        color: "#001283",
-                        textAlign: "center",
-                        fontSize: "10px",
-                        fontWeight: 800,
-                        letterSpacing: "0.833px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        marginLeft: "auto",
+                        color: plan.type === "Company" ? " #FFFFFF" : "#001283",
                       }}
                     >
-                      MOST POPULAR
+                      ${plan.price}
                     </Typography>
-                  )}
-                  <Box className={styles.pricingFeature}>
-                    <Box
+                    <Typography
+                      className={styles.duration}
                       sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "flex-start",
+                        color: plan.type === "Company" ? " #FFFFFF" : "#848199",
                       }}
                     >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        <Typography
-                          sx={{
-                            color:
-                              plan.type === "Company" ? "#FFFFFF" : "#001283",
-                            fontSize: "36px",
-                            fontWeight: 700,
-                            lineHeight: "46px",
-                          }}
-                        >
-                          ${plan.price}
-                        </Typography>
-                        <Typography
-                          sx={{
-                            color:
-                              plan.type === "Company" ? "#FFFFFF" : "#848199",
-                            fontSize: "17px",
-                            fontWeight: 500,
-                            alignSelf: "center",
-                          }}
-                        >
-                          /{plan.duration}
-                        </Typography>
-                      </Box>
-                    </Box>
-
-                    <Box>
-                      <Typography
-                        style={{
-                          color:
-                            plan.type === "Company" ? "#FFFFFF" : "#001283",
-                          fontSize: "28px",
-                          fontWeight: 500,
-                        }}
-                      >
-                        {plan.type}
-                      </Typography>
-                      <Typography
-                        style={{
-                          fontSize: "15px",
-                          fontWeight: 500,
-                          maxWidth: "232px",
-                          color: plan.type === "Company" ? "#FFF" : "#848199",
-                        }}
-                      >
-                        {plan.description}
-                      </Typography>
-                    </Box>
-
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "flex-start",
-                      }}
-                    >
-                      <PlanFeatures
-                        plantype={plan.type}
-                        features={plan.features}
-                      />
-                    </Box>
+                      /{plan.duration}
+                    </Typography>
                   </Box>
 
-                  <Box
-                    sx={{
-                      textAlign: plan.type === "Company" ? "center" : "none",
-                    }}
-                  >
-                    <Button
+                  <Box className={styles.planDetails}>
+                    <Typography
+                      className={styles.planType}
                       sx={{
-                        borderRadius: "24px",
-                        backgroundColor:
-                          plan.type === "Company" ? "#FFF" : "#E5E3F6",
-                        color: plan.type === "Company" ? "#001283" : "#838199",
-                        width: {
-                          xs: "100%",
-                          sm: "207px",
-                        },
-                        height: "45px",
-                        margin: "0 auto",
-                        textTransform: "none",
-                        "&:hover": {
-                          outline: "1px solid white",
-                          backgroundColor:
-                            plan.type === "Company" ? "#001283" : "#E5E3F6",
-                          color: plan.type === "Company" ? "#FFF" : "#838199",
-                        },
+                        color: plan.type === "Company" ? "#FFF" : "#001283",
                       }}
                     >
-                      Choose Plan
-                    </Button>
+                      {plan.type}
+                    </Typography>
+                    <Typography
+                      className={styles.description}
+                      sx={{
+                        color: plan.type === "Company" ? "#FFF" : "#848199",
+                      }}
+                    >
+                      {plan.description}
+                    </Typography>
+                  </Box>
+
+                  <Box className={styles.planFeatures}>
+                    <PlanFeatures
+                      plantype={plan.type}
+                      features={plan.features}
+                    />
                   </Box>
                 </Box>
-              </Grid>
+
+                <Box className={styles.btnContainer}>
+                  <Button
+                    sx={{
+                      color: plan.type === "Company" ? "#001283" : "#838199",
+                      backgroundColor:
+                        plan.type === "Company" ? "#FFF" : "#E5E3F6",
+                      width: {
+                        xs: "100%",
+                        md: "207px",
+                      },
+                      opacity: plan.type === "Company" ? "none" : "0.5",
+                      "&:hover": {
+                        color: plan.type === "Company" ? "#FFF" : "#838199",
+                        backgroundColor:
+                          plan.type === "Company" ? "#001283" : "#E5E3F6",
+                        outline: "2px solid white",
+                      },
+                    }}
+                    className={styles.planBtn}
+                  >
+                    Choose plan
+                  </Button>
+                </Box>
+              </Box>
             ))}
-          </Grid>
+          </Box>
         </Box>
       </Box>
     </>
