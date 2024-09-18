@@ -6,6 +6,11 @@ import Stairs from "../../../../../assets/icons/ui/Stairs";
 import Property1 from "../../../../../assets/images/property1.png";
 import Property2 from "../../../../../assets/images/property2.png";
 
+interface GeoPoints {
+  lat: number;
+  lng: number;
+}
+
 export interface Property {
   id: number;
   type: string;
@@ -17,7 +22,7 @@ export interface Property {
   floors?: any;
   apartments?: any;
   features?: string[];
-  geoPoints?: {};
+  geoPoints: GeoPoints;
   images?: any[];
 }
 
@@ -48,6 +53,10 @@ export const properties: Property[] = [
       icon: <Apartment />,
     },
     features: ["Gym Available", "Swimming Pool", "Parking Spaces"],
+    geoPoints: {
+      lat: 40.748817,
+      lng: -73.985428,
+    },
     images: [Property1, Property2],
   },
   {
@@ -76,6 +85,10 @@ export const properties: Property[] = [
       icon: <Apartment />,
     },
     features: ["Gym Available", "Swimming Pool", "Parking Spaces"],
+    geoPoints: {
+      lat: 40.748817,
+      lng: -73.985428,
+    },
   },
   {
     id: 3,
@@ -103,5 +116,9 @@ export const properties: Property[] = [
       icon: <Apartment />,
     },
     features: ["Gym Available", "Swimming Pool", "Parking Spaces"],
+    geoPoints: {
+      lat: 40.748817,
+      lng: -73.985428,
+    },
   },
 ];

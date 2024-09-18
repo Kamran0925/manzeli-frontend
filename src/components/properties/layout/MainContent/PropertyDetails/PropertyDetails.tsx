@@ -15,6 +15,8 @@ import LocationIcon from "../../../../../assets/icons/ui/Location";
 import LeftIcon from "../../../../../assets/icons/ui/LeftIcon";
 import RightIcon from "../../../../../assets/icons/ui/RightIcon";
 import Carousel from "react-material-ui-carousel";
+import GeoLocation from "./GeoLocation/GeoLocation";
+
 import styles from "./PropertyDetails.module.css";
 
 interface PropertyDetailsProps {
@@ -115,6 +117,8 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) => {
       <Typography className={styles.propertyLocation}>
         Property Location
       </Typography>
+      <GeoLocation center={property.geoPoints} zoom={12} />
+
       <Typography className={styles.images}>Image Gallery</Typography>
       <Carousel
         sx={{
@@ -123,7 +127,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) => {
           flexShrink: 0,
           borderRadius: "16.537px",
           backgroundSize: "cover",
-          backgroundPosition: "top left",
+          backgroundPosition: "center",
           padding: 0,
           "& .css-e1mnrr": {
             right: "-45px",
