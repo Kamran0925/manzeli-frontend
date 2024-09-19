@@ -121,4 +121,97 @@ export const properties: Property[] = [
       lng: -73.985428,
     },
   },
+  {
+    id: 4,
+    type: "Villa",
+    title: "221 Franklin State Residence London",
+    location: "Gunnersbury House, London",
+    beds: {
+      value: 3,
+      icon: <Bed />,
+    },
+    baths: {
+      value: 2,
+      icon: <Bath />,
+    },
+    area: {
+      value: 500,
+      icon: <Area />,
+    },
+    floors: {
+      value: 2,
+      icon: <Stairs />,
+    },
+    apartments: {
+      value: 1,
+      icon: <Apartment />,
+    },
+    features: ["Gym Available", "Swimming Pool", "Parking Spaces"],
+    geoPoints: {
+      lat: 40.748817,
+      lng: -73.985428,
+    },
+  },
+  {
+    id: 5,
+    type: "Villa",
+    title: "221 Franklin State Residence London",
+    location: "Gunnersbury House, London",
+    beds: {
+      value: 3,
+      icon: <Bed />,
+    },
+    baths: {
+      value: 2,
+      icon: <Bath />,
+    },
+    area: {
+      value: 500,
+      icon: <Area />,
+    },
+    floors: {
+      value: 2,
+      icon: <Stairs />,
+    },
+    apartments: {
+      value: 1,
+      icon: <Apartment />,
+    },
+    features: ["Gym Available", "Swimming Pool", "Parking Spaces"],
+    geoPoints: {
+      lat: 40.748817,
+      lng: -73.985428,
+    },
+  },
+  {
+    id: 6,
+    type: "Villa",
+    title: "221 Franklin State Residence London",
+    location: "Gunnersbury House, London",
+    beds: {
+      value: 3,
+      icon: <Bed />,
+    },
+    baths: {
+      value: 2,
+      icon: <Bath />,
+    },
+    area: {
+      value: 500,
+      icon: <Area />,
+    },
+    floors: {
+      value: 2,
+      icon: <Stairs />,
+    },
+    apartments: {
+      value: 1,
+      icon: <Apartment />,
+    },
+    features: ["Gym Available", "Swimming Pool", "Parking Spaces"],
+    geoPoints: {
+      lat: 40.748817,
+      lng: -73.985428,
+    },
+  },
 ];
