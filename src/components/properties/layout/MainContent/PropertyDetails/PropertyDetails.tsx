@@ -5,7 +5,6 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
-  List,
   ListItem,
   ListItemText,
   Typography,
@@ -26,65 +25,78 @@ interface PropertyDetailsProps {
 const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) => {
   return (
     <Box className={styles.container}>
-      <Box className={styles.titleContainer}>
-        <Typography className={styles.title}>{property.title}</Typography>
-        <Button className={styles.unitsBtn}>View Units</Button>
-      </Box>
-      <Box className={styles.locationContainer}>
-        <LocationIcon />
-        <Typography className={styles.location}>{property.location}</Typography>
-      </Box>
-      <Box className={styles.tag}>{property.type}</Box>
-      <Box className={styles.featuresContainer}>
-        <Box className={styles.featureItem}>
-          {property.beds.icon}
-          <Typography className={styles.featureText}>
-            {property.beds.value} Beds
-          </Typography>
+      <Box className={styles.container2}>
+        <Box className={styles.titleContainer}>
+          <Typography className={styles.title}>{property.title}</Typography>
+          <Button className={styles.unitsBtn}>View Units</Button>
         </Box>
-        <Box className={styles.featureItem}>
-          {property.baths.icon}
-          <Typography className={styles.featureText}>
-            {property.baths.value} Bath
-          </Typography>
-        </Box>
-        <Box className={styles.featureItem}>
-          {property.area.icon}
-          <Typography className={styles.featureText}>
-            {property.area.value} Sqft
-          </Typography>
-        </Box>
-        <Box className={styles.featureItem}>
-          {property.floors.icon}
-          <Typography className={styles.featureText}>
-            Number of Floors {property.floors.value}
-          </Typography>
-        </Box>
-        <Box className={styles.featureItem}>
-          {property.apartments.icon}
-          <Typography className={styles.featureText}>
-            {property.apartments.value} Number of Apartments
+        <Box className={styles.locationContainer}>
+          <LocationIcon />
+          <Typography className={styles.location}>
+            {property.location}
           </Typography>
         </Box>
       </Box>
-      <Box className={styles.featuresContainer2}>
-        <Typography className={styles.additionalFeature}>
-          Additional Features
-        </Typography>
-        <FormGroup className={styles.featuresWrapper}>
-          {property?.features?.map(feature => {
-            return (
-              <FormControlLabel
-                control={<Checkbox defaultChecked checked color="primary" />}
-                label={feature}
-              />
-            );
-          })}
-        </FormGroup>
-      </Box>
-      <List disablePadding className={styles.circleList}>
+
+      <Box className={styles.container3}>
+        <Box className={styles.tag}>{property.type}</Box>
+
+        <Box className={styles.featuresContainer}>
+          <Box className={styles.featureItem}>
+            {property.beds.icon}
+            <Typography className={styles.featureText}>
+              {property.beds.value} Beds
+            </Typography>
+          </Box>
+          <Box className={styles.featureItem}>
+            {property.baths.icon}
+            <Typography className={styles.featureText}>
+              {property.baths.value} Bath
+            </Typography>
+          </Box>
+          <Box className={styles.featureItem}>
+            {property.area.icon}
+            <Typography className={styles.featureText}>
+              {property.area.value} Sqft
+            </Typography>
+          </Box>
+          <Box className={styles.featureItem}>
+            {property.floors.icon}
+            <Typography className={styles.featureText}>
+              Number of Floors {property.floors.value}
+            </Typography>
+          </Box>
+          <Box className={styles.featureItem}>
+            {property.apartments.icon}
+            <Typography className={styles.featureText}>
+              {property.apartments.value} Number of Apartments
+            </Typography>
+          </Box>
+        </Box>
+
+        <Box className={styles.featuresContainer2}>
+          <Typography className={styles.additionalFeature}>
+            Additional Features
+          </Typography>
+          <FormGroup className={styles.featuresWrapper}>
+            {property?.features?.map(feature => {
+              return (
+                <FormControlLabel
+                  control={<Checkbox defaultChecked checked color="primary" />}
+                  label={feature}
+                />
+              );
+            })}
+          </FormGroup>
+        </Box>
+
         <ListItem disablePadding className={styles.circleListItem}>
           <ListItemText
+            sx={{
+              "& .css-konndc-MuiListItemText-root": {
+                padding: "0px",
+              },
+            }}
             primary={
               <Typography component="span" className={styles.listItemText}>
                 Electricity and Water Registered Number:
@@ -113,7 +125,8 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) => {
             }
           />
         </ListItem>
-      </List>
+      </Box>
+
       <Typography className={styles.propertyLocation}>
         Property Location
       </Typography>
@@ -157,7 +170,17 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) => {
         fullHeightHover={false}
       >
         {property?.images?.map((image, i) => (
-          <img key={i} src={image} alt="Property" />
+          <img
+            key={i}
+            src={image}
+            alt="Property"
+            style={{
+              backgroundPosition: "center center",
+              backgroundSize: "contain",
+              height: "312px",
+              width: "100%",
+            }}
+          />
         ))}
       </Carousel>
     </Box>

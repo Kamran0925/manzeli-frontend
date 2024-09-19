@@ -4,20 +4,33 @@
   align-items: flex-start;
   width: calc(100%-40px);
   margin-top: 28px;
-  gap: 20px;
   border-radius: 10px;
   background: #fff;
-  padding: 20px;
+  padding: 20px 20px 0px;
 }
 
-.container .titleContainer {
+.container .container2 {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 14px;
   width: 100%;
 }
 
-.container .titleContainer .title {
+.container .container3 {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  margin-top: 30px;
+}
+
+.container .container2 .titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  width: 100%;
+}
+
+.container .container2 .titleContainer .title {
   color: #000;
   font-family: "Poppins";
   font-size: 32px;
@@ -26,7 +39,7 @@
   letter-spacing: 0.32px;
 }
 
-.container .titleContainer .unitsBtn {
+.container .container2 .titleContainer .unitsBtn {
   height: 44px;
   padding: 14px 24px;
   flex-shrink: 0;
@@ -38,7 +51,7 @@
   font-weight: 400;
 }
 
-.container .titleContainer .unitsBtn:hover {
+.container .container2 .titleContainer .unitsBtn:hover {
   background: #fff;
   color: #001283;
 }
@@ -56,21 +69,21 @@
   line-height: 110%;
 }
 
-.container .tag {
-  display: flex;
-  width: 86px;
+.container .container3 .tag {
   padding: 0.705px 7.754px;
+  width: 86px;
+  display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 16.918px;
   background: rgba(59, 76, 184, 0.11);
   color: #001283;
   text-align: center;
-  font-family: "Roboto";
-  font-size: 16.918px;
+  font-family: "Poppins";
+  font-size: 18px;
+  font-style: normal;
   font-weight: 500;
   line-height: 140%;
-  margin-top: 25px;
 }
 
 .container .additionalFeature {
@@ -117,7 +130,8 @@
 }
 
 .container .propertyLocation {
-  margin-top: 39px;
+  margin-top: 30px;
+  margin-bottom: 19.44px;
   color: #000;
   font-family: "Poppins";
   font-size: 20px;
@@ -135,11 +149,11 @@
   gap: 23px;
 }
 
-.container .circleList .circleListItem {
+/* .container .circleListItem {
   display: list-item;
-}
+} */
 
-.container .circleList .circleListItem .listItemText {
+.container .circleListItem .listItemText {
   color: #000;
   font-family: "Poppins";
   font-size: 18px;
@@ -155,4 +169,62 @@
   font-weight: 500;
   line-height: 110%;
   letter-spacing: 0.2px;
+  margin-top: 30px;
+  margin-bottom: 19px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: calc(100%-40px);
+    padding: 20px 20px 0px;
+  }
+  .container .container2 .titleContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .container .container2 .titleContainer .title {
+    font-size: 24px;
+  }
+
+  .container .container2 .titleContainer .unitsBtn {
+    width: 100%;
+  }
+
+  .container .container3 .tag {
+    margin-left: auto;
+  }
+
+  .container .container3 .featuresContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .container .container3 .featuresContainer2 .additionalFeature {
+    margin-bottom: 20px;
+  }
+
+  .container .container3 .featuresContainer2 .featuresWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10.34px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .container .container2 .titleContainer {
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .container .container2 .titleContainer .title {
+    font-size: 28px;
+  }
+
+  .container .container3 .featuresContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+  }
 }
