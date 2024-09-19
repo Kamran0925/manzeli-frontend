@@ -39,7 +39,8 @@ const Main = () => {
   const [profileActions, setProfileActions] = useState(false);
 
   const location = useLocation();
-  console.log("Current Path:", location.pathname); // Debugging line
+
+  const [gridView, setGridView] = useState(false);
 
   return (
     <Box className={styles.mainContent}>
@@ -97,7 +98,9 @@ const Main = () => {
         className={styles.filterBar}
         sx={{
           justifyContent:
-            location.pathname === "/property/details" ? "flex-end" : "initial",
+            location.pathname === "/property/details"
+              ? "flex-end"
+              : "space-between",
         }}
       >
         {location.pathname !== "/property/details" && (
@@ -164,11 +167,25 @@ const Main = () => {
           </Box>
 
           <Box className={styles.iconContainer}>
-            <Box className={styles.menuContainer}>
-              <Menu />
+            <Box
+              className={styles.menuContainer}
+              onClick={() => setGridView(false)}
+              sx={{
+                backgroundColor: !gridView ? "#001283" : "#FFF",
+                color: !gridView ? "#FFF" : "#000",
+              }}
+            >
+              <Menu fill={!gridView ? "#FFF" : "#000"} />
             </Box>
-            <Box className={styles.gridContainer}>
-              <GridItem />
+            <Box
+              className={styles.menuContainer}
+              onClick={() => setGridView(true)}
+              sx={{
+                backgroundColor: gridView ? "#001283" : "#FFF",
+                color: gridView ? "#FFF" : "#000",
+              }}
+            >
+              <GridItem fill={gridView ? "#FFF" : "#000"} />
             </Box>
           </Box>
         </Box>
@@ -204,7 +221,9 @@ const Main = () => {
         />
         <Route
           path="listings"
-          element={<PropertyListings properties={properties} />}
+          element={
+            <PropertyListings properties={properties} gridView={gridView} />
+          }
         />
         <Route
           path="details"
