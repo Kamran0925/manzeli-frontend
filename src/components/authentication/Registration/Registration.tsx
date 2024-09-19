@@ -5,6 +5,7 @@ import AccountSelectable from "../AccountSelectable/AccountSelectable";
 import SignUp from "../SignUp/SignUp";
 import ContactDetails from "../ContactDetails/ContactDetails";
 import UploadImage from "../UploadImage/UploadImage";
+import Plans from "../../registration/Plans/Plans";
 
 const Registration = () => {
   const { formState } = useFormContext();
@@ -28,6 +29,9 @@ const Registration = () => {
         break;
       case 4:
         setContent(<UploadImage />);
+        break;
+      case 5:
+        setContent(<Plans />);
         break;
       default:
         setContent(<Landing />);
