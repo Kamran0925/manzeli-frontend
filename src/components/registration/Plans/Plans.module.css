@@ -1,0 +1,290 @@
+.container {
+  padding: 41px 40px;
+  background-color: #fff;
+  width: calc(100%-80px);
+}
+
+.container .contentWrapper {
+  margin-top: 79px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.container .contentWrapper .pricingContainer1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 25px;
+  margin: 0 auto;
+  width: 937px;
+}
+
+.container .contentWrapper .pricingContainer1 .plansTitle {
+  color: #231d4f;
+  font-family: "Poppins", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.container .contentWrapper .pricingContainer1 .align {
+  display: flex;
+  align-items: center;
+  gap: 122px;
+}
+
+.container .contentWrapper .pricingContainer1 .align .plansText {
+  color: #848199;
+  font-weight: 500;
+  font-size: 18px;
+  width: 60%;
+  text-align: left;
+}
+
+.container .contentWrapper .pricingContainer1 .align .monthlyButton {
+  color: var(--White, #fff);
+  background-color: var(--Primary, #001283);
+
+  border-radius: 22px;
+  box-shadow: 0px 5px 7px 0px rgba(82, 67, 194, 0.23);
+  padding: 13px 24px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.833px;
+  height: 44px;
+  width: 110px;
+  text-transform: none;
+  transition: background-color 0.2s, box-shadow 0.2s, color 0.2s;
+}
+
+.container .contentWrapper .pricingContainer1 .align .monthlyButton:hover {
+  box-shadow: 0px 5px 7px 0px rgba(82, 67, 194, 0.35);
+}
+
+.container .contentWrapper .pricingContainer1 .align .yearlyButton {
+  box-shadow: 0px 5px 7px 0px rgba(82, 67, 194, 0.23);
+  padding: 13px 24px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.833px;
+  height: 44px;
+  width: 110px;
+  text-transform: none;
+  transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
+}
+
+.container .contentWrapper .pricingContainer1 .align .yearlyButton:hover {
+  box-shadow: 0px 5px 7px 0px rgba(82, 67, 194, 0.35);
+}
+
+.container .contentWrapper .pricingContainer2 {
+  border-radius: 26px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 104px;
+}
+
+.contentWrapper .pricingContainer2 .pricingItem {
+  border-radius: 26px;
+  padding: 20px 30px;
+  width: 292px;
+  max-width: 292px;
+  box-sizing: border-box;
+}
+
+.contentWrapper .pricingContainer2 .pricingItem .popularTag {
+  color: #001283;
+  background-color: #fff;
+  border-radius: 13.5px;
+  width: 121px;
+  height: 27px;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.833px;
+  margin-left: auto;
+  margin-bottom: 20px;
+}
+
+.contentWrapper .pricingContainer2 .pricingItem .pricingFeature {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 232px;
+  height: 370px;
+}
+
+.contentWrapper .pricingContainer2 .pricingItem .pricingFeature .planDetails {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contentWrapper .pricingContainer2 .pricingItem .pricingFeature .planType {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.contentWrapper .pricingContainer2 .pricingItem .pricingFeature .description {
+  font-size: 15px;
+  font-weight: 500;
+  max-width: 232px;
+}
+
+.company {
+  color: #ffffff;
+  text-align: center;
+}
+
+.contentWrapper .pricingContainer2 .pricingItem .pricingFeature .planFeatures {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.contentWrapper
+  .pricingContainer2
+  .pricingItem
+  .pricingFeature
+  .mainPricingTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.contentWrapper .pricingContainer2 .pricingItem .pricingFeature .price {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 46px;
+}
+
+.contentWrapper .pricingContainer2 .pricingItem .pricingFeature .duration {
+  font-size: 17px;
+  font-weight: 500;
+  align-self: center;
+}
+
+.container .contentWrapper .pricingContainer2 .pricingItem .btnContainer {
+  display: flex;
+  align-items: center;
+}
+
+.container .contentWrapper .pricingContainer2 .pricingItem .planBtn {
+  padding: 0;
+  text-align: center;
+  font-family: "Poppins";
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 24px;
+  height: 45px;
+  text-transform: none;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+    width: calc(100%-40px);
+  }
+
+  .container .contentWrapper .pricingContainer1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .container .contentWrapper .pricingContainer1 .plansTitle {
+    width: 100%;
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .container .contentWrapper .pricingContainer1 .align .plansText {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .container .contentWrapper .pricingContainer1 .align {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .container .contentWrapper .pricingContainer1 .btnGroup {
+    margin: 0 auto;
+  }
+
+  .container .contentWrapper .pricingContainer2 {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 50px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .container {
+    padding: 20px;
+    width: calc(100%-40px);
+  }
+
+  .container .contentWrapper .pricingContainer1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .container .contentWrapper .pricingContainer1 .plansTitle {
+    width: 100%;
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .container .contentWrapper .pricingContainer1 .align .plansText {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .container .contentWrapper .pricingContainer1 .align {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .container .contentWrapper .pricingContainer1 .btnGroup {
+    margin: 0 auto;
+  }
+
+  .container .contentWrapper .pricingContainer2 {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 50px;
+  }
+
+  .container .contentWrapper .pricingContainer2 .pricingItem {
+    padding: 20px 30px;
+    width: 60%;
+    max-width: 60%;
+  }
+}

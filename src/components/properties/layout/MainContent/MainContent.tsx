@@ -14,7 +14,7 @@ import PropertyForm from "./PropertyForm/PropertyForm";
 import ProfileActions from "./ProfileActions/ProfileActions";
 import { ResidentialCompoundDetails } from "./PropertyFormFields/ResidentialCompoundDetails/ResidentialCompoundDetails";
 import { ApartmentBuildingDetails } from "./PropertyFormFields/ApartmentBuildingDetails/ApartmentBuildingDetails";
-import { StandAlonePropertyDetails } from "./PropertyFormFields/StandAloneProperty/StandAloneProperty";
+import { StandAlonePropertyDetails } from "./PropertyFormFields/StandAlonePropertyDetails/StandAlonePropertyDetails";
 import PropertyListings from "./PropertyListings/PropertyListings";
 import { properties } from "./PropertyListings/properties";
 import { Search } from "../../../../assets/icons/ui/Search";
