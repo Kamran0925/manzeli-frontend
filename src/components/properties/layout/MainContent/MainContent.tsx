@@ -12,10 +12,11 @@ import {
 import { Routes, Route, useLocation } from "react-router-dom";
 import PropertyForm from "./PropertyForm/PropertyForm";
 import ProfileActions from "./ProfileActions/ProfileActions";
+import PropertyListings from "./PropertyListings/PropertyListings";
+import PropertyDetails from "./PropertyDetails/PropertyDetails";
 import { ResidentialCompoundDetails } from "./PropertyFormFields/ResidentialCompoundDetails/ResidentialCompoundDetails";
 import { ApartmentBuildingDetails } from "./PropertyFormFields/ApartmentBuildingDetails/ApartmentBuildingDetails";
 import { StandAlonePropertyDetails } from "./PropertyFormFields/StandAlonePropertyDetails/StandAlonePropertyDetails";
-import PropertyListings from "./PropertyListings/PropertyListings";
 import { properties } from "./PropertyListings/properties";
 import { Search } from "../../../../assets/icons/ui/Search";
 import Menu from "../../../../assets/icons/ui/Menu";
@@ -23,7 +24,6 @@ import Plus from "../../../../assets/icons/ui/Plus";
 import GridItem from "../../../../assets/icons/ui/GridItem";
 import Profile from "../../../../assets/icons/ui/Profile";
 import Notification from "../../../../assets/icons/ui/Notification";
-import PropertyDetails from "./PropertyDetails/PropertyDetails";
 import styles from "./MainContent.module.css";
 
 const Main = () => {
@@ -37,10 +37,9 @@ const Main = () => {
   ];
 
   const [profileActions, setProfileActions] = useState(false);
+  const [gridView, setGridView] = useState(false);
 
   const location = useLocation();
-
-  const [gridView, setGridView] = useState(false);
 
   return (
     <Box className={styles.mainContent}>
@@ -62,7 +61,11 @@ const Main = () => {
       </Box>
 
       <Box className={styles.subTitleBar}>
-        <Typography className={styles.subTitle}>Property Details</Typography>
+        <Typography className={styles.subTitle}>
+          {location.pathname === "/property/details"
+            ? "Property Details"
+            : "Property List"}
+        </Typography>
 
         <Box className={styles.subTitleActions}>
           <Button className={styles.addPropertyButton} variant="contained">
@@ -149,7 +152,6 @@ const Main = () => {
                   color: "#7F7F7F",
                   fontFamily: "Poppins",
                   fontSize: "12px",
-                  fontStyle: "normal",
                   fontWeight: 500,
                   lineHeight: "100%",
                   padding: "11.006px 10px 8.994px 10px",
@@ -171,7 +173,7 @@ const Main = () => {
               className={styles.menuContainer}
               onClick={() => setGridView(false)}
               sx={{
-                backgroundColor: !gridView ? "#001283" : "#FFF",
+                backgroundColor: !gridView ? "#001283" : "transparent",
                 color: !gridView ? "#FFF" : "#000",
               }}
             >
@@ -181,7 +183,7 @@ const Main = () => {
               className={styles.menuContainer}
               onClick={() => setGridView(true)}
               sx={{
-                backgroundColor: gridView ? "#001283" : "#FFF",
+                backgroundColor: gridView ? "#001283" : "transparent",
                 color: gridView ? "#FFF" : "#000",
               }}
             >
