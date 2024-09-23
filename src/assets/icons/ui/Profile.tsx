@@ -5,6 +5,7 @@ interface ProfileProps extends React.SVGProps<SVGSVGElement> {
   height?: string | number;
   fill?: string;
   background?: string;
+  onClick: (event: React.MouseEvent<SVGSVGElement>) => void;
 }
 
 const Profile: React.FC<ProfileProps> = ({

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import ProfileActions from "../ProfileActions/ProfileActions";
 import Profile from "../../../../../assets/icons/ui/Profile";
@@ -6,27 +6,15 @@ import Notification from "../../../../../assets/icons/ui/Notification";
 import styles from "./PropertyHeader.module.css";
 
 const PropertyHeader: React.FC = () => {
-  const [profileActions, setProfileActions] = useState(false);
-  const profileActionsRef = useRef<HTMLDivElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | SVGSVGElement>(null);
 
-  const handleClose = () => setProfileActions(false);
+  const handleClick = (event: React.MouseEvent<SVGSVGElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        profileActionsRef.current &&
-        !profileActionsRef.current.contains(event.target as Node)
-      ) {
-        handleClose();
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <Box className={styles.mainBar}>
@@ -35,14 +23,8 @@ const PropertyHeader: React.FC = () => {
       </Typography>
       <Box className={styles.mainBarIcons}>
         <Notification />
-        <Profile
-          background="#001283"
-          fill="#FFF"
-          onClick={() => setProfileActions(true)}
-        />
-        {profileActions && (
-          <ProfileActions handleClose={handleClose} ref={profileActionsRef} />
-        )}
+        <Profile background="#001283" fill="#FFF" onClick={handleClick} />
+        <ProfileActions anchorEl={anchorEl} handleClose={handleClose} />
       </Box>
     </Box>
   );
