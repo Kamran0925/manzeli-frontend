@@ -4,7 +4,6 @@ import {
   Button,
   InputAdornment,
   Select,
-  SelectChangeEvent,
   TextField,
   Typography,
   MenuItem,
@@ -27,10 +26,6 @@ import Notification from "../../../../assets/icons/ui/Notification";
 import styles from "./MainContent.module.css";
 
 const Main = () => {
-  const handleChange = (event: SelectChangeEvent<string | number>) => {
-    console.log(event.target.value);
-  };
-
   const propertyTypeOptions = [
     { value: "Residential", label: "Residential" },
     { value: "Commercial", label: "Commercial" },
