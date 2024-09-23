@@ -10,7 +10,15 @@ export const PropertyListItem: React.FC<{
   key: number;
   property: Property;
 }> = ({ property }) => {
-  const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLButtonElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <Box className={styles.propertyItem}>
@@ -33,13 +41,11 @@ export const PropertyListItem: React.FC<{
           position: "relative",
         }}
       >
-        <Button
-          className={styles.actionBtn}
-          onClick={() => setOpen(prev => !prev)}
-        >
+        <Button className={styles.actionBtn} onClick={handleClick}>
           <VerticalDots />
         </Button>
-        {open && <PropertyItemActions handleClose={() => setOpen(false)} />}
+
+        <PropertyItemActions anchorEl={anchorEl} handleClose={handleClose} />
       </Box>
     </Box>
   );
