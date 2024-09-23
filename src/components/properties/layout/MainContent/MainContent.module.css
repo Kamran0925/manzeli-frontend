@@ -7,26 +7,6 @@
   width: calc(100vw - 320px);
 }
 
-.mainContent .mainBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.mainContent .mainBar .mainHeading {
-  color: #000;
-  font-family: "Poppins";
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 110%;
-}
-
-.mainContent .mainBar .mainBarIcons {
-  display: flex;
-  gap: 24px;
-  position: relative;
-}
-
 .subTitleBar {
   margin-top: 22px;
   display: flex;
@@ -140,17 +120,6 @@
     width: calc(100% - 28px);
   }
 
-  .mainContent .mainBar {
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column-reverse;
-    gap: 40px;
-  }
-
-  .mainContent .mainBar .mainHeading {
-    font-size: 24px;
-  }
-
   .mainContent .subTitleBar {
     flex-direction: column;
     align-items: flex-start;
@@ -197,10 +166,6 @@
     padding: 24px 14px;
     position: static;
     width: calc(100% - 28px);
-  }
-
-  .mainContent .mainBar .mainHeading {
-    font-size: 30px;
   }
 
   .mainContent .subTitleBar {

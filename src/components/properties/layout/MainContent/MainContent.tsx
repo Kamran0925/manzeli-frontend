@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import { Routes, Route, useLocation } from "react-router-dom";
 import PropertyForm from "./PropertyForm/PropertyForm";
-import ProfileActions from "./ProfileActions/ProfileActions";
 import PropertyListings from "./PropertyListings/PropertyListings";
 import PropertyDetails from "./PropertyDetails/PropertyDetails";
 import { ResidentialCompoundDetails } from "./PropertyFormFields/ResidentialCompoundDetails/ResidentialCompoundDetails";
@@ -19,8 +18,6 @@ import { Search } from "../../../../assets/icons/ui/Search";
 import Menu from "../../../../assets/icons/ui/Menu";
 import Plus from "../../../../assets/icons/ui/Plus";
 import GridItem from "../../../../assets/icons/ui/GridItem";
-import Profile from "../../../../assets/icons/ui/Profile";
-import Notification from "../../../../assets/icons/ui/Notification";
 import Pagination from "../../../shared/Pagination/Pagination";
 import PropertySortFilter from "./PropertySortFilter/PropertySortFilter";
 import styles from "./MainContent.module.css";
@@ -31,7 +28,6 @@ const Main = () => {
     { value: "Commercial", label: "Commercial" },
   ];
 
-  const [profileActions, setProfileActions] = useState(false);
   const [gridView, setGridView] = useState(false);
 
   const location = useLocation();
@@ -49,23 +45,6 @@ const Main = () => {
 
   return (
     <Box className={styles.mainContent}>
-      <Box className={styles.mainBar}>
-        <Typography variant="h1" className={styles.mainHeading}>
-          Welcome, John Doe!
-        </Typography>
-        <Box className={styles.mainBarIcons}>
-          <Notification />
-          <Profile
-            background="#001283"
-            fill="#FFF"
-            onClick={() => setProfileActions(true)}
-          />
-          {profileActions && (
-            <ProfileActions handleClose={() => setProfileActions(false)} />
-          )}
-        </Box>
-      </Box>
-
       <Box className={styles.subTitleBar}>
         <Typography className={styles.subTitle}>
           {location.pathname === "/property/details"
