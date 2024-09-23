@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box } from "@mui/material";
 import Menu from "../../../../../assets/icons/ui/Menu";
 import GridItem from "../../../../../assets/icons/ui/GridItem";
 import styles from "./PropertyViewToggle.module.css";
 
-const PropertyViewToggle: React.FC = () => {
-  const [gridView, setGridView] = useState(false);
+interface PropertyViewToggleProps {
+  gridView: boolean;
+  onToggle: (view: boolean) => void;
+}
 
+const PropertyViewToggle: React.FC<PropertyViewToggleProps> = ({
+  gridView,
+  onToggle,
+}) => {
   return (
     <Box className={styles.iconContainer}>
       <Box
         className={styles.menuContainer}
-        onClick={() => setGridView(false)}
+        onClick={() => onToggle(false)}
         sx={{
           backgroundColor: !gridView ? "#001283" : "transparent",
           color: !gridView ? "#FFF" : "#000",
@@ -21,7 +27,7 @@ const PropertyViewToggle: React.FC = () => {
       </Box>
       <Box
         className={styles.menuContainer}
-        onClick={() => setGridView(true)}
+        onClick={() => onToggle(true)}
         sx={{
           backgroundColor: gridView ? "#001283" : "transparent",
           color: gridView ? "#FFF" : "#000",
