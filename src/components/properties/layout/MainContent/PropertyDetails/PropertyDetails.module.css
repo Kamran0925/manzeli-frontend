@@ -54,6 +54,7 @@
 .container .container2 .titleContainer .unitsBtn:hover {
   background: #fff;
   color: #001283;
+  border: 2px solid #001283;
 }
 
 .container .locationContainer {
@@ -111,7 +112,7 @@
 }
 
 .featureText {
-  color: #7f7f7f;
+  color: #000;
   font-family: "Poppins", sans-serif;
   font-size: 12px;
   font-weight: 500;
