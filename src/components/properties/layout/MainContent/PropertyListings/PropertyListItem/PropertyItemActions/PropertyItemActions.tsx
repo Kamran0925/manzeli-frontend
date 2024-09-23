@@ -14,17 +14,19 @@ const PropertyItemActions: React.FC<PropertyItemActionsProps> = ({
 }) => {
   return (
     <Box className={styles.propertyItemActions}>
-      <Box component="div" className={styles.closeIcon} onClick={handleClose}>
-        <Cross />
-      </Box>
-      <Box className={styles.actionsAlign}>
-        <Box className={styles.actionsContainer}>
-          <Pencil />
-          <Typography className={styles.actionsFont}>Edit</Typography>
+      <Box className={styles.propertyItemContainer}>
+        <Box component="div" className={styles.closeIcon} onClick={handleClose}>
+          <Cross />
         </Box>
-        <Box className={styles.actionsContainer}>
-          <Trash />
-          <Typography className={styles.actionsFont}>Delete</Typography>
+        <Box className={styles.actionsAlign}>
+          <Box className={styles.actionsContainer}>
+            <Pencil />
+            <Typography className={styles.actionsFont}>Edit</Typography>
+          </Box>
+          <Box className={styles.actionsContainer}>
+            <Trash />
+            <Typography className={styles.actionsFont}>Delete</Typography>
+          </Box>
         </Box>
       </Box>
     </Box>
