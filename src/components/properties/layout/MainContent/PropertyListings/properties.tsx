@@ -1,3 +1,6 @@
+// This file contains dummy property data for development purposes.
+// It will be removed once data is fetched from the API.
+
 import Bed from "../../../../../assets/icons/ui/Bed";
 import Bath from "../../../../../assets/icons/ui/Bath";
 import Area from "../../../../../assets/icons/ui/Area";
