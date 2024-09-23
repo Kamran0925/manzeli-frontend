@@ -3,10 +3,8 @@ import {
   Box,
   Button,
   InputAdornment,
-  Select,
   TextField,
   Typography,
-  MenuItem,
 } from "@mui/material";
 import { Routes, Route, useLocation } from "react-router-dom";
 import PropertyForm from "./PropertyForm/PropertyForm";
@@ -24,6 +22,7 @@ import GridItem from "../../../../assets/icons/ui/GridItem";
 import Profile from "../../../../assets/icons/ui/Profile";
 import Notification from "../../../../assets/icons/ui/Notification";
 import Pagination from "../../../shared/Pagination/Pagination";
+import PropertySortFilter from "./PropertySortFilter/PropertySortFilter";
 import styles from "./MainContent.module.css";
 
 const Main = () => {
@@ -36,6 +35,17 @@ const Main = () => {
   const [gridView, setGridView] = useState(false);
 
   const location = useLocation();
+
+  const [sortOption, setSortOption] = useState("Default");
+
+  const sortOptions = [
+    { value: "Default", label: "Default" },
+    { value: "Newest", label: "Newest" },
+  ];
+
+  const handleSortChange = (value: string) => {
+    setSortOption(value);
+  };
 
   return (
     <Box className={styles.mainContent}>
@@ -111,62 +121,11 @@ const Main = () => {
           />
         )}
         <Box className={styles.sortContainer}>
-          <Box className={styles.sortingBar}>
-            <Typography className={styles.sort}>Sort by:</Typography>
-            <Select
-              defaultValue="Default"
-              className={styles.sortSelect}
-              MenuProps={{
-                PaperProps: {
-                  sx: {
-                    top: "240px !important",
-                    width: "196px !important",
-                    borderRadius: "10px",
-                    backgroundColor: "#FFF",
-                    boxShadow: "0px 4px 15.3px 0px rgba(0, 0, 0, 0.25)",
-                    padding: "10px 7px",
-                    "& .MuiMenu-list": {
-                      padding: "0 !important",
-                    },
-                    "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                      {
-                        padding: "0 !important",
-                      },
-                  },
-                },
-              }}
-              sx={{
-                "& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                  {
-                    padding: "0px",
-                  },
-                "& .css-yf8vq0-MuiSelect-nativeInput": {
-                  padding: "0px",
-                },
-              }}
-            >
-              <MenuItem
-                value="Default"
-                sx={{
-                  color: "#7F7F7F",
-                  fontFamily: "Poppins",
-                  fontSize: "12px",
-                  fontWeight: 500,
-                  lineHeight: "100%",
-                  padding: "11.006px 10px 8.994px 10px",
-                  marginBottom: "8px",
-                  borderRadius: "5px",
-                  "&:hover": {
-                    color: "#3B4CB8",
-                    backgroundColor: "#EBEDF8",
-                  },
-                }}
-              >
-                Default
-              </MenuItem>
-            </Select>
-          </Box>
-
+          <PropertySortFilter
+            options={sortOptions}
+            selectedValue={sortOption}
+            onChange={handleSortChange}
+          />
           <Box className={styles.iconContainer}>
             <Box
               className={styles.menuContainer}
