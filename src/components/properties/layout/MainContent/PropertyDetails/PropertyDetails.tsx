@@ -90,6 +90,11 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ property }) => {
                       <Checkbox defaultChecked checked color="primary" />
                     }
                     label={feature}
+                    sx={{
+                      "& .css-6pkdlj-MuiTypography-root": {
+                        color: "#000",
+                      },
+                    }}
                   />
                 );
               })}
