@@ -1,8 +1,7 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Menu, { MenuProps } from "@mui/material/Menu";
-import { Box, Typography, MenuItem } from "@mui/material";
-import Cross from "../../../assets/icons/ui/Cross";
+import { Typography, MenuItem } from "@mui/material";
 
 interface Option {
   icon: React.ReactNode;
@@ -14,7 +13,6 @@ interface OptionsDropdownProps {
   options: Option[];
   anchorEl: null | SVGSVGElement | HTMLButtonElement;
   handleClose: () => void;
-  showCross?: boolean;
 }
 
 const StyledMenu = styled((props: MenuProps) => (
@@ -40,7 +38,7 @@ const StyledMenu = styled((props: MenuProps) => (
   />
 ))(() => ({
   "& .MuiPaper-root": {
-    padding: "0px 0px 18px 10px",
+    padding: "17px 15px 17px 10px",
     boxSizing: "border-box",
     display: "flex",
     alignItems: "center",
@@ -56,8 +54,6 @@ const StyledMenu = styled((props: MenuProps) => (
   },
   "& .MuiMenu-list": {
     width: "100% ",
-    position: "relative",
-    padding: "16px 5px 0px 0px",
   },
 }));
 
@@ -65,7 +61,6 @@ export const OptionsDropdown: React.FC<OptionsDropdownProps> = ({
   options,
   anchorEl,
   handleClose,
-  showCross,
 }) => {
   const open = Boolean(anchorEl);
 
@@ -85,21 +80,6 @@ export const OptionsDropdown: React.FC<OptionsDropdownProps> = ({
       open={open}
       onClose={handleClose}
     >
-      {showCross && (
-        <Box
-          component="div"
-          onClick={handleClose}
-          sx={{
-            position: "absolute",
-            right: "5px",
-            top: "3px",
-            cursor: "pointer",
-            zIndex: 1,
-          }}
-        >
-          <Cross />
-        </Box>
-      )}
       {options.map((option, index) => (
         <MenuItem
           disableGutters={true}

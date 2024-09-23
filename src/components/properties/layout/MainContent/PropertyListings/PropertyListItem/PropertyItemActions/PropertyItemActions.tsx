@@ -18,7 +18,6 @@ const PropertyItemActions = forwardRef<
       options={PropertyActions}
       anchorEl={anchorEl}
       handleClose={handleClose}
-      showCross={true}
     />
   );
 });
