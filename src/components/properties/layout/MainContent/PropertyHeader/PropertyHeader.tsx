@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import ProfileActions from "../ProfileActions/ProfileActions";
 import Profile from "../../../../../assets/icons/ui/Profile";
@@ -7,6 +7,26 @@ import styles from "./PropertyHeader.module.css";
 
 const PropertyHeader: React.FC = () => {
   const [profileActions, setProfileActions] = useState(false);
+  const profileActionsRef = useRef<HTMLDivElement>(null);
+
+  const handleClose = () => setProfileActions(false);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        profileActionsRef.current &&
+        !profileActionsRef.current.contains(event.target as Node)
+      ) {
+        handleClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <Box className={styles.mainBar}>
@@ -21,7 +41,7 @@ const PropertyHeader: React.FC = () => {
           onClick={() => setProfileActions(true)}
         />
         {profileActions && (
-          <ProfileActions handleClose={() => setProfileActions(false)} />
+          <ProfileActions handleClose={handleClose} ref={profileActionsRef} />
         )}
       </Box>
     </Box>
