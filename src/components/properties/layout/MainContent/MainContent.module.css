@@ -100,14 +100,6 @@
   margin-top: 24.5px;
 }
 
-.filterBar .pageResults {
-  color: #7f7f7f;
-  font-family: "Poppins";
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 100%;
-}
-
 .filterBar .sortContainer {
   display: flex;
   align-items: center;

@@ -23,6 +23,7 @@ import Plus from "../../../../assets/icons/ui/Plus";
 import GridItem from "../../../../assets/icons/ui/GridItem";
 import Profile from "../../../../assets/icons/ui/Profile";
 import Notification from "../../../../assets/icons/ui/Notification";
+import Pagination from "../../../shared/Pagination/Pagination";
 import styles from "./MainContent.module.css";
 
 const Main = () => {
@@ -102,9 +103,12 @@ const Main = () => {
         }}
       >
         {location.pathname !== "/property/details" && (
-          <Typography className={styles.pageResults}>
-            Showing 1-9 of 13 Results
-          </Typography>
+          <Pagination
+            totalResults={13}
+            resultsPerPage={9}
+            currentPage={1}
+            onPageChange={() => null}
+          />
         )}
         <Box className={styles.sortContainer}>
           <Box className={styles.sortingBar}>
