@@ -7,15 +7,15 @@ interface LocationProps {
 }
 
 const Location: React.FC<LocationProps> = ({
-  width = 17.08,
-  height = 17.08,
+  width = 18.509,
+  height = 18.509,
   fill = "#273240",
 }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
     height={height}
-    viewBox="0 0 18 18"
+    viewBox="0 0 19 19"
     fill="none"
   >
     <path
