@@ -149,10 +149,6 @@
   gap: 23px;
 }
 
-/* .container .circleListItem {
-  display: list-item;
-} */
-
 .container .circleListItem .listItemText {
   color: #000;
   font-family: "Poppins";
