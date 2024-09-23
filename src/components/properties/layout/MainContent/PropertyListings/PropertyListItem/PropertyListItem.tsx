@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Box, Button, Typography } from "@mui/material";
 import LocationIcon from "../../../../../../assets/icons/ui/Location";
 import VerticalDots from "../../../../../../assets/icons/ui/VerticalDots";
@@ -11,6 +12,7 @@ export const PropertyListItem: React.FC<{
   property: Property;
 }> = ({ property }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLButtonElement>(null);
+  const navigate = useNavigate();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -20,8 +22,12 @@ export const PropertyListItem: React.FC<{
     setAnchorEl(null);
   };
 
+  const handlePropertyClick = () => {
+    navigate(`/property/details`);
+  };
+
   return (
-    <Box className={styles.propertyItem}>
+    <Box className={styles.propertyItem} onClick={handlePropertyClick}>
       <Box className={styles.itemContent}>
         <Box className={styles.align1}>
           <Typography className={styles.title}>{property.title}</Typography>
