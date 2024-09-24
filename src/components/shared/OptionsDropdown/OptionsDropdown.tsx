@@ -118,7 +118,6 @@ export const OptionsDropdown: React.FC<OptionsDropdownProps> = ({
           <Typography
             sx={{
               color: "#7F7F7F",
-              fontFamily: "Poppins",
               fontSize: "10px",
               fontWeight: 500,
               lineHeight: "130%",

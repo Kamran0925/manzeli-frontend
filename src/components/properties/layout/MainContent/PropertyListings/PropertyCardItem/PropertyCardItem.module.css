@@ -21,7 +21,6 @@
 
 .propertyItemContainer .propertyItem .title {
   color: #000;
-  font-family: "Poppins";
   font-size: 20px;
   font-weight: 500;
   line-height: 110%;
@@ -36,7 +35,6 @@
 
 .propertyItemContainer .propertyItem .propertyInfo .location {
   color: #7f7f7f;
-  font-family: "Poppins";
   font-size: 12px;
   font-weight: 400;
   line-height: 110%;
@@ -85,7 +83,6 @@
 .propertyItemContainer .propertyItemActions .details {
   color: #fff;
   text-align: center;
-  font-family: "Poppins";
   font-size: 16px;
   font-weight: 500;
   line-height: 140%;

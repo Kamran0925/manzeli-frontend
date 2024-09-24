@@ -32,7 +32,6 @@
 
 .container .container2 .titleContainer .title {
   color: #000;
-  font-family: "Poppins";
   font-size: 32px;
   font-weight: 500;
   line-height: 110%;
@@ -64,9 +63,7 @@
 
 .container .location {
   color: #515151;
-  font-family: "Poppins";
   font-size: 16px;
-  font-style: normal;
   font-weight: 400;
   line-height: 110%;
 }
@@ -83,7 +80,6 @@
   text-align: center;
   font-family: "Poppins";
   font-size: 18px;
-  font-style: normal;
   font-weight: 500;
   line-height: 140%;
 }
@@ -114,7 +110,6 @@
 
 .featureText {
   color: #000;
-  font-family: "Poppins", sans-serif;
   font-size: 12px;
   font-weight: 500;
   line-height: 1.1;
@@ -131,9 +126,7 @@
   margin-top: 30px;
   margin-bottom: 19.44px;
   color: #000;
-  font-family: "Poppins";
   font-size: 20px;
-  font-style: normal;
   font-weight: 500;
   line-height: 110%;
   letter-spacing: 0.2px;
@@ -149,16 +142,12 @@
 
 .container .circleListItem .listItemText {
   color: #000;
-  font-family: "Poppins";
   font-size: 18px;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
 }
 
 .container .images {
   color: #000;
-  font-family: "Poppins";
   font-size: 20px;
   font-weight: 500;
   line-height: 110%;

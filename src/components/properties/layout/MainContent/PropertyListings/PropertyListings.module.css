@@ -24,13 +24,11 @@
 @media (max-width: 600px) {
   .container {
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     gap: 20px;
   }
 
   .filterBar {
-    display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
@@ -38,12 +36,10 @@
   }
 
   .filterBar .sortContainer {
-    display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: end;
     width: 100%;
-    gap: 20px;
   }
 }
 
