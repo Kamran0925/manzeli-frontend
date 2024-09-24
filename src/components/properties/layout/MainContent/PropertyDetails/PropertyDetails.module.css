@@ -3,10 +3,10 @@
   flex-direction: column;
   align-items: flex-start;
   width: calc(100%-40px);
-  margin-top: 28px;
+  margin-top: 27px;
   border-radius: 10px;
   background: #fff;
-  padding: 20px 20px 0px;
+  padding: 20px 20px 19px;
 }
 
 .container .container2 {
@@ -20,7 +20,7 @@
   display: flex;
   flex-direction: column;
   gap: 23px;
-  margin-top: 30px;
+  margin-top: 30.5px;
 }
 
 .container .container2 .titleContainer {
@@ -54,6 +54,7 @@
 .container .container2 .titleContainer .unitsBtn:hover {
   background: #fff;
   color: #001283;
+  border: 2px solid #001283;
 }
 
 .container .locationContainer {
@@ -62,9 +63,10 @@
 }
 
 .container .location {
-  color: hsl(0, 0%, 32%);
+  color: #515151;
   font-family: "Poppins";
-  font-size: 17.086px;
+  font-size: 16px;
+  font-style: normal;
   font-weight: 400;
   line-height: 110%;
 }
@@ -111,16 +113,12 @@
 }
 
 .featureText {
-  color: #7f7f7f;
+  color: #000;
   font-family: "Poppins", sans-serif;
   font-size: 12px;
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: 0.12px;
-}
-
-.featuresContainer2 {
-  margin-top: 23px;
 }
 
 .featuresContainer2 .featuresWrapper {
