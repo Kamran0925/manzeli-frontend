@@ -4,6 +4,29 @@ import Menu from "../../../../../assets/icons/ui/Menu";
 import GridItem from "../../../../../assets/icons/ui/GridItem";
 import styles from "./PropertyViewToggle.module.css";
 
+interface StyledMenuBoxProps {
+  isActive: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}
+
+const StyledMenuBox: React.FC<StyledMenuBoxProps> = ({
+  isActive,
+  onClick,
+  children,
+}) => (
+  <Box
+    className={styles.menuContainer}
+    onClick={onClick}
+    sx={{
+      backgroundColor: isActive ? "#001283" : "transparent",
+      color: isActive ? "#FFF" : "#000",
+    }}
+  >
+    {children}
+  </Box>
+);
+
 interface PropertyViewToggleProps {
   gridView: boolean;
   onToggle: (view: boolean) => void;
@@ -15,26 +38,12 @@ const PropertyViewToggle: React.FC<PropertyViewToggleProps> = ({
 }) => {
   return (
     <Box className={styles.iconContainer}>
-      <Box
-        className={styles.menuContainer}
-        onClick={() => onToggle(false)}
-        sx={{
-          backgroundColor: !gridView ? "#001283" : "transparent",
-          color: !gridView ? "#FFF" : "#000",
-        }}
-      >
+      <StyledMenuBox isActive={!gridView} onClick={() => onToggle(false)}>
         <Menu fill={!gridView ? "#FFF" : "#000"} />
-      </Box>
-      <Box
-        className={styles.menuContainer}
-        onClick={() => onToggle(true)}
-        sx={{
-          backgroundColor: gridView ? "#001283" : "transparent",
-          color: gridView ? "#FFF" : "#000",
-        }}
-      >
+      </StyledMenuBox>
+      <StyledMenuBox isActive={gridView} onClick={() => onToggle(true)}>
         <GridItem fill={gridView ? "#FFF" : "#000"} />
-      </Box>
+      </StyledMenuBox>
     </Box>
   );
 };
