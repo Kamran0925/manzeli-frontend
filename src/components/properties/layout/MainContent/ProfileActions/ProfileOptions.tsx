@@ -1,11 +1,9 @@
-import Logout from "../../../../../assets/icons/ui/Logout";
 import UserProfile from "../../../../../assets/icons/ui/UserProfile";
+import Logout from "../../../../../assets/icons/ui/Logout";
 
 export const ProfileOptions = [
   {
-    icon: (
-      <UserProfile height={13} width={13} fill="#7F7F7F" background="#FFF" />
-    ),
+    icon: <UserProfile />,
     optionText: "Profile Settings",
     routeLink: "/profile/settings",
   },
