@@ -27,8 +27,8 @@ export const PropertyListItem: React.FC<{
   };
 
   return (
-    <Box className={styles.propertyItem} onClick={handlePropertyClick}>
-      <Box className={styles.itemContent}>
+    <Box className={styles.propertyItem}>
+      <Box className={styles.itemContent} onClick={handlePropertyClick}>
         <Box className={styles.align1}>
           <Typography className={styles.title}>{property.title}</Typography>
           <Box className={styles.tag}>{property.type}</Box>
