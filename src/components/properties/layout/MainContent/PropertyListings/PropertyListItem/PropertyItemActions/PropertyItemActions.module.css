@@ -35,10 +35,3 @@
   font-weight: 500;
   line-height: 130%;
 }
-
-.propertyItemActions .closeIcon {
-  cursor: pointer;
-  position: absolute;
-  right: 5px;
-  top: 3px;
-}
