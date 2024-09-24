@@ -1,6 +1,6 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import Menu, { MenuProps } from "@mui/material/Menu";
+import { Menu, MenuProps, PopoverOrigin } from "@mui/material";
 import { Typography, MenuItem } from "@mui/material";
 
 interface Option {
@@ -15,28 +15,39 @@ interface OptionsDropdownProps {
   handleClose: () => void;
 }
 
-const StyledMenu = styled((props: MenuProps) => (
-  <Menu
-    elevation={0}
-    anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "right",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "right",
-    }}
-    {...props}
-    sx={{
-      "& .MuiMenu-list": {
-        display: "flex",
-        flexDirection: "column",
-        gap: "15px",
-        padding: "0px",
-      },
-    }}
-  />
-))(() => ({
+interface StyledMenuProps
+  extends Omit<MenuProps, "anchorOrigin" | "transformOrigin"> {
+  elevation?: number;
+  anchorOrigin?: PopoverOrigin;
+  transformOrigin?: PopoverOrigin;
+  sx?: object;
+}
+
+const StyledMenu = styled(
+  ({
+    elevation,
+    anchorOrigin,
+    transformOrigin,
+    sx,
+    ...props
+  }: StyledMenuProps) => (
+    <Menu
+      elevation={elevation}
+      anchorOrigin={anchorOrigin}
+      transformOrigin={transformOrigin}
+      sx={{
+        "& .MuiMenu-list": {
+          display: "flex",
+          flexDirection: "column",
+          gap: "15px",
+          padding: "0px",
+        },
+        ...sx,
+      }}
+      {...props}
+    />
+  ),
+)(() => ({
   "& .MuiPaper-root": {
     padding: "17px 15px 17px 10px",
     boxSizing: "border-box",
@@ -79,6 +90,15 @@ export const OptionsDropdown: React.FC<OptionsDropdownProps> = ({
       anchorEl={anchorEl}
       open={open}
       onClose={handleClose}
+      elevation={0}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "right",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
     >
       {options.map((option, index) => (
         <MenuItem
