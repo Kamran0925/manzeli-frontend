@@ -1,0 +1,12 @@
+.pageResults {
+  color: #7f7f7f;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 100%;
+}
+
+@media (max-width: 600px) {
+  .pageResults {
+    font-size: 14px;
+  }
+}

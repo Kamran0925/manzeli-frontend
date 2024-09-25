@@ -1,34 +1,17 @@
-import React from "react";
-import { Box, Typography } from "@mui/material";
-import Notification from "../../../../assets/icons/ui/Notification";
-import Profile from "../../../../assets/icons/ui/Profile";
-import PropertyFilters from "./PropertyFilters/PropertyFilters";
-import PropertyForm from "./PropertyForm/PropertyForm";
+import { Box } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
+import PropertyForm from "./PropertyForm/PropertyForm";
+import PropertyListings from "./PropertyListings/PropertyListings";
+import PropertyDetails from "./PropertyDetails/PropertyDetails";
 import { ResidentialCompoundDetails } from "./PropertyFormFields/ResidentialCompoundDetails/ResidentialCompoundDetails";
 import { ApartmentBuildingDetails } from "./PropertyFormFields/ApartmentBuildingDetails/ApartmentBuildingDetails";
 import { StandAlonePropertyDetails } from "./PropertyFormFields/StandAlonePropertyDetails/StandAlonePropertyDetails";
+import { properties } from "./PropertyListings/properties";
 import styles from "./MainContent.module.css";
 
 const Main = () => {
   return (
     <Box className={styles.mainContent}>
-      <Box className={styles.mainBar}>
-        <Typography variant="h1" className={styles.mainHeading}>
-          Welcome, John Doe!
-        </Typography>
-        <Box className={styles.mainBarIcons}>
-          <Notification />
-          <Profile />
-        </Box>
-      </Box>
-
-      <Box className={styles.subTitleBar}>
-        <Typography className={styles.subTitle}>Add Property</Typography>
-      </Box>
-
-      <PropertyFilters />
-
       <Routes>
         <Route
           path="residential-compound"
@@ -56,6 +39,14 @@ const Main = () => {
               formFields={StandAlonePropertyDetails}
             />
           }
+        />
+        <Route
+          path="listings"
+          element={<PropertyListings properties={properties} />}
+        />
+        <Route
+          path="details"
+          element={<PropertyDetails property={properties[0]} />}
         />
       </Routes>
     </Box>

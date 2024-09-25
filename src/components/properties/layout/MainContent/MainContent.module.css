@@ -7,60 +7,10 @@
   width: calc(100vw - 320px);
 }
 
-.mainContent .mainBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.mainContent .mainBar .mainBarIcons {
-  display: flex;
-  gap: 24px;
-}
-
-.subTitleBar {
-  margin-top: 27px;
-}
-
-.subTitleBar .subTitle {
-  color: #000;
-  font-family: "Poppins";
-  font-size: 32px;
-  font-weight: 500;
-  line-height: 110%;
-}
-
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .mainContent {
     padding: 24px 14px;
     position: static;
     width: calc(100% - 28px);
-  }
-
-  .mainContent .mainBar {
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column-reverse;
-    gap: 40px;
-  }
-
-  .mainContent .mainBar .mainHeading {
-    font-size: 24px;
-  }
-
-  .mainContent .subTitleBar .subTitle {
-    font-size: 22px;
-  }
-}
-
-@media (min-width: 601px) and (max-width: 900px) {
-  .mainContent {
-    padding: 24px 14px;
-    position: static;
-    width: calc(100% - 28px);
-  }
-
-  .mainContent .mainBar .mainHeading {
-    font-size: 30px;
   }
 }
