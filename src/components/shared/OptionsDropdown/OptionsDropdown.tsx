@@ -7,13 +7,13 @@ interface Option {
   icon: React.ReactNode;
   optionText: string;
   routeLink: string;
+  onClick?: () => void;
 }
 
 interface OptionsDropdownProps {
   options: Option[];
   anchorEl: null | SVGSVGElement | HTMLButtonElement;
   handleClose: () => void;
-  showModal?: () => void;
 }
 
 interface StyledMenuProps
@@ -73,13 +73,12 @@ export const OptionsDropdown: React.FC<OptionsDropdownProps> = ({
   options,
   anchorEl,
   handleClose,
-  showModal,
 }) => {
   const open = Boolean(anchorEl);
 
   const handleMenuItemClick = (option: Option) => {
-    if (option.optionText === "Delete" && showModal) {
-      showModal();
+    if (option.optionText === "Delete" && option.onClick) {
+      option.onClick();
     } else {
       window.location.href = option.routeLink;
     }

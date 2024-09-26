@@ -10,8 +10,8 @@ import styles from "./PropertyListItem.module.css";
 export const PropertyListItem: React.FC<{
   key: number;
   property: Property;
-  showModal: () => void;
-}> = ({ property, showModal }) => {
+  propertyActions: any;
+}> = ({ property, propertyActions }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLButtonElement>(null);
   const navigate = useNavigate();
 
@@ -55,7 +55,7 @@ export const PropertyListItem: React.FC<{
         <PropertyItemActions
           anchorEl={anchorEl}
           handleClose={handleClose}
-          showModal={showModal}
+          propertyActions={propertyActions}
         />
       </Box>
     </Box>

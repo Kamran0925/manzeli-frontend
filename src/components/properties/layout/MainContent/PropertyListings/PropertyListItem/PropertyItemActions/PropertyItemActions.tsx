@@ -1,25 +1,23 @@
 import { forwardRef } from "react";
 import { OptionsDropdown } from "../../../../../../shared/OptionsDropdown/OptionsDropdown";
-import { PropertyActions } from "./PropertyActions";
 
 interface PropertyItemActionsProps {
   anchorEl: null | SVGSVGElement | HTMLButtonElement;
   handleClose: () => void;
-  showModal: () => void;
+  propertyActions: any;
 }
 
 const PropertyItemActions = forwardRef<
   HTMLDivElement,
   PropertyItemActionsProps
->(({ anchorEl, handleClose, showModal }) => {
+>(({ anchorEl, handleClose, propertyActions }) => {
   if (!anchorEl) return null;
 
   return (
     <OptionsDropdown
-      options={PropertyActions}
+      options={propertyActions}
       anchorEl={anchorEl}
       handleClose={handleClose}
-      showModal={showModal}
     />
   );
 });

@@ -9,10 +9,19 @@ import Pagination from "../../../../shared/Pagination/Pagination";
 import { PropertyCardItem } from "./PropertyCardItem/PropertyCardItem";
 import { PropertyListItem } from "./PropertyListItem/PropertyListItem";
 import ActionModal from "../../../../shared/ActionModal/ActionModal";
+import Pencil from "../../../../../assets/icons/ui/Pencil";
+import Trash from "../../../../../assets/icons/ui/Trash";
 import styles from "./PropertyListings.module.css";
 
 interface PropertyListingsProps {
   properties: Property[];
+}
+
+interface Action {
+  icon: React.ReactNode;
+  optionText: string;
+  routeLink: string;
+  onClick?: () => void;
 }
 
 const PropertyListings: React.FC<PropertyListingsProps> = ({ properties }) => {
@@ -30,6 +39,24 @@ const PropertyListings: React.FC<PropertyListingsProps> = ({ properties }) => {
   const [gridView, setGridView] = useState(false);
 
   const [modal, setModal] = useState(false);
+
+  const showModal = () => {
+    setModal(true);
+  };
+
+  const PropertyActions: Action[] = [
+    {
+      icon: <Pencil />,
+      optionText: "Edit",
+      routeLink: "/property/edit",
+    },
+    {
+      icon: <Trash />,
+      optionText: "Delete",
+      routeLink: "/property/delete",
+      onClick: showModal,
+    },
+  ];
 
   return (
     <>
@@ -56,12 +83,16 @@ const PropertyListings: React.FC<PropertyListingsProps> = ({ properties }) => {
       <Box className={styles.container}>
         {properties.map(property =>
           gridView ? (
-            <PropertyCardItem key={property.id} property={property} />
+            <PropertyCardItem
+              key={property.id}
+              property={property}
+              showModal={showModal}
+            />
           ) : (
             <PropertyListItem
               key={property.id}
               property={property}
-              showModal={() => setModal(true)}
+              propertyActions={PropertyActions}
             />
           ),
         )}
