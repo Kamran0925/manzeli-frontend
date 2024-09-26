@@ -4,10 +4,12 @@ export interface FieldState {
   value: string;
   errorMessage: string;
   disabled: boolean;
-  step: number;
+  companyFlowStep: number | null;
+  individualFlowStep: number | null;
 }
 
 export interface FormState {
+  accountType: string;
   username: FieldState;
   email: FieldState;
   password: FieldState;
@@ -20,17 +22,21 @@ export interface FormState {
   city: FieldState;
   residence: FieldState;
   identity: FieldState;
-  profilePicture?: Blob | "";
+  company: FieldState;
+  website: FieldState;
+  profilePicture?: Blob | "" | undefined;
 }
 
 export const RegistrationFields: FormState = {
+  accountType: "",
   username: {
     title: "Full name*",
     type: "text",
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 2,
+    companyFlowStep: 3,
+    individualFlowStep: 2,
   },
   email: {
     title: "Email address*",
@@ -38,7 +44,8 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 2,
+    companyFlowStep: 3,
+    individualFlowStep: 2,
   },
   password: {
     title: "Create password*",
@@ -46,7 +53,8 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 2,
+    companyFlowStep: 3,
+    individualFlowStep: 2,
   },
   confirmPassword: {
     title: "Confirm new password",
@@ -54,7 +62,8 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 2,
+    companyFlowStep: 3,
+    individualFlowStep: 2,
   },
   isTermsAccepted: false,
   step: 0,
@@ -64,7 +73,8 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 3,
+    companyFlowStep: null,
+    individualFlowStep: 3,
   },
   address: {
     title: "Your Address",
@@ -72,7 +82,8 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 3,
+    companyFlowStep: 2,
+    individualFlowStep: 3,
   },
   street: {
     title: "",
@@ -80,7 +91,8 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 3,
+    companyFlowStep: 2,
+    individualFlowStep: 3,
   },
   city: {
     title: "",
@@ -88,7 +100,8 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 3,
+    companyFlowStep: 2,
+    individualFlowStep: 3,
   },
   residence: {
     title: "Country of residence",
@@ -96,7 +109,8 @@ export const RegistrationFields: FormState = {
     value: "AE",
     errorMessage: "",
     disabled: false,
-    step: 3,
+    companyFlowStep: null,
+    individualFlowStep: 3,
   },
   identity: {
     title: "Tax Identity Number",
@@ -104,7 +118,26 @@ export const RegistrationFields: FormState = {
     value: "",
     errorMessage: "",
     disabled: false,
-    step: 3,
+    companyFlowStep: null,
+    individualFlowStep: 3,
+  },
+  company: {
+    title: "Company Name",
+    type: "text",
+    value: "",
+    errorMessage: "",
+    disabled: false,
+    companyFlowStep: 2,
+    individualFlowStep: null,
+  },
+  website: {
+    title: "Website",
+    type: "text",
+    value: "",
+    errorMessage: "",
+    disabled: false,
+    companyFlowStep: 2,
+    individualFlowStep: null,
   },
   profilePicture: "",
 };

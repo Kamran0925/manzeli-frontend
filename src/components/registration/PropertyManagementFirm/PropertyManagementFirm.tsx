@@ -1,15 +1,24 @@
-import React, { ChangeEvent, useState } from "react";
-import { Container, Box, Typography, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { styled } from "@mui/material/styles";
-import MobileStepper from "@mui/material/MobileStepper";
+import { ChangeEvent, useEffect, useState } from "react";
+import {
+  Container,
+  Box,
+  Typography,
+  Button,
+  SelectChangeEvent,
+  styled,
+  MobileStepper,
+} from "@mui/material";
+
+import InputField from "../../shared/InputField/InputField";
 import StyledButton from "../../shared/StyledButton/StyledButton";
-import LeftArrow from "../../../assets/icons/ui/LeftArrow";
-import LockIcon from "../../../assets/icons/ui/LockIcon";
+import { AccountType, useFormContext } from "../../../context/FormContext";
+import { collectPropertyFirmErrors } from "../../../utils/validationHelpers";
+import Error from "../../shared/Error/Error";
 import Circle from "../../../assets/icons/ui/Circle";
 import FileUpload from "../../../assets/icons/ui/FileUpload";
-import { useFormContext } from "../../../context/FormContext";
-import styles from "./UploadImage.module.css";
+import LeftArrow from "../../../assets/icons/ui/LeftArrow";
+import { FormState } from "../../shared/RegistrationFields/RegistrationFields";
+import styles from "./PropertyManagementFirm.module.css";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -23,10 +32,58 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const UploadImage = () => {
-  const navigate = useNavigate();
+const PropertyManagementFirm = () => {
+  const {
+    formState,
+    validateField,
+    previousStep,
+    nextStep,
+    setProfilePicture,
+  } = useFormContext();
 
-  const { formState, setProfilePicture, previousStep } = useFormContext();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [collectedErrors, setCollectedErrors] = useState<string[]>([]);
+
+  const handleChange = (
+    event: SelectChangeEvent<string>,
+    name: string,
+    type: string,
+  ) => {
+    validateField(type, name as keyof FormState, event.target.value);
+  };
+
+  const handleSubmit = () => {
+    let isValidForm = true;
+    Object.entries(formState).forEach(([key, field]) => {
+      if (typeof field === "object" && "type" in field) {
+        if (
+          field.companyFlowStep === formState.step &&
+          formState.accountType === AccountType.PropertyManagementFirm
+        ) {
+          const isValidField = validateField(
+            field.type,
+            key as keyof FormState,
+            field.value,
+          );
+          if (!isValidField) {
+            isValidForm = false;
+          }
+        }
+      }
+    });
+
+    if (!formState.profilePicture) {
+      isValidForm = false;
+      setFileError("Please select a profile picture.");
+    }
+
+    if (isValidForm) {
+      nextStep();
+    } else {
+      setIsButtonDisabled(true);
+    }
+  };
+
   const [fileName, setFileName] = useState<string | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
 
@@ -70,22 +127,20 @@ const UploadImage = () => {
     setProfilePicture("");
   };
 
-  const handleSave = () => {
-    if (formState.profilePicture) {
-      navigate("/pricing");
-    } else {
-      setFileError("Please select a profile picture.");
-    }
-  };
+  useEffect(() => {
+    const errors = collectPropertyFirmErrors(formState);
+    setCollectedErrors(errors);
+    setIsButtonDisabled(errors.length > 0);
+  }, [formState]);
 
   return (
     <>
       <Container className={styles.box1} disableGutters={true}>
         <MobileStepper
           variant="text"
-          steps={4}
+          steps={2}
           position="static"
-          activeStep={2}
+          activeStep={0}
           backButton={
             <Button size="small" onClick={previousStep}>
               <LeftArrow />
@@ -93,10 +148,8 @@ const UploadImage = () => {
             </Button>
           }
           nextButton={null}
+          sx={{ width: "100%" }}
         />
-        <Typography variant="h4" sx={{ textAlign: "right" }} color="secondary">
-          Personal Info.
-        </Typography>
 
         <Box className={styles.box2}>
           <Typography
@@ -104,7 +157,7 @@ const UploadImage = () => {
             sx={{
               marginRight: "auto",
               fontSize: {
-                xs: "24px",
+                xs: "25px",
                 sm: "30px",
               },
               lineHeight: {
@@ -113,7 +166,7 @@ const UploadImage = () => {
               },
             }}
           >
-            Complete Your Profile!
+            Property Management Firm Registration
           </Typography>
 
           <Typography
@@ -130,17 +183,105 @@ const UploadImage = () => {
               },
             }}
           >
-            For the purpose of industry regulation, your details are required.
+            For the purpose of property management firm, your details are
+            required.
           </Typography>
 
           <Box className={styles.box3}>
+            <Box>
+              <Typography variant="h4" color="#696F79" className={styles.label}>
+                Company name
+              </Typography>
+
+              <InputField
+                type="text"
+                name="company"
+                placeholder="Enter Company Name"
+                value={formState.company.value}
+                errorMessage={formState.company.errorMessage}
+                handleChange={handleChange}
+              />
+            </Box>
+
+            <Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography
+                  variant="h4"
+                  color="#696F79"
+                  className={styles.label}
+                >
+                  Website
+                </Typography>
+                <Typography
+                  variant="h4"
+                  color="#696F79"
+                  sx={{
+                    fontSize: "14px",
+                  }}
+                >
+                  Optional
+                </Typography>
+              </Box>
+
+              <InputField
+                type="text"
+                name="website"
+                placeholder="Website"
+                value={formState.website.value}
+                errorMessage={formState.website.errorMessage}
+                handleChange={handleChange}
+              />
+            </Box>
+
+            <Box>
+              <Typography variant="h4" color="#696F79" className={styles.label}>
+                Your address
+              </Typography>
+
+              <Box className={styles.addressFields}>
+                <InputField
+                  type="text"
+                  name="address"
+                  placeholder="Enter address"
+                  value={formState.address.value}
+                  errorMessage={formState.address.errorMessage}
+                  handleChange={handleChange}
+                />
+
+                <InputField
+                  type="text"
+                  name="street"
+                  value={formState.street.value}
+                  placeholder="Enter street"
+                  errorMessage={formState.street.errorMessage}
+                  handleChange={handleChange}
+                />
+                <InputField
+                  type="text"
+                  name="city"
+                  value={formState.city.value}
+                  placeholder="Enter city"
+                  errorMessage={formState.city.errorMessage}
+                  handleChange={handleChange}
+                />
+              </Box>
+            </Box>
+          </Box>
+
+          <Box className={styles.profilePicture}>
             <Box>
               <Typography
                 variant="h4"
                 color="#696F79"
                 sx={{ marginBottom: "12px" }}
               >
-                Upload Profile Picture
+                Upload Logo
               </Typography>
 
               {formState.profilePicture ? (
@@ -159,11 +300,8 @@ const UploadImage = () => {
               <Typography
                 sx={{
                   color: fileError ? "#E80000" : "#7F7F7F",
-                  fontFamily: "Poppins",
                   fontSize: "10px",
-                  fontStyle: "normal",
                   fontWeight: 400,
-                  lineHeight: "normal",
                   marginTop: "7px",
                 }}
               >
@@ -174,7 +312,7 @@ const UploadImage = () => {
                 )}
               </Typography>
 
-              <Box className={styles.box4}>
+              <Box className={styles.profilePricture2}>
                 <Button
                   component="label"
                   role={undefined}
@@ -222,34 +360,17 @@ const UploadImage = () => {
               </Box>
             </Box>
 
+            {collectedErrors.length > 0 && <Error messages={collectedErrors} />}
             <StyledButton
               fullWidth={true}
+              disabled={isButtonDisabled}
               title="Save & Continue"
               styles={{
-                height: "54px",
-                padding: "15px 20px",
                 margin: "30px 0px",
                 backgroundColor: "#001283",
               }}
-              onClick={handleSave}
+              onClick={handleSubmit}
             />
-
-            <Typography
-              color="secondary"
-              sx={{
-                fontWeight: 400,
-                fontSize: "12px",
-                lineHeight: "18px",
-                display: "flex",
-                alignItems: "center",
-                width: "100%",
-                margin: "0 auto 20px",
-                justifyContent: "center",
-              }}
-            >
-              <LockIcon />
-              Your Info is safely secured
-            </Typography>
           </Box>
         </Box>
       </Container>
@@ -257,4 +378,4 @@ const UploadImage = () => {
   );
 };
 
-export default UploadImage;
+export default PropertyManagementFirm;

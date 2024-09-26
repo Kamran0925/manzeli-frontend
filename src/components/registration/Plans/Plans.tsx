@@ -6,6 +6,7 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import MobileStepper from "@mui/material/MobileStepper";
 import LeftArrow from "../../../assets/icons/ui/LeftArrow";
 import plans from "../../common/data/planTypes";
@@ -14,6 +15,12 @@ import styles from "./Plans.module.css";
 
 const Plans = () => {
   const [planType, setPlanType] = useState("monthly");
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/registration");
+  };
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
@@ -31,7 +38,7 @@ const Plans = () => {
           position="static"
           activeStep={3}
           backButton={
-            <Button size="small">
+            <Button size="small" onClick={handleClick}>
               <LeftArrow />
               Back
             </Button>

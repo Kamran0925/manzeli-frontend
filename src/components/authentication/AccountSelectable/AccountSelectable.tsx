@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Grid, Typography, Box, Link as MuiLink } from "@mui/material";
 import { Link } from "react-router-dom";
 import Tile from "../../shared/Tile/Tile";
 import { accountTypes } from "../../shared/AccountTypes/AccountTypes";
-import { useFormContext } from "../../../context/FormContext";
+import { AccountType, useFormContext } from "../../../context/FormContext";
 import styles from "./AccountSelectable.module.css";
 
 const AccountSelectable = () => {
   const [hoveredTileIndex, setHoveredTileIndex] = useState<number | null>(null);
 
-  const { nextStep } = useFormContext();
+  const { nextStep, setAccountType } = useFormContext();
 
-  const handleStep = () => {
+  const handleClick = (index: number) => {
+    if (index === 0) {
+      setAccountType(AccountType.PropertyManagementFirm);
+    } else if (index === 1) {
+      setAccountType(AccountType.IndividualPropertyOwner);
+    }
     nextStep();
   };
 
@@ -53,7 +58,7 @@ const AccountSelectable = () => {
                     key={index}
                     onMouseEnter={() => setHoveredTileIndex(index)}
                     onMouseLeave={() => setHoveredTileIndex(null)}
-                    onClick={index !== 0 ? handleStep : undefined}
+                    onClick={() => handleClick(index)}
                   >
                     <Tile
                       title={accountType.title}

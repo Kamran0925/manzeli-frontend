@@ -8,6 +8,7 @@ export const validate = (
     case "username":
     case "address":
     case "street":
+    case "company":
       if (value.trim().length < 5) {
         return {
           errorMessage: "Minimum of 5 characters",
@@ -124,6 +125,16 @@ export const collectContactDetailErrors = (formState: FormState): string[] => {
     formState.phone.errorMessage,
     formState.identity.errorMessage,
     formState.residence.errorMessage,
+  ].filter(error => error.length > 0);
+};
+
+export const collectPropertyFirmErrors = (formState: FormState): string[] => {
+  return [
+    formState.company.errorMessage,
+    formState.website.errorMessage,
+    formState.address.errorMessage,
+    formState.street.errorMessage,
+    formState.city.errorMessage,
   ].filter(error => error.length > 0);
 };
 

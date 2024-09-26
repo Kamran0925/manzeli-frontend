@@ -1,0 +1,74 @@
+.box1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.box2 {
+  margin: 5px auto;
+  max-width: 554px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.box3 {
+  margin-right: auto;
+  margin-top: 29px;
+  max-width: 554px;
+  width: 100%;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.box3 .label {
+  margin-bottom: 7px;
+}
+
+.box3 .addressFields {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.box4 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 554px;
+  text-align: left;
+}
+
+.box5 {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.profilePicture {
+  margin-right: auto;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.profilePricture2 {
+  display: flex;
+  align-items: flex-start;
+  align-content: space-between;
+  gap: 35px;
+  margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+  .box1 {
+    padding: 0px;
+  }
+
+  .box2 {
+    padding-left: 0;
+    margin-top: 80px;
+  }
+}

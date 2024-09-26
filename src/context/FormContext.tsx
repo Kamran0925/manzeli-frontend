@@ -6,13 +6,24 @@ import {
   RegistrationFields,
 } from "../components/shared/RegistrationFields/RegistrationFields";
 
+export enum AccountType {
+  PropertyManagementFirm = "Property Management Firm",
+  IndividualPropertyOwner = "Individual Property Owner",
+}
+
 interface FormContextType {
   formState: FormState;
-  validateField: (type: string, fieldName: string, value: any) => boolean;
+  validateField: (
+    type: string,
+    fieldName: keyof FormState,
+    value: any,
+  ) => boolean;
   nextStep: () => void;
   previousStep: () => void;
+  setAccountType: (accountType: AccountType) => void;
   setProfilePicture: (blob: Blob | "") => void;
 }
+
 const inputFieldTypes = [
   "text",
   "email",
@@ -30,9 +41,11 @@ const contactFields = [
   "street",
   "city",
   "identity",
+  "company",
+  "website",
 ];
 
-const fieldNames = ["username", "address", "street", "city"];
+const fieldNames = ["username", "address", "street", "city", "company"];
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
@@ -41,7 +54,11 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [formState, setFormState] = useState<FormState>(RegistrationFields);
 
-  const validateField = (type: string, name: string, value: string) => {
+  const validateField = (
+    type: string,
+    name: keyof FormState,
+    value: string,
+  ) => {
     let errorMessage = "";
 
     if (inputFieldTypes.includes(type) && fieldNames.includes(name)) {
@@ -58,13 +75,15 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
       errorMessage = displayError(name, errorMessage);
     }
 
+    const fieldState = formState[name] as FieldState;
     let newFieldData: FieldState = {
-      title: name,
+      title: fieldState.title,
       type: type,
       value: value,
       errorMessage: errorMessage,
       disabled: false,
-      step: formState.step,
+      individualFlowStep: fieldState.individualFlowStep,
+      companyFlowStep: fieldState.companyFlowStep,
     };
 
     setFormState(prevState => {
@@ -105,6 +124,13 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
     }));
   };
 
+  const setAccountType = (accountType: AccountType) => {
+    setFormState(prevState => ({
+      ...prevState,
+      accountType: accountType,
+    }));
+  };
+
   return (
     <FormContext.Provider
       value={{
@@ -113,6 +139,7 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
         nextStep,
         previousStep,
         setProfilePicture,
+        setAccountType,
       }}
     >
       {children}
