@@ -138,9 +138,9 @@ const PropertyManagementFirm = () => {
       <Container className={styles.box1} disableGutters={true}>
         <MobileStepper
           variant="text"
-          steps={4}
+          steps={2}
           position="static"
-          activeStep={1}
+          activeStep={0}
           backButton={
             <Button size="small" onClick={previousStep}>
               <LeftArrow />
@@ -148,6 +148,7 @@ const PropertyManagementFirm = () => {
             </Button>
           }
           nextButton={null}
+          sx={{ width: "100%" }}
         />
 
         <Box className={styles.box2}>
