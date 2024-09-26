@@ -13,6 +13,7 @@ interface OptionsDropdownProps {
   options: Option[];
   anchorEl: null | SVGSVGElement | HTMLButtonElement;
   handleClose: () => void;
+  showModal?: () => void;
 }
 
 interface StyledMenuProps
@@ -72,12 +73,17 @@ export const OptionsDropdown: React.FC<OptionsDropdownProps> = ({
   options,
   anchorEl,
   handleClose,
+  showModal,
 }) => {
   const open = Boolean(anchorEl);
 
-  const handleMenuItemClick = (routeLink: string) => {
+  const handleMenuItemClick = (option: Option) => {
+    if (option.optionText === "Delete" && showModal) {
+      showModal();
+    } else {
+      window.location.href = option.routeLink;
+    }
     handleClose();
-    window.location.href = routeLink;
   };
 
   if (!anchorEl) return null;
@@ -104,7 +110,7 @@ export const OptionsDropdown: React.FC<OptionsDropdownProps> = ({
         <MenuItem
           disableGutters={true}
           key={index}
-          onClick={() => handleMenuItemClick(option.routeLink)}
+          onClick={() => handleMenuItemClick(option)}
           disableRipple
           sx={{
             display: "flex",
