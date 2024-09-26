@@ -6,7 +6,7 @@
 }
 
 .box2 {
-  margin: 50px auto;
+  margin: 5px auto;
   max-width: 554px;
   display: flex;
   flex-direction: column;
@@ -16,9 +16,22 @@
 
 .box3 {
   margin-right: auto;
-  margin-top: 40px;
+  margin-top: 29px;
   max-width: 554px;
   width: 100%;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.box3 .label {
+  margin-bottom: 7px;
+}
+
+.box3 .addressFields {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
 }
 
 .box4 {
@@ -37,7 +50,7 @@
 
 .profilePicture {
   margin-right: auto;
-  margin-top: 29px;
+  margin-top: 30px;
   width: 100%;
 }
 

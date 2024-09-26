@@ -188,8 +188,8 @@ const PropertyManagementFirm = () => {
           </Typography>
 
           <Box className={styles.box3}>
-            <Box mt={2}>
-              <Typography variant="h4" color="#696F79">
+            <Box>
+              <Typography variant="h4" color="#696F79" className={styles.label}>
                 Company name
               </Typography>
 
@@ -201,10 +201,33 @@ const PropertyManagementFirm = () => {
                 errorMessage={formState.company.errorMessage}
                 handleChange={handleChange}
               />
+            </Box>
 
-              <Typography variant="h4" color="#696F79">
-                Website
-              </Typography>
+            <Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography
+                  variant="h4"
+                  color="#696F79"
+                  className={styles.label}
+                >
+                  Website
+                </Typography>
+                <Typography
+                  variant="h4"
+                  color="#696F79"
+                  sx={{
+                    fontSize: "14px",
+                  }}
+                >
+                  Optional
+                </Typography>
+              </Box>
 
               <InputField
                 type="text"
@@ -214,36 +237,40 @@ const PropertyManagementFirm = () => {
                 errorMessage={formState.website.errorMessage}
                 handleChange={handleChange}
               />
+            </Box>
 
-              <Typography variant="h4" color="#696F79">
+            <Box>
+              <Typography variant="h4" color="#696F79" className={styles.label}>
                 Your address
               </Typography>
 
-              <InputField
-                type="text"
-                name="address"
-                placeholder="Enter address"
-                value={formState.address.value}
-                errorMessage={formState.address.errorMessage}
-                handleChange={handleChange}
-              />
+              <Box className={styles.addressFields}>
+                <InputField
+                  type="text"
+                  name="address"
+                  placeholder="Enter address"
+                  value={formState.address.value}
+                  errorMessage={formState.address.errorMessage}
+                  handleChange={handleChange}
+                />
 
-              <InputField
-                type="text"
-                name="street"
-                value={formState.street.value}
-                placeholder="Enter street"
-                errorMessage={formState.street.errorMessage}
-                handleChange={handleChange}
-              />
-              <InputField
-                type="text"
-                name="city"
-                value={formState.city.value}
-                placeholder="Enter city"
-                errorMessage={formState.city.errorMessage}
-                handleChange={handleChange}
-              />
+                <InputField
+                  type="text"
+                  name="street"
+                  value={formState.street.value}
+                  placeholder="Enter street"
+                  errorMessage={formState.street.errorMessage}
+                  handleChange={handleChange}
+                />
+                <InputField
+                  type="text"
+                  name="city"
+                  value={formState.city.value}
+                  placeholder="Enter city"
+                  errorMessage={formState.city.errorMessage}
+                  handleChange={handleChange}
+                />
+              </Box>
             </Box>
           </Box>
 
@@ -254,7 +281,7 @@ const PropertyManagementFirm = () => {
                 color="#696F79"
                 sx={{ marginBottom: "12px" }}
               >
-                Upload Profile Picture
+                Upload Logo
               </Typography>
 
               {formState.profilePicture ? (
@@ -339,7 +366,7 @@ const PropertyManagementFirm = () => {
               disabled={isButtonDisabled}
               title="Save & Continue"
               styles={{
-                margin: "20px 0px",
+                margin: "30px 0px",
                 backgroundColor: "#001283",
               }}
               onClick={handleSubmit}
