@@ -86,7 +86,7 @@ const PropertyListings: React.FC<PropertyListingsProps> = ({ properties }) => {
             <PropertyCardItem
               key={property.id}
               property={property}
-              showModal={showModal}
+              deleteModal={showModal}
             />
           ) : (
             <PropertyListItem
@@ -97,15 +97,16 @@ const PropertyListings: React.FC<PropertyListingsProps> = ({ properties }) => {
           ),
         )}
       </Box>
-
-      <ActionModal
-        open={modal}
-        onClose={() => setModal(false)}
-        onDelete={() => setModal(false)}
-        title="Are you sure you want to delete this property?"
-        description="Once delete it won’t be undone."
-        actionBtnText="Yes, Delete"
-      />
+      {modal && (
+        <ActionModal
+          open={modal}
+          onClose={() => setModal(false)}
+          onDelete={() => setModal(false)}
+          title="Are you sure you want to delete this property?"
+          description="Once delete it won’t be undone."
+          actionBtnText="Yes, Delete"
+        />
+      )}
     </>
   );
 };
