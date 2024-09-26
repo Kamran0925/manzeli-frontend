@@ -1,0 +1,76 @@
+.dialog {
+  padding: 0px;
+  margin: 0 auto;
+}
+
+.dialog .title {
+  color: #19191a;
+  font-family: "Poppins";
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 28px;
+  padding: 24px 24px 28px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: stretch;
+  border-bottom: 2px solid #f5f5f5;
+}
+
+.dialog .description {
+  color: #646566;
+  font-family: "Poppins";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  display: flex;
+  align-items: flex-start;
+  align-self: stretch;
+  padding: 24px 24px !important;
+  border-bottom: 2px solid #f5f5f5;
+}
+
+.dialog .actions {
+  padding: 24px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.dialog .actions .cancelBtn {
+  display: flex;
+  width: 99px;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1),
+    0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+  color: #19191a;
+  font-family: "Poppins";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-transform: none;
+}
+
+.dialog .actions .deleteBtn {
+  display: flex;
+  width: 110px;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background-color: #001283;
+  box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.3) inset,
+    0px 1px 1px 0px rgba(13, 97, 181, 0.8), 0px 0px 0px 1px #3490ec;
+  color: #fff;
+  font-family: "Poppins";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-transform: none;
+}
