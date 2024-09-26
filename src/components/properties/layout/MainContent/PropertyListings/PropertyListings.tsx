@@ -8,6 +8,7 @@ import PropertyHeader from "../PropertyHeader/PropertyHeader";
 import Pagination from "../../../../shared/Pagination/Pagination";
 import { PropertyCardItem } from "./PropertyCardItem/PropertyCardItem";
 import { PropertyListItem } from "./PropertyListItem/PropertyListItem";
+import ActionModal from "../../../../shared/ActionModal/ActionModal";
 import styles from "./PropertyListings.module.css";
 
 interface PropertyListingsProps {
@@ -27,6 +28,8 @@ const PropertyListings: React.FC<PropertyListingsProps> = ({ properties }) => {
   };
 
   const [gridView, setGridView] = useState(false);
+
+  const [modal, setModal] = useState(false);
 
   return (
     <>
@@ -55,10 +58,23 @@ const PropertyListings: React.FC<PropertyListingsProps> = ({ properties }) => {
           gridView ? (
             <PropertyCardItem key={property.id} property={property} />
           ) : (
-            <PropertyListItem key={property.id} property={property} />
+            <PropertyListItem
+              key={property.id}
+              property={property}
+              showModal={() => setModal(true)}
+            />
           ),
         )}
       </Box>
+
+      <ActionModal
+        open={modal}
+        onClose={() => setModal(false)}
+        onDelete={() => setModal(false)}
+        title="Are you sure you want to delete this property?"
+        description="Once delete it won’t be undone."
+        actionBtnText="Yes, Delete"
+      />
     </>
   );
 };

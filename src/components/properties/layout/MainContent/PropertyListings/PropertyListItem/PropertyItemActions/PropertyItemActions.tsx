@@ -5,12 +5,13 @@ import { PropertyActions } from "./PropertyActions";
 interface PropertyItemActionsProps {
   anchorEl: null | SVGSVGElement | HTMLButtonElement;
   handleClose: () => void;
+  showModal: () => void;
 }
 
 const PropertyItemActions = forwardRef<
   HTMLDivElement,
   PropertyItemActionsProps
->(({ anchorEl, handleClose }) => {
+>(({ anchorEl, handleClose, showModal }) => {
   if (!anchorEl) return null;
 
   return (
@@ -18,6 +19,7 @@ const PropertyItemActions = forwardRef<
       options={PropertyActions}
       anchorEl={anchorEl}
       handleClose={handleClose}
+      showModal={showModal}
     />
   );
 });
