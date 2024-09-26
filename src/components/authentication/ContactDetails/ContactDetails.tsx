@@ -15,13 +15,14 @@ import StyledButton from "../../shared/StyledButton/StyledButton";
 import LeftArrow from "../../../assets/icons/ui/LeftArrow";
 import MobileStepper from "@mui/material/MobileStepper";
 
-import { useFormContext } from "../../../context/FormContext";
+import { AccountType, useFormContext } from "../../../context/FormContext";
 import { collectContactDetailErrors } from "../../../utils/validationHelpers";
 import LockIcon from "../../../assets/icons/ui/LockIcon";
 import { Country, countries } from "../../common/data/countries";
 import Error from "../../shared/Error/Error";
 import PhoneField from "../../shared/PhoneField/Phonefield";
 import styles from "./ContactDetails.module.css";
+import { FormState } from "../../shared/RegistrationFields/RegistrationFields";
 
 const ContactDetails = () => {
   const { formState, validateField, previousStep, nextStep } = useFormContext();
@@ -34,7 +35,7 @@ const ContactDetails = () => {
     name: string,
     type: string,
   ) => {
-    validateField(type, name, event.target.value);
+    validateField(type, name as keyof FormState, event.target.value);
   };
 
   const onChangeHandler = (event: SelectChangeEvent<string>, name: string) => {
@@ -42,20 +43,27 @@ const ContactDetails = () => {
   };
 
   const handlePhoneChange = (value: any, name: string, type: string) => {
-    validateField(type, name, value);
+    validateField(type, name as keyof FormState, value);
   };
 
   const handleSubmit = () => {
     let isValidForm = true;
     Object.entries(formState).forEach(([key, field]) => {
-      if (
-        field.step === formState.step &&
-        typeof field === "object" &&
-        "type" in field
-      ) {
-        const isValidField = validateField(field.type, key, field.value);
-        if (!isValidField) {
-          isValidForm = false;
+      if (typeof field === "object" && "type" in field) {
+        const isIndividualMatchingStep =
+          field.individualFlowStep === formState.step;
+        const isIndividualOwner =
+          formState.accountType === AccountType.IndividualPropertyOwner;
+
+        if (isIndividualOwner && isIndividualMatchingStep) {
+          const isValidField = validateField(
+            field.type,
+            key as keyof FormState,
+            field.value,
+          );
+          if (!isValidField) {
+            isValidForm = false;
+          }
         }
       }
     });

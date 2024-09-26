@@ -7,18 +7,21 @@ import {
   Button,
   Link,
 } from "@mui/material";
-
+import MobileStepper from "@mui/material/MobileStepper";
+import { useNavigate } from "react-router-dom";
 import InputField from "../../shared/InputField/InputField";
 import StyledButton from "../../shared/StyledButton/StyledButton";
 import LeftArrow from "../../../assets/icons/ui/LeftArrow";
-import MobileStepper from "@mui/material/MobileStepper";
-import { useFormContext } from "../../../context/FormContext";
+import { AccountType, useFormContext } from "../../../context/FormContext";
 import { collectErrors } from "../../../utils/validationHelpers";
 import Error from "../../shared/Error/Error";
 import TermsAndConditionsPopup from "../TermsAndConditionsPopup/TermsAndConditionsPopup";
+import { FormState } from "../../shared/RegistrationFields/RegistrationFields";
 import styles from "./SignUp.module.css";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const { formState, validateField, previousStep, nextStep } = useFormContext();
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -31,7 +34,7 @@ const SignUp = () => {
     name: string,
     type: string,
   ) => {
-    validateField(type, name, event.target.value);
+    validateField(type, name as keyof FormState, event.target.value);
   };
 
   const handleTermsAccept = () => {
@@ -41,20 +44,37 @@ const SignUp = () => {
   const handleSubmit = () => {
     let isValidForm = true;
     Object.entries(formState).forEach(([key, field]) => {
-      if (
-        field.step === formState.step &&
-        typeof field === "object" &&
-        "type" in field
-      ) {
-        const isValidField = validateField(field.type, key, field.value);
-        if (!isValidField) {
-          isValidForm = false;
+      if (typeof field === "object" && "type" in field) {
+        const isCompanyMatchingStep = field.companyFlowStep === formState.step;
+        const isIndividualMatchingStep =
+          field.individualFlowStep === formState.step;
+        const isIndividualOwner =
+          formState.accountType === AccountType.IndividualPropertyOwner;
+        const isPropertyManagement =
+          formState.accountType === AccountType.PropertyManagementFirm;
+
+        if (
+          (isIndividualOwner && isIndividualMatchingStep) ||
+          (isPropertyManagement && isCompanyMatchingStep)
+        ) {
+          const isValidField = validateField(
+            field.type,
+            key as keyof FormState,
+            field.value,
+          );
+          if (!isValidField) {
+            isValidForm = false;
+          }
         }
       }
     });
 
     if (isValidForm) {
-      nextStep();
+      if (formState.accountType === AccountType.PropertyManagementFirm) {
+        navigate("/pricing");
+      } else {
+        nextStep();
+      }
     } else {
       setIsButtonDisabled(true);
     }

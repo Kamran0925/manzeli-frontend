@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import { Container, Box, Typography, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import MobileStepper from "@mui/material/MobileStepper";
 import StyledButton from "../../shared/StyledButton/StyledButton";
@@ -23,8 +24,9 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const UploadImage = () => {
-  const { formState, setProfilePicture, nextStep, previousStep } =
-    useFormContext();
+  const navigate = useNavigate();
+
+  const { formState, setProfilePicture, previousStep } = useFormContext();
   const [fileName, setFileName] = useState<string | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
 
@@ -70,7 +72,7 @@ const UploadImage = () => {
 
   const handleSave = () => {
     if (formState.profilePicture) {
-      nextStep();
+      navigate("/pricing");
     } else {
       setFileError("Please select a profile picture.");
     }
