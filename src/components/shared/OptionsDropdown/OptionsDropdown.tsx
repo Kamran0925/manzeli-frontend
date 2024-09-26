@@ -7,6 +7,7 @@ interface Option {
   icon: React.ReactNode;
   optionText: string;
   routeLink: string;
+  onClick?: () => void;
 }
 
 interface OptionsDropdownProps {
@@ -75,9 +76,13 @@ export const OptionsDropdown: React.FC<OptionsDropdownProps> = ({
 }) => {
   const open = Boolean(anchorEl);
 
-  const handleMenuItemClick = (routeLink: string) => {
+  const handleMenuItemClick = (option: Option) => {
+    if (option.optionText === "Delete" && option.onClick) {
+      option.onClick();
+    } else {
+      window.location.href = option.routeLink;
+    }
     handleClose();
-    window.location.href = routeLink;
   };
 
   if (!anchorEl) return null;
@@ -104,7 +109,7 @@ export const OptionsDropdown: React.FC<OptionsDropdownProps> = ({
         <MenuItem
           disableGutters={true}
           key={index}
-          onClick={() => handleMenuItemClick(option.routeLink)}
+          onClick={() => handleMenuItemClick(option)}
           disableRipple
           sx={{
             display: "flex",

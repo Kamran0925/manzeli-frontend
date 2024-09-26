@@ -9,7 +9,8 @@ import styles from "./PropertyCardItem.module.css";
 export const PropertyCardItem: React.FC<{
   key: number;
   property: Property;
-}> = ({ property }) => {
+  deleteModal: () => void;
+}> = ({ property, deleteModal }) => {
   return (
     <Box className={styles.propertyItemContainer}>
       <Box className={styles.propertyItem}>
@@ -28,7 +29,7 @@ export const PropertyCardItem: React.FC<{
           <Pencil height={17.5} width={17.73} fill="#001283" />
         </IconButton>
         <Typography className={styles.details}>View Details</Typography>
-        <IconButton className={styles.btn}>
+        <IconButton className={styles.btn} onClick={deleteModal}>
           <Trash height={17.5} width={17.73} fill="#001283" />
         </IconButton>
       </Box>
