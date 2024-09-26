@@ -4,8 +4,7 @@
 }
 
 .dialog .title {
-  color: #19191a;
-  font-family: "Poppins";
+  color: #000;
   font-size: 18px;
   font-weight: 500;
   line-height: 28px;
@@ -18,8 +17,7 @@
 }
 
 .dialog .description {
-  color: #646566;
-  font-family: "Poppins";
+  color: #7f7f7f;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -39,38 +37,24 @@
   align-self: stretch;
 }
 
-.dialog .actions .cancelBtn {
-  display: flex;
-  width: 99px;
+.dialog .actions .btn {
   padding: 12px;
+  display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  background: #fff;
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1),
-    0px 0px 0px 1px rgba(0, 0, 0, 0.08);
-  color: #19191a;
-  font-family: "Poppins";
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
   text-transform: none;
 }
 
+.dialog .actions .cancelBtn {
+  border: 2px solid #f5f5f5;
+  color: #000;
+}
+
 .dialog .actions .deleteBtn {
-  display: flex;
-  width: 110px;
-  padding: 12px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
   background-color: #001283;
-  box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.3) inset,
-    0px 1px 1px 0px rgba(13, 97, 181, 0.8), 0px 0px 0px 1px #3490ec;
   color: #fff;
-  font-family: "Poppins";
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  text-transform: none;
 }
