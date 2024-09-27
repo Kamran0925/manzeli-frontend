@@ -18,33 +18,33 @@
   border-radius: 20px;
 }
 
-.sideNav .navList .activeBtn {
+.sideNav .navList .navListItem {
   border-radius: 20px;
-  background: linear-gradient(90deg, #e1e1e4 -34.58%, #fff 164.97%);
-  color: #001283;
 }
 
-.sideNav .navList .navBtn {
+.sideNav .navList .activeListItem {
+  background: linear-gradient(90deg, #e1e1e4 -34.58%, #fff 164.97%);
+}
+
+.sideNav .navList .navListItem .navBtn {
   padding: 12px;
 }
 
-.sideNav .navList .navBtn:hover {
+.sideNav .navList .navListItem .navBtn:hover {
   border-radius: 20px;
   background: linear-gradient(90deg, #e1e1e4 -34.58%, #fff 164.97%);
   color: #001283;
 }
 
-.navListItem {
+.sideNav .navList .navListItem .navBtn .activeBtn {
   border-radius: 20px;
+  color: #001283;
 }
 
 .sideNav .navList .navBtn .navItemText {
-  font-family: "Poppins", sans-serif;
   color: #7f7f7f;
   font-size: 16px;
-  font-style: normal;
   font-weight: 400;
-  line-height: 100%;
   margin: 0;
   padding: 0;
 }
