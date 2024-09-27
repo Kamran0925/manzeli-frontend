@@ -46,7 +46,7 @@ const Main = () => {
           element={<PropertyListings properties={properties} />}
         />
 
-        <Route path="tenancy-lists" element={<TenancyLists />} />
+        <Route path="tenancy" element={<TenancyLists />} />
 
         <Route
           path="details"
