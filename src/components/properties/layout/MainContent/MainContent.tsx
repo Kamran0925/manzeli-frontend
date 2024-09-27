@@ -7,6 +7,7 @@ import { ResidentialCompoundDetails } from "./PropertyFormFields/ResidentialComp
 import { ApartmentBuildingDetails } from "./PropertyFormFields/ApartmentBuildingDetails/ApartmentBuildingDetails";
 import { StandAlonePropertyDetails } from "./PropertyFormFields/StandAlonePropertyDetails/StandAlonePropertyDetails";
 import { properties } from "./PropertyListings/properties";
+import TenancyLists from "./TenancyLists/TenancyLists";
 import styles from "./MainContent.module.css";
 
 const Main = () => {
@@ -44,6 +45,9 @@ const Main = () => {
           path="listings"
           element={<PropertyListings properties={properties} />}
         />
+
+        <Route path="tenancy-lists" element={<TenancyLists />} />
+
         <Route
           path="details"
           element={<PropertyDetails property={properties[0]} />}
