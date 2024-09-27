@@ -1,6 +1,6 @@
 .tenancyTableContainer {
   margin-top: 11px;
-  border-radius: 20px;
+  border-radius: 20px !important;
   background: #fff;
 }
 
