@@ -17,3 +17,17 @@
   line-height: 100%;
   padding: 0px;
 }
+
+@media (max-width: 900px) {
+  .sortingBar {
+    margin-top: 50px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
+  }
+
+  .sortingBar .searchBar {
+    width: 100%;
+    align-self: flex-start;
+  }
+}
