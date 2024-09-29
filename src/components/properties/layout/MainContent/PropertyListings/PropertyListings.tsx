@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
 import { Property } from "./properties";
-import PropertySortFilter from "../PropertySortFilter/PropertySortFilter";
 import PropertyViewToggle from "../PropertyViewToggle/PropertyViewToggle";
 import PropertySubtitleBar from "../PropertySubtitleBar/PropertySubtitleBar";
 import PropertyHeader from "../PropertyHeader/PropertyHeader";
 import Pagination from "../../../../shared/Pagination/Pagination";
 import { PropertyCardItem } from "./PropertyCardItem/PropertyCardItem";
 import { PropertyListItem } from "./PropertyListItem/PropertyListItem";
+import SortFilter from "../../../../shared/SortFilter/SortFilter";
 import ActionModal from "../../../../shared/ActionModal/ActionModal";
 import Pencil from "../../../../../assets/icons/ui/Pencil";
 import Trash from "../../../../../assets/icons/ui/Trash";
@@ -71,7 +71,7 @@ const PropertyListings: React.FC<PropertyListingsProps> = ({ properties }) => {
           onPageChange={() => null}
         />
         <Box className={styles.sortContainer}>
-          <PropertySortFilter
+          <SortFilter
             options={sortOptions}
             selectedValue={sortOption}
             onChange={handleSortChange}
