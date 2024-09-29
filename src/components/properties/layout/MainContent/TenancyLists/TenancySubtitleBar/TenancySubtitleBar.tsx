@@ -16,11 +16,9 @@ const TenancySubtitleBar: React.FC<TenancySubtitleBarProps> = ({
     <Box className={styles.subTitleBar}>
       <Typography className={styles.subTitle}>{title}</Typography>
       {subTitleActions && (
-        <Box className={styles.subTitleActions}>
-          <Button className={styles.addTenancyButton} variant="contained">
-            <Plus /> Add New Tenancy
-          </Button>
-        </Box>
+        <Button className={styles.addTenancyButton} variant="contained">
+          <Plus /> Add New Tenancy
+        </Button>
       )}
     </Box>
   );

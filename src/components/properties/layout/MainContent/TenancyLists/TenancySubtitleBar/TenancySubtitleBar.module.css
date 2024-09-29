@@ -12,13 +12,6 @@
   line-height: 110%;
 }
 
-.subTitleBar .subTitleActions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
-
 .subTitleBar .addTenancyButton {
   width: 196px;
   height: 51px;
@@ -59,10 +52,6 @@
     font-size: 22px;
   }
 
-  .subTitleBar .subTitleActions {
-    flex-direction: column;
-    width: 100%;
-  }
   .subTitleBar .subTitleActions .addTenancyButton {
     width: 100%;
   }
