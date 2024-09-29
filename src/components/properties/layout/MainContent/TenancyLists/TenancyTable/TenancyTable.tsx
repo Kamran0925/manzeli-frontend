@@ -6,7 +6,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
 } from "@mui/material";
 import { useState } from "react";
 import VerticalDots from "../../../../../../assets/icons/ui/VerticalDots";
@@ -56,7 +55,7 @@ export default function TenancyTable() {
   ];
 
   return (
-    <TableContainer component={Paper} className={styles.tenancyTableContainer}>
+    <TableContainer className={styles.tenancyTableContainer}>
       <Table>
         <TableHead>
           <TableRow>
