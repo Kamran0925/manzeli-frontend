@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Container } from "@mui/material";
 import MainContent from "./MainContent/MainContent";
 import SideBar from "./SideBar/SideBar";
