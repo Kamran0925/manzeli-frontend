@@ -45,3 +45,19 @@
   font-weight: 400;
   line-height: 23.462px;
 }
+
+@media (max-width: 600px) {
+  .detailsBox {
+    width: calc(100% - 60px);
+  }
+
+  .detailsBox .titleContainer {
+    gap: 20px;
+  }
+
+  .detailsBox .titleContainer2 {
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+  }
+}
