@@ -1,0 +1,59 @@
+.container {
+  border-radius: 20px;
+  background: #fff;
+  margin-top: 30px;
+}
+
+.container .detailHeader {
+  padding: 25px 30px 21px 30px;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.container .detailHeader .title1 {
+  color: #000;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 110%;
+}
+
+.container .detailsRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: calc(100%-60px);
+  flex-wrap: wrap;
+  padding: 30px;
+  gap: 36px;
+}
+
+.container .detailActions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 16px;
+  padding: 14px 30px;
+  border-top: 1px solid #e3e3e3;
+}
+
+.container .detailActions .btn {
+  font-size: 16px;
+  font-weight: 400;
+  height: 44px;
+  padding: 14px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  border: 1px solid #cbcbcb;
+  text-transform: capitalize;
+}
+
+.container .detailActions .backBtn {
+  color: #232222;
+  background: #fff;
+}
+
+.container .detailActions .editBtn {
+  color: #fff;
+  background: #001283;
+}
