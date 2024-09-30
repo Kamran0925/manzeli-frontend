@@ -26,7 +26,7 @@ const Registration = () => {
       if (isIndividual) {
         switch (step) {
           case 2:
-            return <SignUp />;
+            return <SignUp activeStep={0} totalStep={4} />;
           case 3:
             return <ContactDetails />;
           case 4:
@@ -39,7 +39,7 @@ const Registration = () => {
           case 2:
             return <PropertyManagementFirm />;
           case 3:
-            return <SignUp />;
+            return <SignUp activeStep={1} totalStep={2} />;
           default:
             return <Landing />;
         }
