@@ -22,9 +22,10 @@ import styles from "./SignUp.module.css";
 interface SignUpProps {
   activeStep: number;
   totalStep: number;
+  title: string;
 }
 
-const SignUp: React.FC<SignUpProps> = ({ activeStep, totalStep }) => {
+const SignUp: React.FC<SignUpProps> = ({ activeStep, totalStep, title }) => {
   const navigate = useNavigate();
 
   const { formState, validateField, previousStep, nextStep } = useFormContext();
@@ -142,7 +143,7 @@ const SignUp: React.FC<SignUpProps> = ({ activeStep, totalStep }) => {
               },
             }}
           >
-            Register Individual Account!
+            {title}
           </Typography>
 
           <Typography
