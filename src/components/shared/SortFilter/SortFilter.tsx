@@ -1,25 +1,24 @@
 import React from "react";
 import { Box, Typography, Select, MenuItem } from "@mui/material";
-import styles from "./PropertySortFilter.module.css";
+import styles from "./SortFilter.module.css";
 
-interface PropertySortFilterProps {
+interface SortFilterProps {
   options: { value: string; label: string }[];
   selectedValue: string;
   onChange: (value: string) => void;
 }
 
-const PropertySortFilter: React.FC<PropertySortFilterProps> = ({
+const SortFilter: React.FC<SortFilterProps> = ({
   options,
   selectedValue,
   onChange,
 }) => {
   return (
-    <Box className={styles.sortingBar}>
+    <Box className={styles.sortContainer}>
       <Typography className={styles.sort}>Sort by:</Typography>
       <Select
         value={selectedValue}
         onChange={event => onChange(event.target.value)}
-        className={styles.sortSelect}
         MenuProps={{
           PaperProps: {
             sx: {
@@ -88,4 +87,4 @@ const PropertySortFilter: React.FC<PropertySortFilterProps> = ({
   );
 };
 
-export default PropertySortFilter;
+export default SortFilter;

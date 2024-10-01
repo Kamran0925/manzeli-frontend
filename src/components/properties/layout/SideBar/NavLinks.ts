@@ -1,6 +1,7 @@
 import Grid from "../../../../assets/icons/ui/Grid";
 import Home from "../../../../assets/icons/ui/Home";
 import Message from "../../../../assets/icons/ui/Message";
+import Unit from "../../../../assets/icons/ui/Unit";
 import Tenant from "../../../../assets/icons/ui/Tenant";
 import Plan from "../../../../assets/icons/ui/Plan";
 
@@ -11,19 +12,24 @@ export const NAV_LINKS = [
     label: "Dashboard",
   },
   {
-    route: "/properties",
+    route: "/property/listings",
     icon: Home,
     label: "Properties",
+  },
+  {
+    route: "/units",
+    icon: Unit,
+    label: "Units",
+  },
+  {
+    route: "/property/tenancy",
+    icon: Tenant,
+    label: "Tenancy Contracts",
   },
   {
     route: "/messages",
     icon: Message,
     label: "Messages",
-  },
-  {
-    route: "/tenants",
-    icon: Tenant,
-    label: "Tenants",
   },
   {
     route: "/plans-billing",

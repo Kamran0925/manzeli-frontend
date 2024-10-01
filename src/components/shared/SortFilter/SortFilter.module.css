@@ -1,10 +1,10 @@
-.sortingBar {
+.sortContainer {
   display: flex;
   align-items: center;
   gap: 3px;
 }
 
-.sortingBar .sort {
+.sortContainer .sort {
   color: #000;
   font-size: 14px;
   font-weight: 400;

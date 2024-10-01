@@ -1,4 +1,3 @@
-import React from "react";
 import {
   List,
   ListItem,
@@ -23,7 +22,9 @@ const SideBar = () => {
           <ListItem
             key={link.route}
             disablePadding
-            className={styles.navListItem}
+            className={classNames(styles.navListItem, {
+              [styles.activeListItem]: window.location.pathname === link.route,
+            })}
           >
             <ListItemButton
               className={classNames(styles.navBtn, {
@@ -41,7 +42,9 @@ const SideBar = () => {
               </ListItemIcon>
               <ListItemText
                 primary={link.label}
-                className={styles.navItemText}
+                className={classNames(styles.navItemText, {
+                  [styles.activeBtn]: window.location.pathname === link.route,
+                })}
                 disableTypography
               />
             </ListItemButton>
