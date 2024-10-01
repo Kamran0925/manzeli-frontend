@@ -1,0 +1,46 @@
+.fieldsSubtitle {
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 100%;
+}
+
+.table {
+  border-radius: 15px;
+  overflow: visible;
+}
+
+.tableHead {
+  border-right: 1px solid #e3e3e3;
+  border-bottom: 1px solid #e3e3e3;
+  border: 1px solid #e3e3e3;
+  background: #f4f4f4;
+}
+
+.tableHeaderCell {
+  color: #000;
+  padding: 10px;
+}
+
+.tableCell {
+  border: 1px solid #e3e3e3;
+  padding: 10px;
+  background: #fff;
+}
+
+.addRows {
+  border-left: 1px solid #e3e3e3;
+  border-right: 1px solid #e3e3e3;
+  border-bottom: 1px solid #e3e3e3;
+  border-radius: 0 0 15px 15px;
+  color: #7f7f7f;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 100%;
+  padding-top: 56.82px;
+  padding-left: 10px;
+  padding-bottom: 17.8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
