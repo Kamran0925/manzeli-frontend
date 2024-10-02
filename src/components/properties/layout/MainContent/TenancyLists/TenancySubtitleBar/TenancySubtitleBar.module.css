@@ -29,6 +29,7 @@
   display: flex;
   align-items: center;
   gap: 3px;
+  box-shadow: none;
 }
 
 .subTitleBar .addTenancyButton:hover {
