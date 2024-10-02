@@ -14,6 +14,7 @@ import Trash from "../../../../../../assets/icons/ui/Trash";
 import TenancyItemActions from "../TenancyItemActions/TenancyItemActions";
 import { tenancyData } from "../tenancyData";
 import ActionModal from "../../../../../shared/ActionModal/ActionModal";
+import { useNavigate } from "react-router-dom";
 import styles from "./TenancyTable.module.css";
 
 interface Action {
@@ -54,6 +55,12 @@ export default function TenancyTable() {
     },
   ];
 
+  const navigate = useNavigate();
+
+  const handleRowClick = () => {
+    navigate("/property/tenancy/details");
+  };
+
   return (
     <TableContainer className={styles.tenancyTableContainer}>
       <Table>
@@ -78,7 +85,12 @@ export default function TenancyTable() {
         </TableHead>
         <TableBody>
           {tenancyData.map(row => (
-            <TableRow key={row.buildingName}>
+            <TableRow
+              key={row.buildingName}
+              onClick={handleRowClick}
+              style={{ cursor: "pointer" }}
+              hover={true}
+            >
               <TableCell className={styles.tableCell}>
                 {row.buildingName}
               </TableCell>
