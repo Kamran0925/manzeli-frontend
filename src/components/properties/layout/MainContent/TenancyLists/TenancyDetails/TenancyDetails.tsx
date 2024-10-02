@@ -3,9 +3,16 @@ import { Box, Button, Typography } from "@mui/material";
 import DetailCard from "./DetailCard/DetailCard";
 import DetailTable from "./DetailTable/DetailTable";
 import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
 import styles from "./TenancyDetails.module.css";
 
 const TenancyDetails = () => {
+  const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    navigate("/property/tenancy");
+  };
+
   return (
     <>
       <PropertyHeader />
@@ -23,6 +30,7 @@ const TenancyDetails = () => {
           <Button
             variant="outlined"
             className={classNames(styles.btn, styles.backBtn)}
+            onClick={handleBackClick}
           >
             Back
           </Button>
