@@ -50,6 +50,9 @@ const ChequesTable: React.FC<ChequesTableProps> = ({ chequesData }) => {
                 Cheque Date
               </TableCell>
               <TableCell className={styles.tableHeaderCell} align="center">
+                Cheque Image
+              </TableCell>
+              <TableCell className={styles.tableHeaderCell} align="center">
                 Reminder Notification
               </TableCell>
             </TableRow>
@@ -65,6 +68,19 @@ const ChequesTable: React.FC<ChequesTableProps> = ({ chequesData }) => {
                 </TableCell>
                 <TableCell className={styles.tableCell} align="center">
                   {cheque.date}
+                </TableCell>
+                <TableCell
+                  className={styles.tableCell}
+                  align="center"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: 0,
+                    borderBottom: "1px solid #e3e3e3",
+                  }}
+                >
+                  <Box className={styles.chequeImage}></Box>
                 </TableCell>
                 <TableCell className={styles.tableCell} align="center">
                   <Checkbox />

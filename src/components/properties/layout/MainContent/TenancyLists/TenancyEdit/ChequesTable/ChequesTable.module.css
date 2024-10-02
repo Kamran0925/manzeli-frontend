@@ -21,6 +21,15 @@
   background: #fff;
 }
 
+.chequeImage {
+  background: url("../../../../../../../assets/images/cheque.png") lightgray
+    0.226px 0px / 100.195% 116.667% no-repeat;
+  width: 52px;
+  height: 21.972px;
+  padding: 10px;
+  flex-shrink: 0;
+}
+
 .addRows {
   border-left: 1px solid #e3e3e3;
   border-right: 1px solid #e3e3e3;
