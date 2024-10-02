@@ -10,8 +10,8 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import styles from "./ChequesTable.module.css";
 import Plus from "../../../../../../../assets/icons/ui/Plus";
+import styles from "./ChequesTable.module.css";
 
 export interface Cheque {
   chequeNo: string;
@@ -26,7 +26,16 @@ interface ChequesTableProps {
 const ChequesTable: React.FC<ChequesTableProps> = ({ chequesData }) => {
   return (
     <>
-      <Typography className={styles.fieldsSubtitle}>Cheques Table</Typography>
+      <Typography
+        sx={{
+          color: "#000",
+          fontSize: "16px",
+          fontWeight: 500,
+          lineHeight: "100%",
+        }}
+      >
+        Cheques Table
+      </Typography>
       <TableContainer className={styles.table}>
         <Table>
           <TableHead className={styles.tableHead}>
