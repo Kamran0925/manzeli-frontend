@@ -34,21 +34,8 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 53px;
+  gap: 20px 53px;
 }
-
-/* .container .fieldsEditContainer .fieldWrapper .inputField {
-  width: 330px;
-  flex-shrink: 0;
-  border-radius: 6px;
-  border: 1px solid #e3e3e3;
-  color: #7f7f7f;
-  font-family: "Poppins";
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 100%;
-  padding: 10px;
-} */
 
 .container .label {
   color: #21272a;
