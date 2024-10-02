@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Checkbox,
@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import Plus from "../../../../../../../assets/icons/ui/Plus";
 import styles from "./ChequesTable.module.css";
+import ActionModal from "../../../../../../shared/ActionModal/ActionModal";
 
 export interface Cheque {
   chequeNo: string;
@@ -24,6 +25,7 @@ interface ChequesTableProps {
 }
 
 const ChequesTable: React.FC<ChequesTableProps> = ({ chequesData }) => {
+  const [modal, setModal] = useState(false);
   return (
     <>
       <Typography
@@ -70,6 +72,7 @@ const ChequesTable: React.FC<ChequesTableProps> = ({ chequesData }) => {
                   {cheque.date}
                 </TableCell>
                 <TableCell
+                  onClick={() => setModal(true)}
                   className={styles.tableCell}
                   align="center"
                   sx={{
@@ -78,6 +81,7 @@ const ChequesTable: React.FC<ChequesTableProps> = ({ chequesData }) => {
                     justifyContent: "center",
                     border: 0,
                     borderBottom: "1px solid #e3e3e3",
+                    cursor: "pointer",
                   }}
                 >
                   <Box className={styles.chequeImage}></Box>
@@ -103,6 +107,27 @@ const ChequesTable: React.FC<ChequesTableProps> = ({ chequesData }) => {
           Add More Rows
         </Typography>
       </TableContainer>
+      <ActionModal
+        open={modal}
+        onClose={() => setModal(false)}
+        title={"Cheque Image"}
+        description={
+          <Box
+            className={styles.chequeImage}
+            sx={{
+              width: "85%",
+              height: "253px",
+              boxSizing: "border-box",
+              flexShrink: 0,
+              display: "flex",
+              margin: "0 auto 37px",
+              padding: 0,
+              border: 0,
+            }}
+          ></Box>
+        }
+        showActions={false}
+      />
     </>
   );
 };
