@@ -45,13 +45,14 @@
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  border: 1px solid #cbcbcb;
   text-transform: capitalize;
+  box-shadow: none;
 }
 
 .container .detailActions .backBtn {
   color: #232222;
   background: #fff;
+  border: 1px solid #cbcbcb;
 }
 
 .container .detailActions .editBtn {
