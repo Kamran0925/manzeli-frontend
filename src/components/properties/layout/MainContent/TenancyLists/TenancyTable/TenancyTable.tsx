@@ -87,20 +87,31 @@ export default function TenancyTable() {
           {tenancyData.map(row => (
             <TableRow
               key={row.buildingName}
-              onClick={handleRowClick}
               style={{ cursor: "pointer" }}
               hover={true}
             >
-              <TableCell className={styles.tableCell}>
+              <TableCell className={styles.tableCell} onClick={handleRowClick}>
                 {row.buildingName}
               </TableCell>
-              <TableCell className={styles.tableCell} align="center">
+              <TableCell
+                className={styles.tableCell}
+                align="center"
+                onClick={handleRowClick}
+              >
                 {row.apartmentNumber}
               </TableCell>
-              <TableCell className={styles.tableCell} align="center">
+              <TableCell
+                className={styles.tableCell}
+                align="center"
+                onClick={handleRowClick}
+              >
                 {row.tenantName}
               </TableCell>
-              <TableCell className={styles.tableCell} align="center">
+              <TableCell
+                className={styles.tableCell}
+                align="center"
+                onClick={handleRowClick}
+              >
                 {row.leasePeriod}
               </TableCell>
               <TableCell className={styles.tableCell} align="center">
