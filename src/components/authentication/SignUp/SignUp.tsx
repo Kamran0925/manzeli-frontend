@@ -19,7 +19,13 @@ import TermsAndConditionsPopup from "../TermsAndConditionsPopup/TermsAndConditio
 import { FormState } from "../../shared/RegistrationFields/RegistrationFields";
 import styles from "./SignUp.module.css";
 
-const SignUp = () => {
+interface SignUpProps {
+  activeStep: number;
+  totalStep: number;
+  title: string;
+}
+
+const SignUp: React.FC<SignUpProps> = ({ activeStep, totalStep, title }) => {
   const navigate = useNavigate();
 
   const { formState, validateField, previousStep, nextStep } = useFormContext();
@@ -102,9 +108,9 @@ const SignUp = () => {
       <Container className={styles.box1} disableGutters={true}>
         <MobileStepper
           variant="text"
-          steps={4}
+          steps={totalStep}
           position="static"
-          activeStep={0}
+          activeStep={activeStep}
           backButton={
             <Button size="small" onClick={handleBack}>
               <LeftArrow />
@@ -137,7 +143,7 @@ const SignUp = () => {
               },
             }}
           >
-            Register Individual Account!
+            {title}
           </Typography>
 
           <Typography
