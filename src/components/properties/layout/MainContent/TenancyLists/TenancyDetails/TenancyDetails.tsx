@@ -13,6 +13,10 @@ const TenancyDetails = () => {
     navigate("/property/tenancy");
   };
 
+  const handleEditClick = () => {
+    navigate("/property/tenancy/edit");
+  };
+
   return (
     <>
       <PropertyHeader />
@@ -37,6 +41,7 @@ const TenancyDetails = () => {
           <Button
             variant="contained"
             className={classNames(styles.btn, styles.editBtn)}
+            onClick={handleEditClick}
           >
             Edit
           </Button>
