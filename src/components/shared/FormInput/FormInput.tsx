@@ -228,6 +228,11 @@ const FormInput: React.FC<FormInputProps> = props => {
         {field.fieldConfig?.isOptional && (
           <Typography className={styles.smallText}>(Optional)</Typography>
         )}
+        {field.fieldConfig?.helpText && (
+          <Typography className={styles.smallText}>
+            ({field.fieldConfig?.helpText})
+          </Typography>
+        )}
       </Box>
 
       {inputElement}
