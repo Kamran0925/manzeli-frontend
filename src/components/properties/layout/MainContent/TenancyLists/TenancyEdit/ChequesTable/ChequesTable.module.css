@@ -30,7 +30,7 @@
   flex-shrink: 0;
 }
 
-.addRows {
+.table .addRows {
   border-left: 1px solid #e3e3e3;
   border-right: 1px solid #e3e3e3;
   border-bottom: 1px solid #e3e3e3;
