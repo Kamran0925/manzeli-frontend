@@ -120,10 +120,11 @@ export const TenantFields: { [key: string]: TenanetFieldConfig[] } = {
       fieldId: "paymentMethod",
       fieldLabel: "Payment Method:",
       fieldConfig: {
-        type: "text",
+        type: "select",
         placeholder: "Cheque",
-        value: "",
+        value: "Cheque",
         validation: { required: true },
+        options: [{ label: "Cheque", value: "Cheque" }],
       },
     },
   ],
