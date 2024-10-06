@@ -9,6 +9,7 @@ import { StandAlonePropertyDetails } from "./PropertyFormFields/StandAloneProper
 import { properties } from "./PropertyListings/properties";
 import TenancyLists from "./TenancyLists/TenancyLists";
 import TenancyDetails from "./TenancyLists/TenancyDetails/TenancyDetails";
+import TenancyEdit from "./TenancyLists/TenancyEdit/TenancyEdit";
 import styles from "./MainContent.module.css";
 
 const Main = () => {
@@ -49,6 +50,7 @@ const Main = () => {
 
         <Route path="tenancy" element={<TenancyLists />} />
         <Route path="tenancy/details" element={<TenancyDetails />} />
+        <Route path="tenancy/edit" element={<TenancyEdit />} />
 
         <Route
           path="details"

@@ -45,7 +45,7 @@ export default function TenancyTable() {
     {
       icon: <Pencil />,
       optionText: "Edit",
-      routeLink: "/tenancy/edit",
+      routeLink: "/property/tenancy/edit",
     },
     {
       icon: <Trash />,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import {
   Dialog,
   DialogActions,
@@ -13,10 +13,11 @@ import styles from "./ActionModal.module.css";
 interface ActionModalProps {
   open: boolean;
   onClose: () => void;
-  onDelete: () => void;
+  onDelete?: () => void;
   title: string;
-  description: string;
-  actionBtnText: string;
+  description: string | ReactElement;
+  actionBtnText?: string;
+  showActions?: boolean;
 }
 
 const ActionModal: React.FC<ActionModalProps> = ({
@@ -25,7 +26,8 @@ const ActionModal: React.FC<ActionModalProps> = ({
   onDelete,
   title,
   description,
-  actionBtnText,
+  actionBtnText = "Save",
+  showActions = true,
 }) => {
   return (
     <Dialog
@@ -47,22 +49,24 @@ const ActionModal: React.FC<ActionModalProps> = ({
       <DialogContent className={styles.description}>
         {description}
       </DialogContent>
-      <DialogActions className={styles.actions}>
-        <Button
-          onClick={onClose}
-          variant="outlined"
-          className={classNames(styles.btn, styles.cancelBtn)}
-        >
-          Cancel
-        </Button>
-        <Button
-          onClick={onDelete}
-          variant="contained"
-          className={classNames(styles.btn, styles.deleteBtn)}
-        >
-          {actionBtnText}
-        </Button>
-      </DialogActions>
+      {showActions && (
+        <DialogActions className={styles.actions}>
+          <Button
+            onClick={onClose}
+            variant="outlined"
+            className={classNames(styles.btn, styles.cancelBtn)}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={onDelete}
+            variant="contained"
+            className={classNames(styles.btn, styles.deleteBtn)}
+          >
+            {actionBtnText}
+          </Button>
+        </DialogActions>
+      )}
     </Dialog>
   );
 };
