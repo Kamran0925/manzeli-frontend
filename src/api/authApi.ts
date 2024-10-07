@@ -18,7 +18,7 @@ export interface RegisterationData {
   password_confirmation: string;
 }
 
-export const ClientRegisteration = async (data: RegisterationData) => {
+export const clientRegisteration = async (data: RegisterationData) => {
   const response = await apiClient.post("/api/clients/registration/", data);
   return response.data;
 };
