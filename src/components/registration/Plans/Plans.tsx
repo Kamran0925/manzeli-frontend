@@ -13,9 +13,6 @@ import LeftArrow from "../../../assets/icons/ui/LeftArrow";
 import plans from "../../common/data/planTypes";
 import PlanFeatures from "./PlanFeatures/PlanFeatures";
 import { useAuth } from "../../../context/AuthContext";
-import { useFormContext } from "../../../context/FormContext";
-import { RegisterationData } from "../../../api/authApi";
-import { clientTypes } from "../../shared/AccountTypes/AccountTypes";
 import { formatErrorMessages } from "../../../utils/errorHelper";
 import Error from "../../shared/Error/Error";
 import styles from "./Plans.module.css";
@@ -28,7 +25,6 @@ export const BillingCycles = {
 
 const Plans = () => {
   const { register } = useAuth();
-  const { formState } = useFormContext();
   const [planType, setPlanType] = useState("monthly");
   const [error, setError] = useState<string[]>([]);
   const [isRegister, setIsRegister] = useState<boolean>(false);
@@ -48,25 +44,9 @@ const Plans = () => {
 
   const handleSubmit = async () => {
     setError([]);
-    const data: RegisterationData = {
-      client_name: formState.username.value,
-      client_type: clientTypes[formState.accountType],
-      email: formState.email.value,
-      telephone: formState.phone.value,
-      street: formState.street.value,
-      city: formState.city.value,
-      country: "AE",
-      product: 1,
-      billing_cycle: BillingCycles["monthly"],
-      billing_interval: 1,
-      contact_name: formState.username.value,
-      username: formState.email.value,
-      password: formState.password.value,
-      password_confirmation: formState.confirmPassword.value,
-    };
 
     try {
-      const response = await register(data);
+      const response = await register();
       console.log("Registration successful:", response);
       setIsRegister(true);
     } catch (err: any) {
