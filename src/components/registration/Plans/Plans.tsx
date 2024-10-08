@@ -15,11 +15,16 @@ import PlanFeatures from "./PlanFeatures/PlanFeatures";
 import { useAuth } from "../../../context/AuthContext";
 import { useFormContext } from "../../../context/FormContext";
 import { RegisterationData } from "../../../api/authApi";
-import { BillingCycles } from "./BillingCycles";
 import { clientTypes } from "../../shared/AccountTypes/AccountTypes";
 import { formatErrorMessages } from "../../../utils/errorHelper";
 import Error from "../../shared/Error/Error";
 import styles from "./Plans.module.css";
+
+export const BillingCycles = {
+  monthly: "010",
+  quarterly: "020",
+  yearly: "030",
+};
 
 const Plans = () => {
   const { register } = useAuth();
