@@ -87,7 +87,7 @@ const CSVModal: React.FC<CSVModalProps> = ({
           <Button
             variant="outlined"
             className={styles.downloadBtn}
-            onMouseEnter={() => setFillColor("white")}
+            onMouseEnter={() => setFillColor("#FFF")}
             onMouseLeave={() => setFillColor("none")}
           >
             <Document fill={fillColor} /> Download Sample Template

@@ -11,6 +11,7 @@ import SortFilter from "../../../../shared/SortFilter/SortFilter";
 import ActionModal from "../../../../shared/ActionModal/ActionModal";
 import Pencil from "../../../../../assets/icons/ui/Pencil";
 import Trash from "../../../../../assets/icons/ui/Trash";
+import CSVModal from "../../../../shared/CSVModal/CSVModal";
 import styles from "./PropertyListings.module.css";
 
 interface PropertyListingsProps {
@@ -39,6 +40,7 @@ const PropertyListings: React.FC<PropertyListingsProps> = ({ properties }) => {
   const [gridView, setGridView] = useState(false);
 
   const [modal, setModal] = useState(false);
+  const [csvModal, setCsvModal] = useState(false);
 
   const showModal = () => {
     setModal(true);
@@ -61,7 +63,7 @@ const PropertyListings: React.FC<PropertyListingsProps> = ({ properties }) => {
   return (
     <>
       <PropertyHeader />
-      <PropertySubtitleBar />
+      <PropertySubtitleBar showModal={() => setCsvModal(true)} />
 
       <Box className={styles.filterBar}>
         <Pagination
@@ -97,6 +99,15 @@ const PropertyListings: React.FC<PropertyListingsProps> = ({ properties }) => {
           ),
         )}
       </Box>
+
+      <CSVModal
+        open={csvModal}
+        onClose={() => setCsvModal(false)}
+        title="File Upload"
+        description="Upload a file or multiple CSV files to add properties in bulk"
+        actionBtnText="Upload"
+      />
+
       {modal && (
         <ActionModal
           open={modal}
