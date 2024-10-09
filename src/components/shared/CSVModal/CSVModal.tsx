@@ -7,6 +7,7 @@ import {
   Button,
   Typography,
   Box,
+  Divider,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import FillCross from "../../../assets/icons/ui/FillCross";
@@ -69,6 +70,14 @@ const CSVModal: React.FC<CSVModalProps> = ({
           <Typography className={styles.formatText}>
             Formats accepted are csv
           </Typography>
+          <Divider
+            sx={{
+              width: "499px",
+              height: "1px",
+              background: "#E3E3E3",
+            }}
+          />
+
           <Typography className={styles.templateText}>
             Note: The uploaded file must match the template.
             <Link className={styles.templateLink} to={""}>
