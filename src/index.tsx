@@ -17,8 +17,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <AuthProvider>
-        <FormProvider>
+      <FormProvider>
+        <AuthProvider>
           <Router>
             <Routes>
               <Route path="property/*" element={<Layout />} />
@@ -26,8 +26,8 @@ root.render(
               <Route path="*" element={<Authentication />} />
             </Routes>
           </Router>
-        </FormProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </FormProvider>
     </ThemeProvider>
   </React.StrictMode>,
 );
