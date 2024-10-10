@@ -1,6 +1,7 @@
 import apiClient from "./apiClient";
 
 export interface RegisterationData {
+  [key: string]: string | number | Blob | null | undefined | "";
   client_name: string;
   client_type: string;
   email: string;
@@ -18,7 +19,9 @@ export interface RegisterationData {
   password_confirmation: string;
 }
 
-export const clientRegisteration = async (data: RegisterationData) => {
-  const response = await apiClient.post("/api/clients/registration/", data);
+const CLIENT_REGISTRATION_URL = "/api/clients/registration/";
+
+export const clientRegisteration = async (data: any) => {
+  const response = await apiClient.post(CLIENT_REGISTRATION_URL, data);
   return response.data;
 };

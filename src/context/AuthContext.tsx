@@ -3,6 +3,7 @@ import { clientRegisteration, RegisterationData } from "../api/authApi";
 import { useFormContext } from "./FormContext";
 import { clientTypes } from "../components/shared/AccountTypes/AccountTypes";
 import { BillingCycles } from "../components/registration/Plans/Plans";
+import { createFormData } from "../utils/inputFIeldHelper";
 
 interface AuthContextType {
   register: () => Promise<void>;
@@ -24,6 +25,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       street: formState.street.value,
       city: formState.city.value,
       country: "AE",
+      logo: formState.profilePicture,
       product: 1,
       billing_cycle: BillingCycles["monthly"],
       billing_interval: 1,
@@ -32,7 +34,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       password: formState.password.value,
       password_confirmation: formState.confirmPassword.value,
     };
-    return clientRegisteration(data);
+    const formData = createFormData(data);
+    return clientRegisteration(formData);
   };
 
   return (
