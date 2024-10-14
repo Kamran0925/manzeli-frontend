@@ -15,7 +15,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { Checkfield } from "../Checkfield/Checkfield";
 import { SelectChangeEvent } from "@mui/material/Select";
-import { PropertyFieldConfig } from "../../properties/layout/MainContent/PropertyFormFields/PropertyFieldConfig";
+import { PropertyFieldConfig } from "../../properties/layout/Main/PropertyFormFields/PropertyFieldConfig";
 import styles from "./FormInput.module.css";
 
 interface FormInputProps {
