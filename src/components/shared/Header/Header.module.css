@@ -1,0 +1,37 @@
+.mainBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mainBar .mainHeading {
+  color: #000;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 110%;
+}
+
+.mainBar .mainBarIcons {
+  display: flex;
+  gap: 24px;
+  position: relative;
+}
+
+@media (max-width: 600px) {
+  .mainBar {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column-reverse;
+    gap: 40px;
+  }
+
+  .mainBar .mainHeading {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .mainBar .mainHeading {
+    font-size: 30px;
+  }
+}
