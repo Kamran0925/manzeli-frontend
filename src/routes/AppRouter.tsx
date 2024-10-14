@@ -45,7 +45,7 @@ export const AppRouter = () => {
             }
           />
           <Route path="listings" element={<PropertyListings />} />
-          <Route path="/details/:id" element={<PropertyDetails />} />
+          <Route path="property/details/:id" element={<PropertyDetails />} />
         </Route>
 
         <Route path="tenancy/*" element={<Layout />}>
