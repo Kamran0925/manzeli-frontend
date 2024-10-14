@@ -1,0 +1,39 @@
+.detailsTable {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0px 6px 15.62px;
+  flex-grow: 1;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #f4f4f4;
+}
+
+.detailsTable .title2 {
+  color: #001283;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 110%;
+  margin: 15.37px 0px 0px 20px;
+}
+
+.detailsTable .table {
+  border-radius: 5px 5px 0px 0px;
+}
+
+.detailsTable .tableHead {
+  border-right: 1px solid #001283;
+  border-bottom: 1px solid #001283;
+  background: #001283;
+}
+
+.detailsTable .tableHeaderCell {
+  color: #fff;
+  padding: 10px;
+}
+
+.detailsTable .tableCell {
+  border: 1px solid #e3e3e3;
+  padding: 10px;
+  background: #fff;
+}

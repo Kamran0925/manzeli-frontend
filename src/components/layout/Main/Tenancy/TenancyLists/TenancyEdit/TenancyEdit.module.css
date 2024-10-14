@@ -1,0 +1,85 @@
+.container {
+  border-radius: 20px;
+  background: #fff;
+  margin-top: 27px;
+}
+
+.container .editHeader {
+  padding: 18px 19px 26px;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.container .editHeader .title1 {
+  color: #000;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 110%;
+}
+
+.container .fieldsEditContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 34.38px 20px;
+}
+
+.container .fieldsEditContainer .fieldsSubtitle {
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 100%;
+}
+
+.container .fieldsEditContainer .fieldWrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px 53px;
+}
+
+.container .label {
+  color: #21272a;
+  font-family: "Poppins";
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 23.462px;
+}
+
+.container .detailActions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 16px;
+  margin-top: 24.82px;
+  padding: 14px 30px;
+  border-top: 1px solid #e3e3e3;
+}
+
+.container .detailActions .btn {
+  font-size: 16px;
+  font-weight: 400;
+  height: 44px;
+  padding: 14px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  border: 1px solid #cbcbcb;
+  text-transform: capitalize;
+}
+
+.container .detailActions .backBtn {
+  color: #232222;
+  background: #fff;
+}
+
+.container .detailActions .editBtn {
+  color: #fff;
+  background: #001283;
+}
+
+@media (max-width: 600px) {
+  .container .fieldsEditContainer .fieldWrapper {
+    gap: 0px;
+  }
+}
