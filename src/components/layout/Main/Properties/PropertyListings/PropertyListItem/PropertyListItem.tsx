@@ -25,7 +25,7 @@ export const PropertyListItem: React.FC<{
   };
 
   const handlePropertyClick = () => {
-    navigate(`/property/details`);
+    navigate(`/property/details/` + property.id);
   };
 
   return (
