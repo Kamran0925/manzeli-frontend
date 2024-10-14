@@ -65,14 +65,14 @@
   text-align: center;
 }
 
-.dialog .contentContainer .fileUploadContainer .formatText {
+.dialog .contentContainer .formatText {
   color: #9d9d9d;
   font-size: 16px;
   font-weight: 400;
   text-align: center;
 }
 
-.dialog .dialogContent .contentContainer .fileUploadContainer .templateText {
+.dialog .dialogContent .contentContainer .templateText {
   color: #525252;
   font-size: 16px;
   font-weight: 400;
@@ -143,4 +143,32 @@
   background-color: #cdcdcd;
   color: #fff;
   box-shadow: none;
+}
+
+@media (max-width: 600px) {
+  .dialog .dialogContent {
+    padding: 0px 20px;
+  }
+
+  .dialog .dialogContent .description {
+    font-size: 14px;
+  }
+
+  .dialog .contentContainer .fileUploadContainer {
+    padding: 15px 25px;
+  }
+
+  .dialog .contentContainer .formatText {
+    font-size: 12px !important;
+  }
+
+  .dialog .dialogContent .contentContainer .templateText {
+    font-size: 12px;
+  }
+
+  .dialog .contentContainer .downloadBtn {
+    font-size: 10px;
+    font-weight: bold;
+    width: 100%;
+  }
 }

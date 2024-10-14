@@ -42,7 +42,10 @@ const CSVModal: React.FC<CSVModalProps> = ({
       className={styles.dialog}
       sx={{
         "& .MuiDialog-paper": {
-          width: "939px !important",
+          width: {
+            xs: "90%",
+            md: "939px !important",
+          },
           maxWidth: "none",
         },
         "& .css-1t1j96h-MuiPaper-root-MuiDialog-paper": {
@@ -72,7 +75,10 @@ const CSVModal: React.FC<CSVModalProps> = ({
           </Typography>
           <Divider
             sx={{
-              width: "499px",
+              width: {
+                xs: "90%",
+                md: "499px",
+              },
               height: "1px",
               background: "#E3E3E3",
             }}
