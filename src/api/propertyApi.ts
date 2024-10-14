@@ -12,6 +12,16 @@ export const getProperties = async () => {
   }
 };
 
+export const getProperty = async (id: string | undefined) => {
+  try {
+    const response = await apiClient.get(`${PROPERTY_URL}${id}/`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching property with ID ${id}:`, error);
+    throw error;
+  }
+};
+
 export const createProperty = async (propertyData: any) => {
   try {
     const response = await apiClient.post(PROPERTY_URL, propertyData);
