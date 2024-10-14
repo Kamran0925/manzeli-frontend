@@ -1,13 +1,13 @@
 import { Box, Container } from "@mui/material";
-import MainContent from "./MainContent/MainContent";
 import SideBar from "./SideBar/SideBar";
+import Main from "./Main/Main";
 
 const Layout = () => {
   return (
     <Container disableGutters={true} maxWidth={false}>
       <Box sx={{ position: "relative" }}>
         <SideBar />
-        <MainContent />
+        <Main />
       </Box>
     </Container>
   );
