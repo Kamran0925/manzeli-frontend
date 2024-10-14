@@ -62,9 +62,10 @@ const PropertyListings = () => {
   };
 
   useEffect(() => {
-    fetchProperties();
     if (properties.length > 0) {
       setLoading(false);
+    } else {
+      fetchProperties();
     }
   }, [properties]);
 
