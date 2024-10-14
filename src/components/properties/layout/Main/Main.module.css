@@ -1,0 +1,16 @@
+.mainContent {
+  padding: 42px 24px;
+  background: #f4f4f4;
+  position: absolute;
+  top: 0;
+  left: 256px;
+  width: calc(100vw - 320px);
+}
+
+@media (max-width: 900px) {
+  .mainContent {
+    padding: 24px 14px;
+    position: static;
+    width: calc(100% - 28px);
+  }
+}
