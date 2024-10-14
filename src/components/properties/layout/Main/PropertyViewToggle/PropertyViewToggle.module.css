@@ -1,0 +1,16 @@
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.iconContainer .menuContainer {
+  border-radius: 7.1px;
+  width: 35.5px;
+  height: 35.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
