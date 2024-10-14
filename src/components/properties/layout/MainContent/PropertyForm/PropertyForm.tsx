@@ -65,12 +65,14 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ title, formFields }) => {
               md={field.fieldConfig.type === "checkbox" ? 12 : 4}
               key={key}
             >
-              <FormInput
-                field={field}
-                value={formData[field.fieldId]?.value}
-                onChange={validate}
-                error={formData[field.fieldId]?.error}
-              />
+              <Box sx={{ marginBottom: "20px" }}>
+                <FormInput
+                  field={field}
+                  value={formData[field.fieldId]?.value}
+                  onChange={validate}
+                  error={formData[field.fieldId]?.error}
+                />
+              </Box>
             </Grid>
           ))}
         </Grid>

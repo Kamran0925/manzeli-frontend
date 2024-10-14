@@ -1,4 +1,5 @@
-import { PROPERTY_MANAGEMENT_FIRM, INDIVIDUAL_PROPERTY_OWNER } from "./Clients";
+export const INDIVIDUAL_PROPERTY_OWNER = "Individual Property Owner";
+export const PROPERTY_MANAGEMENT_FIRM = "Property Management Firm";
 
 type AccountType = {
   title: string;
