@@ -40,7 +40,6 @@ const StyledMenu = styled(
         "& .MuiMenu-list": {
           display: "flex",
           flexDirection: "column",
-          gap: "15px",
           padding: "0px",
         },
         ...sx,
@@ -50,7 +49,7 @@ const StyledMenu = styled(
   ),
 )(() => ({
   "& .MuiPaper-root": {
-    padding: "17px 15px 17px 10px",
+    padding: "7px 0px 0px",
     boxSizing: "border-box",
     display: "flex",
     alignItems: "center",
@@ -116,7 +115,7 @@ export const OptionsDropdown: React.FC<OptionsDropdownProps> = ({
             alignItems: "center",
             justifyContent: "flex-start",
             gap: "3px",
-            padding: 0,
+            padding: "10px 15px",
           }}
         >
           {option.icon}

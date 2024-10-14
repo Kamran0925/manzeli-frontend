@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme/theme";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Layout from "./components/properties/layout/Layout";
 import Plans from "./components/registration/Plans/Plans";
+import Authentication from "./components/authentication/authentication";
+import { AuthProvider } from "./context/AuthContext";
+import { FormProvider } from "./context/FormContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -15,13 +17,17 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <Router>
-        <Routes>
-          <Route path="property/*" element={<Layout />} />
-          <Route path="/pricing" element={<Plans />} />
-          <Route path="*" element={<App />} />
-        </Routes>
-      </Router>
+      <AuthProvider>
+        <FormProvider>
+          <Router>
+            <Routes>
+              <Route path="property/*" element={<Layout />} />
+              <Route path="pricing" element={<Plans />} />
+              <Route path="*" element={<Authentication />} />
+            </Routes>
+          </Router>
+        </FormProvider>
+      </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>,
 );

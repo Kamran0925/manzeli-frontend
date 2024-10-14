@@ -1,20 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
   Button,
   ToggleButton,
   ToggleButtonGroup,
+  Snackbar,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import MobileStepper from "@mui/material/MobileStepper";
 import LeftArrow from "../../../assets/icons/ui/LeftArrow";
 import plans from "../../common/data/planTypes";
 import PlanFeatures from "./PlanFeatures/PlanFeatures";
+import { useAuth } from "../../../context/AuthContext";
+import { formatErrorMessages } from "../../../utils/errorHelper";
+import Error from "../../shared/Error/Error";
 import styles from "./Plans.module.css";
 
+export const BillingCycles = {
+  monthly: "010",
+  quarterly: "020",
+  yearly: "030",
+};
+
 const Plans = () => {
+  const { register } = useAuth();
   const [planType, setPlanType] = useState("monthly");
+  const [error, setError] = useState<string[]>([]);
+  const [isRegister, setIsRegister] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -28,6 +41,32 @@ const Plans = () => {
   ) => {
     setPlanType(value);
   };
+
+  const handleSubmit = async () => {
+    setError([]);
+
+    try {
+      const response = await register();
+      console.log("Registration successful:", response);
+      setIsRegister(true);
+    } catch (err: any) {
+      const errorMessages = formatErrorMessages(err.response?.data) || [
+        "Client registration failed!",
+      ];
+      setError(errorMessages);
+      console.error("Registration error:", err);
+    }
+  };
+
+  useEffect(() => {
+    if (isRegister) {
+      const timer = setTimeout(() => {
+        setIsRegister(false);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isRegister]);
 
   return (
     <>
@@ -50,6 +89,18 @@ const Plans = () => {
         </Typography>
 
         <Box className={styles.contentWrapper}>
+          <Snackbar
+            open={isRegister}
+            autoHideDuration={3000}
+            onClose={() => setIsRegister(false)}
+            message="The client has been registered successfully"
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            sx={{
+              "& .css-73yezh-MuiPaper-root-MuiSnackbarContent-root": {
+                backgroundColor: "#001283",
+              },
+            }}
+          />
           <Box className={styles.pricingContainer1}>
             <Typography variant="h3" className={styles.plansTitle}>
               Plans & Pricing
@@ -93,6 +144,14 @@ const Plans = () => {
                 </ToggleButton>
               </ToggleButtonGroup>
             </Box>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            {error?.length > 0 && <Error messages={error} />}
           </Box>
 
           <Box className={styles.pricingContainer2}>
@@ -185,6 +244,7 @@ const Plans = () => {
                       },
                     }}
                     className={styles.planBtn}
+                    onClick={handleSubmit}
                   >
                     Choose plan
                   </Button>
