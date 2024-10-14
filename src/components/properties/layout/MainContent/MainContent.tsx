@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
-import { Routes, Route } from "react-router-dom";
+import { useAuth } from "../../../../context/AuthContext";
+import { Routes, Route, Navigate } from "react-router-dom";
 import PropertyForm from "./PropertyForm/PropertyForm";
 import PropertyListings from "./PropertyListings/PropertyListings";
 import PropertyDetails from "./PropertyDetails/PropertyDetails";
@@ -13,6 +14,8 @@ import TenancyEdit from "./TenancyLists/TenancyEdit/TenancyEdit";
 import styles from "./MainContent.module.css";
 
 const Main = () => {
+  const { isAuthenticated } = useAuth();
+
   return (
     <Box className={styles.mainContent}>
       <Routes>
@@ -45,7 +48,13 @@ const Main = () => {
         />
         <Route
           path="listings"
-          element={<PropertyListings properties={properties} />}
+          element={
+            isAuthenticated ? (
+              <PropertyListings properties={properties} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
 
         <Route path="tenancy" element={<TenancyLists />} />

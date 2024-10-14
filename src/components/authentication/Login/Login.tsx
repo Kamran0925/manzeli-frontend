@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
-import { Typography, Box, Link as MuiLink, Button } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Link as MuiLink,
+  Button,
+  Snackbar,
+} from "@mui/material";
 import InputField from "../../shared/InputField/InputField";
 import { Link } from "react-router-dom";
 import { displayError, validate } from "../../../utils/validationHelpers";
 import Error from "../../shared/Error/Error";
+import { useAuth } from "../../../context/AuthContext";
+import { formatErrorMessages } from "../../../utils/errorHelper";
 import styles from "./Login.module.css";
 
 interface FormField {
@@ -38,6 +46,8 @@ const Login = () => {
       errorMessage: "",
     },
   };
+  const { login, isAuthenticated } = useAuth();
+  const [loginError, setLoginError] = useState<string[]>([]);
 
   const [formState, setFormState] = useState<FormState>(initialFormState);
 
@@ -71,7 +81,7 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const emailError = validate("email", formState.email.value).errorMessage;
 
     let passwordError = validate(
@@ -96,6 +106,16 @@ const Login = () => {
       }));
       setIsButtonDisabled(true);
       return;
+    }
+
+    try {
+      const response = await login({
+        email: formState.email.value,
+        password: formState.password.value,
+      });
+      console.log(response);
+    } catch (err: any) {
+      setLoginError(formatErrorMessages(err.response.data));
     }
 
     setIsButtonDisabled(false);
@@ -129,8 +149,33 @@ const Login = () => {
     setIsButtonDisabled(!!(emailError || passwordError));
   }, [formState.email.value, formState.password.value]);
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setIsLoggedIn(true);
+
+      const logoutTimer = setTimeout(() => {
+        setIsLoggedIn(false);
+      }, 3000);
+
+      return () => clearTimeout(logoutTimer);
+    }
+  }, [isAuthenticated]);
+
   return (
     <Box component="section" className={styles.box1}>
+      <Snackbar
+        open={isLoggedIn}
+        autoHideDuration={3000}
+        message="Client has been logged in successfully"
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        sx={{
+          "& .css-73yezh-MuiPaper-root-MuiSnackbarContent-root": {
+            backgroundColor: "#001283",
+          },
+        }}
+      />
       <Box className={styles.box2}>
         <Typography
           variant="h4"
@@ -188,14 +233,14 @@ const Login = () => {
             errorMessage={formState.password.errorMessage}
             handleChange={e => handleInputChange(e, "password")}
           />
-          {collectErrors(formState).length > 0 && (
+          {(collectErrors(formState).length > 0 || loginError.length > 0) && (
             <Box
               sx={{
                 maxWidth: "554px",
                 width: "100%",
               }}
             >
-              <Error messages={collectErrors(formState)} />
+              <Error messages={[...collectErrors(formState), ...loginError]} />
             </Box>
           )}
           <MuiLink
