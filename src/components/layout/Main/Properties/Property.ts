@@ -14,16 +14,26 @@ export const contractType: { [key: string]: string } = {
   "030": "Self",
 };
 
+export interface Amenity {
+  id: number;
+  name: string;
+}
+
 export interface Property {
   id: number;
   name: string;
   type: keyof typeof propertyType;
+  type_name: string;
   contract_type: keyof typeof contractType;
+  contract_type_name: string;
   local_authority_id: string;
   street: string;
   city: string;
+  country: string;
   latitude: number;
   longitude: number;
-  amenities: Amenity[];
+  units: number;
   created_at: string;
+  amenities: Amenity[];
+  images: [];
 }
