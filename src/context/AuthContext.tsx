@@ -11,7 +11,7 @@ import {
 } from "../api/authApi";
 
 interface AuthContextType {
-  register: (data: RegisterationData) => Promise<void>;
+  register: () => Promise<void>;
   login: (data: LoginData) => any;
   isAuthenticated: boolean;
 }
@@ -37,7 +37,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       street: formState.street.value,
       city: formState.city.value,
       country: "AE",
-      logo: formState.profilePicture,
       product: 1,
       billing_cycle: BillingCycles["monthly"],
       billing_interval: 1,
