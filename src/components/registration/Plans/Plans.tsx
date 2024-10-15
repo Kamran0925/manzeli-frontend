@@ -7,27 +7,32 @@ import {
   ToggleButtonGroup,
   Snackbar,
 } from "@mui/material";
+import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 import MobileStepper from "@mui/material/MobileStepper";
 import LeftArrow from "../../../assets/icons/ui/LeftArrow";
-import plans from "../../common/data/planTypes";
 import PlanFeatures from "./PlanFeatures/PlanFeatures";
 import { useAuth } from "../../../context/AuthContext";
 import { formatErrorMessages } from "../../../utils/errorHelper";
+import { getSubscriptionPlans } from "../../../api/planApi";
 import Error from "../../shared/Error/Error";
+import Loader from "../../shared/Loader/Loader";
+import { Plan } from "../../common/data/planTypes";
 import styles from "./Plans.module.css";
 
-export const BillingCycles = {
-  monthly: "010",
-  quarterly: "020",
-  yearly: "030",
+export const BillingCycles: Record<string, string> = {
+  "010": "Monthly",
+  "020": "Quarterly",
+  "030": "Yearly",
 };
 
 const Plans = () => {
   const { register } = useAuth();
-  const [planType, setPlanType] = useState("monthly");
+  const [planType, setPlanType] = useState("010");
+  const [plans, setPlans] = useState<Plan[]>([]);
   const [error, setError] = useState<string[]>([]);
   const [isRegister, setIsRegister] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -40,6 +45,7 @@ const Plans = () => {
     value: string,
   ) => {
     setPlanType(value);
+    fetchPlans(value);
   };
 
   const handleSubmit = async () => {
@@ -67,6 +73,27 @@ const Plans = () => {
       return () => clearTimeout(timer);
     }
   }, [isRegister]);
+
+  const fetchPlans = async (planId: string) => {
+    try {
+      const fetchedPlans = await getSubscriptionPlans();
+      setPlans(
+        fetchedPlans
+          .filter((plan: Plan) => plan.billing_cycle === planId)
+          .slice(0, 3)
+          .reverse(),
+      );
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching subscription plans:", error);
+      setError(["Failed to fetch subscription plans"]);
+    }
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    fetchPlans("010");
+  }, []);
 
   return (
     <>
@@ -122,23 +149,26 @@ const Plans = () => {
                 className={styles.btnGroup}
               >
                 <ToggleButton
-                  value="monthly"
-                  className={styles.monthlyButton}
-                  sx={{
-                    color: "monthly" === planType ? "#FFF" : "#001283",
-                    backgroundColor:
-                      "monthly" === planType ? "#001283" : "#FFF",
-                  }}
+                  value="010"
+                  className={classNames(styles.btn, {
+                    [styles.activeButton]: planType === "010",
+                  })}
                 >
                   MONTHLY
                 </ToggleButton>
                 <ToggleButton
-                  value="yearly"
-                  className={styles.yearlyButton}
-                  sx={{
-                    color: "yearly" === planType ? "#FFF" : "#3B3472",
-                    backgroundColor: "yearly" === planType ? "#3B3472" : "#FFF",
-                  }}
+                  value="020"
+                  className={classNames(styles.btn, {
+                    [styles.activeButton]: planType === "020",
+                  })}
+                >
+                  QUARTERLY
+                </ToggleButton>
+                <ToggleButton
+                  value="030"
+                  className={classNames(styles.btn, {
+                    [styles.activeButton]: planType === "030",
+                  })}
                 >
                   YEARLY
                 </ToggleButton>
@@ -154,104 +184,108 @@ const Plans = () => {
             {error?.length > 0 && <Error messages={error} />}
           </Box>
 
-          <Box className={styles.pricingContainer2}>
-            {plans.map((plan, index) => (
-              <Box
-                key={index}
-                className={styles.pricingItem}
-                sx={{
-                  backgroundColor:
-                    plan.type === "Company"
-                      ? "#001283"
-                      : "rgba(255, 255, 255, 0.50)",
-                  boxShadow:
-                    plan.type === "Company"
-                      ? "0px 42px 34px 0px rgba(82, 67, 194, 0.3)"
-                      : "none,",
-                }}
-              >
-                {plan.type === "Company" && (
-                  <Typography className={styles.popularTag}>
-                    MOST POPULAR
-                  </Typography>
-                )}
+          {!loading ? (
+            <Box className={styles.pricingContainer2}>
+              {plans?.map((plan, index) => (
                 <Box
-                  sx={{ marginTop: plan.type === "Company" ? "0px" : "47px" }}
-                  className={styles.pricingFeature}
+                  key={index}
+                  className={styles.pricingItem}
+                  sx={{
+                    backgroundColor:
+                      plan.name === "Company"
+                        ? "#001283"
+                        : "rgba(255, 255, 255, 0.50)",
+                    boxShadow:
+                      plan.name === "Company"
+                        ? "0px 42px 34px 0px rgba(82, 67, 194, 0.3)"
+                        : "none,",
+                  }}
                 >
-                  <Box className={styles.mainPricingTitle}>
-                    <Typography
-                      className={styles.price}
-                      sx={{
-                        color: plan.type === "Company" ? " #FFFFFF" : "#001283",
-                      }}
-                    >
-                      ${plan.price}
+                  {plan.name === "Company" && (
+                    <Typography className={styles.popularTag}>
+                      MOST POPULAR
                     </Typography>
-                    <Typography
-                      className={styles.duration}
-                      sx={{
-                        color: plan.type === "Company" ? " #FFFFFF" : "#848199",
-                      }}
-                    >
-                      /{plan.duration}
-                    </Typography>
-                  </Box>
-
-                  <Box className={styles.planDetails}>
-                    <Typography
-                      className={styles.planType}
-                      sx={{
-                        color: plan.type === "Company" ? "#FFF" : "#001283",
-                      }}
-                    >
-                      {plan.type}
-                    </Typography>
-                    <Typography
-                      className={styles.description}
-                      sx={{
-                        color: plan.type === "Company" ? "#FFF" : "#848199",
-                      }}
-                    >
-                      {plan.description}
-                    </Typography>
-                  </Box>
-
-                  <Box className={styles.planFeatures}>
-                    <PlanFeatures
-                      plantype={plan.type}
-                      features={plan.features}
-                    />
-                  </Box>
-                </Box>
-
-                <Box className={styles.btnContainer}>
-                  <Button
-                    sx={{
-                      color: plan.type === "Company" ? "#001283" : "#838199",
-                      backgroundColor:
-                        plan.type === "Company" ? "#FFF" : "#E5E3F6",
-                      width: {
-                        xs: "100%",
-                        md: "207px",
-                      },
-                      opacity: plan.type === "Company" ? "none" : "0.5",
-                      "&:hover": {
-                        color: plan.type === "Company" ? "#FFF" : "#838199",
-                        backgroundColor:
-                          plan.type === "Company" ? "#001283" : "#E5E3F6",
-                        outline: "2px solid white",
-                      },
-                    }}
-                    className={styles.planBtn}
-                    onClick={handleSubmit}
+                  )}
+                  <Box
+                    sx={{ marginTop: plan.name === "Company" ? "0px" : "47px" }}
+                    className={styles.pricingFeature}
                   >
-                    Choose plan
-                  </Button>
+                    <Box className={styles.mainPricingTitle}>
+                      <Typography
+                        className={styles.price}
+                        sx={{
+                          color:
+                            plan.name === "Company" ? "#FFFFFF" : "#001283",
+                        }}
+                      >
+                        ${plan.price}
+                      </Typography>
+                      <Typography
+                        className={styles.duration}
+                        sx={{
+                          color:
+                            plan.name === "Company" ? "#FFFFFF" : "#848199",
+                        }}
+                      >
+                        /{BillingCycles[plan.billing_cycle]}
+                      </Typography>
+                    </Box>
+
+                    <Box className={styles.planDetails}>
+                      <Typography
+                        className={styles.planType}
+                        sx={{
+                          color: plan.name === "Company" ? "#FFF" : "#001283",
+                        }}
+                      >
+                        {plan.name}
+                      </Typography>
+                      <Typography
+                        className={styles.description}
+                        sx={{
+                          color: plan.name === "Company" ? "#FFF" : "#848199",
+                        }}
+                      >
+                        {plan.memo}
+                      </Typography>
+                    </Box>
+
+                    <Box className={styles.planFeatures}>
+                      <PlanFeatures plantype={plan.name} />
+                    </Box>
+                  </Box>
+
+                  <Box className={styles.btnContainer}>
+                    <Button
+                      sx={{
+                        color: plan.name === "Company" ? "#001283" : "#838199",
+                        backgroundColor:
+                          plan.name === "Company" ? "#FFF" : "#E5E3F6",
+                        width: {
+                          xs: "100%",
+                          md: "207px",
+                        },
+                        opacity: plan.name === "Company" ? "none" : "0.5",
+                        "&:hover": {
+                          color: plan.name === "Company" ? "#FFF" : "#FFF",
+                          backgroundColor:
+                            plan.name === "Company" ? "#001283" : "#001283",
+                          outline: "2px solid white",
+                          opacity: "1",
+                        },
+                      }}
+                      className={styles.planBtn}
+                      onClick={handleSubmit}
+                    >
+                      Choose plan
+                    </Button>
+                  </Box>
                 </Box>
-              </Box>
-            ))}
-          </Box>
+              ))}
+            </Box>
+          ) : (
+            <Loader />
+          )}
         </Box>
       </Box>
     </>
