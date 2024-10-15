@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PropertyHeader from "../../../../shared/Header/Header";
+import Header from "../../../../shared/Header/Header";
 import TenancySubtitleBar from "./TenancySubtitleBar/TenancySubtitleBar";
 import TenancyTable from "./TenancyTable/TenancyTable";
 import TenancyFilter from "./TenancyFilter/TenancyFilter";
@@ -18,7 +18,7 @@ const TenancyLists = () => {
 
   return (
     <>
-      <PropertyHeader />
+      <Header />
       <TenancySubtitleBar title="Tenancy List" />
 
       <TenancyFilter

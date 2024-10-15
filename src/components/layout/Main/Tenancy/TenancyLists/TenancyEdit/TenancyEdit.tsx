@@ -1,4 +1,4 @@
-import PropertyHeader from "../../../../../shared/Header/Header";
+import Header from "../../../../../shared/Header/Header";
 import { Box, Button, Typography } from "@mui/material";
 import classNames from "classnames";
 import { TenantFields } from "./TenantFields";
@@ -22,7 +22,7 @@ const TenancyEdit = () => {
 
   return (
     <>
-      <PropertyHeader />
+      <Header />
       <Typography
         sx={{
           color: "#020615",

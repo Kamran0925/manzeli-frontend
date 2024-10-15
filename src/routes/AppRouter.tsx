@@ -6,7 +6,6 @@ import { ApartmentBuildingDetails } from "../components/layout/Main/Properties/P
 import { ResidentialCompoundDetails } from "../components/layout/Main/Properties/PropertyFormFields/ResidentialCompoundDetails/ResidentialCompoundDetails";
 import { StandAlonePropertyDetails } from "../components/layout/Main/Properties/PropertyFormFields/StandAlonePropertyDetails/StandAlonePropertyDetails";
 import PropertyListings from "../components/layout/Main/Properties/PropertyListings/PropertyListings";
-import PropertyDetails from "../components/layout/Main/Properties/PropertyDetails/PropertyDetails";
 import TenancyDetails from "../components/layout/Main/Tenancy/TenancyLists/TenancyDetails/TenancyDetails";
 import TenancyEdit from "../components/layout/Main/Tenancy/TenancyLists/TenancyEdit/TenancyEdit";
 import TenancyLists from "../components/layout/Main/Tenancy/TenancyLists/TenancyLists";
@@ -45,7 +44,7 @@ export const AppRouter = () => {
             }
           />
           <Route path="listings" element={<PropertyListings />} />
-          <Route path="property/details/:id" element={<PropertyDetails />} />
+          {/* <Route path="property/details/:id" element={<PropertyDetails />} /> */}
         </Route>
 
         <Route path="tenancy/*" element={<Layout />}>

@@ -1,4 +1,4 @@
-import PropertyHeader from "../../../../../shared/Header/Header";
+import Header from "../../../../../shared/Header/Header";
 import { Box, Button, Typography } from "@mui/material";
 import DetailCard from "./DetailCard/DetailCard";
 import DetailTable from "./DetailTable/DetailTable";
@@ -19,7 +19,7 @@ const TenancyDetails = () => {
 
   return (
     <>
-      <PropertyHeader />
+      <Header />
       <Box className={styles.container}>
         <Box className={styles.detailHeader}>
           <Typography className={styles.title1}>Tenancy Details</Typography>

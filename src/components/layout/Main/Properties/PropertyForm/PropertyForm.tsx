@@ -3,7 +3,7 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import classNames from "classnames";
 import FormInput from "../../../../shared/FormInput/FormInput";
 import { PropertyFieldConfig } from "../PropertyFormFields/PropertyFieldConfig";
-import PropertyHeader from "../../../../shared/Header/Header";
+import Header from "../../../../shared/Header/Header";
 import { createProperty } from "../../../../../api/propertyApi";
 import styles from "./PropertyForm.module.css";
 
@@ -71,7 +71,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ title, formFields }) => {
 
   return (
     <>
-      <PropertyHeader />
+      <Header />
       <Box className={styles.propertyForm}>
         <Box className={styles.header}>
           <Typography className={styles.title}>{title}</Typography>
