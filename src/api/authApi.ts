@@ -19,9 +19,17 @@ export interface RegisterationData {
   password_confirmation: string;
 }
 
-const CLIENT_REGISTRATION_URL = "/api/clients/registration/";
+export interface LoginData {
+  email: string;
+  password: string;
+}
 
-export const clientRegisteration = async (data: any) => {
-  const response = await apiClient.post(CLIENT_REGISTRATION_URL, data);
+export const clientRegisteration = async (data: RegisterationData) => {
+  const response = await apiClient.post("/api/clients/registration/", data);
+  return response.data;
+};
+
+export const clientLogin = async (data: LoginData) => {
+  const response = await apiClient.post("/api/token/", data);
   return response.data;
 };

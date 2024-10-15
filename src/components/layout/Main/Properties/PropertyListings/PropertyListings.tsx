@@ -13,6 +13,7 @@ import Trash from "../../../../../assets/icons/ui/Trash";
 import { deleteProperty, getProperties } from "../../../../../api/propertyApi";
 import { Property } from "../Property";
 import Loader from "../../../../shared/Loader/Loader";
+import CSVModal from "../../../../shared/CSVModal/CSVModal";
 import styles from "./PropertyListings.module.css";
 
 interface Action {
@@ -29,6 +30,7 @@ const PropertyListings = () => {
   const [loading, setLoading] = useState(true);
   const [gridView, setGridView] = useState(false);
   const [modal, setModal] = useState(false);
+  const [csvModal, setCsvModal] = useState(false);
 
   const sortOptions = [
     { value: "Default", label: "Default" },
@@ -130,6 +132,14 @@ const PropertyListings = () => {
           )}
         </Box>
       )}
+
+      <CSVModal
+        open={csvModal}
+        onClose={() => setCsvModal(false)}
+        title="File Upload"
+        description="Upload a file or multiple CSV files to add properties in bulk"
+        actionBtnText="Upload"
+      />
 
       {modal && (
         <ActionModal

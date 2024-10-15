@@ -1,12 +1,19 @@
 import React, { createContext, ReactNode } from "react";
-import { clientRegisteration, RegisterationData } from "../api/authApi";
 import { useFormContext } from "./FormContext";
+import { useState } from "react";
 import { clientTypes } from "../components/shared/AccountTypes/AccountTypes";
 import { BillingCycles } from "../components/registration/Plans/Plans";
-import { createFormData } from "../utils/inputFIeldHelper";
+import {
+  clientLogin,
+  clientRegisteration,
+  LoginData,
+  RegisterationData,
+} from "../api/authApi";
 
 interface AuthContextType {
-  register: () => Promise<void>;
+  register: (data: RegisterationData) => Promise<void>;
+  login: (data: LoginData) => any;
+  isAuthenticated: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -15,6 +22,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const { formState } = useFormContext();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [tokens, setTokens] = useState<{
+    access: string;
+    refresh: string;
+  } | null>(null);
 
   const register = async () => {
     const data: RegisterationData = {
@@ -34,12 +46,22 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       password: formState.password.value,
       password_confirmation: formState.confirmPassword.value,
     };
-    const formData = createFormData(data);
-    return clientRegisteration(formData);
+    return clientRegisteration(data);
+  };
+
+  const login = async (data: LoginData) => {
+    const response = await clientLogin(data);
+    if (response.access && response.refresh) {
+      setTokens({ access: response.access, refresh: response.refresh });
+      setIsAuthenticated(true);
+    }
+    return response;
   };
 
   return (
-    <AuthContext.Provider value={{ register }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ register, login, isAuthenticated }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 
