@@ -48,11 +48,11 @@ const Plans = () => {
     fetchPlans(value);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (planId: number) => {
     setError([]);
 
     try {
-      const response = await register();
+      const response = await register(planId);
       console.log("Registration successful:", response);
       setIsRegister(true);
     } catch (err: any) {
@@ -275,7 +275,7 @@ const Plans = () => {
                         },
                       }}
                       className={styles.planBtn}
-                      onClick={handleSubmit}
+                      onClick={() => handleSubmit(plan.id)}
                     >
                       Choose plan
                     </Button>
