@@ -88,7 +88,10 @@ const PropertyListings = () => {
   return (
     <>
       <Header />
-      <PropertySubtitleBar title="Property List" />
+      <PropertySubtitleBar
+        title="Property List"
+        showModal={() => setCsvModal(true)}
+      />
 
       <Box className={styles.filterBar}>
         <Pagination
