@@ -70,7 +70,7 @@
 
 .container .container3 .tag {
   padding: 0.705px 7.754px;
-  width: 86px;
+  max-width: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
