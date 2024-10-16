@@ -68,6 +68,12 @@ const StyledMenu = styled(
   },
 }));
 
+const actions = ["Delete", "Logout"] as const;
+
+const isActionableOption = (optionText: string): boolean => {
+  return actions.includes(optionText as (typeof actions)[number]);
+};
+
 export const OptionsDropdown: React.FC<OptionsDropdownProps> = ({
   options,
   anchorEl,
@@ -76,7 +82,7 @@ export const OptionsDropdown: React.FC<OptionsDropdownProps> = ({
   const open = Boolean(anchorEl);
 
   const handleMenuItemClick = (option: Option) => {
-    if (option.optionText === "Delete" && option.onClick) {
+    if (isActionableOption(option.optionText) && option.onClick) {
       option.onClick();
     } else {
       window.location.href = option.routeLink;
