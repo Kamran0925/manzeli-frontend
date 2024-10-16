@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode } from "react";
+import React, { createContext, ReactNode, useEffect } from "react";
 import { useFormContext } from "./FormContext";
 import { useState } from "react";
 import { clientTypes } from "../components/shared/AccountTypes/AccountTypes";
@@ -9,6 +9,7 @@ import {
   LoginData,
   RegisterationData,
 } from "../api/authApi";
+import apiClient from "../api/apiClient";
 
 interface AuthContextType {
   register: () => Promise<void>;
@@ -56,6 +57,26 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     }
     return response;
   };
+
+  useEffect(() => {
+    const storedAccessToken = localStorage.getItem("accessToken");
+    if (storedAccessToken) {
+      setTokens({ access: storedAccessToken, refresh: "" });
+      setIsAuthenticated(true);
+      apiClient.defaults.headers.Authorization = `Bearer ${storedAccessToken}`;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (tokens) {
+      if (tokens.access) {
+        localStorage.setItem("accessToken", tokens.access);
+        apiClient.defaults.headers.Authorization = `Bearer ${tokens.access}`;
+      } else {
+        delete apiClient.defaults.headers.Authorization;
+      }
+    }
+  }, [tokens]);
 
   return (
     <AuthContext.Provider value={{ register, login, isAuthenticated }}>
