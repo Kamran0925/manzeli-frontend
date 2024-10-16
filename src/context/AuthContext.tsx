@@ -13,6 +13,7 @@ import apiClient from "../api/apiClient";
 interface AuthContextType {
   register: (planId: number) => Promise<void>;
   login: (data: LoginData) => any;
+  logout: () => void;
   isAuthenticated: boolean;
   isLoading: boolean;
 }
@@ -57,6 +58,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     return response;
   };
 
+  const logout = () => {
+    setIsAuthenticated(false);
+    setTokens(null);
+    localStorage.removeItem("accessToken");
+    delete apiClient.defaults.headers.Authorization;
+  };
+
   useEffect(() => {
     const storedAccessToken = localStorage.getItem("accessToken");
     if (storedAccessToken) {
@@ -83,7 +91,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   return (
     <AuthContext.Provider
-      value={{ register, login, isAuthenticated, isLoading }}
+      value={{ register, login, logout, isAuthenticated, isLoading }}
     >
       {children}
     </AuthContext.Provider>
