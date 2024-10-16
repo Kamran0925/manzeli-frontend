@@ -5,9 +5,12 @@ import {
   LoginData,
   RegisterationData,
 } from "../api/authApi";
+import { useFormContext } from "./FormContext";
+import { clientTypes } from "../components/shared/AccountTypes/AccountTypes";
+import { BillingCycles } from "../components/registration/Plans/Plans";
 
 interface AuthContextType {
-  register: (data: RegisterationData) => Promise<void>;
+  register: () => Promise<void>;
   login: (data: LoginData) => any;
   isAuthenticated: boolean;
 }
@@ -17,13 +20,30 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  const { formState } = useFormContext();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [tokens, setTokens] = useState<{
     access: string;
     refresh: string;
   } | null>(null);
 
-  const register = async (data: RegisterationData) => {
+  const register = async () => {
+    const data: RegisterationData = {
+      client_name: formState.username.value,
+      client_type: clientTypes[formState.accountType],
+      email: formState.email.value,
+      telephone: formState.phone.value,
+      street: formState.street.value,
+      city: formState.city.value,
+      country: "AE",
+      product: 1,
+      billing_cycle: BillingCycles["monthly"],
+      billing_interval: 1,
+      contact_name: formState.username.value,
+      username: formState.email.value,
+      password: formState.password.value,
+      password_confirmation: formState.confirmPassword.value,
+    };
     return clientRegisteration(data);
   };
 
