@@ -6,7 +6,6 @@ const apiClient = axios.create({
     Accept: "application/json",
     "Content-Type": "application/json",
     "X-CSRFTOKEN": process.env.REACT_APP_X_CSRF_TOKEN,
-    Authorization: process.env.REACT_APP_AUTH_TOKEN,
   },
 });
 
