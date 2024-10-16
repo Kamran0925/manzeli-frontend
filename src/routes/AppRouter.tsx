@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
 import Authentication from "../components/authentication/authentication";
 import Layout from "../components/layout/Layout";
 import PropertyForm from "../components/layout/Main/Properties/PropertyForm/PropertyForm";
@@ -11,47 +17,73 @@ import TenancyDetails from "../components/layout/Main/Tenancy/TenancyLists/Tenan
 import TenancyEdit from "../components/layout/Main/Tenancy/TenancyLists/TenancyEdit/TenancyEdit";
 import TenancyLists from "../components/layout/Main/Tenancy/TenancyLists/TenancyLists";
 import Plans from "../components/registration/Plans/Plans";
+import { useAuth } from "../context/AuthContext";
+import IsAuth from "../hoc/isAuth";
 
 export const AppRouter = () => {
+  const { isAuthenticated } = useAuth();
+
+  const ProtectedRoute = () => {
+    return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+  };
+
   return (
     <Router>
       <Routes>
-        <Route path="property/*" element={<Layout />}>
-          <Route
-            path="residential-compound"
-            element={
-              <PropertyForm
-                title="Residential Compound Details"
-                formFields={ResidentialCompoundDetails}
-              />
-            }
-          />
-          <Route
-            path="apartment-building"
-            element={
-              <PropertyForm
-                title="Apartment Building Details"
-                formFields={ApartmentBuildingDetails}
-              />
-            }
-          />
-          <Route
-            path="stand-alone-property"
-            element={
-              <PropertyForm
-                title="Stand Alone Property Details"
-                formFields={StandAlonePropertyDetails}
-              />
-            }
-          />
-          <Route path="listings" element={<PropertyListings />} />
-          <Route path="details/:id" element={<PropertyDetails />} />
+        <Route
+          path="property/*"
+          element={
+            <IsAuth>
+              <ProtectedRoute />
+            </IsAuth>
+          }
+        >
+          <Route element={<Layout />}>
+            <Route
+              path="residential-compound"
+              element={
+                <PropertyForm
+                  title="Residential Compound Details"
+                  formFields={ResidentialCompoundDetails}
+                />
+              }
+            />
+            <Route
+              path="apartment-building"
+              element={
+                <PropertyForm
+                  title="Apartment Building Details"
+                  formFields={ApartmentBuildingDetails}
+                />
+              }
+            />
+            <Route
+              path="stand-alone-property"
+              element={
+                <PropertyForm
+                  title="Stand Alone Property Details"
+                  formFields={StandAlonePropertyDetails}
+                />
+              }
+            />
+            <Route path="listings" element={<PropertyListings />} />
+            <Route path="details/:id" element={<PropertyDetails />} />
+          </Route>
         </Route>
 
-        <Route path="tenancy/*" element={<Layout />}>
-          <Route path="" element={<TenancyLists />} />
-          <Route path="details" element={<TenancyDetails />} />
-          <Route path="edit" element={<TenancyEdit />} />
+        <Route
+          path="tenancy/*"
+          element={
+            <IsAuth>
+              <ProtectedRoute />
+            </IsAuth>
+          }
+        >
+          <Route element={<Layout />}>
+            <Route path="" element={<TenancyLists />} />
+            <Route path="details" element={<TenancyDetails />} />
+            <Route path="edit" element={<TenancyEdit />} />
+          </Route>
         </Route>
 
         <Route path="pricing" element={<Plans />} />
