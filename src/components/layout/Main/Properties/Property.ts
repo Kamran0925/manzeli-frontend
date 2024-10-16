@@ -14,11 +14,6 @@ export const contractType: { [key: string]: string } = {
   "030": "Self",
 };
 
-export interface Amenity {
-  id: number;
-  name: string;
-}
-
 export interface Property {
   id: number;
   name: string;
