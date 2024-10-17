@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Header from "../../../../shared/Header/Header";
 import PropertyViewToggle from "../PropertyViewToggle/PropertyViewToggle";
 import PropertySubtitleBar from "../PropertySubtitleBar/PropertySubtitleBar";
@@ -58,17 +58,14 @@ const PropertyListings = () => {
     try {
       const data = await getProperties();
       setProperties(data);
+      setLoading(false);
     } catch (error) {
       console.error("Failed to fetch properties:", error);
     }
   };
 
   useEffect(() => {
-    if (properties.length > 0) {
-      setLoading(false);
-    } else {
-      fetchProperties();
-    }
+    fetchProperties();
   }, []);
 
   const PropertyActions: Action[] = [
@@ -110,9 +107,11 @@ const PropertyListings = () => {
         </Box>
       </Box>
 
-      {loading ? (
-        <Loader />
-      ) : (
+      {loading && <Loader />}
+      {!loading && properties.length === 0 && (
+        <Typography className={styles.info}>No properties found</Typography>
+      )}
+      {!loading && properties.length > 0 && (
         <Box className={styles.container}>
           {properties.map(property =>
             gridView ? (
