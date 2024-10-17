@@ -69,7 +69,7 @@ const PropertyListings = () => {
     } else {
       fetchProperties();
     }
-  }, [properties]);
+  }, []);
 
   const PropertyActions: Action[] = [
     {
