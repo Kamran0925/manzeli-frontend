@@ -32,6 +32,7 @@ const PropertyDetails = () => {
       try {
         const data = await getProperty(id);
         const propertyData: Property = {
+          ...data,
           type: data.type as keyof typeof propertyType,
           contract_type: data.contract_type as keyof typeof contractType,
           latitude: data.gps_coordinates[0],
@@ -40,7 +41,6 @@ const PropertyDetails = () => {
             id: amenity.id,
             name: amenity.name,
           })),
-          ...data,
         };
 
         setProperty(propertyData);
