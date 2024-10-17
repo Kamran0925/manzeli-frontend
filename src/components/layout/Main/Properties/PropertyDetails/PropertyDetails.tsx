@@ -32,25 +32,15 @@ const PropertyDetails = () => {
       try {
         const data = await getProperty(id);
         const propertyData: Property = {
-          id: data.id,
-          name: data.name,
           type: data.type as keyof typeof propertyType,
-          type_name: data.type_name,
           contract_type: data.contract_type as keyof typeof contractType,
-          contract_type_name: data.contract_type_name,
-          local_authority_id: data.local_authority_id,
-          street: data.street,
-          city: data.city,
-          country: data.country,
           latitude: data.gps_coordinates[0],
           longitude: data.gps_coordinates[1],
-          units: data.units,
           amenities: data.amenities.map((amenity: Amenity) => ({
             id: amenity.id,
             name: amenity.name,
           })),
-          created_at: data.created_at,
-          images: data.images,
+          ...data,
         };
 
         setProperty(propertyData);
