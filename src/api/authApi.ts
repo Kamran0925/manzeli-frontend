@@ -31,3 +31,10 @@ export const clientLogin = async (data: LoginData) => {
   const response = await apiClient.post("/api/token/", data);
   return response.data;
 };
+
+export const getAccessToken = async (refreshToken: string) => {
+  const response = await apiClient.post("/api/token/refresh/", {
+    refresh: refreshToken,
+  });
+  return response.data;
+};
