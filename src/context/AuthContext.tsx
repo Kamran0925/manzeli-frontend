@@ -5,6 +5,7 @@ import { clientTypes } from "../components/shared/AccountTypes/AccountTypes";
 import {
   clientLogin,
   clientRegisteration,
+  getAccessToken,
   LoginData,
   RegisterationData,
 } from "../api/authApi";
@@ -14,6 +15,7 @@ interface AuthContextType {
   register: (planId: number) => Promise<void>;
   login: (data: LoginData) => any;
   logout: () => void;
+  apiAuthWrapper: (apiFunction: Function, props: any) => Promise<any>;
   isAuthenticated: boolean;
   isLoading: boolean;
 }
@@ -53,6 +55,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     const response = await clientLogin(data);
     if (response.access && response.refresh) {
       setTokens({ access: response.access, refresh: response.refresh });
+      localStorage.setItem("accessToken", response.access);
+      localStorage.setItem("refreshToken", response.refresh);
       setIsAuthenticated(true);
     }
     return response;
@@ -62,13 +66,19 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     setIsAuthenticated(false);
     setTokens(null);
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     delete apiClient.defaults.headers.Authorization;
   };
 
   useEffect(() => {
     const storedAccessToken = localStorage.getItem("accessToken");
+    const storedRefreshToken = localStorage.getItem("refreshToken");
     if (storedAccessToken) {
-      setTokens({ access: storedAccessToken, refresh: "" });
+      setTokens(prev => ({
+        access: storedAccessToken,
+        refresh: storedRefreshToken || "",
+      }));
+
       setIsAuthenticated(true);
       apiClient.defaults.headers.Authorization = `Bearer ${storedAccessToken}`;
     }
@@ -89,9 +99,42 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     setIsLoading(false);
   }, [isAuthenticated]);
 
+  const apiAuthWrapper = async (
+    apiFunction: Function,
+    props: any,
+  ): Promise<any> => {
+    try {
+      const result = await apiFunction(props);
+      return result;
+    } catch (error: any) {
+      if (error.response && error.response.status === 401) {
+        const refreshToken = tokens?.refresh;
+
+        if (refreshToken) {
+          try {
+            const tokenData = await getAccessToken(refreshToken);
+            setTokens({ access: tokenData.access, refresh: refreshToken });
+            localStorage.setItem("accessToken", tokenData.access);
+            return await apiFunction(props);
+          } catch (refreshError) {
+            throw refreshError;
+          }
+        }
+      }
+      throw error;
+    }
+  };
+
   return (
     <AuthContext.Provider
-      value={{ register, login, logout, isAuthenticated, isLoading }}
+      value={{
+        register,
+        login,
+        logout,
+        apiAuthWrapper,
+        isAuthenticated,
+        isLoading,
+      }}
     >
       {children}
     </AuthContext.Provider>
