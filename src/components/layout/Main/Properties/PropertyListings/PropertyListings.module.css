@@ -1,0 +1,56 @@
+.filterBar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24.5px;
+}
+
+.filterBar .sortContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px !important;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 22.5px;
+  gap: 20px 45px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .filterBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 50px;
+  }
+
+  .filterBar .sortContainer {
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: end;
+    width: 100%;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .container {
+    gap: 60px;
+  }
+}

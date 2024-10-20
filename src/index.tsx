@@ -4,12 +4,9 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme/theme";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Layout from "./components/properties/layout/Layout";
-import Plans from "./components/registration/Plans/Plans";
-import Authentication from "./components/authentication/authentication";
 import { AuthProvider } from "./context/AuthContext";
 import { FormProvider } from "./context/FormContext";
+import { AppRouter } from "./routes/AppRouter";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -19,13 +16,7 @@ root.render(
     <ThemeProvider theme={theme}>
       <FormProvider>
         <AuthProvider>
-          <Router>
-            <Routes>
-              <Route path="property/*" element={<Layout />} />
-              <Route path="pricing" element={<Plans />} />
-              <Route path="*" element={<Authentication />} />
-            </Routes>
-          </Router>
+          <AppRouter />
         </AuthProvider>
       </FormProvider>
     </ThemeProvider>

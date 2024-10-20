@@ -1,18 +1,21 @@
-import React, { createContext, ReactNode, useState } from "react";
+import React, { createContext, ReactNode, useEffect } from "react";
+import { useFormContext } from "./FormContext";
+import { useState } from "react";
+import { clientTypes } from "../components/shared/AccountTypes/AccountTypes";
+import { BillingCycles } from "../components/registration/Plans/Plans";
 import {
   clientLogin,
   clientRegisteration,
   LoginData,
   RegisterationData,
 } from "../api/authApi";
-import { useFormContext } from "./FormContext";
-import { clientTypes } from "../components/shared/AccountTypes/AccountTypes";
-import { BillingCycles } from "../components/registration/Plans/Plans";
+import apiClient from "../api/apiClient";
 
 interface AuthContextType {
   register: () => Promise<void>;
   login: (data: LoginData) => any;
   isAuthenticated: boolean;
+  isLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -22,6 +25,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const { formState } = useFormContext();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [tokens, setTokens] = useState<{
     access: string;
     refresh: string;
@@ -56,8 +60,34 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     return response;
   };
 
+  useEffect(() => {
+    const storedAccessToken = localStorage.getItem("accessToken");
+    if (storedAccessToken) {
+      setTokens({ access: storedAccessToken, refresh: "" });
+      setIsAuthenticated(true);
+      apiClient.defaults.headers.Authorization = `Bearer ${storedAccessToken}`;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (tokens) {
+      if (tokens.access) {
+        localStorage.setItem("accessToken", tokens.access);
+        apiClient.defaults.headers.Authorization = `Bearer ${tokens.access}`;
+      } else {
+        delete apiClient.defaults.headers.Authorization;
+      }
+    }
+  }, [tokens]);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, [isAuthenticated]);
+
   return (
-    <AuthContext.Provider value={{ register, login, isAuthenticated }}>
+    <AuthContext.Provider
+      value={{ register, login, isAuthenticated, isLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );

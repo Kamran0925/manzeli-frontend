@@ -7,7 +7,7 @@ import {
   Snackbar,
 } from "@mui/material";
 import InputField from "../../shared/InputField/InputField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { displayError, validate } from "../../../utils/validationHelpers";
 import Error from "../../shared/Error/Error";
 import { useAuth } from "../../../context/AuthContext";
@@ -52,6 +52,7 @@ const Login = () => {
   const [formState, setFormState] = useState<FormState>(initialFormState);
 
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -114,6 +115,7 @@ const Login = () => {
         password: formState.password.value,
       });
       console.log(response);
+      navigate("/property/listings");
     } catch (err: any) {
       setLoginError(formatErrorMessages(err.response.data));
     }

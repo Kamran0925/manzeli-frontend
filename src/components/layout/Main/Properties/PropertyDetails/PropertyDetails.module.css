@@ -1,0 +1,213 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: calc(100%-40px);
+  margin-top: 27px;
+  border-radius: 10px;
+  background: #fff;
+  padding: 20px 20px 19px;
+}
+
+.container .container2 {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.container .container3 {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  margin-top: 30.5px;
+}
+
+.container .container2 .titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  width: 100%;
+}
+
+.container .container2 .titleContainer .title {
+  color: #000;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 110%;
+  letter-spacing: 0.32px;
+}
+
+.container .container2 .titleContainer .unitsBtn {
+  height: 44px;
+  padding: 14px 24px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: #001283;
+  color: #fff;
+  font-family: "Poppins";
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.container .container2 .titleContainer .unitsBtn:hover {
+  background: #fff;
+  color: #001283;
+  border: 2px solid #001283;
+}
+
+.container .locationContainer {
+  display: flex;
+  gap: 5.7px;
+}
+
+.container .location {
+  color: #515151;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 110%;
+}
+
+.container .container3 .tag {
+  padding: 0.705px 7.754px;
+  max-width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16.918px;
+  background: rgba(59, 76, 184, 0.11);
+  color: #001283;
+  text-align: center;
+  font-family: "Poppins";
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 140%;
+}
+
+.container .additionalFeature {
+  color: #000;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0.2px;
+}
+
+.featuresContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 52px;
+}
+
+.featuresContainer .featureItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.featureText {
+  color: #000;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0.12px;
+}
+
+.featuresContainer2 .featuresWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 53.34px;
+}
+
+.container .propertyLocation {
+  margin-top: 30px;
+  margin-bottom: 19.44px;
+  color: #000;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 110%;
+  letter-spacing: 0.2px;
+}
+
+.container .circleList {
+  list-style-type: circle;
+  padding-left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+}
+
+.container .circleListItem .listItemText {
+  color: #000;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.container .images {
+  color: #000;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 110%;
+  letter-spacing: 0.2px;
+  margin-top: 30px;
+  margin-bottom: 19px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: calc(100%-40px);
+    padding: 20px 20px 0px;
+  }
+  .container .container2 .titleContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .container .container2 .titleContainer .title {
+    font-size: 24px;
+  }
+
+  .container .container2 .titleContainer .unitsBtn {
+    width: 100%;
+  }
+
+  .container .container3 .tag {
+    margin-left: auto;
+  }
+
+  .container .container3 .featuresContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .container .container3 .featuresContainer2 .additionalFeature {
+    margin-bottom: 20px;
+  }
+
+  .container .container3 .featuresContainer2 .featuresWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10.34px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .container .container2 .titleContainer {
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .container .container2 .titleContainer .title {
+    font-size: 28px;
+  }
+
+  .container .container3 .featuresContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+  }
+}
