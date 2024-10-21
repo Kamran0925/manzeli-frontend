@@ -14,7 +14,7 @@ import LeftArrow from "../../../assets/icons/ui/LeftArrow";
 import PlanFeatures from "./PlanFeatures/PlanFeatures";
 import { useAuth } from "../../../context/AuthContext";
 import { formatErrorMessages } from "../../../utils/errorHelper";
-import { getSubscriptionPlans } from "../../../api/plan";
+import { getSubscriptionPlans } from "../../../api/plans";
 import Error from "../../shared/Error/Error";
 import Loader from "../../shared/Loader/Loader";
 import { Plan } from "../../common/data/planTypes";
