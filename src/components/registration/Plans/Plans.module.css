@@ -72,20 +72,16 @@
   height: 44px;
   width: 110px;
   text-transform: none;
-  transition: background-color 0.3s, box-shadow 0.1s, color 0.2s;
+  transition: background-color 0.2s, color 0.1s;
   color: #001283;
   background-color: #fff;
   border-width: 0;
-}
-
-.container .contentWrapper .pricingContainer1 .align .btn:hover {
-  box-shadow: 0px 5px 7px 0px rgba(82, 67, 194, 0.35);
+  border-radius: 22px;
 }
 
 .container .contentWrapper .pricingContainer1 .align .activeButton {
   color: #fff;
   background-color: #001283;
-  border-radius: 22px;
 }
 
 .container .contentWrapper .pricingContainer2 {
