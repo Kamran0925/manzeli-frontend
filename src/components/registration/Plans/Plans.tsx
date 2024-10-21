@@ -83,10 +83,11 @@ const Plans = () => {
           .slice(0, 3)
           .reverse(),
       );
-      setLoading(false);
     } catch (error) {
       console.error("Error fetching subscription plans:", error);
       setError(["Failed to fetch subscription plans"]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -94,6 +95,120 @@ const Plans = () => {
     setLoading(true);
     fetchPlans("010");
   }, []);
+
+  let content;
+
+  if (loading) {
+    content = <Loader />;
+  } else if (error.length > 0) {
+    content = (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        {error?.length > 0 && <Error messages={error} />}
+      </Box>
+    );
+  } else {
+    content = (
+      <Box className={styles.pricingContainer2}>
+        {plans?.map((plan, index) => (
+          <Box
+            key={index}
+            className={styles.pricingItem}
+            sx={{
+              backgroundColor:
+                plan.name === "Company"
+                  ? "#001283"
+                  : "rgba(255, 255, 255, 0.50)",
+              boxShadow:
+                plan.name === "Company"
+                  ? "0px 42px 34px 0px rgba(82, 67, 194, 0.3)"
+                  : "none",
+            }}
+          >
+            {plan.name === "Company" && (
+              <Typography className={styles.popularTag}>
+                MOST POPULAR
+              </Typography>
+            )}
+            <Box
+              sx={{ marginTop: plan.name === "Company" ? "0px" : "47px" }}
+              className={styles.pricingFeature}
+            >
+              <Box className={styles.mainPricingTitle}>
+                <Typography
+                  className={styles.price}
+                  sx={{
+                    color: plan.name === "Company" ? "#FFFFFF" : "#001283",
+                  }}
+                >
+                  ${plan.price}
+                </Typography>
+                <Typography
+                  className={styles.duration}
+                  sx={{
+                    color: plan.name === "Company" ? "#FFFFFF" : "#848199",
+                  }}
+                >
+                  /{BillingCycles[plan.billing_cycle]}
+                </Typography>
+              </Box>
+
+              <Box className={styles.planDetails}>
+                <Typography
+                  className={styles.planType}
+                  sx={{
+                    color: plan.name === "Company" ? "#FFF" : "#001283",
+                  }}
+                >
+                  {plan.name}
+                </Typography>
+                <Typography
+                  className={styles.description}
+                  sx={{
+                    color: plan.name === "Company" ? "#FFF" : "#848199",
+                  }}
+                >
+                  {plan.memo}
+                </Typography>
+              </Box>
+
+              <Box className={styles.planFeatures}>
+                <PlanFeatures plantype={plan.name} />
+              </Box>
+            </Box>
+
+            <Box className={styles.btnContainer}>
+              <Button
+                sx={{
+                  color: plan.name === "Company" ? "#001283" : "#838199",
+                  backgroundColor: plan.name === "Company" ? "#FFF" : "#E5E3F6",
+                  width: {
+                    xs: "100%",
+                    md: "207px",
+                  },
+                  opacity: plan.name === "Company" ? "1" : "0.5",
+                  "&:hover": {
+                    color: "#FFF",
+                    backgroundColor: "#001283",
+                    outline: "2px solid white",
+                    opacity: "1",
+                  },
+                }}
+                className={styles.planBtn}
+                onClick={() => handleSubmit(plan.id)}
+              >
+                Choose plan
+              </Button>
+            </Box>
+          </Box>
+        ))}
+      </Box>
+    );
+  }
 
   return (
     <>
@@ -175,117 +290,7 @@ const Plans = () => {
               </ToggleButtonGroup>
             </Box>
           </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            {error?.length > 0 && <Error messages={error} />}
-          </Box>
-
-          {!loading ? (
-            <Box className={styles.pricingContainer2}>
-              {plans?.map((plan, index) => (
-                <Box
-                  key={index}
-                  className={styles.pricingItem}
-                  sx={{
-                    backgroundColor:
-                      plan.name === "Company"
-                        ? "#001283"
-                        : "rgba(255, 255, 255, 0.50)",
-                    boxShadow:
-                      plan.name === "Company"
-                        ? "0px 42px 34px 0px rgba(82, 67, 194, 0.3)"
-                        : "none,",
-                  }}
-                >
-                  {plan.name === "Company" && (
-                    <Typography className={styles.popularTag}>
-                      MOST POPULAR
-                    </Typography>
-                  )}
-                  <Box
-                    sx={{ marginTop: plan.name === "Company" ? "0px" : "47px" }}
-                    className={styles.pricingFeature}
-                  >
-                    <Box className={styles.mainPricingTitle}>
-                      <Typography
-                        className={styles.price}
-                        sx={{
-                          color:
-                            plan.name === "Company" ? "#FFFFFF" : "#001283",
-                        }}
-                      >
-                        ${plan.price}
-                      </Typography>
-                      <Typography
-                        className={styles.duration}
-                        sx={{
-                          color:
-                            plan.name === "Company" ? "#FFFFFF" : "#848199",
-                        }}
-                      >
-                        /{BillingCycles[plan.billing_cycle]}
-                      </Typography>
-                    </Box>
-
-                    <Box className={styles.planDetails}>
-                      <Typography
-                        className={styles.planType}
-                        sx={{
-                          color: plan.name === "Company" ? "#FFF" : "#001283",
-                        }}
-                      >
-                        {plan.name}
-                      </Typography>
-                      <Typography
-                        className={styles.description}
-                        sx={{
-                          color: plan.name === "Company" ? "#FFF" : "#848199",
-                        }}
-                      >
-                        {plan.memo}
-                      </Typography>
-                    </Box>
-
-                    <Box className={styles.planFeatures}>
-                      <PlanFeatures plantype={plan.name} />
-                    </Box>
-                  </Box>
-
-                  <Box className={styles.btnContainer}>
-                    <Button
-                      sx={{
-                        color: plan.name === "Company" ? "#001283" : "#838199",
-                        backgroundColor:
-                          plan.name === "Company" ? "#FFF" : "#E5E3F6",
-                        width: {
-                          xs: "100%",
-                          md: "207px",
-                        },
-                        opacity: plan.name === "Company" ? "none" : "0.5",
-                        "&:hover": {
-                          color: plan.name === "Company" ? "#FFF" : "#FFF",
-                          backgroundColor:
-                            plan.name === "Company" ? "#001283" : "#001283",
-                          outline: "2px solid white",
-                          opacity: "1",
-                        },
-                      }}
-                      className={styles.planBtn}
-                      onClick={() => handleSubmit(plan.id)}
-                    >
-                      Choose plan
-                    </Button>
-                  </Box>
-                </Box>
-              ))}
-            </Box>
-          ) : (
-            <Loader />
-          )}
+          {content}
         </Box>
       </Box>
     </>
