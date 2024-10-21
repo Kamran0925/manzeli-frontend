@@ -2,6 +2,7 @@
   padding: 41px 40px;
   background-color: #fff;
   width: calc(100%-80px);
+  min-height: 100vh;
 }
 
 .container .contentWrapper {
