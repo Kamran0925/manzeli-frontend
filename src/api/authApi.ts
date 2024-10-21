@@ -1,7 +1,6 @@
 import apiClient from "./apiClient";
 
 export interface RegisterationData {
-  [key: string]: string | number | Blob | null | undefined | "";
   client_name: string;
   client_type: string;
   email: string;

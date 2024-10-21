@@ -1,5 +1,4 @@
 import { Box, IconButton, Typography } from "@mui/material";
-// import { Property } from "../properties";
 import Location from "../../../../../../assets/icons/ui/Location";
 import Pencil from "../../../../../../assets/icons/ui/Pencil";
 import Trash from "../../../../../../assets/icons/ui/Trash";
