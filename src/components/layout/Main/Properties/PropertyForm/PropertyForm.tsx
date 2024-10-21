@@ -4,7 +4,7 @@ import classNames from "classnames";
 import FormInput from "../../../../shared/FormInput/FormInput";
 import { PropertyFieldConfig } from "../PropertyFormFields/PropertyFieldConfig";
 import Header from "../../../../shared/Header/Header";
-import { createProperty } from "../../../../../api/propertyApi";
+import { createProperty } from "../../../../../api/property";
 import styles from "./PropertyForm.module.css";
 
 interface FormState {
