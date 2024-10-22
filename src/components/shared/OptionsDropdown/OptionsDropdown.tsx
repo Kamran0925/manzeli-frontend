@@ -14,6 +14,7 @@ interface OptionsDropdownProps {
   options: Option[];
   anchorEl: null | SVGSVGElement | HTMLButtonElement;
   handleClose: () => void;
+  ref?: React.Ref<HTMLDivElement>;
 }
 
 interface StyledMenuProps
@@ -78,6 +79,7 @@ export const OptionsDropdown: React.FC<OptionsDropdownProps> = ({
   options,
   anchorEl,
   handleClose,
+  ref,
 }) => {
   const open = Boolean(anchorEl);
 
