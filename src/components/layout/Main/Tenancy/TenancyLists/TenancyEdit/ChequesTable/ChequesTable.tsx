@@ -95,6 +95,7 @@ const ChequesTable: React.FC<ChequesTableProps> = ({ chequesData }) => {
         </Table>
         <Typography className={styles.addRows}>
           <Box
+            component="span"
             sx={{
               backgroundColor: "#F4F4F4",
               borderRadius: "100%",
