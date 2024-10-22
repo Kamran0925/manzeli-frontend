@@ -45,7 +45,7 @@ export default function TenancyTable() {
     {
       icon: <Pencil />,
       optionText: "Edit",
-      routeLink: "/property/tenancy/edit",
+      routeLink: "/tenancy/edit",
     },
     {
       icon: <Trash />,
@@ -58,7 +58,7 @@ export default function TenancyTable() {
   const navigate = useNavigate();
 
   const handleRowClick = () => {
-    navigate("/property/tenancy/details");
+    navigate("/tenancy/details");
   };
 
   return (

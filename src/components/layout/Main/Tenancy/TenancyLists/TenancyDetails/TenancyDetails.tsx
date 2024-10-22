@@ -10,11 +10,11 @@ const TenancyDetails = () => {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
-    navigate("/property/tenancy");
+    navigate("/tenancy");
   };
 
   const handleEditClick = () => {
-    navigate("/property/tenancy/edit");
+    navigate("/tenancy/edit");
   };
 
   return (
