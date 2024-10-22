@@ -117,9 +117,7 @@ const PropertyDetails = () => {
               <FormGroup className={styles.featuresWrapper}>
                 {property?.amenities?.map(amenity => (
                   <FormControlLabel
-                    control={
-                      <Checkbox defaultChecked checked color="primary" />
-                    }
+                    control={<Checkbox defaultChecked color="primary" />}
                     label={amenity.name}
                     key={amenity.id}
                     sx={{
