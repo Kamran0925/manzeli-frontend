@@ -234,7 +234,10 @@ const Plans = () => {
           <Snackbar
             open={isRegister}
             autoHideDuration={3000}
-            onClose={() => setIsRegister(false)}
+            onClose={() => {
+              setIsRegister(false);
+              navigate("/login");
+            }}
             message="The client has been registered successfully"
             anchorOrigin={{ vertical: "top", horizontal: "center" }}
             sx={{
