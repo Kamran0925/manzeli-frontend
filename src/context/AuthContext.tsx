@@ -8,7 +8,7 @@ import {
   getAccessToken,
   LoginData,
   RegisterationData,
-} from "../api/authApi";
+} from "../api/auth";
 import apiClient from "../api/apiClient";
 
 interface AuthContextType {
