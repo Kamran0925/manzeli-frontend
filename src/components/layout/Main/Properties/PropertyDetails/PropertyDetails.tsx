@@ -18,7 +18,7 @@ import GeoLocation from "./GeoLocation/GeoLocation";
 import PropertySubtitleBar from "../PropertySubtitleBar/PropertySubtitleBar";
 import { Amenity, Property, contractType, propertyType } from "../Property";
 import { useParams } from "react-router-dom";
-import { getProperty } from "../../../../../api/propertyApi";
+import { getProperty } from "../../../../../api/property";
 import Loader from "../../../../shared/Loader/Loader";
 import styles from "./PropertyDetails.module.css";
 

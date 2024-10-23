@@ -2,17 +2,16 @@ import React, { createContext, ReactNode, useEffect } from "react";
 import { useFormContext } from "./FormContext";
 import { useState } from "react";
 import { clientTypes } from "../components/shared/AccountTypes/AccountTypes";
-import { BillingCycles } from "../components/registration/Plans/Plans";
 import {
   clientLogin,
   clientRegisteration,
   LoginData,
   RegisterationData,
-} from "../api/authApi";
+} from "../api/auth";
 import apiClient from "../api/apiClient";
 
 interface AuthContextType {
-  register: () => Promise<void>;
+  register: (planId: number) => Promise<void>;
   login: (data: LoginData) => any;
   isAuthenticated: boolean;
   isLoading: boolean;
@@ -31,7 +30,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     refresh: string;
   } | null>(null);
 
-  const register = async () => {
+  const register = async (planId: number) => {
     const data: RegisterationData = {
       client_name: formState.username.value,
       client_type: clientTypes[formState.accountType],
@@ -40,9 +39,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       street: formState.street.value,
       city: formState.city.value,
       country: "AE",
-      product: 1,
-      billing_cycle: BillingCycles["monthly"],
-      billing_interval: 1,
+      plan: planId,
       contact_name: formState.username.value,
       username: formState.email.value,
       password: formState.password.value,

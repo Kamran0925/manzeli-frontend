@@ -10,7 +10,7 @@ import SortFilter from "../../../../shared/SortFilter/SortFilter";
 import ActionModal from "../../../../shared/ActionModal/ActionModal";
 import Pencil from "../../../../../assets/icons/ui/Pencil";
 import Trash from "../../../../../assets/icons/ui/Trash";
-import { deleteProperty, getProperties } from "../../../../../api/propertyApi";
+import { deleteProperty, getProperties } from "../../../../../api/property";
 import { Property } from "../Property";
 import Loader from "../../../../shared/Loader/Loader";
 import CSVModal from "../../../../shared/CSVModal/CSVModal";

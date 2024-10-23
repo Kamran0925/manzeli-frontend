@@ -32,7 +32,7 @@ export const NAV_LINKS = [
     label: "Messages",
   },
   {
-    route: "/plans-billing",
+    route: "/pricing",
     icon: Plan,
     label: "Plans & Billing",
   },

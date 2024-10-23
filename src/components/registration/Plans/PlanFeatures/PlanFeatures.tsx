@@ -4,13 +4,14 @@ import CheckmarkIcon from "../../../../assets/icons/ui/Checkmark";
 
 interface PlanFeaturesProps {
   plantype: string;
-  features: string[];
 }
 
-const PlanFeatures: React.FC<PlanFeaturesProps> = ({ plantype, features }) => {
+const features = ["Multi-step Zaps", "3 Premium Apps", "2 Users Team"];
+
+const PlanFeatures: React.FC<PlanFeaturesProps> = ({ plantype }) => {
   return (
     <Box>
-      {features.map((feature, index) => (
+      {features?.map((feature, index) => (
         <Box
           key={index}
           sx={{

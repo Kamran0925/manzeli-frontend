@@ -9,9 +9,7 @@ export interface RegisterationData {
   city: string;
   country: string;
   logo?: Blob | null | undefined | "";
-  product: number;
-  billing_cycle: string;
-  billing_interval: number;
+  plan: number;
   contact_name: string;
   username: string;
   password: string;
