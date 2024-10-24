@@ -31,7 +31,7 @@ export const clientLogin = async (data: LoginData) => {
   return response.data;
 };
 
-export const getAccessToken = async (refreshToken: string) => {
+export const refreshAccessToken = async (refreshToken: string) => {
   const response = await apiClient.post("/api/token/refresh/", {
     refresh: refreshToken,
   });

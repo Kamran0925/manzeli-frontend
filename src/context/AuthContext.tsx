@@ -5,7 +5,7 @@ import { clientTypes } from "../components/shared/AccountTypes/AccountTypes";
 import {
   clientLogin,
   clientRegisteration,
-  getAccessToken,
+  refreshAccessToken,
   LoginData,
   RegisterationData,
 } from "../api/auth";
@@ -112,7 +112,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
         if (refreshToken) {
           try {
-            const tokenData = await getAccessToken(refreshToken);
+            const tokenData = await refreshAccessToken(refreshToken);
             setTokens({ access: tokenData.access, refresh: refreshToken });
             localStorage.setItem("accessToken", tokenData.access);
             return await apiFunction(props);
