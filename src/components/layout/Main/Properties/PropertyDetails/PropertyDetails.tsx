@@ -20,17 +20,19 @@ import { Amenity, Property, contractType, propertyType } from "../Property";
 import { useParams } from "react-router-dom";
 import { getProperty } from "../../../../../api/property";
 import Loader from "../../../../shared/Loader/Loader";
+import { useAuth } from "../../../../../context/AuthContext";
 import styles from "./PropertyDetails.module.css";
 
 const PropertyDetails = () => {
   const { id } = useParams<{ id: string }>();
   const [property, setProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState(true);
+  const { apiAuthWrapper } = useAuth();
 
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const data = await getProperty(id);
+        const data = await apiAuthWrapper(getProperty, id);
         const propertyData: Property = {
           ...data,
           type: data.type as keyof typeof propertyType,

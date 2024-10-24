@@ -14,6 +14,7 @@ import { deleteProperty, getProperties } from "../../../../../api/property";
 import { Property } from "../Property";
 import Loader from "../../../../shared/Loader/Loader";
 import CSVModal from "../../../../shared/CSVModal/CSVModal";
+import { useAuth } from "../../../../../context/AuthContext";
 import styles from "./PropertyListings.module.css";
 
 interface Action {
@@ -31,6 +32,7 @@ const PropertyListings = () => {
   const [gridView, setGridView] = useState(false);
   const [modal, setModal] = useState(false);
   const [csvModal, setCsvModal] = useState(false);
+  const { apiAuthWrapper } = useAuth();
 
   const sortOptions = [
     { value: "Default", label: "Default" },
@@ -47,7 +49,7 @@ const PropertyListings = () => {
 
   const handleDelete = async () => {
     if (property) {
-      await deleteProperty(property);
+      await apiAuthWrapper(deleteProperty, property);
       fetchProperties();
     }
     setModal(false);
@@ -56,7 +58,7 @@ const PropertyListings = () => {
   const fetchProperties = async () => {
     setLoading(true);
     try {
-      const data = await getProperties();
+      const data = await apiAuthWrapper(getProperties, null);
       setProperties(data);
       setLoading(false);
     } catch (error) {
