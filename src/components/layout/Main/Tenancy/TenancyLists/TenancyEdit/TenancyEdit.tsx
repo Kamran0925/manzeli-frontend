@@ -17,7 +17,7 @@ const TenancyEdit = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate("/property/tenancy");
+    navigate("/tenancy");
   };
 
   return (
@@ -42,13 +42,14 @@ const TenancyEdit = () => {
 
         <Box className={styles.fieldsEditContainer}>
           {Object.entries(TenantFields).map(([section, fields]) => (
-            <>
+            <Box key={section}>
               <Typography className={styles.fieldsSubtitle}>
                 {section}
               </Typography>
               <Box className={styles.fieldWrapper}>
                 {fields.map((field, index) => (
                   <FormInput
+                    key={index}
                     field={field}
                     value={field.fieldConfig.value}
                     onChange={() => null}
@@ -56,7 +57,7 @@ const TenancyEdit = () => {
                   />
                 ))}
               </Box>
-            </>
+            </Box>
           ))}
           <ChequesTable chequesData={chequesData} />
         </Box>

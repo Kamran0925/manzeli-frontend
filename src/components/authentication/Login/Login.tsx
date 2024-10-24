@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Typography,
-  Box,
-  Link as MuiLink,
-  Button,
-  Snackbar,
-} from "@mui/material";
+import { Typography, Box, Link as MuiLink, Button } from "@mui/material";
 import InputField from "../../shared/InputField/InputField";
 import { Link, useNavigate } from "react-router-dom";
 import { displayError, validate } from "../../../utils/validationHelpers";
@@ -151,33 +145,14 @@ const Login = () => {
     setIsButtonDisabled(!!(emailError || passwordError));
   }, [formState.email.value, formState.password.value]);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   useEffect(() => {
     if (isAuthenticated) {
-      setIsLoggedIn(true);
-
-      const logoutTimer = setTimeout(() => {
-        setIsLoggedIn(false);
-      }, 3000);
-
-      return () => clearTimeout(logoutTimer);
+      navigate("/property/listings");
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, navigate]);
 
   return (
     <Box component="section" className={styles.box1}>
-      <Snackbar
-        open={isLoggedIn}
-        autoHideDuration={3000}
-        message="Client has been logged in successfully"
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        sx={{
-          "& .css-73yezh-MuiPaper-root-MuiSnackbarContent-root": {
-            backgroundColor: "#001283",
-          },
-        }}
-      />
       <Box className={styles.box2}>
         <Typography
           variant="h4"

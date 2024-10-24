@@ -8,10 +8,12 @@ interface TenancyItemActionsProps {
 }
 
 const TenancyItemActions = forwardRef<HTMLDivElement, TenancyItemActionsProps>(
-  props => {
+  (props, ref) => {
     if (!props.anchorEl) return null;
 
-    return <OptionsDropdown options={props.tenantActions} {...props} />;
+    return (
+      <OptionsDropdown options={props.tenantActions} {...props} ref={ref} />
+    );
   },
 );
 

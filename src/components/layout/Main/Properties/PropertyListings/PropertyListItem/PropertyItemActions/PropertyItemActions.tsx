@@ -10,10 +10,12 @@ interface PropertyItemActionsProps {
 const PropertyItemActions = forwardRef<
   HTMLDivElement,
   PropertyItemActionsProps
->(props => {
+>((props, ref) => {
   if (!props.anchorEl) return null;
 
-  return <OptionsDropdown options={props.propertyActions} {...props} />;
+  return (
+    <OptionsDropdown options={props.propertyActions} {...props} ref={ref} />
+  );
 });
 
 export default PropertyItemActions;

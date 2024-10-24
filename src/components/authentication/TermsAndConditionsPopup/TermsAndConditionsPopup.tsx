@@ -43,7 +43,6 @@ const TermsAndConditionsPopup: React.FC<{
       >
         <DialogTitle>
           <Typography
-            variant="h6"
             sx={{
               fontFamily: "Roboto",
               fontWeight: 700,
