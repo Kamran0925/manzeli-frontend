@@ -4,17 +4,14 @@ import Header from "../../../shared/Header/Header";
 import ProfileManagement from "./ProfileManagement/ProfileManagement";
 import styles from "./Settings.module.css";
 
-const SubscriptionPlans = () => <Box>Active Subscription & Plans Content</Box>;
-const BillingHistory = () => <Box>Billing History Content</Box>;
-
-const tabData = [
+const profileTabs = [
   { value: "profile", label: "Profile Management" },
   { value: "subscription", label: "Active Subscription & Plans" },
   { value: "billing", label: "Billing History" },
 ];
 
 const Settings = () => {
-  const [value, setValue] = React.useState(tabData[0].value);
+  const [value, setValue] = React.useState(profileTabs[0].value);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -24,17 +21,13 @@ const Settings = () => {
     switch (value) {
       case "profile":
         return <ProfileManagement />;
-      case "subscription":
-        return <SubscriptionPlans />;
-      case "billing":
-        return <BillingHistory />;
       default:
         return null;
     }
   };
 
   return (
-    <>
+    <Box className={styles.settings}>
       <Header title="Settings" className="smallerHeading" />
       <Tabs
         textColor="primary"
@@ -43,7 +36,7 @@ const Settings = () => {
         onChange={handleChange}
         className={styles.tabs}
       >
-        {tabData.map((tab, index) => (
+        {profileTabs.map((tab, index) => (
           <Tab
             key={index}
             label={tab.label}
@@ -53,7 +46,7 @@ const Settings = () => {
         ))}
       </Tabs>
       <Box className={styles.tabContent}>{renderTabContent()}</Box>
-    </>
+    </Box>
   );
 };
 
