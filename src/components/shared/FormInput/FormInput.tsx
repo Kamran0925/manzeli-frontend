@@ -23,11 +23,12 @@ interface FormInputProps {
   value: any;
   error: string | undefined;
   onChange: (value: any, field: PropertyFieldConfig) => void;
+  customStyle?: any;
 }
 
 const FormInput: React.FC<FormInputProps> = props => {
   let inputElement: JSX.Element | null = null;
-  const { field, value, onChange, error } = props;
+  const { field, value, onChange, error, customStyle } = props;
 
   const handleChange = (
     event:
@@ -40,8 +41,11 @@ const FormInput: React.FC<FormInputProps> = props => {
   switch (field.fieldConfig.type) {
     case "text":
     case "number":
+    case "email":
+    case "password":
       inputElement = (
         <TextField
+          type={field.fieldConfig.type}
           placeholder={field.fieldConfig.placeholder}
           value={value}
           required={field.fieldConfig?.validation?.required}
@@ -216,6 +220,7 @@ const FormInput: React.FC<FormInputProps> = props => {
           xs: field.fieldConfig.type === "checkbox" ? "100%" : "80%",
           sm: field.fieldConfig.type === "checkbox" ? "100%" : "300px",
         },
+        ...customStyle,
       }}
     >
       <Box className={styles.align}>
@@ -225,6 +230,11 @@ const FormInput: React.FC<FormInputProps> = props => {
         {field.fieldConfig?.helpText && (
           <Typography className={styles.smallText}>
             ({field.fieldConfig?.helpText})
+          </Typography>
+        )}
+        {field.fieldConfig?.link && (
+          <Typography className={styles.link}>
+            {field.fieldConfig?.link}
           </Typography>
         )}
       </Box>
