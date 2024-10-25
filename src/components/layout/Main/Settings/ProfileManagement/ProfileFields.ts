@@ -18,7 +18,7 @@ export const ProfileFields: { [key: string]: ProfileFieldConfig[] } = {
   "Personal Details": [
     {
       fieldId: "firstName",
-      fieldLabel: "First Name:",
+      fieldLabel: "First Name",
       fieldConfig: {
         type: "text",
         placeholder: "Luke",
@@ -28,7 +28,7 @@ export const ProfileFields: { [key: string]: ProfileFieldConfig[] } = {
     },
     {
       fieldId: "lastName",
-      fieldLabel: "Last Name:",
+      fieldLabel: "Last Name",
       fieldConfig: {
         type: "text",
         placeholder: "Warm",
@@ -38,7 +38,7 @@ export const ProfileFields: { [key: string]: ProfileFieldConfig[] } = {
     },
     {
       fieldId: "email",
-      fieldLabel: "Email:",
+      fieldLabel: "Email",
       fieldConfig: {
         type: "email",
         placeholder: "lukewarm@gmail.com",
@@ -49,7 +49,7 @@ export const ProfileFields: { [key: string]: ProfileFieldConfig[] } = {
     },
     {
       fieldId: "phoneNumber",
-      fieldLabel: "Phone Number:",
+      fieldLabel: "Phone Number",
       fieldConfig: {
         type: "number",
         placeholder: "+151 8987678867",
@@ -61,10 +61,10 @@ export const ProfileFields: { [key: string]: ProfileFieldConfig[] } = {
   Security: [
     {
       fieldId: "password",
-      fieldLabel: "Password:",
+      fieldLabel: "Password",
       fieldConfig: {
         type: "password",
-        placeholder: "12345678",
+        placeholder: "********",
         value: "",
         validation: { required: true },
         link: "Change Password",
