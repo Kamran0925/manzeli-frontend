@@ -1,0 +1,115 @@
+.profileContainer {
+  display: flex;
+  align-items: flex-start;
+}
+
+.profileContainer .profilePicture {
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+  border-radius: 45px;
+  background: lightgray url("../../../../../assets/images/profile.png") 50% /
+    cover no-repeat;
+}
+
+.profileContainer .profileUpload {
+  padding: 23px 22px;
+}
+
+.profileContainer .profileUpload .profileText {
+  color: #6d6d6d;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 110%;
+  letter-spacing: 0.12px;
+}
+
+.profileContainer .profileUpload .profileActions {
+  display: flex;
+  align-items: flex-start;
+  gap: 10.92px;
+  margin-top: 7px;
+}
+
+.profileContainer .profileUpload .profileActions .profileBtn {
+  display: inline-flex;
+  height: 23.635px;
+  padding: 0px 12.892px;
+  align-items: center;
+  gap: 4.297px;
+  flex-shrink: 0;
+  border-radius: 10.743px;
+  font-size: 8.078px;
+  font-weight: 400;
+  text-transform: capitalize;
+  box-shadow: none;
+}
+
+.profileContainer .profileUpload .profileActions .uploadBtn {
+  background: #001283;
+  color: #fff;
+}
+
+.profileContainer .profileUpload .profileActions .removeBtn {
+  background: #fff;
+  color: #7f7f7f;
+  border: 0.537px solid #f3f3f3;
+}
+
+.formContainer {
+  margin-top: 2px;
+  width: 50%;
+}
+
+.formContainer .fieldsSubtitle {
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  margin-top: 18px;
+}
+
+.formContainer .align {
+  display: "flex";
+  align-items: "flex-start";
+  gap: "4px";
+}
+
+.actions {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.actions .btn {
+  font-size: 16px;
+  font-weight: 400;
+  height: 44px;
+  padding: 14px 24px;
+  border-radius: 20px;
+  text-transform: capitalize;
+  box-shadow: none;
+}
+
+.actions .saveBtn,
+.actions .saveBtn:hover {
+  color: #fff;
+  background: #001283;
+}
+
+.actions .saveBtn:hover {
+  background-color: #010f6b;
+}
+
+.actions .cancelBtn {
+  color: #fff;
+  background: #cdcdcd;
+}
+
+.actions .cancelBtn:hover {
+  color: #001283;
+  background: #fff;
+  box-shadow: none;
+  border: 1.5px solid #001283;
+}
