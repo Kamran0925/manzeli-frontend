@@ -11,6 +11,10 @@
   line-height: 110%;
 }
 
+.mainBar .smallerHeading {
+  font-size: 32px;
+}
+
 .mainBar .mainBarIcons {
   display: flex;
   gap: 24px;
