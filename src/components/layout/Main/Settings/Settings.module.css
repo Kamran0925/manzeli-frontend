@@ -1,0 +1,16 @@
+.tabs {
+  margin-top: 22px;
+}
+
+.tabs .tab {
+  text-transform: none;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #6d6d6d;
+  padding-bottom: 6px;
+}
+
+.tabContent {
+  margin-top: 26px;
+}
