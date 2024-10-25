@@ -74,7 +74,10 @@ const ProfileManagement = () => {
                   error=""
                   customStyle={{
                     marginTop: "18px",
-                    width: alignField(section, index),
+                    width: {
+                      xs: "100%",
+                      sm: alignField(section, index),
+                    },
                   }}
                 />
               ))}
