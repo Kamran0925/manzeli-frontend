@@ -26,6 +26,13 @@
   line-height: 100%;
 }
 
+.field .align .link {
+  color: #003;
+  font-size: 9px;
+  font-weight: 500;
+  text-decoration-line: underline;
+}
+
 .field .textField {
   border-radius: 6px;
   width: 100%;
