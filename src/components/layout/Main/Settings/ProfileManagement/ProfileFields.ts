@@ -10,10 +10,7 @@ export interface ProfileFieldConfig {
     placeholder?: string;
     value: any;
     validation?: ValidationConfig;
-    additional?: {
-      helpText?: string;
-      link?: string;
-    };
+    link?: string;
   };
 }
 
@@ -47,10 +44,7 @@ export const ProfileFields: { [key: string]: ProfileFieldConfig[] } = {
         placeholder: "lukewarm@gmail.com",
         value: "",
         validation: { required: true },
-        additional: {
-          helpText: "Change Email",
-          link: "/change-email",
-        },
+        link: "Change Email",
       },
     },
     {
@@ -70,13 +64,10 @@ export const ProfileFields: { [key: string]: ProfileFieldConfig[] } = {
       fieldLabel: "Password:",
       fieldConfig: {
         type: "password",
-        placeholder: "pass1234",
+        placeholder: "12345678",
         value: "",
         validation: { required: true },
-        additional: {
-          helpText: "Change Password",
-          link: "/change-password",
-        },
+        link: "Change Password",
       },
     },
   ],
