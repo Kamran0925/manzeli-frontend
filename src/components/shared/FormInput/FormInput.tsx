@@ -24,11 +24,18 @@ interface FormInputProps {
   error: string | undefined;
   onChange: (value: any, field: PropertyFieldConfig) => void;
   customStyle?: any;
+  onLinkClick?: (link: string) => void;
 }
 
 const FormInput: React.FC<FormInputProps> = props => {
   let inputElement: JSX.Element | null = null;
-  const { field, value, onChange, error, customStyle } = props;
+  const { field, value, onChange, error, customStyle, onLinkClick } = props;
+
+  const handleLinkClick = () => {
+    if (field.fieldConfig?.link && onLinkClick) {
+      onLinkClick(field.fieldConfig.link);
+    }
+  };
 
   const handleChange = (
     event:
@@ -233,7 +240,7 @@ const FormInput: React.FC<FormInputProps> = props => {
           </Typography>
         )}
         {field.fieldConfig?.link && (
-          <Typography className={styles.link}>
+          <Typography className={styles.link} onClick={handleLinkClick}>
             {field.fieldConfig?.link}
           </Typography>
         )}
