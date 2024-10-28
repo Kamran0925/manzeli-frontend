@@ -4,6 +4,14 @@ import FormInput from "../../../../shared/FormInput/FormInput";
 import { ProfileFields } from "./ProfileFields";
 import FileUpload from "../../../../../assets/icons/ui/FileUpload";
 import Trash2 from "../../../../../assets/icons/ui/Trash2";
+import { useState } from "react";
+import Modal from "../../../../shared/Modal/Modal";
+import VerifyCurrentEmail from "./VerifyCurrentEmail/VerifyCurrentEmail";
+import UpdateEmail from "./UpdateEmail/UpdateEmail";
+import VerifyOTP from "./VerifyOTP/VerifyOTP";
+import EmailUpdated from "./EmailUpdated/EmailUpdated";
+import UpdatePassword from "./UpdatePassword/UpdatePassword";
+import PasswordUpdated from "./PasswordUpdated/PasswordUpdated";
 import styles from "./ProfileManagement.module.css";
 
 const ProfileManagement = () => {
@@ -21,6 +29,17 @@ const ProfileManagement = () => {
         return "calc(60% - 4px)";
       default:
         return defaultWidth;
+    }
+  };
+
+  const [emailModal, setEmailModal] = useState<boolean>(false);
+  const [passwordModal, setPasswordModal] = useState<boolean>(false);
+
+  const handleClick = (link: string) => {
+    if (link === "Change Email") {
+      setEmailModal(true);
+    } else if (link === "Change Password") {
+      setPasswordModal(true);
     }
   };
 
@@ -79,6 +98,7 @@ const ProfileManagement = () => {
                       sm: alignField(section, index),
                     },
                   }}
+                  onLinkClick={link => handleClick(link)}
                 />
               ))}
             </Box>
@@ -100,6 +120,94 @@ const ProfileManagement = () => {
           Cancel
         </Button>
       </Box>
+
+      <Modal
+        open={emailModal}
+        onClose={() => setEmailModal(false)}
+        showClose={false}
+        title="Verify Your Current Email Address"
+        description={<VerifyCurrentEmail />}
+        showActions={true}
+        primaryBtnText="Send Verification Email"
+        onClickPrimaryBtn={() => null}
+        secondaryBtnText="Cancel"
+        onClickSecondaryBtn={() => null}
+      />
+
+      {false && (
+        <Modal
+          open={false}
+          onClose={() => null}
+          showClose={false}
+          title="Change Email"
+          description={<UpdateEmail />}
+          showActions={true}
+          primaryBtnText="Send OTP"
+          onClickPrimaryBtn={() => null}
+          secondaryBtnText="Cancel"
+          onClickSecondaryBtn={() => null}
+        />
+      )}
+
+      {false && (
+        <Modal
+          open={false}
+          onClose={() => null}
+          showClose={false}
+          title="Verify OTP"
+          description={<VerifyOTP />}
+          showActions={true}
+          primaryBtnText="Verify and Update Email"
+          onClickPrimaryBtn={() => null}
+          secondaryBtnText="Cancel"
+          onClickSecondaryBtn={() => null}
+        />
+      )}
+
+      {false && (
+        <Modal
+          open={false}
+          onClose={() => null}
+          showClose={false}
+          title="Email Changed Successfully!"
+          description={<EmailUpdated isSuccess={false} />}
+          showActions={true}
+          primaryBtnText="Go to Dashboard"
+          onClickPrimaryBtn={() => null}
+          secondaryBtnText="Back to Profile Management"
+          onClickSecondaryBtn={() => null}
+        />
+      )}
+
+      {passwordModal && (
+        <Modal
+          open={passwordModal}
+          onClose={() => null}
+          showClose={false}
+          title="Change Password"
+          description={<UpdatePassword />}
+          showActions={true}
+          primaryBtnText="Save Changes"
+          onClickPrimaryBtn={() => null}
+          secondaryBtnText="Cancel"
+          onClickSecondaryBtn={() => null}
+        />
+      )}
+
+      {false && (
+        <Modal
+          open={false}
+          onClose={() => null}
+          showClose={false}
+          title="Change Password"
+          description={<PasswordUpdated isSuccess={true} />}
+          showActions={true}
+          primaryBtnText="Save Changes"
+          onClickPrimaryBtn={() => null}
+          secondaryBtnText="Cancel"
+          onClickSecondaryBtn={() => null}
+        />
+      )}
     </Box>
   );
 };
