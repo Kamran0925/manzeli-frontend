@@ -1,0 +1,259 @@
+.container {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.container .section1 {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.container .section1 .subscriptionContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 19px 28px 13.378px 15px;
+  gap: 100px;
+  height: 114px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  border: 1px solid #e7e7e7;
+}
+
+.container .section1 .subscriptionContainer .activeSubscriptionText {
+  color: #6d6d6d;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.container .section1 .subscriptionContainer .subscriptionInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.container .section1 .subscriptionContainer .subscriptionInfo .align {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container .section1 .subscriptionContainer .subscriptionInfo .align .price {
+  color: #001283;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 55.622px;
+}
+
+.container .section1 .subscriptionContainer .subscriptionInfo .align .duration {
+  color: #848199;
+  font-size: 20.556px;
+  font-weight: 500;
+}
+
+.container .section1 .subscriptionContainer .buttonContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.container .section1 .subscriptionContainer .buttonContainer .starterBtn {
+  display: inline-flex;
+  height: 32px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 23px;
+  background: #001283;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  text-transform: none;
+}
+
+.container .section1 .subscriptionContainer .buttonContainer .activeBtn {
+  display: inline-flex;
+  height: 32px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: rgba(114, 212, 0, 0.2);
+  color: #72d400;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  text-transform: none;
+}
+
+.container .section1 .subscriptionContainer .buttonContainer .pendingBtn {
+  color: #ffa500;
+  background: rgba(255, 165, 0, 0.09);
+}
+
+.container .section1 .subscriptionContainer .buttonContainer .cancelledBtn {
+  color: #e80000;
+  background: rgba(232, 0, 0, 0.2);
+}
+
+.container .section1 .paymentContainer {
+  border-radius: 20px;
+  border: 1px solid #e7e7e7;
+  padding: 19px 28px 13.378px 15px;
+  height: 114px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  gap: 78px;
+}
+
+.container .section1 .paymentContainer .paymentInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.container .section1 .paymentContainer .paymentInfo .nextPaymentText {
+  color: #6d6d6d;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.container .align2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.container .section1 .paymentContainer .paymentInfo .align2 .visaInfoText {
+  color: #6d6d6d;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 30px;
+}
+
+.container .section1 .paymentContainer .paymentInfo .align2 .visaInfoDate {
+  color: #848199;
+  font-size: 20.556px;
+  font-weight: 500;
+}
+
+.container .section1 .paymentContainer .planBtnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container .section1 .paymentContainer .changePlanBtn {
+  width: 154px;
+  height: 32px;
+  padding: 10px;
+  flex-shrink: 0;
+  border-radius: 23px;
+  background: #001283;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  text-transform: capitalize;
+}
+
+.container .subscriptionStatusText {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 4px;
+  background: rgba(59, 76, 184, 0.11);
+  color: #7f7f7f;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 20px;
+  gap: 10px;
+}
+
+.container .section2 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.container .section2 .paymentInfoText {
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.container .section2 .cardContainer {
+  border-radius: 10px;
+  border: 1px solid #e7e7e7;
+  display: flex;
+  width: 429px;
+  padding: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.container .section2 .cardContainer .cardDetailsText {
+  color: #212b36;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.container .section2 .cardContainer .cardInfo {
+  color: #212b36;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 30px;
+}
+
+.container .section3 {
+  display: flex;
+  gap: 16px;
+}
+
+.container .section3 .btn {
+  height: 44px;
+  padding: 14px 24px;
+  border-radius: 20px;
+  border: 1px solid #cbcbcb;
+  background: #fff;
+  text-transform: capitalize;
+}
+
+.container .section3 .cancelSubscriptionBtn {
+  color: #232222;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.container .section3 .reactivateBtn {
+  background-color: #001283;
+  color: #fff;
+}
+
+.container .section3 .managePaymentsBtn {
+  border-radius: 20px;
+  background: #cdcdcd;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+}
