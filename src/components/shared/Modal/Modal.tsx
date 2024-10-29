@@ -19,8 +19,8 @@ interface ModalProps {
   showActions: boolean;
   primaryBtnText: string;
   onClickPrimaryBtn: () => void;
-  secondaryBtnText: string;
-  onClickSecondaryBtn: () => void;
+  secondaryBtnText?: string;
+  onClickSecondaryBtn?: () => void;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -63,13 +63,15 @@ const Modal: React.FC<ModalProps> = ({
       </DialogContent>
       {showActions && (
         <DialogActions className={styles.actions}>
-          <Button
-            onClick={onClickSecondaryBtn}
-            variant="outlined"
-            className={classNames(styles.btn, styles.cancelBtn)}
-          >
-            {secondaryBtnText}
-          </Button>
+          {secondaryBtnText && (
+            <Button
+              onClick={onClickSecondaryBtn}
+              variant="outlined"
+              className={classNames(styles.btn, styles.cancelBtn)}
+            >
+              {secondaryBtnText}
+            </Button>
+          )}
           <Button
             onClick={onClickPrimaryBtn}
             variant="contained"
