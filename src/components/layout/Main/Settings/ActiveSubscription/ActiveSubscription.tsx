@@ -71,6 +71,9 @@ const ActiveSubscription = () => {
           sx={{
             cursor: "pointer",
             background: "#F0F0F0",
+            height: "24px",
+            width: "24px",
+            borderRadius: "100%",
           }}
         >
           <Cross height={24} width={24} />
