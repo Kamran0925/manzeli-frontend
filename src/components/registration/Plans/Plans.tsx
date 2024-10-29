@@ -26,7 +26,12 @@ export const BillingCycles: Record<string, string> = {
   "030": "Yearly",
 };
 
-const Plans = () => {
+interface PlansProps {
+  showStepper?: boolean;
+  customStyle?: any;
+}
+
+const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
   const { register } = useAuth();
   const [planType, setPlanType] = useState("010");
   const [plans, setPlans] = useState<Plan[]>([]);
@@ -217,24 +222,28 @@ const Plans = () => {
   return (
     <>
       <Box className={styles.container}>
-        <MobileStepper
-          variant="text"
-          steps={4}
-          position="static"
-          activeStep={3}
-          backButton={
-            <Button size="small" onClick={handleClick}>
-              <LeftArrow />
-              Back
-            </Button>
-          }
-          nextButton={null}
-        />
-        <Typography variant="h4" align="right" color="#8692A6">
-          Personal Info.
-        </Typography>
+        {showStepper && (
+          <>
+            <MobileStepper
+              variant="text"
+              steps={4}
+              position="static"
+              activeStep={3}
+              backButton={
+                <Button size="small" onClick={handleClick}>
+                  <LeftArrow />
+                  Back
+                </Button>
+              }
+              nextButton={null}
+            />
+            <Typography variant="h4" align="right" color="#8692A6">
+              Personal Info.
+            </Typography>
+          </>
+        )}
 
-        <Box className={styles.contentWrapper}>
+        <Box className={styles.contentWrapper} sx={{ ...customStyle }}>
           <Snackbar
             open={isRegister}
             autoHideDuration={3000}
