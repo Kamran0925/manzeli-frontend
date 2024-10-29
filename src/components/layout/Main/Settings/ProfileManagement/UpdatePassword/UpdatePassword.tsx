@@ -16,6 +16,7 @@ const UpdatePassword = () => {
           value=""
           errorMessage=""
           handleChange={() => null}
+          customStyle={{ margin: 0 }}
         />
       </Box>
       <Box className={classNames(styles.field)}>
@@ -27,19 +28,24 @@ const UpdatePassword = () => {
           value=""
           errorMessage=""
           handleChange={() => null}
+          customStyle={{ margin: 0 }}
         />
       </Box>
-      <Box className={classNames(styles.field, styles.spacing1)}>
+      <Box className={styles.field}>
         <Typography className={styles.label}>Confirm New Password</Typography>
         <InputField
           type="password"
           name="password"
           placeholder="Re-enter New Password"
           value=""
-          errorMessage=""
+          errorMessage="Passwords do not match"
           handleChange={() => {}}
+          customStyle={{ margin: 0 }}
         />
-        <Error messages={["Passwords do not match"]} />
+        <Error
+          messages={["Passwords do not match"]}
+          customStyle={{ margin: 0 }}
+        />
       </Box>
     </Box>
   );

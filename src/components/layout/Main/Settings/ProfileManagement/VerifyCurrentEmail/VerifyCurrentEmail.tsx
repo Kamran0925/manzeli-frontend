@@ -21,6 +21,7 @@ const VerifyCurrentEmail = () => {
             value=""
             errorMessage=""
             handleChange={() => null}
+            customStyle={{ margin: 0 }}
           />
         </Box>
 

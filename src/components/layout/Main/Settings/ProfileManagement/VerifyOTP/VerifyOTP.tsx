@@ -5,7 +5,7 @@ import { useState } from "react";
 import styles from "./VerifyOTP.module.css";
 
 const VerifyOTP = () => {
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(true);
   return (
     <Box className={styles.section}>
       <Typography className={styles.infoText}>
@@ -44,7 +44,7 @@ const VerifyOTP = () => {
           [styles.errorText]: error,
         })}
       >
-        {error ? "Didn't receive the code?" : "Invalid OTP, please try again."}{" "}
+        {error ? "Invalid OTP, please try again." : "Didn't receive the code?"}{" "}
         <MuiLink
           component={Link}
           to="/resend-email"

@@ -54,7 +54,13 @@ const Modal: React.FC<ModalProps> = ({
           <FillCross onClick={onClose} style={{ cursor: "pointer" }} />
         )}
       </DialogTitle>
-      <DialogContent>{description}</DialogContent>
+      <DialogContent
+        sx={{
+          padding: 0,
+        }}
+      >
+        {description}
+      </DialogContent>
       {showActions && (
         <DialogActions className={styles.actions}>
           <Button

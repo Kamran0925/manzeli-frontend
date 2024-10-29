@@ -18,6 +18,7 @@ interface InputFieldProps {
     name: string,
     type: "text" | "password" | "email",
   ) => void;
+  customStyle?: any;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -28,6 +29,7 @@ const InputField: React.FC<InputFieldProps> = ({
   disabled,
   errorMessage,
   handleChange,
+  customStyle,
 }) => {
   const theme = useTheme();
 
@@ -90,6 +92,7 @@ const InputField: React.FC<InputFieldProps> = ({
           padding: "15px 0px",
           color: errorMessage ? theme.palette.error.main : "inherit",
         },
+        ...customStyle,
       }}
     />
   );
