@@ -1,11 +1,16 @@
 import React from "react";
 
-const Cross: React.FC<React.SVGProps<SVGSVGElement>> = props => {
+interface CrossProps extends React.SVGProps<SVGSVGElement> {
+  width?: string | number;
+  height?: string | number;
+}
+
+const Cross: React.FC<CrossProps> = ({ width = 15, height = 15, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="15"
-      height="15"
+      width={width}
+      height={height}
       viewBox="0 0 15 15"
       fill="none"
       {...props}
