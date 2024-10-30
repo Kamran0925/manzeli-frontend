@@ -73,7 +73,7 @@ const Modal: React.FC<ModalProps> = ({
           <Button
             onClick={onClickPrimaryBtn}
             variant="contained"
-            className={classNames(styles.btn, styles.deleteBtn)}
+            className={classNames(styles.btn, styles.actionBtn)}
           >
             {primaryBtnText}
           </Button>
