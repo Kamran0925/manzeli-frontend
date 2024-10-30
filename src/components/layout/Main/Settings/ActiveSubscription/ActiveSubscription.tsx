@@ -12,9 +12,58 @@ import { useState } from "react";
 import styles from "./ActiveSubscription.module.css";
 
 const ActiveSubscription = () => {
-  const [plan, setPlan] = useState<boolean>(false);
+  const [planVisible, setPlanVisible] = useState<boolean>(false);
+  const [modalIndex, setModalIndex] = useState<number | null>(null);
+  const [flowType, setFlowType] = useState<"cancel" | null>(null);
 
-  if (plan) {
+  const openPlan = () => setPlanVisible(true);
+  const closePlan = () => setPlanVisible(false);
+
+  const handleCancelSubscriptionClick = () => {
+    setFlowType("cancel");
+    openModal(0);
+  };
+
+  const openModal = (index: number) => setModalIndex(index);
+  const closeModal = () => {
+    setModalIndex(null);
+    setFlowType(null);
+  };
+
+  const modals = {
+    cancel: [
+      {
+        title: "Confirmation for Cancel Subscription",
+        description: <CancelSubscription isRequested={true} />,
+        primaryBtnText: "Proceed with Cancellation",
+        nextModalIndex: 1,
+      },
+      {
+        title: "Reason for Cancellation",
+        description: <CancelSubscriptionReason />,
+        primaryBtnText: "Submit",
+        nextModalIndex: 2,
+      },
+      {
+        title: "Cancellation Confirmation",
+        description: <CancelSubscriptionConfirm />,
+        primaryBtnText: "Back to Dashboard",
+      },
+    ],
+  };
+
+  const handlePrimaryBtnClick = () => {
+    const currentModal = modals[flowType!][modalIndex!];
+    if (currentModal.nextModalIndex !== undefined) {
+      openModal(currentModal.nextModalIndex);
+    } else {
+      closeModal();
+    }
+  };
+
+  const currentModal = flowType ? modals[flowType][modalIndex!] : null;
+
+  if (planVisible) {
     return (
       <Plans showStepper={false} customStyle={{ marginTop: "0 !important" }} />
     );
@@ -37,8 +86,6 @@ const ActiveSubscription = () => {
             <Button className={styles.starterBtn}>Starter</Button>
             <Button className={classNames(styles.activeBtn)}>
               <Circle height="8px" width="8px" fill="#72D400" /> Active
-              {/* <Circle height="8px" width="8px" fill="#FFA500" /> Pending
-              Cancellation */}
             </Button>
           </Box>
         </Box>
@@ -54,12 +101,14 @@ const ActiveSubscription = () => {
                 Visa ending with 3456
               </Typography>
               <Typography className={styles.visaInfoDate}>
-                Oct 26,2024
+                Oct 26, 2024
               </Typography>
             </Box>
           </Box>
           <Box className={styles.planBtnContainer}>
-            <Button className={styles.changePlanBtn}>Change Plan</Button>
+            <Button className={styles.changePlanBtn} onClick={openPlan}>
+              Change Plan
+            </Button>
           </Box>
         </Box>
       </Box>
@@ -102,6 +151,7 @@ const ActiveSubscription = () => {
             styles.cancelSubscriptionBtn,
             styles.reactivateBtn,
           )}
+          onClick={handleCancelSubscriptionClick}
         >
           Cancel Subscription
         </Button>
@@ -110,42 +160,20 @@ const ActiveSubscription = () => {
         </Button>
       </Box>
 
-      <Modal
-        open={false}
-        onClose={() => null}
-        showClose={false}
-        title="Confirmation  for Cancel Subscription"
-        description={<CancelSubscription isRequested={true} />}
-        showActions={true}
-        primaryBtnText="Proceed with Cancellation"
-        onClickPrimaryBtn={() => null}
-        secondaryBtnText="Cancel"
-        onClickSecondaryBtn={() => null}
-      />
-
-      <Modal
-        open={false}
-        onClose={() => null}
-        showClose={false}
-        title="Reason for Cancellation"
-        description={<CancelSubscriptionReason />}
-        showActions={true}
-        primaryBtnText="Submit"
-        onClickPrimaryBtn={() => null}
-        secondaryBtnText="Skip"
-        onClickSecondaryBtn={() => null}
-      />
-
-      <Modal
-        open={false}
-        onClose={() => null}
-        showClose={false}
-        title="Cancellation Confirmation"
-        description={<CancelSubscriptionConfirm />}
-        showActions={true}
-        primaryBtnText="Back to Dashboard"
-        onClickPrimaryBtn={() => null}
-      />
+      {currentModal && (
+        <Modal
+          open={true}
+          onClose={closeModal}
+          showClose={false}
+          title={currentModal.title}
+          description={currentModal.description}
+          showActions={true}
+          primaryBtnText={currentModal.primaryBtnText}
+          onClickPrimaryBtn={handlePrimaryBtnClick}
+          secondaryBtnText="Cancel"
+          onClickSecondaryBtn={closeModal}
+        />
+      )}
     </Box>
   );
 };

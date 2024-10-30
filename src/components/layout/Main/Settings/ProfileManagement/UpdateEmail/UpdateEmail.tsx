@@ -20,6 +20,7 @@ const UpdateEmail = () => {
             value=""
             errorMessage=""
             handleChange={() => null}
+            customStyle={{ margin: 0 }}
           />
         </Box>
 
@@ -32,6 +33,7 @@ const UpdateEmail = () => {
             value=""
             errorMessage=""
             handleChange={() => null}
+            customStyle={{ margin: 0 }}
           />
         </Box>
       </Box>

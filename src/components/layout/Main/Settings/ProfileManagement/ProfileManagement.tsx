@@ -16,44 +16,95 @@ import PasswordUpdated from "./PasswordUpdated/PasswordUpdated";
 import styles from "./ProfileManagement.module.css";
 
 const ProfileManagement = () => {
+  const navigate = useNavigate();
+  const [modalIndex, setModalIndex] = useState<number | null>(null);
+  const [flowType, setFlowType] = useState<"email" | "password" | null>(null);
+
   const alignField = (section: string, index: number): string => {
     const defaultWidth = "528px";
 
-    if (section !== "Personal Details") {
-      return defaultWidth;
-    }
+    if (section !== "Personal Details") return defaultWidth;
 
-    switch (index) {
-      case 0:
-        return "calc(528px - 60%)";
-      case 1:
-        return "calc(60% - 4px)";
-      default:
-        return defaultWidth;
-    }
+    return index === 0
+      ? "calc(528px - 60%)"
+      : index === 1
+      ? "calc(60% - 4px)"
+      : defaultWidth;
   };
-
-  const [emailModal, setEmailModal] = useState<boolean>(false);
-  const [updateEmail, setUpdateEmail] = useState<boolean>(false);
-  const [otpModal, setOtpModal] = useState<boolean>(false);
-  const [emailUpdated, setEmailUpdated] = useState<boolean>(false);
-
-  const [passwordModal, setPasswordModal] = useState<boolean>(false);
-  const [passwordUpdated, setPasswordUpdated] = useState<boolean>(false);
-  const navigate = useNavigate();
 
   const handleClick = (link: string) => {
-    if (link === "Change Email") {
-      setEmailModal(true);
-    } else if (link === "Change Password") {
-      setPasswordModal(true);
-    }
+    setFlowType(link === "Change Email" ? "email" : "password");
+    openModal(0);
   };
+
+  const modals = {
+    email: [
+      {
+        title: "Verify Your Current Email Address",
+        description: <VerifyCurrentEmail />,
+        primaryBtnText: "Send Verification Email",
+        onClickPrimaryBtn: () => {
+          openModal(1);
+        },
+      },
+      {
+        title: "Change Email",
+        description: <UpdateEmail />,
+        primaryBtnText: "Send OTP",
+        onClickPrimaryBtn: () => {
+          openModal(2);
+        },
+      },
+      {
+        title: "Verify OTP",
+        description: <VerifyOTP />,
+        primaryBtnText: "Verify and Update Email",
+        onClickPrimaryBtn: () => {
+          openModal(3);
+        },
+      },
+      {
+        title: "Email Changed Successfully!",
+        description: <EmailUpdated isSuccess={true} />,
+        primaryBtnText: "Go to Dashboard",
+        onClickPrimaryBtn: () => {
+          closeModal();
+          navigate("/property/listings");
+        },
+      },
+    ],
+    password: [
+      {
+        title: "Change Password",
+        description: <UpdatePassword />,
+        primaryBtnText: "Save Changes",
+        onClickPrimaryBtn: () => {
+          openModal(1);
+        },
+      },
+      {
+        title: "Password Changed Successfully!",
+        description: <PasswordUpdated isSuccess={true} />,
+        primaryBtnText: "Go to Dashboard",
+        onClickPrimaryBtn: () => {
+          navigate("/property/listings");
+        },
+      },
+    ],
+  };
+
+  const openModal = (index: number) => setModalIndex(index);
+  const closeModal = () => {
+    setModalIndex(null);
+    setFlowType(null);
+  };
+
+  const currentModal = flowType ? modals[flowType][modalIndex!] : null;
 
   return (
     <Box>
       <Box className={styles.profileContainer}>
-        <Box className={styles.profilePicture}></Box>
+        <Box className={styles.profilePicture} />
         <Box className={styles.profileUpload}>
           <Typography className={styles.profileText}>
             We support PNGs and JPEGs under 10MB
@@ -80,17 +131,10 @@ const ProfileManagement = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
-              flexWrap: "nowrap",
             }}
           >
             <Typography className={styles.fieldsSubtitle}>{section}</Typography>
-            <Box
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "4px",
-              }}
-            >
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: "4px" }}>
               {fields.map((field, index) => (
                 <FormInput
                   key={index}
@@ -100,12 +144,9 @@ const ProfileManagement = () => {
                   error=""
                   customStyle={{
                     marginTop: "18px",
-                    width: {
-                      xs: "100%",
-                      sm: alignField(section, index),
-                    },
+                    width: { xs: "100%", sm: alignField(section, index) },
                   }}
-                  onLinkClick={link => handleClick(link)}
+                  onLinkClick={handleClick}
                 />
               ))}
             </Box>
@@ -128,103 +169,20 @@ const ProfileManagement = () => {
         </Button>
       </Box>
 
-      <Modal
-        open={emailModal}
-        onClose={() => setEmailModal(false)}
-        showClose={false}
-        title="Verify Your Current Email Address"
-        description={<VerifyCurrentEmail />}
-        showActions={true}
-        primaryBtnText="Send Verification Email"
-        onClickPrimaryBtn={() => {
-          setEmailModal(false);
-          setUpdateEmail(true);
-        }}
-        secondaryBtnText="Cancel"
-        onClickSecondaryBtn={() => setEmailModal(false)}
-      />
-
-      <Modal
-        open={updateEmail}
-        onClose={() => setUpdateEmail(false)}
-        showClose={false}
-        title="Change Email"
-        description={<UpdateEmail />}
-        showActions={true}
-        primaryBtnText="Send OTP"
-        onClickPrimaryBtn={() => {
-          setUpdateEmail(false);
-          setOtpModal(true);
-        }}
-        secondaryBtnText="Cancel"
-        onClickSecondaryBtn={() => setUpdateEmail(false)}
-      />
-
-      <Modal
-        open={otpModal}
-        onClose={() => setOtpModal(true)}
-        showClose={false}
-        title="Verify OTP"
-        description={<VerifyOTP />}
-        showActions={true}
-        primaryBtnText="Verify and Update Email"
-        onClickPrimaryBtn={() => {
-          setOtpModal(false);
-          setEmailUpdated(true);
-        }}
-        secondaryBtnText="Cancel"
-        onClickSecondaryBtn={() => setOtpModal(false)}
-      />
-
-      <Modal
-        open={emailUpdated}
-        onClose={() => setEmailUpdated(false)}
-        showClose={false}
-        title="Email Changed Successfully!"
-        description={<EmailUpdated isSuccess={true} />}
-        showActions={true}
-        primaryBtnText="Go to Dashboard"
-        onClickPrimaryBtn={() => {
-          setEmailUpdated(false);
-          navigate("/property-listings");
-        }}
-        secondaryBtnText="Back to Profile Management"
-        onClickSecondaryBtn={() => {
-          setEmailUpdated(false);
-        }}
-      />
-
-      <Modal
-        open={passwordModal}
-        onClose={() => setPasswordModal(false)}
-        showClose={false}
-        title="Change Password"
-        description={<UpdatePassword />}
-        showActions={true}
-        primaryBtnText="Save Changes"
-        onClickPrimaryBtn={() => {
-          setPasswordModal(false);
-          setPasswordUpdated(true);
-        }}
-        secondaryBtnText="Cancel"
-        onClickSecondaryBtn={() => setPasswordModal(false)}
-      />
-
-      <Modal
-        open={passwordUpdated}
-        onClose={() => setPasswordUpdated(false)}
-        showClose={false}
-        title="Password Changed Successfully!"
-        description={<PasswordUpdated isSuccess={true} />}
-        showActions={true}
-        primaryBtnText="Go to Dashboard"
-        onClickPrimaryBtn={() => {
-          setPasswordUpdated(false);
-          navigate("/property-listings");
-        }}
-        secondaryBtnText="Back To Profile Management"
-        onClickSecondaryBtn={() => setPasswordUpdated(false)}
-      />
+      {currentModal && (
+        <Modal
+          open={true}
+          onClose={closeModal}
+          showClose={false}
+          title={currentModal.title}
+          description={currentModal.description}
+          showActions={true}
+          primaryBtnText={currentModal.primaryBtnText}
+          onClickPrimaryBtn={currentModal.onClickPrimaryBtn}
+          secondaryBtnText="Cancel"
+          onClickSecondaryBtn={closeModal}
+        />
+      )}
     </Box>
   );
 };
