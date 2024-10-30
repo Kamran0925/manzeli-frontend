@@ -4,6 +4,7 @@ import Message from "../../../assets/icons/ui/Message";
 import Unit from "../../../assets/icons/ui/Unit";
 import Tenant from "../../../assets/icons/ui/Tenant";
 import Plan from "../../../assets/icons/ui/Plan";
+import Settings from "../../../assets/icons/ui/Settings";
 
 export const NAV_LINKS = [
   {
@@ -35,5 +36,10 @@ export const NAV_LINKS = [
     route: "/pricing",
     icon: Plan,
     label: "Plans & Billing",
+  },
+  {
+    route: "/settings",
+    icon: Settings,
+    label: "Settings",
   },
 ];

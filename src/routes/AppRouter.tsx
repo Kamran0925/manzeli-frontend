@@ -19,6 +19,7 @@ import TenancyLists from "../components/layout/Main/Tenancy/TenancyLists/Tenancy
 import Plans from "../components/registration/Plans/Plans";
 import { useAuth } from "../context/AuthContext";
 import IsAuth from "../hoc/isAuth";
+import Settings from "../components/layout/Main/Settings/Settings";
 
 export const AppRouter = () => {
   const { isAuthenticated } = useAuth();
@@ -83,6 +84,19 @@ export const AppRouter = () => {
             <Route path="" element={<TenancyLists />} />
             <Route path="details" element={<TenancyDetails />} />
             <Route path="edit" element={<TenancyEdit />} />
+          </Route>
+        </Route>
+
+        <Route
+          path="settings/*"
+          element={
+            <IsAuth>
+              <ProtectedRoute />
+            </IsAuth>
+          }
+        >
+          <Route element={<Layout />}>
+            <Route path="" element={<Settings />} />
           </Route>
         </Route>
 

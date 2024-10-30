@@ -1,0 +1,56 @@
+.dialog {
+  padding: 0px;
+  margin: 0 auto;
+}
+
+.dialog .title {
+  padding: 20px 24px;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: stretch;
+  border-radius: 8px 8px 0px 0px;
+  border-bottom: 1px solid #e3e3e3;
+  color: #000;
+  background: #fff;
+}
+
+.dialog .actions {
+  padding: 14px 24px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  align-self: stretch;
+  gap: 16px;
+  border-radius: 0px 0px 8px 8px;
+  border-top: 1px solid #e3e3e3;
+  background: #fff;
+}
+
+.dialog .actions .btn {
+  display: flex;
+  height: 44px;
+  padding: 14px 24px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  box-shadow: none;
+  text-transform: capitalize;
+  box-sizing: border-box;
+}
+
+.dialog .actions .cancelBtn {
+  background: #fff;
+  color: #232222;
+  border: 1px solid #cbcbcb;
+}
+
+.dialog .actions .actionBtn {
+  background-color: #001283;
+  color: #fff;
+  border: none;
+}

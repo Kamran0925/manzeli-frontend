@@ -3,9 +3,10 @@ import { Box, Typography } from "@mui/material";
 
 interface ErrorProps {
   messages: string[];
+  customStyle?: any;
 }
 
-const Error: React.FC<ErrorProps> = ({ messages }) => {
+const Error: React.FC<ErrorProps> = ({ messages, customStyle }) => {
   return (
     <Box
       sx={{
@@ -19,6 +20,7 @@ const Error: React.FC<ErrorProps> = ({ messages }) => {
         borderRadius: "40px",
         marginTop: "12px",
         width: "100%",
+        ...customStyle,
       }}
     >
       {messages.map((msg, index) => (
