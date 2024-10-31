@@ -2,6 +2,7 @@ import React from "react";
 import { Tabs, Tab, Box } from "@mui/material";
 import Header from "../../../shared/Header/Header";
 import ProfileManagement from "./ProfileManagement/ProfileManagement";
+import ActiveSubscription from "./ActiveSubscription/ActiveSubscription";
 import styles from "./Settings.module.css";
 
 const profileTabs = [
@@ -21,6 +22,8 @@ const Settings = () => {
     switch (value) {
       case "profile":
         return <ProfileManagement />;
+      case "subscription":
+        return <ActiveSubscription />;
       default:
         return null;
     }
