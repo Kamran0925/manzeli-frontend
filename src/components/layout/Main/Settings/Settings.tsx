@@ -3,6 +3,7 @@ import { Tabs, Tab, Box } from "@mui/material";
 import Header from "../../../shared/Header/Header";
 import ProfileManagement from "./ProfileManagement/ProfileManagement";
 import ActiveSubscription from "./ActiveSubscription/ActiveSubscription";
+import BillingHistory from "./BillingHistory/BillingHistory";
 import styles from "./Settings.module.css";
 
 const profileTabs = [
@@ -24,6 +25,8 @@ const Settings = () => {
         return <ProfileManagement />;
       case "subscription":
         return <ActiveSubscription />;
+      case "billing":
+        return <BillingHistory />;
       default:
         return null;
     }
