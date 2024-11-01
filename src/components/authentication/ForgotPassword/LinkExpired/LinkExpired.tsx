@@ -1,13 +1,23 @@
 import { Typography, Box, Button } from "@mui/material";
+import { resetPassword } from "../../../../api/auth";
 import styles from "./LinkExpired.module.css";
 
 interface LinkExpiredProps {
   onNext: () => void;
+  email: string;
 }
 
-const LinkExpired: React.FC<LinkExpiredProps> = ({ onNext }) => {
-  const handleSubmit = () => {
-    onNext();
+const LinkExpired: React.FC<LinkExpiredProps> = ({ onNext, email }) => {
+  const handleSubmit = async () => {
+    const emailData = { email: email };
+
+    try {
+      const response = await resetPassword(emailData);
+      console.log(response);
+      onNext();
+    } catch (error) {
+      console.error("Error resetting password:", error);
+    }
   };
 
   return (
