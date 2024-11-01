@@ -3,9 +3,15 @@ import { Typography, Box, Link, Button } from "@mui/material";
 import InputField from "../../../shared/InputField/InputField";
 import Error from "../../../shared/Error/Error";
 import { displayError, validate } from "../../../../utils/validationHelpers";
+import {
+  PasswordResetConfirmData,
+  confirmPasswordReset,
+} from "../../../../api/auth";
 import styles from "./ResetPasswordForm.module.css";
 
 interface ResetPasswordFormProps {
+  uid: string | null;
+  token: string | null;
   onNext: () => void;
 }
 
@@ -19,7 +25,11 @@ interface ResetFormState {
   confirmPassword: PasswordField;
 }
 
-const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
+const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
+  uid,
+  token,
+  onNext,
+}) => {
   const [formState, setFormState] = useState<ResetFormState>({
     password: { value: "", errorMessage: "" },
     confirmPassword: { value: "", errorMessage: "" },
@@ -56,7 +66,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const passwordError = formatError(
       "password",
       "password",
@@ -97,6 +107,21 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
     }
 
     setIsButtonDisabled(false);
+
+    const data: PasswordResetConfirmData = {
+      uid: uid,
+      token: token,
+      new_password1: formState.password.value,
+      new_password2: formState.confirmPassword.value,
+    };
+
+    try {
+      const response = await confirmPasswordReset(data);
+      console.log("Password reset confirmed:", response);
+    } catch (error) {
+      console.error("Error resetting user password:", error);
+    }
+
     onNext();
   };
 
