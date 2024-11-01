@@ -2,16 +2,20 @@ import { useState } from "react";
 import { Typography, Box, Button, Link as MuiLink } from "@mui/material";
 import InputField from "../../../shared/InputField/InputField";
 import { Link } from "react-router-dom";
-
+import { resetPassword } from "../../../../api/auth";
 import styles from "./ForgotPasswordForm.module.css";
 
 interface ForgotPasswordProps {
   onNext: () => void;
+  email: string;
+  setEmail: (value: string) => void;
 }
 
-const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({ onNext }) => {
-  const [name, setName] = useState<string>("");
-
+const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({
+  onNext,
+  email,
+  setEmail,
+}) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,11 +25,19 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({ onNext }) => {
     } else {
       setIsButtonDisabled(false);
     }
-    setName(value);
+    setEmail(value);
   };
 
-  const handleSubmit = () => {
-    onNext();
+  const handleSubmit = async () => {
+    const emailData = { email: email };
+
+    try {
+      const response = await resetPassword(emailData);
+      console.log(response);
+      onNext();
+    } catch (error) {
+      console.error("Error resetting password:", error);
+    }
   };
 
   return (
@@ -44,7 +56,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({ onNext }) => {
         </Typography>
 
         <Typography variant="h4" fontWeight={400}>
-          Enter the Username you used to create your account so we can send you
+          Enter the email you used to create your account so we can send you
           instructions on how to reset your password.
         </Typography>
 
@@ -57,10 +69,10 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({ onNext }) => {
           }}
         >
           <InputField
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={name}
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={email}
             errorMessage={""}
             handleChange={handleChange}
           />
