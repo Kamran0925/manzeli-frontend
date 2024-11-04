@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Typography, Box, Button, Link as MuiLink } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Button,
+  Link as MuiLink,
+  CircularProgress,
+} from "@mui/material";
 import InputField from "../../../shared/InputField/InputField";
 import { Link } from "react-router-dom";
 import { resetPassword } from "../../../../api/auth";
@@ -17,6 +23,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({
   setEmail,
 }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -30,14 +37,17 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({
 
   const handleSubmit = async () => {
     const emailData = { email: email };
+    setIsLoading(true);
 
     try {
       const response = await resetPassword(emailData);
+
       console.log(response);
       onNext();
     } catch (error) {
       console.error("Error resetting password:", error);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -94,7 +104,16 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({
             onClick={handleSubmit}
             disabled={isButtonDisabled}
           >
-            Send
+            Send{" "}
+            {isLoading && (
+              <CircularProgress
+                size="16px"
+                sx={{
+                  marginLeft: "20px",
+                  color: "#FFF",
+                }}
+              />
+            )}
           </Button>
           <Box
             sx={{

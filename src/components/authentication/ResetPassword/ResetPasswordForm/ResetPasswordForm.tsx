@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Typography, Box, Link, Button } from "@mui/material";
+import { Typography, Box, Link, Button, CircularProgress } from "@mui/material";
 import InputField from "../../../shared/InputField/InputField";
 import Error from "../../../shared/Error/Error";
 import { displayError, validate } from "../../../../utils/validationHelpers";
@@ -36,6 +36,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
   });
 
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const formatError = (type: string, field: string, value: any): string => {
     const { errorMessage } = validate(type, value);
@@ -108,6 +109,8 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
 
     setIsButtonDisabled(false);
 
+    setIsLoading(true);
+
     const data: PasswordResetConfirmData = {
       uid: uid,
       token: token,
@@ -122,6 +125,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
       console.error("Error resetting user password:", error);
     }
 
+    setIsLoading(false);
     onNext();
   };
 
@@ -221,7 +225,16 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
             onClick={handleSubmit}
             disabled={isButtonDisabled}
           >
-            Reset Password
+            Reset Password{" "}
+            {isLoading && (
+              <CircularProgress
+                size="16px"
+                sx={{
+                  marginLeft: "20px",
+                  color: "#FFF",
+                }}
+              />
+            )}
           </Button>
           <Box
             sx={{

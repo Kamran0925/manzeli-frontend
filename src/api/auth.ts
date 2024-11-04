@@ -56,7 +56,7 @@ export interface PasswordResetConfirmData {
 
 export const confirmPasswordReset = async (data: PasswordResetConfirmData) => {
   const response = await apiClient.post(
-    `/password/reset/confirm/${data.uid}/${data.token}/`,
+    `/api/password/reset/confirm/${data.uid}/${data.token}/`,
     data,
   );
   return response.data;

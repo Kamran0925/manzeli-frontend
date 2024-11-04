@@ -1,5 +1,6 @@
-import { Typography, Box, Button } from "@mui/material";
+import { Typography, Box, Button, CircularProgress } from "@mui/material";
 import { resetPassword } from "../../../../api/auth";
+import { useState } from "react";
 import styles from "./LinkExpired.module.css";
 
 interface LinkExpiredProps {
@@ -8,7 +9,10 @@ interface LinkExpiredProps {
 }
 
 const LinkExpired: React.FC<LinkExpiredProps> = ({ onNext, email }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const handleSubmit = async () => {
+    setIsLoading(true);
     const emailData = { email: email };
 
     try {
@@ -18,6 +22,7 @@ const LinkExpired: React.FC<LinkExpiredProps> = ({ onNext, email }) => {
     } catch (error) {
       console.error("Error resetting password:", error);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -62,7 +67,16 @@ const LinkExpired: React.FC<LinkExpiredProps> = ({ onNext, email }) => {
             }}
             onClick={handleSubmit}
           >
-            Request New Link
+            Request New Link{" "}
+            {isLoading && (
+              <CircularProgress
+                size="16px"
+                sx={{
+                  marginLeft: "20px",
+                  color: "#FFF",
+                }}
+              />
+            )}
           </Button>
         </Box>
       </Box>
