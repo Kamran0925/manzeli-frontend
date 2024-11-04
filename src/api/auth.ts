@@ -61,3 +61,14 @@ export const confirmPasswordReset = async (data: PasswordResetConfirmData) => {
   );
   return response.data;
 };
+
+export interface ChangePasswordData {
+  current_password: string;
+  new_password: string;
+  confirm_password: string;
+}
+
+export const changePassword = async (data: ChangePasswordData) => {
+  const response = await apiClient.post("/api/users/change-password/", data);
+  return response.data;
+};
