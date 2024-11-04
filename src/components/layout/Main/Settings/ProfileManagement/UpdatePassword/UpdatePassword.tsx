@@ -29,24 +29,22 @@ const UpdatePassword: React.FC<UpdatePasswordProps> = ({
 
     if (currentPassword.length < passwordLength) {
       errors.push(
-        `Current password must be at least ${passwordLength} characters.`,
+        `Current password must be at least ${passwordLength} characters`,
       );
     }
     if (newPassword.length < passwordLength) {
-      errors.push(
-        `New password must be at least ${passwordLength} characters.`,
-      );
+      errors.push(`New password must be at least ${passwordLength} characters`);
     }
     if (confirmPassword.length < passwordLength) {
       errors.push(
-        `Confirm password must be at least ${passwordLength} characters.`,
+        `Confirm password must be at least ${passwordLength} characters`,
       );
     }
     if (newPassword !== confirmPassword) {
-      errors.push("New password and confirmation do not match.");
+      errors.push("Passwords do not match");
     }
     if (currentPassword === newPassword) {
-      errors.push("New password must be different from the current password.");
+      errors.push("New password must be different from the current password");
     }
 
     return errors;
