@@ -17,7 +17,7 @@ const ProfileActions = forwardRef<HTMLDivElement, ProfileActionsProps>(
       {
         icon: <UserProfile />,
         optionText: "Profile Settings",
-        routeLink: "/profile/settings",
+        routeLink: "/settings",
       },
       {
         icon: <Logout />,
