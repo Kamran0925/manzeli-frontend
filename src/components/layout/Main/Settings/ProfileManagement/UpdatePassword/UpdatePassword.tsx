@@ -3,7 +3,7 @@ import { Typography, Box } from "@mui/material";
 import InputField from "../../../../../shared/InputField/InputField";
 import classNames from "classnames";
 import Error from "../../../../../shared/Error/Error";
-import { changePassword } from "../../../../../../api/auth";
+import { ChangePasswordData, changePassword } from "../../../../../../api/auth";
 import {
   validate,
   displayError,
@@ -63,7 +63,7 @@ const UpdatePassword: React.FC<UpdatePasswordProps> = ({
           return;
         }
 
-        const data = {
+        const data: ChangePasswordData = {
           current_password: currentPassword,
           new_password: newPassword,
           confirm_password: confirmPassword,
