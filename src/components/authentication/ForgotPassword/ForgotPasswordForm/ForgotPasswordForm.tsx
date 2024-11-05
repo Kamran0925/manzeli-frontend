@@ -10,6 +10,7 @@ import InputField from "../../../shared/InputField/InputField";
 import { Link } from "react-router-dom";
 import { resetPassword } from "../../../../api/auth";
 import styles from "./ForgotPasswordForm.module.css";
+import Error from "../../../shared/Error/Error";
 
 interface ForgotPasswordProps {
   onNext: () => void;
@@ -24,6 +25,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({
 }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -40,12 +42,10 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({
     setIsLoading(true);
 
     try {
-      const response = await resetPassword(emailData);
-
-      console.log(response);
+      await resetPassword(emailData);
       onNext();
-    } catch (error) {
-      console.error("Error resetting password:", error);
+    } catch (error: any) {
+      setError(Object.values(error?.response?.data));
     }
     setIsLoading(false);
   };
@@ -86,6 +86,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({
             errorMessage={""}
             handleChange={handleChange}
           />
+          {error.length > 0 && <Error messages={error} />}
 
           <Button
             variant="contained"
