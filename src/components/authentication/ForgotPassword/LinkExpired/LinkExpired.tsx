@@ -1,6 +1,13 @@
-import { Typography, Box, Button, CircularProgress } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Button,
+  CircularProgress,
+  Snackbar,
+} from "@mui/material";
 import { resetPassword } from "../../../../api/auth";
 import { useState } from "react";
+import Error from "../../../shared/Error/Error";
 import styles from "./LinkExpired.module.css";
 
 interface LinkExpiredProps {
@@ -10,6 +17,8 @@ interface LinkExpiredProps {
 
 const LinkExpired: React.FC<LinkExpiredProps> = ({ onNext, email }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState([]);
+  const [snackbarMessage, setSnackbarMessage] = useState<string>("");
 
   const handleSubmit = async () => {
     setIsLoading(true);
@@ -17,10 +26,10 @@ const LinkExpired: React.FC<LinkExpiredProps> = ({ onNext, email }) => {
 
     try {
       const response = await resetPassword(emailData);
-      console.log(response);
-      onNext();
-    } catch (error) {
-      console.error("Error resetting password:", error);
+      let message = Object.values(response)[0];
+      setSnackbarMessage(message ? message.toString() : "");
+    } catch (error: any) {
+      setError(Object.values(error?.response?.data));
     }
     setIsLoading(false);
   };
@@ -28,6 +37,19 @@ const LinkExpired: React.FC<LinkExpiredProps> = ({ onNext, email }) => {
   return (
     <Box component="section" className={styles.box1}>
       <Box className={styles.box2}>
+        <Snackbar
+          open={!!snackbarMessage}
+          autoHideDuration={1500}
+          onClose={() => setSnackbarMessage("")}
+          message={snackbarMessage}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          sx={{
+            ".css-73yezh-MuiPaper-root-MuiSnackbarContent-root": {
+              backgroundColor: "#001283",
+              boxShadow: "none",
+            },
+          }}
+        />
         <Typography
           variant="h4"
           sx={{
@@ -44,6 +66,8 @@ const LinkExpired: React.FC<LinkExpiredProps> = ({ onNext, email }) => {
         <Typography variant="h4" fontWeight={400}>
           The password reset link has expired. Please request a new link.
         </Typography>
+
+        {error.length > 0 && <Error messages={error} />}
 
         <Box
           sx={{
