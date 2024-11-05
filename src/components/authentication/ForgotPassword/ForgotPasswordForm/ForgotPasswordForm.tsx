@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import InputField from "../../../shared/InputField/InputField";
 import { Link } from "react-router-dom";
-import { resetPassword } from "../../../../api/auth";
+import { PasswordResetData, resetPassword } from "../../../../api/auth";
 import styles from "./ForgotPasswordForm.module.css";
 import Error from "../../../shared/Error/Error";
 
@@ -38,7 +38,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({
   };
 
   const handleSubmit = async () => {
-    const emailData = { email: email };
+    const emailData: PasswordResetData = { email: email };
     setIsLoading(true);
 
     try {

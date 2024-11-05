@@ -3,7 +3,10 @@ import { Typography, Box, Link, Button, CircularProgress } from "@mui/material";
 import InputField from "../../../shared/InputField/InputField";
 import Error from "../../../shared/Error/Error";
 import { displayError, validate } from "../../../../utils/validationHelpers";
-import { confirmPasswordReset } from "../../../../api/auth";
+import {
+  PasswordResetConfirmData,
+  confirmPasswordReset,
+} from "../../../../api/auth";
 import styles from "./ResetPasswordForm.module.css";
 
 interface ResetPasswordFormProps {
@@ -109,7 +112,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
 
     setIsLoading(true);
 
-    const data = {
+    const data: PasswordResetConfirmData = {
       uid: uid,
       token: token,
       new_password1: formState.password.value,
