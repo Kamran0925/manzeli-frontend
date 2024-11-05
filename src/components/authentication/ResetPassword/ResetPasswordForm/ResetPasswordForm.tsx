@@ -3,10 +3,7 @@ import { Typography, Box, Link, Button, CircularProgress } from "@mui/material";
 import InputField from "../../../shared/InputField/InputField";
 import Error from "../../../shared/Error/Error";
 import { displayError, validate } from "../../../../utils/validationHelpers";
-import {
-  PasswordResetConfirmData,
-  confirmPasswordReset,
-} from "../../../../api/auth";
+import { confirmPasswordReset } from "../../../../api/auth";
 import styles from "./ResetPasswordForm.module.css";
 
 interface ResetPasswordFormProps {
@@ -37,6 +34,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
 
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string[]>([]);
 
   const formatError = (type: string, field: string, value: any): string => {
     const { errorMessage } = validate(type, value);
@@ -111,7 +109,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
 
     setIsLoading(true);
 
-    const data: PasswordResetConfirmData = {
+    const data = {
       uid: uid,
       token: token,
       new_password1: formState.password.value,
@@ -119,14 +117,14 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
     };
 
     try {
-      const response = await confirmPasswordReset(data);
-      console.log("Password reset confirmed:", response);
-    } catch (error) {
-      console.error("Error resetting user password:", error);
+      await confirmPasswordReset(data);
+      setError([]);
+      onNext();
+    } catch (error: any) {
+      setError(Object.values(error.response?.data));
     }
 
     setIsLoading(false);
-    onNext();
   };
 
   const collectErrors = (formState: ResetFormState): string[] => {
@@ -163,6 +161,8 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
 
     setIsButtonDisabled(!!(passwordError || confirmPasswordError));
   }, [formState.password.value, formState.confirmPassword.value]);
+
+  const errors = [...collectErrors(formState), ...error];
 
   return (
     <Box component="section" className={styles.box1}>
@@ -206,9 +206,10 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
             errorMessage={formState.confirmPassword.errorMessage}
             handleChange={handleChange}
           />
-          {collectErrors(formState).length > 0 && (
+
+          {errors.length > 0 && (
             <Box sx={{ maxWidth: "554px", marginTop: "10px", width: "100%" }}>
-              <Error messages={collectErrors(formState)} />
+              <Error messages={errors} />
             </Box>
           )}
           <Button
