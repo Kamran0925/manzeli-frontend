@@ -3,7 +3,11 @@ import { Typography, Box } from "@mui/material";
 import InputField from "../../../../../shared/InputField/InputField";
 import classNames from "classnames";
 import Error from "../../../../../shared/Error/Error";
-import { ChangePasswordData, changePassword } from "../../../../../../api/auth";
+import { changePassword } from "../../../../../../api/auth";
+import {
+  validate,
+  displayError,
+} from "../../../../../../utils/validationHelpers";
 import styles from "./UpdatePassword.module.css";
 
 interface UpdatePasswordProps {
@@ -25,26 +29,26 @@ const UpdatePassword: React.FC<UpdatePasswordProps> = ({
   const validateFields = () => {
     const errors: string[] = [];
 
-    const passwordLength = 8;
+    const passwordFields = {
+      currentPassword,
+      newPassword,
+      confirmPassword,
+    };
 
-    if (currentPassword.length < passwordLength) {
-      errors.push(
-        `Current password must be at least ${passwordLength} characters`,
-      );
-    }
-    if (newPassword.length < passwordLength) {
-      errors.push(`New password must be at least ${passwordLength} characters`);
-    }
-    if (confirmPassword.length < passwordLength) {
-      errors.push(
-        `Confirm password must be at least ${passwordLength} characters`,
-      );
-    }
+    Object.entries(passwordFields).forEach(([label, value]) => {
+      let passwordError = validate("password", value).errorMessage;
+
+      if (passwordError) {
+        passwordError = displayError(label, passwordError);
+      }
+
+      if (passwordError) {
+        errors.push(passwordError);
+      }
+    });
+
     if (newPassword !== confirmPassword) {
       errors.push("Passwords do not match");
-    }
-    if (currentPassword === newPassword) {
-      errors.push("New password must be different from the current password");
     }
 
     return errors;
@@ -59,19 +63,18 @@ const UpdatePassword: React.FC<UpdatePasswordProps> = ({
           return;
         }
 
-        const data: ChangePasswordData = {
+        const data = {
           current_password: currentPassword,
           new_password: newPassword,
           confirm_password: confirmPassword,
         };
 
         try {
-          const result = await changePassword(data);
-          console.log("Password changed successfully:", result);
+          await changePassword(data);
+          setErrorMessages([]);
           openModal(1);
-        } catch (error) {
-          console.error("Error changing password:", error);
-          setErrorMessages(["Failed to change password. Please try again."]);
+        } catch (error: any) {
+          setErrorMessages(Object.values(error?.response?.data));
         }
       }
     };
