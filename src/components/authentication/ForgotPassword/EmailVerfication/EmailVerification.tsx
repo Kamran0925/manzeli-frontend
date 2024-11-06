@@ -4,9 +4,13 @@ import styles from "./EmailVerification.module.css";
 
 interface EmailVerificationProps {
   onNext: () => void;
+  email: string;
 }
 
-const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext }) => {
+const EmailVerification: React.FC<EmailVerificationProps> = ({
+  onNext,
+  email,
+}) => {
   const handleSubmit = () => {
     onNext();
   };
@@ -27,8 +31,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext }) => {
         </Typography>
 
         <Typography variant="h4" fontWeight={400}>
-          We have sent an email with password reset information to
-          p****11@g***l.com.
+          We have sent an email with password reset information to {email}.
         </Typography>
 
         <Box

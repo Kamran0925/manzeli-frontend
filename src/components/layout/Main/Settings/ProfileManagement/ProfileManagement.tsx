@@ -32,6 +32,14 @@ const ProfileManagement = () => {
       : defaultWidth;
   };
 
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
+
+  const openModal = (index: number) => setModalIndex(index);
+  const closeModal = () => {
+    setModalIndex(null);
+    setFlowType(null);
+  };
+
   const handleClick = (link: string) => {
     setFlowType(link === "Change Email" ? "email" : "password");
     openModal(0);
@@ -76,11 +84,18 @@ const ProfileManagement = () => {
     password: [
       {
         title: "Change Password",
-        description: <UpdatePassword />,
+        description: (
+          <UpdatePassword
+            isSubmit={isSubmit}
+            setIsSubmit={setIsSubmit}
+            openModal={openModal}
+          />
+        ),
         primaryBtnText: "Save Changes",
         onClickPrimaryBtn: () => {
-          openModal(1);
+          setIsSubmit(true);
         },
+        loading: isSubmit,
       },
       {
         title: "Password Changed Successfully!",
@@ -89,17 +104,23 @@ const ProfileManagement = () => {
         onClickPrimaryBtn: () => {
           navigate("/property/listings");
         },
+        secondaryBtnText: "Back to Profile Management",
       },
     ],
   };
 
-  const openModal = (index: number) => setModalIndex(index);
-  const closeModal = () => {
-    setModalIndex(null);
-    setFlowType(null);
-  };
+  interface ModalProps {
+    title: string;
+    description: any;
+    primaryBtnText: string;
+    onClickPrimaryBtn: () => void;
+    secondaryBtnText?: string;
+    loading?: boolean | undefined;
+  }
 
-  const currentModal = flowType ? modals[flowType][modalIndex!] : null;
+  const currentModal: ModalProps | null = flowType
+    ? modals[flowType][modalIndex!]
+    : null;
 
   return (
     <Box>
@@ -179,8 +200,9 @@ const ProfileManagement = () => {
           showActions={true}
           primaryBtnText={currentModal.primaryBtnText}
           onClickPrimaryBtn={currentModal.onClickPrimaryBtn}
-          secondaryBtnText="Cancel"
+          secondaryBtnText={currentModal?.secondaryBtnText || "Cancel"}
           onClickSecondaryBtn={closeModal}
+          loading={currentModal?.loading}
         />
       )}
     </Box>

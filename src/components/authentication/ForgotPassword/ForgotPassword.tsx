@@ -6,6 +6,7 @@ import ForgotPasswordForm from "./ForgotPasswordForm/ForgotPasswordForm";
 
 const ForgotPassword = () => {
   const [step, setStep] = useState(0);
+  const [email, setEmail] = useState<string>("");
 
   const handleNext = () => {
     setStep(prevStep => Math.min(prevStep + 1, 2));
@@ -14,11 +15,17 @@ const ForgotPassword = () => {
   const renderStep = () => {
     switch (step) {
       case 1:
-        return <EmailVerification onNext={handleNext} />;
+        return <EmailVerification onNext={handleNext} email={email} />;
       case 2:
-        return <LinkExpired onNext={handleNext} />;
+        return <LinkExpired onNext={handleNext} email={email} />;
       default:
-        return <ForgotPasswordForm onNext={handleNext} />;
+        return (
+          <ForgotPasswordForm
+            onNext={handleNext}
+            email={email}
+            setEmail={setEmail}
+          />
+        );
     }
   };
 

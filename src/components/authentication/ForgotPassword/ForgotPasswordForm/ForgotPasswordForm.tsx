@@ -1,18 +1,31 @@
 import { useState } from "react";
-import { Typography, Box, Button, Link as MuiLink } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Button,
+  Link as MuiLink,
+  CircularProgress,
+} from "@mui/material";
 import InputField from "../../../shared/InputField/InputField";
 import { Link } from "react-router-dom";
-
+import { PasswordResetData, resetPassword } from "../../../../api/auth";
 import styles from "./ForgotPasswordForm.module.css";
+import Error from "../../../shared/Error/Error";
 
 interface ForgotPasswordProps {
   onNext: () => void;
+  email: string;
+  setEmail: (value: string) => void;
 }
 
-const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({ onNext }) => {
-  const [name, setName] = useState<string>("");
-
+const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({
+  onNext,
+  email,
+  setEmail,
+}) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -21,11 +34,20 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({ onNext }) => {
     } else {
       setIsButtonDisabled(false);
     }
-    setName(value);
+    setEmail(value);
   };
 
-  const handleSubmit = () => {
-    onNext();
+  const handleSubmit = async () => {
+    const emailData: PasswordResetData = { email: email };
+    setIsLoading(true);
+
+    try {
+      await resetPassword(emailData);
+      onNext();
+    } catch (error: any) {
+      setError(Object.values(error?.response?.data));
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -44,7 +66,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({ onNext }) => {
         </Typography>
 
         <Typography variant="h4" fontWeight={400}>
-          Enter the Username you used to create your account so we can send you
+          Enter the email you used to create your account so we can send you
           instructions on how to reset your password.
         </Typography>
 
@@ -57,13 +79,14 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({ onNext }) => {
           }}
         >
           <InputField
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={name}
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={email}
             errorMessage={""}
             handleChange={handleChange}
           />
+          {error.length > 0 && <Error messages={error} />}
 
           <Button
             variant="contained"
@@ -82,7 +105,16 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({ onNext }) => {
             onClick={handleSubmit}
             disabled={isButtonDisabled}
           >
-            Send
+            Send{" "}
+            {isLoading && (
+              <CircularProgress
+                size="16px"
+                sx={{
+                  marginLeft: "20px",
+                  color: "#FFF",
+                }}
+              />
+            )}
           </Button>
           <Box
             sx={{

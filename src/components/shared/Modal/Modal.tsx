@@ -5,6 +5,7 @@ import {
   DialogContent,
   DialogTitle,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import FillCross from "../../../assets/icons/ui/FillCross";
 import classNames from "classnames";
@@ -21,6 +22,7 @@ interface ModalProps {
   onClickPrimaryBtn: () => void;
   secondaryBtnText?: string;
   onClickSecondaryBtn?: () => void;
+  loading?: boolean | undefined;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -34,6 +36,7 @@ const Modal: React.FC<ModalProps> = ({
   onClickPrimaryBtn,
   secondaryBtnText,
   onClickSecondaryBtn,
+  loading,
 }) => {
   return (
     <Dialog
@@ -77,7 +80,16 @@ const Modal: React.FC<ModalProps> = ({
             variant="contained"
             className={classNames(styles.btn, styles.actionBtn)}
           >
-            {primaryBtnText}
+            {primaryBtnText}{" "}
+            {loading && (
+              <CircularProgress
+                size="16px"
+                sx={{
+                  marginLeft: "20px",
+                  color: "#FFF",
+                }}
+              />
+            )}
           </Button>
         </DialogActions>
       )}

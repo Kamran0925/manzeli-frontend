@@ -1,13 +1,8 @@
 import { Typography, Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-
 import styles from "./ResetPasswordSuccess.module.css";
 
 const ResetPasswordSuccess = () => {
-  const handleSubmit = () => {
-    console.log("Link Expired:");
-  };
-
   return (
     <Box component="section" className={styles.box1}>
       <Box className={styles.box2}>
@@ -51,7 +46,6 @@ const ResetPasswordSuccess = () => {
                 cursor: "pointer",
               },
             }}
-            onClick={handleSubmit}
           >
             Login
           </Button>

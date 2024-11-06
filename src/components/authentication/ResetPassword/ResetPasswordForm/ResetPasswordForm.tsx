@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
-import { Typography, Box, Link, Button } from "@mui/material";
+import { Typography, Box, Link, Button, CircularProgress } from "@mui/material";
 import InputField from "../../../shared/InputField/InputField";
 import Error from "../../../shared/Error/Error";
 import { displayError, validate } from "../../../../utils/validationHelpers";
+import {
+  PasswordResetConfirmData,
+  confirmPasswordReset,
+} from "../../../../api/auth";
 import styles from "./ResetPasswordForm.module.css";
 
 interface ResetPasswordFormProps {
+  uid: string | null;
+  token: string | null;
   onNext: () => void;
 }
 
@@ -19,13 +25,19 @@ interface ResetFormState {
   confirmPassword: PasswordField;
 }
 
-const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
+const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
+  uid,
+  token,
+  onNext,
+}) => {
   const [formState, setFormState] = useState<ResetFormState>({
     password: { value: "", errorMessage: "" },
     confirmPassword: { value: "", errorMessage: "" },
   });
 
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string[]>([]);
 
   const formatError = (type: string, field: string, value: any): string => {
     const { errorMessage } = validate(type, value);
@@ -56,7 +68,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const passwordError = formatError(
       "password",
       "password",
@@ -97,7 +109,25 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
     }
 
     setIsButtonDisabled(false);
-    onNext();
+
+    setIsLoading(true);
+
+    const data: PasswordResetConfirmData = {
+      uid: uid,
+      token: token,
+      new_password1: formState.password.value,
+      new_password2: formState.confirmPassword.value,
+    };
+
+    try {
+      await confirmPasswordReset(data);
+      setError([]);
+      onNext();
+    } catch (error: any) {
+      setError(Object.values(error.response?.data));
+    }
+
+    setIsLoading(false);
   };
 
   const collectErrors = (formState: ResetFormState): string[] => {
@@ -134,6 +164,8 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
 
     setIsButtonDisabled(!!(passwordError || confirmPasswordError));
   }, [formState.password.value, formState.confirmPassword.value]);
+
+  const errors = [...collectErrors(formState), ...error];
 
   return (
     <Box component="section" className={styles.box1}>
@@ -177,9 +209,10 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
             errorMessage={formState.confirmPassword.errorMessage}
             handleChange={handleChange}
           />
-          {collectErrors(formState).length > 0 && (
+
+          {errors.length > 0 && (
             <Box sx={{ maxWidth: "554px", marginTop: "10px", width: "100%" }}>
-              <Error messages={collectErrors(formState)} />
+              <Error messages={errors} />
             </Box>
           )}
           <Button
@@ -196,7 +229,16 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ onNext }) => {
             onClick={handleSubmit}
             disabled={isButtonDisabled}
           >
-            Reset Password
+            Reset Password{" "}
+            {isLoading && (
+              <CircularProgress
+                size="16px"
+                sx={{
+                  marginLeft: "20px",
+                  color: "#FFF",
+                }}
+              />
+            )}
           </Button>
           <Box
             sx={{

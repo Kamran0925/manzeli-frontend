@@ -37,3 +37,38 @@ export const refreshAccessToken = async (refreshToken: string) => {
   });
   return response.data;
 };
+
+export interface PasswordResetData {
+  email: string;
+}
+
+export const resetPassword = async (data: PasswordResetData) => {
+  const response = await apiClient.post("/api/password/reset/", data);
+  return response.data;
+};
+
+export interface PasswordResetConfirmData {
+  uid: string | null;
+  token: string | null;
+  new_password1: string;
+  new_password2: string;
+}
+
+export const confirmPasswordReset = async (data: PasswordResetConfirmData) => {
+  const response = await apiClient.post(
+    `/api/password/reset/confirm/${data.uid}/${data.token}/`,
+    data,
+  );
+  return response.data;
+};
+
+export interface ChangePasswordData {
+  current_password: string;
+  new_password: string;
+  confirm_password: string;
+}
+
+export const changePassword = async (data: ChangePasswordData) => {
+  const response = await apiClient.post("/api/users/change-password/", data);
+  return response.data;
+};

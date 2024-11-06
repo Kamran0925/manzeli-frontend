@@ -1,18 +1,55 @@
-import { Typography, Box, Button } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Button,
+  CircularProgress,
+  Snackbar,
+} from "@mui/material";
+import { resetPassword } from "../../../../api/auth";
+import { useState } from "react";
+import Error from "../../../shared/Error/Error";
 import styles from "./LinkExpired.module.css";
 
 interface LinkExpiredProps {
   onNext: () => void;
+  email: string;
 }
 
-const LinkExpired: React.FC<LinkExpiredProps> = ({ onNext }) => {
-  const handleSubmit = () => {
-    onNext();
+const LinkExpired: React.FC<LinkExpiredProps> = ({ onNext, email }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState([]);
+  const [snackbarMessage, setSnackbarMessage] = useState<string>("");
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    const emailData = { email: email };
+
+    try {
+      const response = await resetPassword(emailData);
+      let message = Object.values(response)[0];
+      setSnackbarMessage(message ? message.toString() : "");
+    } catch (error: any) {
+      setError(Object.values(error?.response?.data));
+    }
+    setIsLoading(false);
   };
 
   return (
     <Box component="section" className={styles.box1}>
       <Box className={styles.box2}>
+        <Snackbar
+          open={!!snackbarMessage}
+          autoHideDuration={1500}
+          onClose={() => setSnackbarMessage("")}
+          message={snackbarMessage}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          sx={{
+            ".css-73yezh-MuiPaper-root-MuiSnackbarContent-root": {
+              backgroundColor: "#001283",
+              boxShadow: "none",
+            },
+          }}
+        />
         <Typography
           variant="h4"
           sx={{
@@ -29,6 +66,8 @@ const LinkExpired: React.FC<LinkExpiredProps> = ({ onNext }) => {
         <Typography variant="h4" fontWeight={400}>
           The password reset link has expired. Please request a new link.
         </Typography>
+
+        {error.length > 0 && <Error messages={error} />}
 
         <Box
           sx={{
@@ -52,7 +91,16 @@ const LinkExpired: React.FC<LinkExpiredProps> = ({ onNext }) => {
             }}
             onClick={handleSubmit}
           >
-            Request New Link
+            Request New Link{" "}
+            {isLoading && (
+              <CircularProgress
+                size="16px"
+                sx={{
+                  marginLeft: "20px",
+                  color: "#FFF",
+                }}
+              />
+            )}
           </Button>
         </Box>
       </Box>
