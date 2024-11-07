@@ -72,3 +72,25 @@ export const changePassword = async (data: ChangePasswordData) => {
   const response = await apiClient.post("/api/users/change-password/", data);
   return response.data;
 };
+
+export interface ChangeEmailData {
+  new_email: string;
+  current_password: string;
+}
+
+export const changeEmail = async (data: ChangeEmailData) => {
+  const response = await apiClient.post("/api/users/email/change/", data);
+  return response.data;
+};
+
+export interface ConfirmEmailChangeData {
+  otp: string;
+}
+
+export const confirmEmailChange = async (data: ConfirmEmailChangeData) => {
+  const response = await apiClient.post(
+    "/api/users/email/change/confirm/",
+    data,
+  );
+  return response.data;
+};
