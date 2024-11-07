@@ -33,6 +33,7 @@ const ProfileManagement = () => {
   };
 
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const [primaryAction, setPrimaryAction] = useState<boolean>(false);
 
   const openModal = (index: number) => setModalIndex(index);
   const closeModal = () => {
@@ -47,29 +48,45 @@ const ProfileManagement = () => {
 
   const modals = {
     email: [
-      {
-        title: "Verify Your Current Email Address",
-        description: <VerifyCurrentEmail />,
-        primaryBtnText: "Send Verification Email",
-        onClickPrimaryBtn: () => {
-          openModal(1);
-        },
-      },
+      // {
+      //   title: "Verify Your Current Email Address",
+      //   description: <VerifyCurrentEmail />,
+      //   primaryBtnText: "Send Verification Email",
+      //   onClickPrimaryBtn: () => {
+      //     openModal(1);
+      //   },
+      // },
       {
         title: "Change Email",
-        description: <UpdateEmail />,
+        description: (
+          <UpdateEmail
+            isSubmit={isSubmit}
+            setIsSubmit={setIsSubmit}
+            openModal={openModal}
+            setPrimaryAction={(val: boolean) => setPrimaryAction(val)}
+          />
+        ),
         primaryBtnText: "Send OTP",
         onClickPrimaryBtn: () => {
-          openModal(2);
+          setIsSubmit(true);
         },
+        loading: isSubmit,
       },
       {
         title: "Verify OTP",
-        description: <VerifyOTP />,
+        description: (
+          <VerifyOTP
+            isSubmit={isSubmit}
+            setIsSubmit={setIsSubmit}
+            openModal={openModal}
+            setPrimaryAction={(val: boolean) => setPrimaryAction(val)}
+          />
+        ),
         primaryBtnText: "Verify and Update Email",
         onClickPrimaryBtn: () => {
-          openModal(3);
+          setIsSubmit(true);
         },
+        loading: isSubmit,
       },
       {
         title: "Email Changed Successfully!",
@@ -200,6 +217,7 @@ const ProfileManagement = () => {
           showActions={true}
           primaryBtnText={currentModal.primaryBtnText}
           onClickPrimaryBtn={currentModal.onClickPrimaryBtn}
+          disablePrimaryAction={primaryAction}
           secondaryBtnText={currentModal?.secondaryBtnText || "Cancel"}
           onClickSecondaryBtn={closeModal}
           loading={currentModal?.loading}
