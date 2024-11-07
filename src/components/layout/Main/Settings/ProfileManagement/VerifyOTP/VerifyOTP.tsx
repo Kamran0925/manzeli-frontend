@@ -22,14 +22,8 @@ const VerifyOTP: React.FC<VerifyOTPProps> = ({
   openModal,
   setPrimaryAction,
 }) => {
-  const [otpFields, setOtpFields] = useState<string[]>([
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-  ]);
+  const [otpFields, setOtpFields] = useState<string[]>(new Array(5).fill(""));
+
   const [error, setError] = useState<string | null>(null);
 
   const handleOtpChange = (
