@@ -20,6 +20,7 @@ interface ModalProps {
   showActions: boolean;
   primaryBtnText: string;
   onClickPrimaryBtn: () => void;
+  disablePrimaryAction?: boolean;
   secondaryBtnText?: string;
   onClickSecondaryBtn?: () => void;
   loading?: boolean | undefined;
@@ -34,6 +35,7 @@ const Modal: React.FC<ModalProps> = ({
   showActions = true,
   primaryBtnText,
   onClickPrimaryBtn,
+  disablePrimaryAction,
   secondaryBtnText,
   onClickSecondaryBtn,
   loading,
@@ -78,7 +80,10 @@ const Modal: React.FC<ModalProps> = ({
           <Button
             onClick={onClickPrimaryBtn}
             variant="contained"
-            className={classNames(styles.btn, styles.actionBtn)}
+            disabled={disablePrimaryAction}
+            className={classNames(styles.btn, styles.actionBtn, {
+              [styles.disabled]: disablePrimaryAction,
+            })}
           >
             {primaryBtnText}{" "}
             {loading && (
