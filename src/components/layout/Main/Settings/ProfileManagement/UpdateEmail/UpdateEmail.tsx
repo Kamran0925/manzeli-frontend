@@ -2,23 +2,15 @@ import { Typography, Box } from "@mui/material";
 import InputField from "../../../../../shared/InputField/InputField";
 import classNames from "classnames";
 import {
+  collectFormErrors,
   displayError,
+  FormFieldState,
   validate,
 } from "../../../../../../utils/validationHelpers";
 import { useEffect, useState } from "react";
 import Error from "../../../../../shared/Error/Error";
 import { changeEmail, ChangeEmailData } from "../../../../../../api/auth";
 import styles from "./UpdateEmail.module.css";
-
-interface FormField {
-  value: string;
-  errorMessage: string;
-}
-
-interface FormState {
-  email: FormField;
-  password: FormField;
-}
 
 interface UpdateEmailProps {
   isSubmit: boolean;
@@ -44,7 +36,8 @@ const UpdateEmail: React.FC<UpdateEmailProps> = ({
   openModal,
   setPrimaryAction,
 }) => {
-  const [formState, setFormState] = useState(initialFormState);
+  const [formState, setFormState] =
+    useState<FormFieldState<string>>(initialFormState);
   const [error, setError] = useState<string[]>([]);
 
   const handleChange = (
@@ -64,12 +57,6 @@ const UpdateEmail: React.FC<UpdateEmailProps> = ({
         errorMessage,
       },
     });
-  };
-
-  const collectErrors = (formState: FormState): string[] => {
-    return Object.values(formState)
-      .map(field => field.errorMessage)
-      .filter(message => message !== "");
   };
 
   const validateFields = () => {
@@ -100,7 +87,7 @@ const UpdateEmail: React.FC<UpdateEmailProps> = ({
       if (isSubmit) {
         validateFields();
 
-        if (collectErrors(formState).length > 0) {
+        if (collectFormErrors(formState).length > 0) {
           setPrimaryAction(true);
           return;
         }
@@ -124,7 +111,7 @@ const UpdateEmail: React.FC<UpdateEmailProps> = ({
   }, [isSubmit]);
 
   useEffect(() => {
-    if (collectErrors(formState).length === 0) {
+    if (collectFormErrors(formState).length === 0) {
       setPrimaryAction(false);
     }
   }, [formState.email.value, formState.password.value]);
@@ -162,9 +149,9 @@ const UpdateEmail: React.FC<UpdateEmailProps> = ({
           />
         </Box>
 
-        {(collectErrors(formState).length || error.length) > 0 && (
+        {(collectFormErrors(formState).length || error.length) > 0 && (
           <Box sx={{ maxWidth: 554, width: "100%" }}>
-            <Error messages={[...collectErrors(formState), ...error]} />
+            <Error messages={[...collectFormErrors(formState), ...error]} />
           </Box>
         )}
       </Box>

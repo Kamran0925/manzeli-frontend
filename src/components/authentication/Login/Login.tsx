@@ -2,21 +2,16 @@ import { useEffect, useState } from "react";
 import { Typography, Box, Link as MuiLink, Button } from "@mui/material";
 import InputField from "../../shared/InputField/InputField";
 import { Link, useNavigate } from "react-router-dom";
-import { displayError, validate } from "../../../utils/validationHelpers";
+import {
+  collectFormErrors,
+  displayError,
+  FormFieldState,
+  validate,
+} from "../../../utils/validationHelpers";
 import Error from "../../shared/Error/Error";
 import { useAuth } from "../../../context/AuthContext";
 import { formatErrorMessages } from "../../../utils/errorHelper";
 import styles from "./Login.module.css";
-
-interface FormField {
-  value: string;
-  errorMessage: string;
-}
-
-interface FormState {
-  email: FormField;
-  password: FormField;
-}
 
 const validateField = (name: string, value: string) => {
   switch (name) {
@@ -30,7 +25,7 @@ const validateField = (name: string, value: string) => {
 };
 
 const Login = () => {
-  const initialFormState: FormState = {
+  const initialFormState = {
     email: {
       value: "",
       errorMessage: "",
@@ -43,7 +38,8 @@ const Login = () => {
   const { login, isAuthenticated } = useAuth();
   const [loginError, setLoginError] = useState<string[]>([]);
 
-  const [formState, setFormState] = useState<FormState>(initialFormState);
+  const [formState, setFormState] =
+    useState<FormFieldState<string>>(initialFormState);
 
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -115,12 +111,6 @@ const Login = () => {
     }
 
     setIsButtonDisabled(false);
-  };
-
-  const collectErrors = (formState: FormState): string[] => {
-    return Object.values(formState)
-      .map(field => field.errorMessage)
-      .filter(message => message !== "");
   };
 
   useEffect(() => {
@@ -210,14 +200,17 @@ const Login = () => {
             errorMessage={formState.password.errorMessage}
             handleChange={e => handleInputChange(e, "password")}
           />
-          {(collectErrors(formState).length > 0 || loginError.length > 0) && (
+          {(collectFormErrors(formState).length > 0 ||
+            loginError.length > 0) && (
             <Box
               sx={{
                 maxWidth: "554px",
                 width: "100%",
               }}
             >
-              <Error messages={[...collectErrors(formState), ...loginError]} />
+              <Error
+                messages={[...collectFormErrors(formState), ...loginError]}
+              />
             </Box>
           )}
           <MuiLink
