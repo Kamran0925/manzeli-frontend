@@ -2,7 +2,12 @@ import { useState, useEffect } from "react";
 import { Typography, Box, Link, Button, CircularProgress } from "@mui/material";
 import InputField from "../../../shared/InputField/InputField";
 import Error from "../../../shared/Error/Error";
-import { displayError, validate } from "../../../../utils/validationHelpers";
+import {
+  collectFormErrors,
+  displayError,
+  FormFieldState,
+  validate,
+} from "../../../../utils/validationHelpers";
 import {
   PasswordResetConfirmData,
   confirmPasswordReset,
@@ -30,7 +35,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
   token,
   onNext,
 }) => {
-  const [formState, setFormState] = useState<ResetFormState>({
+  const [formState, setFormState] = useState<FormFieldState<string>>({
     password: { value: "", errorMessage: "" },
     confirmPassword: { value: "", errorMessage: "" },
   });
@@ -130,12 +135,6 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
     setIsLoading(false);
   };
 
-  const collectErrors = (formState: ResetFormState): string[] => {
-    return Object.values(formState)
-      .map(field => field.errorMessage)
-      .filter(message => message !== "");
-  };
-
   useEffect(() => {
     const { password, confirmPassword } = formState;
 
@@ -165,7 +164,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
     setIsButtonDisabled(!!(passwordError || confirmPasswordError));
   }, [formState.password.value, formState.confirmPassword.value]);
 
-  const errors = [...collectErrors(formState), ...error];
+  const errors = [...collectFormErrors(formState), ...error];
 
   return (
     <Box component="section" className={styles.box1}>

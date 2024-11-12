@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, CircularProgress } from "@mui/material";
+import { Box } from "@mui/material";
+import loadingGif from "../../../assets/gifs/loading-bar.gif";
 
 const Loader = () => {
   return (
@@ -15,11 +16,11 @@ const Loader = () => {
           display: "flex",
           alignItems: "center",
           gap: "10px",
+          width: "265px",
+          height: "265px",
+          background: `url(${loadingGif}) transparent 50% / cover no-repeat`,
         }}
-      >
-        <CircularProgress color="primary" />
-        Loading...
-      </Box>
+      ></Box>
     </Box>
   );
 };

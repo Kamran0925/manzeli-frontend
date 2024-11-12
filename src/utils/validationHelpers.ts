@@ -150,3 +150,20 @@ const formatFieldName = (field: string): string => {
 export const displayError = (field: string, error: string): string => {
   return `${formatFieldName(field)} should have ${error.toLowerCase()}`;
 };
+
+interface FormField<T> {
+  value: T;
+  errorMessage: string;
+}
+
+export interface FormFieldState<T> {
+  [key: string]: FormField<T>;
+}
+
+export const collectFormErrors = <T>(
+  formState: FormFieldState<T>,
+): string[] => {
+  return Object.values(formState)
+    .map(field => field.errorMessage)
+    .filter(message => message !== "");
+};

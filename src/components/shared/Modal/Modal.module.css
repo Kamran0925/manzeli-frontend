@@ -54,3 +54,7 @@
   color: #fff;
   border: none;
 }
+
+.dialog .actions .disabled {
+  background-color: #cbcbcb;
+}
