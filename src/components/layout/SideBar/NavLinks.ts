@@ -1,45 +1,33 @@
-// import Grid from "../../../assets/icons/ui/Grid";
-import Home from "../../../assets/icons/ui/Home";
-// import Message from "../../../assets/icons/ui/Message";
-// import Unit from "../../../assets/icons/ui/Unit";
-import Tenant from "../../../assets/icons/ui/Tenant";
-import Plan from "../../../assets/icons/ui/Plan";
-import Settings from "../../../assets/icons/ui/Settings";
+import Grid from '../../../assets/icons/ui/Grid';
+import Home from '../../../assets/icons/ui/Home';
+import Tenant from '../../../assets/icons/ui/Tenant';
+import Plan from '../../../assets/icons/ui/Plan';
+import Settings from '../../../assets/icons/ui/Settings';
 
 export const NAV_LINKS = [
-  // {
-  //   route: "/dashboard",
-  //   icon: Grid,
-  //   label: "Dashboard",
-  // },
   {
-    route: "/property/listings",
+    route: '/dashboard',
+    icon: Grid,
+    label: 'Dashboard',
+  },
+  {
+    route: '/property/listings',
     icon: Home,
-    label: "Properties",
+    label: 'Properties',
   },
-  // {
-  //   route: "/units",
-  //   icon: Unit,
-  //   label: "Units",
-  // },
   {
-    route: "/tenancy",
+    route: '/tenancy',
     icon: Tenant,
-    label: "Tenancy Contracts",
+    label: 'Tenancy Contracts',
   },
-  // {
-  //   route: "/messages",
-  //   icon: Message,
-  //   label: "Messages",
-  // },
   {
-    route: "/pricing",
+    route: '/pricing',
     icon: Plan,
-    label: "Plans & Billing",
+    label: 'Plans & Billing',
   },
   {
-    route: "/settings",
+    route: '/settings',
     icon: Settings,
-    label: "Settings",
+    label: 'Settings',
   },
 ];
