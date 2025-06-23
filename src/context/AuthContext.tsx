@@ -1,15 +1,15 @@
-import React, { createContext, ReactNode, useEffect } from "react";
-import { useFormContext } from "./FormContext";
-import { useState } from "react";
-import { clientTypes } from "../components/shared/AccountTypes/AccountTypes";
+import React, { createContext, ReactNode, useEffect } from 'react';
+import { useFormContext } from './FormContext';
+import { useState } from 'react';
+import { clientTypes } from '../components/shared/AccountTypes/AccountTypes';
 import {
   clientLogin,
   clientRegisteration,
   refreshAccessToken,
   LoginData,
   RegisterationData,
-} from "../api/auth";
-import apiClient from "../api/apiClient";
+} from '../api/auth';
+import apiClient from '../api/apiClient';
 
 interface AuthContextType {
   register: (planId: number) => Promise<void>;
@@ -22,9 +22,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { formState } = useFormContext();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -41,7 +39,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       telephone: formState.phone.value,
       street: formState.street.value,
       city: formState.city.value,
-      country: "AE",
+      country: 'AE',
       plan: planId,
       contact_name: formState.username.value,
       username: formState.email.value,
@@ -55,8 +53,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     const response = await clientLogin(data);
     if (response.access && response.refresh) {
       setTokens({ access: response.access, refresh: response.refresh });
-      localStorage.setItem("accessToken", response.access);
-      localStorage.setItem("refreshToken", response.refresh);
+      localStorage.setItem('accessToken', response.access);
+      localStorage.setItem('refreshToken', response.refresh);
       setIsAuthenticated(true);
     }
     return response;
@@ -65,18 +63,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const logout = () => {
     setIsAuthenticated(false);
     setTokens(null);
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     delete apiClient.defaults.headers.Authorization;
   };
 
   useEffect(() => {
-    const storedAccessToken = localStorage.getItem("accessToken");
-    const storedRefreshToken = localStorage.getItem("refreshToken");
+    const storedAccessToken = localStorage.getItem('accessToken');
+    const storedRefreshToken = localStorage.getItem('refreshToken');
     if (storedAccessToken) {
       setTokens(prev => ({
         access: storedAccessToken,
-        refresh: storedRefreshToken || "",
+        refresh: storedRefreshToken || '',
       }));
 
       setIsAuthenticated(true);
@@ -87,7 +85,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   useEffect(() => {
     if (tokens) {
       if (tokens.access) {
-        localStorage.setItem("accessToken", tokens.access);
+        localStorage.setItem('accessToken', tokens.access);
         apiClient.defaults.headers.Authorization = `Bearer ${tokens.access}`;
       } else {
         delete apiClient.defaults.headers.Authorization;
@@ -99,10 +97,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     setIsLoading(false);
   }, [isAuthenticated]);
 
-  const apiAuthWrapper = async (
-    apiFunction: Function,
-    props: any,
-  ): Promise<any> => {
+  const apiAuthWrapper = async (apiFunction: Function, props: any): Promise<any> => {
     try {
       const result = await apiFunction(props);
       return result;
@@ -114,7 +109,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
           try {
             const tokenData = await refreshAccessToken(refreshToken);
             setTokens({ access: tokenData.access, refresh: refreshToken });
-            localStorage.setItem("accessToken", tokenData.access);
+            localStorage.setItem('accessToken', tokenData.access);
             return await apiFunction(props);
           } catch (refreshError) {
             throw refreshError;
@@ -144,7 +139,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 export const useAuth = (): AuthContextType => {
   const context = React.useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
 };

@@ -1,4 +1,4 @@
-import apiClient from "./apiClient";
+import apiClient from './apiClient';
 
 export interface RegisterationData {
   client_name: string;
@@ -8,7 +8,7 @@ export interface RegisterationData {
   street: string;
   city: string;
   country: string;
-  logo?: Blob | null | undefined | "";
+  logo?: Blob | null | undefined | '';
   plan: number;
   contact_name: string;
   username: string;
@@ -22,17 +22,17 @@ export interface LoginData {
 }
 
 export const clientRegisteration = async (data: RegisterationData) => {
-  const response = await apiClient.post("/api/clients/registration/", data);
+  const response = await apiClient.post('/api/clients/registration/', data);
   return response.data;
 };
 
 export const clientLogin = async (data: LoginData) => {
-  const response = await apiClient.post("/api/token/", data);
+  const response = await apiClient.post('/api/token/', data);
   return response.data;
 };
 
 export const refreshAccessToken = async (refreshToken: string) => {
-  const response = await apiClient.post("/api/token/refresh/", {
+  const response = await apiClient.post('/api/token/refresh/', {
     refresh: refreshToken,
   });
   return response.data;
@@ -43,7 +43,7 @@ export interface PasswordResetData {
 }
 
 export const resetPassword = async (data: PasswordResetData) => {
-  const response = await apiClient.post("/api/password/reset/", data);
+  const response = await apiClient.post('/api/password/reset/', data);
   return response.data;
 };
 
@@ -69,7 +69,7 @@ export interface ChangePasswordData {
 }
 
 export const changePassword = async (data: ChangePasswordData) => {
-  const response = await apiClient.post("/api/users/change-password/", data);
+  const response = await apiClient.post('/api/users/change-password/', data);
   return response.data;
 };
 
@@ -79,7 +79,7 @@ export interface ChangeEmailData {
 }
 
 export const changeEmail = async (data: ChangeEmailData) => {
-  const response = await apiClient.post("/api/users/email/change/", data);
+  const response = await apiClient.post('/api/users/email/change/', data);
   return response.data;
 };
 
@@ -88,9 +88,6 @@ export interface ConfirmEmailChangeData {
 }
 
 export const confirmEmailChange = async (data: ConfirmEmailChangeData) => {
-  const response = await apiClient.post(
-    "/api/users/email/change/confirm/",
-    data,
-  );
+  const response = await apiClient.post('/api/users/email/change/confirm/', data);
   return response.data;
 };
