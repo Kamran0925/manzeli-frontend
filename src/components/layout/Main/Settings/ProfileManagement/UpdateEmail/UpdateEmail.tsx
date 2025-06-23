@@ -1,16 +1,16 @@
-import { Typography, Box } from "@mui/material";
-import InputField from "../../../../../shared/InputField/InputField";
-import classNames from "classnames";
+import { Typography, Box } from '@mui/material';
+import InputField from '../../../../../shared/InputField/InputField';
+import classNames from 'classnames';
 import {
   collectFormErrors,
   displayError,
   FormFieldState,
   validate,
-} from "../../../../../../utils/validationHelpers";
-import { useEffect, useState } from "react";
-import Error from "../../../../../shared/Error/Error";
-import { changeEmail, ChangeEmailData } from "../../../../../../api/auth";
-import styles from "./UpdateEmail.module.css";
+} from '../../../../../../utils/validationHelpers';
+import { useEffect, useState } from 'react';
+import Error from '../../../../../shared/Error/Error';
+import { changeEmail, ChangeEmailData } from '../../../../../../api/auth';
+import styles from './UpdateEmail.module.css';
 
 interface UpdateEmailProps {
   isSubmit: boolean;
@@ -21,12 +21,12 @@ interface UpdateEmailProps {
 
 const initialFormState = {
   email: {
-    value: "",
-    errorMessage: "",
+    value: '',
+    errorMessage: '',
   },
   password: {
-    value: "",
-    errorMessage: "",
+    value: '',
+    errorMessage: '',
   },
 };
 
@@ -36,19 +36,15 @@ const UpdateEmail: React.FC<UpdateEmailProps> = ({
   openModal,
   setPrimaryAction,
 }) => {
-  const [formState, setFormState] =
-    useState<FormFieldState<string>>(initialFormState);
+  const [formState, setFormState] = useState<FormFieldState<string>>(initialFormState);
   const [error, setError] = useState<string[]>([]);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    name: string,
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, name: string) => {
     const { value } = e.target;
 
     let errorMessage = validate(name, value).errorMessage;
-    if (name === "password" && errorMessage) {
-      errorMessage = displayError("password", errorMessage);
+    if (name === 'password' && errorMessage) {
+      errorMessage = displayError('password', errorMessage);
     }
     setFormState({
       ...formState,
@@ -60,14 +56,11 @@ const UpdateEmail: React.FC<UpdateEmailProps> = ({
   };
 
   const validateFields = () => {
-    const emailError = validate("email", formState.email.value).errorMessage;
-    let passwordError = validate(
-      "password",
-      formState.password.value,
-    ).errorMessage;
+    const emailError = validate('email', formState.email.value).errorMessage;
+    let passwordError = validate('password', formState.password.value).errorMessage;
 
     if (passwordError) {
-      passwordError = displayError("password", passwordError);
+      passwordError = displayError('password', passwordError);
     }
 
     setFormState(prevState => ({
@@ -101,7 +94,7 @@ const UpdateEmail: React.FC<UpdateEmailProps> = ({
           await changeEmail(data);
           openModal(1);
         } catch (error: any) {
-          setError(Object.values(error?.response?.data));
+          setError(Object.values(error?.response?.data || {}));
         }
       }
     };
@@ -131,7 +124,7 @@ const UpdateEmail: React.FC<UpdateEmailProps> = ({
             placeholder="Enter new email address"
             value={formState.email.value}
             errorMessage=""
-            handleChange={e => handleChange(e, "email")}
+            handleChange={e => handleChange(e, 'email')}
             customStyle={{ margin: 0 }}
           />
         </Box>
@@ -144,13 +137,13 @@ const UpdateEmail: React.FC<UpdateEmailProps> = ({
             placeholder="Your password"
             value={formState.password.value}
             errorMessage=""
-            handleChange={e => handleChange(e, "password")}
+            handleChange={e => handleChange(e, 'password')}
             customStyle={{ margin: 0 }}
           />
         </Box>
 
         {(collectFormErrors(formState).length || error.length) > 0 && (
-          <Box sx={{ maxWidth: 554, width: "100%" }}>
+          <Box sx={{ maxWidth: 554, width: '100%' }}>
             <Error messages={[...collectFormErrors(formState), ...error]} />
           </Box>
         )}

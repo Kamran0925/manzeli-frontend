@@ -27,11 +27,11 @@ const validateField = (name: string, value: string) => {
 const Login = () => {
   const initialFormState = {
     email: {
-      value: "",
+      value: "test@example.com",
       errorMessage: "",
     },
     password: {
-      value: "",
+      value: "test1234",
       errorMessage: "",
     },
   };

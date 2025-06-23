@@ -1,12 +1,12 @@
-import { Typography, Box, Link as MuiLink, TextField } from "@mui/material";
-import { Link } from "react-router-dom";
-import classNames from "classnames";
-import { useState, useEffect } from "react";
-import { confirmEmailChange } from "../../../../../../api/auth";
-import styles from "./VerifyOTP.module.css";
+import { Typography, Box, Link as MuiLink, TextField } from '@mui/material';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames';
+import { useState, useEffect } from 'react';
+import { confirmEmailChange } from '../../../../../../api/auth';
+import styles from './VerifyOTP.module.css';
 
 const validateOTP = (otpFields: string[]) => {
-  return otpFields.every(field => field !== "");
+  return otpFields.every(field => field !== '');
 };
 
 interface VerifyOTPProps {
@@ -22,14 +22,11 @@ const VerifyOTP: React.FC<VerifyOTPProps> = ({
   openModal,
   setPrimaryAction,
 }) => {
-  const [otpFields, setOtpFields] = useState<string[]>(new Array(5).fill(""));
+  const [otpFields, setOtpFields] = useState<string[]>(new Array(5).fill(''));
 
   const [error, setError] = useState<string | null>(null);
 
-  const handleOtpChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
+  const handleOtpChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const newOtpFields = [...otpFields];
     newOtpFields[index] = e.target.value;
     setOtpFields(newOtpFields);
@@ -37,7 +34,7 @@ const VerifyOTP: React.FC<VerifyOTPProps> = ({
 
   const collectErrors = () => {
     if (!validateOTP(otpFields)) {
-      return "OTP fields cannot be empty.";
+      return 'OTP fields cannot be empty.';
     }
     return null;
   };
@@ -52,12 +49,12 @@ const VerifyOTP: React.FC<VerifyOTPProps> = ({
 
     setError(null);
 
-    const otp = otpFields.join("");
+    const otp = otpFields.join('');
     try {
       await confirmEmailChange({ otp });
       openModal(2);
     } catch (error: any) {
-      setError("Invalid OTP, please try again.");
+      setError('Invalid OTP, please try again.');
     }
   };
 
@@ -91,25 +88,23 @@ const VerifyOTP: React.FC<VerifyOTPProps> = ({
               })}
               inputProps={{
                 maxLength: 1,
-                style: { textAlign: "center" },
+                style: { textAlign: 'center' },
               }}
               sx={{
-                "& .MuiOutlinedInput-input": {
-                  height: "70px",
+                '& .MuiOutlinedInput-input': {
+                  height: '70px',
                   padding: 0,
                 },
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "10px",
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '10px',
                 },
-                "& .css-17e02us-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                '& .css-17e02us-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
                   {
-                    borderColor: "none",
+                    borderColor: 'none',
                   },
               }}
               value={otpFields[index]}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                handleOtpChange(e, index)
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleOtpChange(e, index)}
             />
           ))}
         </Box>
@@ -120,15 +115,15 @@ const VerifyOTP: React.FC<VerifyOTPProps> = ({
           [styles.errorText]: error,
         })}
       >
-        {error ?? "Didn't receive the code?"}{" "}
+        {error ?? "Didn't receive the code?"}{' '}
         <MuiLink
           component={Link}
           to="/resend-email"
           color="primary"
           sx={{
-            textDecoration: "none",
-            "&:hover": {
-              textDecoration: "underline",
+            textDecoration: 'none',
+            '&:hover': {
+              textDecoration: 'underline',
             },
           }}
         >

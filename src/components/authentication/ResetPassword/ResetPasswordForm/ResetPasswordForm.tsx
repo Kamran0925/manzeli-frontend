@@ -1,18 +1,15 @@
-import { useState, useEffect } from "react";
-import { Typography, Box, Link, Button, CircularProgress } from "@mui/material";
-import InputField from "../../../shared/InputField/InputField";
-import Error from "../../../shared/Error/Error";
+import { useState, useEffect } from 'react';
+import { Typography, Box, Link, Button, CircularProgress } from '@mui/material';
+import InputField from '../../../shared/InputField/InputField';
+import Error from '../../../shared/Error/Error';
 import {
   collectFormErrors,
   displayError,
   FormFieldState,
   validate,
-} from "../../../../utils/validationHelpers";
-import {
-  PasswordResetConfirmData,
-  confirmPasswordReset,
-} from "../../../../api/auth";
-import styles from "./ResetPasswordForm.module.css";
+} from '../../../../utils/validationHelpers';
+import { PasswordResetConfirmData, confirmPasswordReset } from '../../../../api/auth';
+import styles from './ResetPasswordForm.module.css';
 
 interface ResetPasswordFormProps {
   uid: string | null;
@@ -30,14 +27,10 @@ interface ResetFormState {
   confirmPassword: PasswordField;
 }
 
-const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
-  uid,
-  token,
-  onNext,
-}) => {
+const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ uid, token, onNext }) => {
   const [formState, setFormState] = useState<FormFieldState<string>>({
-    password: { value: "", errorMessage: "" },
-    confirmPassword: { value: "", errorMessage: "" },
+    password: { value: '', errorMessage: '' },
+    confirmPassword: { value: '', errorMessage: '' },
   });
 
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
@@ -46,7 +39,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
 
   const formatError = (type: string, field: string, value: any): string => {
     const { errorMessage } = validate(type, value);
-    return errorMessage ? displayError(field, errorMessage) : "";
+    return errorMessage ? displayError(field, errorMessage) : '';
   };
 
   const handleChange = (
@@ -74,15 +67,11 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
   };
 
   const handleSubmit = async () => {
-    const passwordError = formatError(
-      "password",
-      "password",
-      formState.password.value,
-    );
+    const passwordError = formatError('password', 'password', formState.password.value);
 
     const confirmPasswordError = formatError(
-      "password",
-      "confirmPassword",
+      'password',
+      'confirmPassword',
       formState.confirmPassword.value,
     );
 
@@ -106,7 +95,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
         ...prevState,
         confirmPassword: {
           ...prevState.confirmPassword,
-          errorMessage: "Passwords do not match! Please try again",
+          errorMessage: 'Passwords do not match! Please try again',
         },
       }));
       setIsButtonDisabled(true);
@@ -129,7 +118,8 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
       setError([]);
       onNext();
     } catch (error: any) {
-      setError(Object.values(error.response?.data));
+      const errorData = error?.response?.data;
+      setError(errorData ? Object.values(errorData) : []);
     }
 
     setIsLoading(false);
@@ -138,17 +128,15 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
   useEffect(() => {
     const { password, confirmPassword } = formState;
 
-    if (password.value === "" && confirmPassword.value === "") {
+    if (password.value === '' && confirmPassword.value === '') {
       return;
     }
 
-    let passwordError = password.value
-      ? formatError("password", "password", password.value)
-      : "";
+    let passwordError = password.value ? formatError('password', 'password', password.value) : '';
 
     let confirmPasswordError = confirmPassword.value
-      ? formatError("password", "confirmPassword", confirmPassword.value)
-      : "";
+      ? formatError('password', 'confirmPassword', confirmPassword.value)
+      : '';
 
     setFormState(prevState => ({
       password: {
@@ -172,11 +160,11 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
         <Typography
           variant="h4"
           sx={{
-            color: "#040308",
-            fontFamily: "Poppins, sans-serif",
-            fontSize: "32px",
+            color: '#040308',
+            fontFamily: 'Poppins, sans-serif',
+            fontSize: '32px',
             fontWeight: 700,
-            lineHeight: "normal",
+            lineHeight: 'normal',
           }}
         >
           Reset Password
@@ -186,10 +174,10 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
         </Typography>
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            marginTop: "100px",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            marginTop: '100px',
           }}
         >
           <InputField
@@ -210,51 +198,51 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
           />
 
           {errors.length > 0 && (
-            <Box sx={{ maxWidth: "554px", marginTop: "10px", width: "100%" }}>
+            <Box sx={{ maxWidth: '554px', marginTop: '10px', width: '100%' }}>
               <Error messages={errors} />
             </Box>
           )}
           <Button
             variant="contained"
             sx={{
-              margin: "30px 0px",
-              padding: "15px 20px",
-              height: "54px",
-              width: "100%",
-              fontSize: "16px",
-              borderRadius: "40px",
-              textTransform: "none",
+              margin: '30px 0px',
+              padding: '15px 20px',
+              height: '54px',
+              width: '100%',
+              fontSize: '16px',
+              borderRadius: '40px',
+              textTransform: 'none',
             }}
             onClick={handleSubmit}
             disabled={isButtonDisabled}
           >
-            Reset Password{" "}
+            Reset Password{' '}
             {isLoading && (
               <CircularProgress
                 size="16px"
                 sx={{
-                  marginLeft: "20px",
-                  color: "#FFF",
+                  marginLeft: '20px',
+                  color: '#FFF',
                 }}
               />
             )}
           </Button>
           <Box
             sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "100%",
-              marginTop: "15px",
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+              marginTop: '15px',
               fontWeight: 600,
             }}
           >
             <Link
               href="/login"
               sx={{
-                textDecoration: "none",
-                color: "#000",
-                "&:hover": { textDecoration: "underline" },
+                textDecoration: 'none',
+                color: '#000',
+                '&:hover': { textDecoration: 'underline' },
               }}
             >
               Back to Login
