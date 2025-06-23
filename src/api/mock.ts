@@ -3,6 +3,7 @@ import apiClient from './apiClient';
 
 export const setupMockApi = () => {
   const mock = new MockAdapter(apiClient);
+
   mock.onPost('/api/clients/registration/').reply(config => {
     return [
       200,
@@ -109,5 +110,96 @@ export const setupMockApi = () => {
     } else {
       return [400, { otp: ['Invalid OTP, please try again.'] }];
     }
+  });
+
+  mock.onGet(new RegExp('/api/platform-admin/subscription-plans/')).reply(() => {
+    console.log('Mocked get subscription plans request');
+
+    return [
+      200,
+      [
+        {
+          id: 1,
+          name: 'Monthly Basic',
+          price: '10',
+          billing_cycle: '010',
+          memo: 'Basic monthly plan',
+          created_at: '2025-06-01T10:00:00Z',
+          updated_at: '2025-06-10T12:00:00Z',
+        },
+        {
+          id: 2,
+          name: 'Monthly Pro',
+          price: '20',
+          billing_cycle: '010',
+          memo: 'Pro monthly plan',
+          created_at: '2025-06-01T11:00:00Z',
+          updated_at: '2025-06-10T13:00:00Z',
+        },
+        {
+          id: 3,
+          name: 'Monthly Enterprise',
+          price: '30',
+          billing_cycle: '010',
+          memo: 'Enterprise monthly plan',
+          created_at: '2025-06-01T12:00:00Z',
+          updated_at: '2025-06-10T14:00:00Z',
+        },
+        {
+          id: 4,
+          name: 'Quarterly Basic',
+          price: '25',
+          billing_cycle: '020',
+          memo: 'Basic quarterly plan',
+          created_at: '2025-06-01T10:00:00Z',
+          updated_at: '2025-06-10T12:00:00Z',
+        },
+        {
+          id: 5,
+          name: 'Quarterly Pro',
+          price: '50',
+          billing_cycle: '020',
+          memo: 'Pro quarterly plan',
+          created_at: '2025-06-01T11:00:00Z',
+          updated_at: '2025-06-10T13:00:00Z',
+        },
+        {
+          id: 6,
+          name: 'Quarterly Enterprise',
+          price: '75',
+          billing_cycle: '020',
+          memo: 'Enterprise quarterly plan',
+          created_at: '2025-06-01T12:00:00Z',
+          updated_at: '2025-06-10T14:00:00Z',
+        },
+        {
+          id: 7,
+          name: 'Yearly Basic',
+          price: '100',
+          billing_cycle: '030',
+          memo: 'Basic yearly plan',
+          created_at: '2025-06-01T10:00:00Z',
+          updated_at: '2025-06-10T12:00:00Z',
+        },
+        {
+          id: 8,
+          name: 'Yearly Pro',
+          price: '200',
+          billing_cycle: '030',
+          memo: 'Pro yearly plan',
+          created_at: '2025-06-01T11:00:00Z',
+          updated_at: '2025-06-10T13:00:00Z',
+        },
+        {
+          id: 9,
+          name: 'Yearly Enterprise',
+          price: '300',
+          billing_cycle: '030',
+          memo: 'Enterprise yearly plan',
+          created_at: '2025-06-01T12:00:00Z',
+          updated_at: '2025-06-10T14:00:00Z',
+        },
+      ],
+    ];
   });
 };

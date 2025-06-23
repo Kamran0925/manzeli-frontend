@@ -1,29 +1,22 @@
-import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Typography,
-  Button,
-  ToggleButton,
-  ToggleButtonGroup,
-  Snackbar,
-} from "@mui/material";
-import classNames from "classnames";
-import { useNavigate } from "react-router-dom";
-import MobileStepper from "@mui/material/MobileStepper";
-import LeftArrow from "../../../assets/icons/ui/LeftArrow";
-import PlanFeatures from "./PlanFeatures/PlanFeatures";
-import { useAuth } from "../../../context/AuthContext";
-import { formatErrorMessages } from "../../../utils/errorHelper";
-import { getSubscriptionPlans } from "../../../api/plans";
-import Error from "../../shared/Error/Error";
-import Loader from "../../shared/Loader/Loader";
-import { Plan } from "../../common/data/planTypes";
-import styles from "./Plans.module.css";
+import React, { useEffect, useState } from 'react';
+import { Box, Typography, Button, ToggleButton, ToggleButtonGroup, Snackbar } from '@mui/material';
+import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
+import MobileStepper from '@mui/material/MobileStepper';
+import LeftArrow from '../../../assets/icons/ui/LeftArrow';
+import PlanFeatures from './PlanFeatures/PlanFeatures';
+import { useAuth } from '../../../context/AuthContext';
+import { formatErrorMessages } from '../../../utils/errorHelper';
+import { getSubscriptionPlans } from '../../../api/plans';
+import Error from '../../shared/Error/Error';
+import Loader from '../../shared/Loader/Loader';
+import { Plan } from '../../common/data/planTypes';
+import styles from './Plans.module.css';
 
 export const BillingCycles: Record<string, string> = {
-  "010": "Monthly",
-  "020": "Quarterly",
-  "030": "Yearly",
+  '010': 'Monthly',
+  '020': 'Quarterly',
+  '030': 'Yearly',
 };
 
 interface PlansProps {
@@ -33,7 +26,7 @@ interface PlansProps {
 
 const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
   const { register } = useAuth();
-  const [planType, setPlanType] = useState("010");
+  const [planType, setPlanType] = useState('010');
   const [plans, setPlans] = useState<Plan[]>([]);
   const [error, setError] = useState<string[]>([]);
   const [isRegister, setIsRegister] = useState<boolean>(false);
@@ -42,13 +35,10 @@ const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/registration");
+    navigate('/registration');
   };
 
-  const handleChange = (
-    event: React.MouseEvent<HTMLElement>,
-    value: string,
-  ) => {
+  const handleChange = (event: React.MouseEvent<HTMLElement>, value: string) => {
     setPlanType(value);
     fetchPlans(value);
   };
@@ -58,14 +48,14 @@ const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
 
     try {
       const response = await register(planId);
-      console.log("Registration successful:", response);
+      console.log('Registration successful:', response);
       setIsRegister(true);
     } catch (err: any) {
       const errorMessages = formatErrorMessages(err.response?.data) || [
-        "Client registration failed!",
+        'Client registration failed!',
       ];
       setError(errorMessages);
-      console.error("Registration error:", err);
+      console.error('Registration error:', err);
     }
   };
 
@@ -82,15 +72,10 @@ const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
   const fetchPlans = async (planId: string) => {
     try {
       const fetchedPlans = await getSubscriptionPlans();
-      setPlans(
-        fetchedPlans
-          .filter((plan: Plan) => plan.billing_cycle === planId)
-          .slice(0, 3)
-          .reverse(),
-      );
+      setPlans(fetchedPlans.filter((plan: Plan) => plan.billing_cycle === planId).slice(0, 3));
     } catch (error) {
-      console.error("Error fetching subscription plans:", error);
-      setError(["Failed to fetch subscription plans"]);
+      console.error('Error fetching subscription plans:', error);
+      setError(['Failed to fetch subscription plans']);
     } finally {
       setLoading(false);
     }
@@ -98,7 +83,7 @@ const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
 
   useEffect(() => {
     setLoading(true);
-    fetchPlans("010");
+    fetchPlans('010');
   }, []);
 
   let content;
@@ -111,14 +96,14 @@ const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
         {error.length > 0 && (
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "center",
+              display: 'flex',
+              justifyContent: 'center',
             }}
           >
             <Error messages={error} />
           </Box>
         )}
-        {!error.includes("plan") && (
+        {!error.includes('plan') && (
           <Box className={styles.pricingContainer2}>
             {plans?.map((plan, index) => (
               <Box
@@ -126,29 +111,23 @@ const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
                 className={styles.pricingItem}
                 sx={{
                   backgroundColor:
-                    plan.name === "Company"
-                      ? "#001283"
-                      : "rgba(255, 255, 255, 0.50)",
+                    plan.name === 'Company' ? '#001283' : 'rgba(255, 255, 255, 0.50)',
                   boxShadow:
-                    plan.name === "Company"
-                      ? "0px 42px 34px 0px rgba(82, 67, 194, 0.3)"
-                      : "none",
+                    plan.name === 'Company' ? '0px 42px 34px 0px rgba(82, 67, 194, 0.3)' : 'none',
                 }}
               >
-                {plan.name === "Company" && (
-                  <Typography className={styles.popularTag}>
-                    MOST POPULAR
-                  </Typography>
+                {plan.name === 'Company' && (
+                  <Typography className={styles.popularTag}>MOST POPULAR</Typography>
                 )}
                 <Box
-                  sx={{ marginTop: plan.name === "Company" ? "0px" : "47px" }}
+                  sx={{ marginTop: plan.name === 'Company' ? '0px' : '47px' }}
                   className={styles.pricingFeature}
                 >
                   <Box className={styles.mainPricingTitle}>
                     <Typography
                       className={styles.price}
                       sx={{
-                        color: plan.name === "Company" ? "#FFFFFF" : "#001283",
+                        color: plan.name === 'Company' ? '#FFFFFF' : '#001283',
                       }}
                     >
                       ${plan.price}
@@ -156,7 +135,7 @@ const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
                     <Typography
                       className={styles.duration}
                       sx={{
-                        color: plan.name === "Company" ? "#FFFFFF" : "#848199",
+                        color: plan.name === 'Company' ? '#FFFFFF' : '#848199',
                       }}
                     >
                       /{BillingCycles[plan.billing_cycle]}
@@ -167,7 +146,7 @@ const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
                     <Typography
                       className={styles.planType}
                       sx={{
-                        color: plan.name === "Company" ? "#FFF" : "#001283",
+                        color: plan.name === 'Company' ? '#FFF' : '#001283',
                       }}
                     >
                       {plan.name}
@@ -175,7 +154,7 @@ const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
                     <Typography
                       className={styles.description}
                       sx={{
-                        color: plan.name === "Company" ? "#FFF" : "#848199",
+                        color: plan.name === 'Company' ? '#FFF' : '#848199',
                       }}
                     >
                       {plan.memo}
@@ -190,19 +169,18 @@ const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
                 <Box className={styles.btnContainer}>
                   <Button
                     sx={{
-                      color: plan.name === "Company" ? "#001283" : "#838199",
-                      backgroundColor:
-                        plan.name === "Company" ? "#FFF" : "#E5E3F6",
+                      color: plan.name === 'Company' ? '#001283' : '#838199',
+                      backgroundColor: plan.name === 'Company' ? '#FFF' : '#E5E3F6',
                       width: {
-                        xs: "100%",
-                        md: "207px",
+                        xs: '100%',
+                        md: '207px',
                       },
-                      opacity: plan.name === "Company" ? "1" : "0.5",
-                      "&:hover": {
-                        color: "#FFF",
-                        backgroundColor: "#001283",
-                        outline: "2px solid white",
-                        opacity: "1",
+                      opacity: plan.name === 'Company' ? '1' : '0.5',
+                      '&:hover': {
+                        color: '#FFF',
+                        backgroundColor: '#001283',
+                        outline: '2px solid white',
+                        opacity: '1',
                       },
                     }}
                     className={styles.planBtn}
@@ -249,13 +227,13 @@ const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
             autoHideDuration={3000}
             onClose={() => {
               setIsRegister(false);
-              navigate("/login");
+              navigate('/login');
             }}
             message="The client has been registered successfully"
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
             sx={{
-              "& .css-73yezh-MuiPaper-root-MuiSnackbarContent-root": {
-                backgroundColor: "#001283",
+              '& .css-73yezh-MuiPaper-root-MuiSnackbarContent-root': {
+                backgroundColor: '#001283',
               },
             }}
           />
@@ -265,13 +243,9 @@ const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
             </Typography>
 
             <Box className={styles.align}>
-              <Typography
-                variant="body1"
-                align="right"
-                className={styles.plansText}
-              >
-                Whether your time-saving automation needs are large or small,
-                we’re here to help you scale.
+              <Typography variant="body1" align="right" className={styles.plansText}>
+                Whether your time-saving automation needs are large or small, we’re here to help you
+                scale.
               </Typography>
               <ToggleButtonGroup
                 value={planType}
@@ -282,7 +256,7 @@ const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
                 <ToggleButton
                   value="010"
                   className={classNames(styles.btn, {
-                    [styles.activeButton]: planType === "010",
+                    [styles.activeButton]: planType === '010',
                   })}
                 >
                   MONTHLY
@@ -290,7 +264,7 @@ const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
                 <ToggleButton
                   value="020"
                   className={classNames(styles.btn, {
-                    [styles.activeButton]: planType === "020",
+                    [styles.activeButton]: planType === '020',
                   })}
                 >
                   QUARTERLY
@@ -298,7 +272,7 @@ const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
                 <ToggleButton
                   value="030"
                   className={classNames(styles.btn, {
-                    [styles.activeButton]: planType === "030",
+                    [styles.activeButton]: planType === '030',
                   })}
                 >
                   YEARLY
