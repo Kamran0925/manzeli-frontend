@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface ApartmentIconProps {
   width?: number;
@@ -6,11 +6,7 @@ interface ApartmentIconProps {
   fill?: string;
 }
 
-const Apartment: React.FC<ApartmentIconProps> = ({
-  width = 25,
-  height = 25,
-  fill = "#001283",
-}) => (
+const Apartment: React.FC<ApartmentIconProps> = ({ width = 25, height = 25, fill = '#000' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}

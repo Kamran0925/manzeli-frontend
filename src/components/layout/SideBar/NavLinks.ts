@@ -3,6 +3,7 @@ import Home from '../../../assets/icons/ui/Home';
 import Tenant from '../../../assets/icons/ui/Tenant';
 import Plan from '../../../assets/icons/ui/Plan';
 import Settings from '../../../assets/icons/ui/Settings';
+import Apartment from '../../../assets/icons/ui/Apartment';
 
 export const NAV_LINKS = [
   {
@@ -14,6 +15,11 @@ export const NAV_LINKS = [
     route: '/property/listings',
     icon: Home,
     label: 'Properties',
+  },
+  {
+    route: '/units/apartment-building',
+    icon: Apartment,
+    label: 'Apartment Building',
   },
   {
     route: '/tenancy',

@@ -1,22 +1,22 @@
-import React from "react";
-import { Typography, Box } from "@mui/material";
-import MatrixIcon from "../../../assets/icons/ui/Matrix";
-import styles from "./PrimarySection.module.css";
+import React from 'react';
+import { Typography, Box } from '@mui/material';
+import MatrixIcon from '../../../assets/icons/ui/Matrix';
+import styles from './PrimarySection.module.css';
 
 const PrimarySection = () => {
   return (
     <>
       <Box className={styles.box}>
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: 'flex' }}>
           <Box className={styles.box1}>
             <Typography
               sx={{
-                fontFamily: "Gayathri, sans-serif",
-                fontStyle: "normal",
+                fontFamily: 'Gayathri, sans-serif',
+                fontStyle: 'normal',
                 fontWeight: 700,
-                fontSize: "96px",
-                lineHeight: "117px",
-                color: "#00DAF7",
+                fontSize: '96px',
+                lineHeight: '117px',
+                color: '#00DAF7',
               }}
             >
               “
@@ -26,24 +26,26 @@ const PrimarySection = () => {
           <Typography
             className={styles.content}
             sx={{
-              fontFamily: "Kaisei HarunoUmi, sans-serif",
-              fontStyle: "normal",
+              fontFamily: 'Kaisei HarunoUmi, sans-serif',
+              fontStyle: 'normal',
               fontWeight: 700,
               fontSize: {
-                xs: "20px",
-                sm: "30px",
-                md: "40px",
+                xs: '20px',
+                sm: '30px',
+                md: '40px',
               },
               lineHeight: {
-                xs: "40px",
-                sm: "50px",
-                md: "58px",
+                xs: '40px',
+                sm: 'normal',
+                md: 'normal',
               },
-              color: "#FFFFFF",
-              textAlign: "left",
+              color: '#FFFFFF',
+              textAlign: 'left',
               padding: {
-                xs: "10px 0px",
+                xs: '10px 0px',
               },
+              paddingTop: '50px !important',
+              paddingLeft: '20px !important',
             }}
           >
             Effortlessly manage your rental properties and grow your business.

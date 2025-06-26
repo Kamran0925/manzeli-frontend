@@ -1,17 +1,10 @@
-import {
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Box,
-} from "@mui/material";
-import classNames from "classnames";
-import { useTheme } from "@mui/material/styles";
-import { NAV_LINKS } from "./NavLinks";
-import { Link } from "react-router-dom";
+import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Box } from '@mui/material';
+import classNames from 'classnames';
+import { useTheme } from '@mui/material/styles';
+import { NAV_LINKS } from './NavLinks';
+import { Link } from 'react-router-dom';
 
-import styles from "./SideBar.module.css";
+import styles from './SideBar.module.css';
 
 const SideBar = () => {
   const theme = useTheme();
@@ -30,9 +23,9 @@ const SideBar = () => {
             <Link
               to={link.route}
               style={{
-                textDecoration: "none",
-                color: "inherit",
-                width: "100%",
+                textDecoration: 'none',
+                color: 'inherit',
+                width: '100%',
               }}
             >
               <ListItemButton
