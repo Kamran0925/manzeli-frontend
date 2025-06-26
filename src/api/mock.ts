@@ -202,4 +202,151 @@ export const setupMockApi = () => {
       ],
     ];
   });
+
+  const properties = [
+    {
+      id: 1,
+      name: 'Sunset Villa',
+      type: '010',
+      type_name: 'Residential',
+      contract_type: '010',
+      contract_type_name: 'Investment',
+      local_authority_id: 'LA001',
+      street: '123 Ocean Drive',
+      city: 'Miami',
+      country: 'USA',
+      latitude: 25.7617,
+      longitude: -80.1918,
+      gps_coordinates: [25.7617, -80.1918],
+      units: 3,
+      created_at: '2024-12-01T12:00:00Z',
+      amenities: [
+        { id: 1, name: 'Pool' },
+        { id: 2, name: 'Gym' },
+      ],
+      images: [],
+    },
+    {
+      id: 2,
+      name: 'Tech Park Tower',
+      type: '020',
+      type_name: 'Commercial',
+      contract_type: '020',
+      contract_type_name: 'Management',
+      local_authority_id: 'LA002',
+      street: '456 Innovation Blvd',
+      city: 'San Francisco',
+      country: 'USA',
+      latitude: 37.7749,
+      longitude: -122.4194,
+      gps_coordinates: [37.7749, -122.4194],
+      units: 10,
+      created_at: '2024-11-21T15:30:00Z',
+      amenities: [{ id: 3, name: 'Parking' }],
+      images: [],
+    },
+    {
+      id: 3,
+      name: 'Green Gardens',
+      type: '010',
+      type_name: 'Residential',
+      contract_type: '030',
+      contract_type_name: 'Self',
+      local_authority_id: 'LA003',
+      street: '789 Eco Lane',
+      city: 'Portland',
+      country: 'USA',
+      latitude: 45.5051,
+      longitude: -122.675,
+      gps_coordinates: [45.5051, -122.675],
+      units: 2,
+      created_at: '2024-10-10T08:45:00Z',
+      amenities: [{ id: 4, name: 'Garden' }],
+      images: [],
+    },
+    {
+      id: 4,
+      name: 'Skyline Offices',
+      type: '020',
+      type_name: 'Commercial',
+      contract_type: '010',
+      contract_type_name: 'Investment',
+      local_authority_id: 'LA004',
+      street: '321 Metro Ave',
+      city: 'Chicago',
+      country: 'USA',
+      latitude: 41.8781,
+      longitude: -87.6298,
+      gps_coordinates: [41.8781, -87.6298],
+      units: 5,
+      created_at: '2024-09-05T14:00:00Z',
+      amenities: [{ id: 5, name: 'Elevator' }],
+      images: [],
+    },
+    {
+      id: 5,
+      name: 'Lakeside Retreat',
+      type: '010',
+      type_name: 'Residential',
+      contract_type: '020',
+      contract_type_name: 'Management',
+      local_authority_id: 'LA005',
+      street: '654 Lakeview Road',
+      city: 'Austin',
+      country: 'USA',
+      latitude: 30.2672,
+      longitude: -97.7431,
+      gps_coordinates: [30.2672, -97.7431],
+      units: 4,
+      created_at: '2024-08-15T09:30:00Z',
+      amenities: [{ id: 6, name: 'WiFi' }],
+      images: [],
+    },
+  ];
+
+  mock.onGet('/api/property-management/properties/').reply(() => {
+    return [200, properties];
+  });
+
+  mock.onGet(/\/api\/property-management\/properties\/\d+\//).reply(config => {
+    const id = config.url?.split('/').filter(Boolean).pop();
+    const property = properties.find(p => p.id === Number(id));
+    if (property) {
+      return [200, property];
+    } else {
+      return [404, { message: 'Property not found' }];
+    }
+  });
+
+  mock.onPost('/api/property-management/properties/').reply(config => {
+    const newProperty = JSON.parse(config.data);
+    const newId = properties.length + 1;
+
+    const gps_coordinates = newProperty.gps_coordinates || [
+      newProperty.latitude,
+      newProperty.longitude,
+    ];
+
+    const createdProperty = {
+      ...newProperty,
+      id: newId,
+      gps_coordinates,
+      created_at: new Date().toISOString(),
+    };
+
+    properties.push(createdProperty);
+
+    return [201, createdProperty];
+  });
+
+  mock.onDelete(/\/api\/property-management\/properties\/\d+\//).reply(config => {
+    const id = config.url?.split('/').filter(Boolean).pop();
+    const index = properties.findIndex(p => p.id === Number(id));
+    if (index !== -1) {
+      properties.splice(index, 1);
+      return [204];
+    } else {
+      return [404, { message: 'Property not found' }];
+    }
+  });
 };
