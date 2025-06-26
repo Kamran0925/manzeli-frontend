@@ -17,7 +17,7 @@ export const NAV_LINKS = [
     label: 'Properties',
   },
   {
-    route: '/property/apartment-building',
+    route: '/units/apartment-building',
     icon: Apartment,
     label: 'Apartment Building',
   },
