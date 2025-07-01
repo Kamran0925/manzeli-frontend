@@ -14,6 +14,7 @@ import Plans from '../components/registration/Plans/Plans';
 import { useAuth } from '../context/AuthContext';
 import IsAuth from '../hoc/isAuth';
 import Settings from '../components/layout/Main/Settings/Settings';
+import Dashboard from '../components/registration/Dashboard/Dashboard';
 
 export const AppRouter = () => {
   const { isAuthenticated } = useAuth();
@@ -103,6 +104,19 @@ export const AppRouter = () => {
         >
           <Route element={<Layout />}>
             <Route path="" element={<Settings />} />
+          </Route>
+        </Route>
+
+        <Route
+          path="dashboard/*"
+          element={
+            <IsAuth>
+              <ProtectedRoute />
+            </IsAuth>
+          }
+        >
+          <Route element={<Layout />}>
+            <Route path="" element={<Dashboard />} />
           </Route>
         </Route>
 

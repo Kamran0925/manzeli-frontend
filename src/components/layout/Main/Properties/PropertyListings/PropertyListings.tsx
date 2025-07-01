@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { Box, Typography } from "@mui/material";
-import Header from "../../../../shared/Header/Header";
-import PropertyViewToggle from "../PropertyViewToggle/PropertyViewToggle";
-import PropertySubtitleBar from "../PropertySubtitleBar/PropertySubtitleBar";
-import Pagination from "../../../../shared/Pagination/Pagination";
-import { PropertyCardItem } from "./PropertyCardItem/PropertyCardItem";
-import { PropertyListItem } from "./PropertyListItem/PropertyListItem";
-import SortFilter from "../../../../shared/SortFilter/SortFilter";
-import ActionModal from "../../../../shared/ActionModal/ActionModal";
-import Pencil from "../../../../../assets/icons/ui/Pencil";
-import Trash from "../../../../../assets/icons/ui/Trash";
-import { deleteProperty, getProperties } from "../../../../../api/property";
-import { Property } from "../Property";
-import Loader from "../../../../shared/Loader/Loader";
-import CSVModal from "../../../../shared/CSVModal/CSVModal";
-import { useAuth } from "../../../../../context/AuthContext";
-import styles from "./PropertyListings.module.css";
+import React, { useEffect, useState } from 'react';
+import { Box, Typography } from '@mui/material';
+import Header from '../../../../shared/Header/Header';
+import PropertyViewToggle from '../PropertyViewToggle/PropertyViewToggle';
+import PropertySubtitleBar from '../PropertySubtitleBar/PropertySubtitleBar';
+import Pagination from '../../../../shared/Pagination/Pagination';
+import { PropertyCardItem } from './PropertyCardItem/PropertyCardItem';
+import { PropertyListItem } from './PropertyListItem/PropertyListItem';
+import SortFilter from '../../../../shared/SortFilter/SortFilter';
+import ActionModal from '../../../../shared/ActionModal/ActionModal';
+import Pencil from '../../../../../assets/icons/ui/Pencil';
+import Trash from '../../../../../assets/icons/ui/Trash';
+import { deleteProperty, getProperties } from '../../../../../api/property';
+import { Property } from '../Property';
+import Loader from '../../../../shared/Loader/Loader';
+import CSVModal from '../../../../shared/CSVModal/CSVModal';
+import { useAuth } from '../../../../../context/AuthContext';
+import styles from './PropertyListings.module.css';
 
 interface Action {
   icon: React.ReactNode;
@@ -25,7 +25,7 @@ interface Action {
 }
 
 const PropertyListings = () => {
-  const [sortOption, setSortOption] = useState("Default");
+  const [sortOption, setSortOption] = useState('Default');
   const [property, setProperty] = useState<number | null>(null);
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
@@ -35,8 +35,8 @@ const PropertyListings = () => {
   const { apiAuthWrapper } = useAuth();
 
   const sortOptions = [
-    { value: "Default", label: "Default" },
-    { value: "Newest", label: "Newest" },
+    { value: 'Default', label: 'Default' },
+    { value: 'Newest', label: 'Newest' },
   ];
 
   const handleSortChange = (value: string) => {
@@ -62,7 +62,7 @@ const PropertyListings = () => {
       setProperties(data);
       setLoading(false);
     } catch (error) {
-      console.error("Failed to fetch properties:", error);
+      console.error('Failed to fetch properties:', error);
     }
   };
 
@@ -73,24 +73,21 @@ const PropertyListings = () => {
   const PropertyActions: Action[] = [
     {
       icon: <Pencil />,
-      optionText: "Edit",
-      routeLink: "/property/edit",
+      optionText: 'Edit',
+      routeLink: '/property/edit',
     },
     {
       icon: <Trash />,
-      optionText: "Delete",
-      routeLink: "/property/delete",
+      optionText: 'Delete',
+      routeLink: '/property/delete',
       onClick: showModal,
     },
   ];
 
   return (
     <>
-      <Header />
-      <PropertySubtitleBar
-        title="Property List"
-        showModal={() => setCsvModal(true)}
-      />
+      <Header title="Manage properties" />
+      <PropertySubtitleBar title="Property List" showModal={() => setCsvModal(true)} />
 
       <Box className={styles.filterBar}>
         <Pagination
