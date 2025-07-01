@@ -10,7 +10,7 @@ import { AppRouter } from './routes/AppRouter';
 
 // Async init
 const prepare = async () => {
-  if (process.env.NEXT_PUBLIC_USE_MOCK === 'true') {
+  if (process.env.REACT_APP_USE_MOCK === 'true') {
     const { setupMockApi } = await import('./api/mock');
     setupMockApi();
   }
