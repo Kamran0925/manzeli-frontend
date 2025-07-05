@@ -1,28 +1,91 @@
-## Versions
+# 🏘️ Manzeli – Real Estate Management Web App
 
-| Tech      | Version|
-| --------- | ------ |
-|**yarn**   |1.22.22 |
-|**nodeJs** |20.16.0 |
+**Manzeli** is a modern, responsive real estate management web application built using **React**, **Material UI**, and **Context API**. It allows both users and companies to manage properties, tenants, subscription plans, and more — all with a secure and user-friendly experience.
 
+![Signup Page](screenshots/signup.png)
 
-## Available Script
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
+- 🏠 Property Listing & Management  
+- 👥 Tenant Management  
+- 💳 Subscription & Plan Handling  
+- 🔐 Secure Authentication System  
+- 🌐 Google Maps Integration  
+- 📅 Date Pickers & Form Handling  
+- 📱 Responsive UI with Material UI Components  
+- ⚙️ API Integration via Axios  
+- 🧠 Global State Management using Context API  
 
-### `yarn`
-Install yarn and run `yarn` to set up all the dependencies.
+---
 
+## 🧰 Tech Stack
 
-### `yarn start`
+- **React 18**
+- **Material UI 5**
+- **React Router DOM 6**
+- **Context API**
+- **Axios**
+- **Google Maps API**
+- **Date-FNS**
+- **React Datepicker**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
+## 📂 Project Structure
 
-## Learn More
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+manzeli-frontend/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── context/
+│   ├── pages/
+│   ├── services/
+│   └── utils/
+└── screenshots/signup.png
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+````
+
+---
+
+## 📸 Screenshots
+
+![Signup](screenshots/signup.png)
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/Kamran0925/manzeli-frontend.git
+cd manzeli-frontend
+npm install
+npm start
+````
+
+---
+
+## 🧪 Testing
+
+```bash
+npm test
+```
+
+---
+
+## 🛠️ Future Improvements
+
+* Dashboard analytics
+* Admin role and access controls
+* Mobile-first UI refinements
+* Real-time chat or notifications
+
+---
+
+## 📬 Contact
+
+Built by [Kamran Rizwan](https://www.linkedin.com/in/kamran-rizwan) – open to collaboration and freelance opportunities!
