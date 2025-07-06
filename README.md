@@ -50,10 +50,6 @@ manzeli-frontend/
 
 ````
 
----
-
----
-
 ## 📦 Installation
 
 ```bash
