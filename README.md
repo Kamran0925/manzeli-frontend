@@ -52,10 +52,6 @@ manzeli-frontend/
 
 ---
 
-## 📸 Screenshots
-
-![Signup](screenshots/signup.png)
-
 ---
 
 ## 📦 Installation
