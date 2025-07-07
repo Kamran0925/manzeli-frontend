@@ -20,6 +20,22 @@
 
 ---
 
+## 🖼️ Screenshots
+
+**Landing Page**  
+![Landing Page](screenshots/landing-page.png)
+
+**Account Selection Page**  
+![Account Selection](screenshots/account-selection-page.png)
+
+**Property Listings Page**  
+![Property Listings](screenshots/property-listings-page.png)
+
+**Tenancy Details Page**  
+![Tenancy Details](screenshots/tenancy-details-page.png)
+
+---
+
 ## 🧰 Tech Stack
 
 - **React 18**
@@ -46,17 +62,24 @@ manzeli-frontend/
 │   ├── pages/
 │   ├── services/
 │   └── utils/
-└── screenshots/signup.png
+└── screenshots/
+├── signup.png
+├── landing-page.png
+├── account-selection-page.png
+├── property-listings-page.png
+└── tenancy-details-page.png
 
 ````
+
+---
 
 ## 📦 Installation
 
 ```bash
 git clone https://github.com/Kamran0925/manzeli-frontend.git
 cd manzeli-frontend
-npm install
-npm start
+yarn install
+yarn start
 ````
 
 ---
@@ -64,17 +87,17 @@ npm start
 ## 🧪 Testing
 
 ```bash
-npm test
+yarn test
 ```
 
 ---
 
 ## 🛠️ Future Improvements
 
-* Dashboard analytics
-* Admin role and access controls
-* Mobile-first UI refinements
-* Real-time chat or notifications
+* 📊 Dashboard analytics
+* 🛡️ Admin role and access controls
+* 📱 Mobile-first UI refinements
+* 💬 Real-time chat or notifications
 
 ---
 
