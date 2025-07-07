@@ -87,7 +87,7 @@ npm start
 ## 🧪 Testing
 
 ```bash
-yarn test
+npm test
 ```
 
 ---
