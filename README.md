@@ -78,8 +78,8 @@ manzeli-frontend/
 ```bash
 git clone https://github.com/Kamran0925/manzeli-frontend.git
 cd manzeli-frontend
-yarn install
-yarn start
+npm install
+npm start
 ````
 
 ---
