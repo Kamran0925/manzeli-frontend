@@ -1,45 +1,44 @@
-import { useEffect, useState } from "react";
-import { Typography, Box, Link as MuiLink, Button } from "@mui/material";
-import InputField from "../../shared/InputField/InputField";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { Typography, Box, Link as MuiLink, Button } from '@mui/material';
+import InputField from '../../shared/InputField/InputField';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   collectFormErrors,
   displayError,
   FormFieldState,
   validate,
-} from "../../../utils/validationHelpers";
-import Error from "../../shared/Error/Error";
-import { useAuth } from "../../../context/AuthContext";
-import { formatErrorMessages } from "../../../utils/errorHelper";
-import styles from "./Login.module.css";
+} from '../../../utils/validationHelpers';
+import Error from '../../shared/Error/Error';
+import { useAuth } from '../../../context/AuthContext';
+import { formatErrorMessages } from '../../../utils/errorHelper';
+import styles from './Login.module.css';
 
 const validateField = (name: string, value: string) => {
   switch (name) {
-    case "email":
-      return validate("email", value).errorMessage;
-    case "password":
-      return validate("password", value).errorMessage;
+    case 'email':
+      return validate('email', value).errorMessage;
+    case 'password':
+      return validate('password', value).errorMessage;
     default:
-      return "";
+      return '';
   }
 };
 
 const Login = () => {
   const initialFormState = {
     email: {
-      value: "test@example.com",
-      errorMessage: "",
+      value: 'demo@example.com',
+      errorMessage: '',
     },
     password: {
-      value: "test1234",
-      errorMessage: "",
+      value: '12345678',
+      errorMessage: '',
     },
   };
   const { login, isAuthenticated } = useAuth();
   const [loginError, setLoginError] = useState<string[]>([]);
 
-  const [formState, setFormState] =
-    useState<FormFieldState<string>>(initialFormState);
+  const [formState, setFormState] = useState<FormFieldState<string>>(initialFormState);
 
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -47,13 +46,15 @@ const Login = () => {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     name: string,
+    disabled = true,
   ) => {
+    if (disabled) return;
     const { value } = e.target;
 
     setFormState(prevState => {
       let errorMessage = validateField(name, value);
 
-      if (errorMessage && name === "password") {
+      if (errorMessage && name === 'password') {
         errorMessage = displayError(name, errorMessage);
       }
 
@@ -73,15 +74,12 @@ const Login = () => {
   };
 
   const handleSubmit = async () => {
-    const emailError = validate("email", formState.email.value).errorMessage;
+    const emailError = validate('email', formState.email.value).errorMessage;
 
-    let passwordError = validate(
-      "password",
-      formState.password.value,
-    ).errorMessage;
+    let passwordError = validate('password', formState.password.value).errorMessage;
 
     if (passwordError) {
-      passwordError = displayError("password", passwordError);
+      passwordError = displayError('password', passwordError);
     }
 
     if (emailError || passwordError) {
@@ -105,7 +103,7 @@ const Login = () => {
         password: formState.password.value,
       });
       console.log(response);
-      navigate("/property/listings");
+      navigate('/property/listings');
     } catch (err: any) {
       setLoginError(formatErrorMessages(err.response.data));
     }
@@ -114,22 +112,20 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (formState.email.value === "" && formState.password.value === "") {
+    if (formState.email.value === '' && formState.password.value === '') {
       return;
     }
 
     const emailError =
-      formState.email.value !== ""
-        ? validate("email", formState.email.value).errorMessage
-        : "";
+      formState.email.value !== '' ? validate('email', formState.email.value).errorMessage : '';
 
     let passwordError =
-      formState.password.value !== ""
-        ? validate("password", formState.password.value).errorMessage
-        : "";
+      formState.password.value !== ''
+        ? validate('password', formState.password.value).errorMessage
+        : '';
 
     if (passwordError) {
-      passwordError = displayError("password", passwordError);
+      passwordError = displayError('password', passwordError);
     }
 
     setIsButtonDisabled(!!(emailError || passwordError));
@@ -137,7 +133,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/property/listings");
+      navigate('/property/listings');
     }
   }, [isAuthenticated, navigate]);
 
@@ -147,27 +143,27 @@ const Login = () => {
         <Typography
           variant="h4"
           sx={{
-            color: "#040308",
-            fontFamily: "Poppins, sans-serif",
-            fontSize: "32px",
-            fontStyle: "normal",
+            color: '#040308',
+            fontFamily: 'Poppins, sans-serif',
+            fontSize: '32px',
+            fontStyle: 'normal',
             fontWeight: 700,
-            lineHeight: "normal",
+            lineHeight: 'normal',
           }}
         >
           Welcome Back
         </Typography>
 
         <Typography variant="h4" fontWeight={400}>
-          Don’t have an account?{" "}
+          Don’t have an account?{' '}
           <MuiLink
             component={Link}
             to="/registration"
             color="primary"
             sx={{
-              textDecoration: "none",
-              "&:hover": {
-                textDecoration: "underline",
+              textDecoration: 'none',
+              '&:hover': {
+                textDecoration: 'underline',
               },
             }}
           >
@@ -177,11 +173,11 @@ const Login = () => {
 
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            marginTop: "100px",
-            gap: "20px",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            marginTop: '100px',
+            gap: '20px',
           }}
         >
           <InputField
@@ -190,7 +186,7 @@ const Login = () => {
             placeholder="Email"
             value={formState.email.value}
             errorMessage={formState.email.errorMessage}
-            handleChange={e => handleInputChange(e, "email")}
+            handleChange={e => handleInputChange(e, 'email')}
           />
           <InputField
             type="password"
@@ -198,32 +194,29 @@ const Login = () => {
             placeholder="Password"
             value={formState.password.value}
             errorMessage={formState.password.errorMessage}
-            handleChange={e => handleInputChange(e, "password")}
+            handleChange={e => handleInputChange(e, 'password')}
           />
-          {(collectFormErrors(formState).length > 0 ||
-            loginError.length > 0) && (
+          {(collectFormErrors(formState).length > 0 || loginError.length > 0) && (
             <Box
               sx={{
-                maxWidth: "554px",
-                width: "100%",
+                maxWidth: '554px',
+                width: '100%',
               }}
             >
-              <Error
-                messages={[...collectFormErrors(formState), ...loginError]}
-              />
+              <Error messages={[...collectFormErrors(formState), ...loginError]} />
             </Box>
           )}
           <MuiLink
             component={Link}
             to="/forgot-password"
             sx={{
-              color: "#001283",
-              fontSize: "14px",
+              color: '#001283',
+              fontSize: '14px',
               fontWeight: 400,
-              marginLeft: "auto",
-              textDecoration: "none",
-              "&:hover": {
-                textDecoration: "underline",
+              marginLeft: 'auto',
+              textDecoration: 'none',
+              '&:hover': {
+                textDecoration: 'underline',
               },
             }}
           >
@@ -234,14 +227,14 @@ const Login = () => {
         <Button
           variant="contained"
           sx={{
-            marginTop: "30px",
-            padding: "15px 20px",
-            height: "54px",
-            width: "100%",
-            borderRadius: "40px",
-            textTransform: "none",
-            "&:hover": {
-              cursor: "pointer",
+            marginTop: '30px',
+            padding: '15px 20px',
+            height: '54px',
+            width: '100%',
+            borderRadius: '40px',
+            textTransform: 'none',
+            '&:hover': {
+              cursor: 'pointer',
             },
           }}
           onClick={handleSubmit}
