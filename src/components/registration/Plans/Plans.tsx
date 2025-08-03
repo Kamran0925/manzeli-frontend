@@ -33,9 +33,8 @@ const Plans: React.FC<PlansProps> = ({ showStepper = true, customStyle }) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
-
   const handleClick = () => {
-    navigate('/registration');
+    navigate(-1);
   };
 
   const handleChange = (event: React.MouseEvent<HTMLElement>, value: string) => {

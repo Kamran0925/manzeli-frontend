@@ -1,5 +1,5 @@
 .dashboard {
-  padding: 40px;
+  padding: 40px 20px;
   width: calc(100% - 80px);
   min-height: 100vh;
   box-sizing: border-box;
@@ -8,10 +8,10 @@
 .heading {
   margin-bottom: 32px;
   text-align: center;
-  color: #231d4f;
-  font-family: 'Poppins', sans-serif;
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 700;
+  background: linear-gradient(to right, #001283, #0f52ba);
+  color: transparent;
 }
 
 .container {
@@ -25,14 +25,15 @@
 
 .statCard {
   padding: 24px;
+  min-width: 100px;
   text-align: center;
   border-radius: 16px;
   height: 100%;
   background-color: #ffffff;
-  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  cursor: pointer;
 }
 
 .statCard h4 {
@@ -52,8 +53,7 @@
   background: #ffffff;
   padding: 2rem;
   border-radius: 16px;
-  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.04);
-  margin-top: 3rem;
+  margin-top: 40px;
 }
 
 .chartTitle {
@@ -85,7 +85,6 @@
   flex-shrink: 0;
 }
 
-/* On larger screens, remove scroll and reset spacing */
 @media (min-width: 900px) {
   .barChart {
     overflow-x: unset;
@@ -112,7 +111,10 @@
   color: #8692a6;
 }
 
-/* =========== MOBILE =========== */
+.recentListings {
+  margin-top: 3rem;
+}
+
 @media (max-width: 600px) {
   .dashboard {
     padding: 20px;
@@ -152,7 +154,6 @@
   }
 }
 
-/* =========== TABLET =========== */
 @media (min-width: 601px) and (max-width: 900px) {
   .dashboard {
     padding: 30px;

@@ -1,15 +1,15 @@
-import { useState } from "react";
-import Header from "../../../../shared/Header/Header";
-import TenancySubtitleBar from "./TenancySubtitleBar/TenancySubtitleBar";
-import TenancyTable from "./TenancyTable/TenancyTable";
-import TenancyFilter from "./TenancyFilter/TenancyFilter";
+import { useState } from 'react';
+import Header from '../../../../shared/Header/Header';
+import TenancySubtitleBar from './TenancySubtitleBar/TenancySubtitleBar';
+import TenancyTable from './TenancyTable/TenancyTable';
+import TenancyFilter from './TenancyFilter/TenancyFilter';
 
 const TenancyLists = () => {
-  const [sortOption, setSortOption] = useState("Default");
+  const [sortOption, setSortOption] = useState('Default');
 
   const sortOptions = [
-    { value: "Default", label: "Default" },
-    { value: "Newest", label: "Newest" },
+    { value: 'Default', label: 'Default' },
+    { value: 'Newest', label: 'Newest' },
   ];
 
   const handleSortChange = (value: string) => {
@@ -18,14 +18,10 @@ const TenancyLists = () => {
 
   return (
     <>
-      <Header />
+      <Header title="Manage tenancy" />
       <TenancySubtitleBar title="Tenancy List" />
 
-      <TenancyFilter
-        options={sortOptions}
-        selectedValue={sortOption}
-        onChange={handleSortChange}
-      />
+      <TenancyFilter options={sortOptions} selectedValue={sortOption} onChange={handleSortChange} />
 
       <TenancyTable />
     </>

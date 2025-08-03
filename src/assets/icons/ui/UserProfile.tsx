@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface UserProfileProps {
   width?: number;
@@ -6,11 +6,7 @@ interface UserProfileProps {
   fill?: string;
 }
 
-const UserProfile: React.FC<UserProfileProps> = ({
-  width = 13,
-  height = 13,
-  fill = "#7F7F7F",
-}) => (
+const UserProfile: React.FC<UserProfileProps> = ({ width = 24, height = 24, fill = '#7F7F7F' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
