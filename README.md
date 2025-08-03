@@ -103,4 +103,4 @@ npm test
 
 ## 📬 Contact
 
-Built by [Kamran Rizwan](https://www.linkedin.com/in/kamran-rizwan) – open to collaboration and freelance opportunities!
+Built by [Kamran Rizwan](https://www.linkedin.com/in/kamran-rizwan) – open to collaboration and work opportunities!
