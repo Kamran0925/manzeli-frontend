@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Box,
   TextField,
@@ -9,14 +9,14 @@ import {
   Select,
   FormControlLabel,
   FormGroup,
-} from "@mui/material";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { Checkfield } from "../Checkfield/Checkfield";
-import { SelectChangeEvent } from "@mui/material/Select";
-import { PropertyFieldConfig } from "../../layout/Main/Properties/PropertyFormFields/PropertyFieldConfig";
-import styles from "./FormInput.module.css";
+} from '@mui/material';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { Checkfield } from '../Checkfield/Checkfield';
+import { SelectChangeEvent } from '@mui/material/Select';
+import { PropertyFieldConfig } from '../../layout/Main/Properties/PropertyFormFields/PropertyFieldConfig';
+import styles from './FormInput.module.css';
 
 interface FormInputProps {
   field: PropertyFieldConfig;
@@ -38,18 +38,16 @@ const FormInput: React.FC<FormInputProps> = props => {
   };
 
   const handleChange = (
-    event:
-      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-      | SelectChangeEvent<unknown>,
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<unknown>,
   ) => {
     onChange(event.target.value, field);
   };
 
   switch (field.fieldConfig.type) {
-    case "text":
-    case "number":
-    case "email":
-    case "password":
+    case 'text':
+    case 'number':
+    case 'email':
+    case 'password':
       inputElement = (
         <TextField
           type={field.fieldConfig.type}
@@ -60,33 +58,33 @@ const FormInput: React.FC<FormInputProps> = props => {
           className={styles.textField}
           inputProps={{
             style: {
-              color: "#7F7F7F",
-              fontFamily: "Poppins, sans-serif",
-              fontSize: "12px",
+              color: '#7F7F7F',
+              fontFamily: 'Poppins, sans-serif',
+              fontSize: '12px',
               fontWeight: 500,
-              lineHeight: "100%",
-              boxSizing: "border-box",
-              border: "none",
+              lineHeight: '100%',
+              boxSizing: 'border-box',
+              border: 'none',
             },
           }}
           sx={{
-            "& .MuiInputBase-root": {
-              padding: "0px 15px",
+            '& .MuiInputBase-root': {
+              padding: '0px 15px',
               margin: 0,
             },
-            "& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input": {
-              padding: "0px",
-              height: "32px",
+            '& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': {
+              padding: '0px',
+              height: '32px',
             },
-            "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
-              border: "1px solid #E3E3E3",
+            '& .css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+              border: '1px solid #E3E3E3',
             },
           }}
         />
       );
       break;
 
-    case "select":
+    case 'select':
       inputElement = (
         <FormControl fullWidth>
           <Select
@@ -96,40 +94,40 @@ const FormInput: React.FC<FormInputProps> = props => {
             MenuProps={{
               PaperProps: {
                 sx: {
-                  borderRadius: "10px",
-                  backgroundColor: "#FFF",
-                  boxShadow: "0px 4px 15.3px 0px rgba(0, 0, 0, 0.25)",
-                  padding: "20px 7px 5px",
+                  borderRadius: '10px',
+                  backgroundColor: '#FFF',
+                  boxShadow: '0px 4px 15.3px 0px rgba(0, 0, 0, 0.25)',
+                  padding: '20px 7px 5px',
                 },
               },
               MenuListProps: {
                 sx: {
-                  padding: "0",
+                  padding: '0',
                 },
               },
             }}
             sx={{
-              borderRadius: "6px",
-              border: "1px solid #E3E3E3",
-              height: "32px",
-              color: "#7F7F7F",
-              fontFamily: "Poppins",
-              fontSize: "12px",
-              fontStyle: "normal",
+              borderRadius: '6px',
+              border: '1px solid #E3E3E3',
+              height: '32px',
+              color: '#7F7F7F',
+              fontFamily: 'Poppins',
+              fontSize: '12px',
+              fontStyle: 'normal',
               fontWeight: 500,
-              lineHeight: "100%",
-              padding: "10px 15px 4px",
-              "& .MuiSelect-select": {
-                padding: "0 !important",
+              lineHeight: '100%',
+              padding: '10px 15px 4px',
+              '& .MuiSelect-select': {
+                padding: '0 !important',
               },
-              "& .css-yf8vq0-MuiSelect-nativeInput": {
-                padding: "0px !important",
+              '& .css-yf8vq0-MuiSelect-nativeInput': {
+                padding: '0px !important',
               },
-              "& .MuiSelect-nativeInput": {
-                border: "none !important",
+              '& .MuiSelect-nativeInput': {
+                border: 'none !important',
               },
-              "& .MuiOutlinedInput-notchedOutline": {
-                border: "none !important",
+              '& .MuiOutlinedInput-notchedOutline': {
+                border: 'none !important',
               },
             }}
           >
@@ -138,21 +136,21 @@ const FormInput: React.FC<FormInputProps> = props => {
                 key={option.label}
                 value={option.value}
                 sx={{
-                  color: "#7F7F7F",
-                  fontFamily: "Poppins",
-                  fontSize: "12px",
-                  fontStyle: "normal",
+                  color: '#7F7F7F',
+                  fontFamily: 'Poppins',
+                  fontSize: '12px',
+                  fontStyle: 'normal',
                   fontWeight: 500,
-                  lineHeight: "100%",
-                  display: "flex",
-                  padding: "10.552px 10px 9.448px 10px",
-                  alignItems: "center",
-                  alignSelf: "stretch",
-                  marginBottom: "8px",
-                  borderRadius: "5px",
-                  "&:hover": {
-                    color: "#3B4CB8",
-                    backgroundColor: "#EBEDF8",
+                  lineHeight: '100%',
+                  display: 'flex',
+                  padding: '10.552px 10px 9.448px 10px',
+                  alignItems: 'center',
+                  alignSelf: 'stretch',
+                  marginBottom: '8px',
+                  borderRadius: '5px',
+                  '&:hover': {
+                    color: '#3B4CB8',
+                    backgroundColor: '#EBEDF8',
                   },
                 }}
               >
@@ -164,23 +162,32 @@ const FormInput: React.FC<FormInputProps> = props => {
       );
       break;
 
-    case "date":
+    case 'date':
       inputElement = (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
-            sx={{
-              "& .css-1s267lr-MuiInputBase-root-MuiOutlinedInput-root": {
-                color: "#7F7F7F",
-                fontFamily: "Poppins, sans-serif",
-                fontSize: "12px",
-                fontWeight: 500,
-                lineHeight: "100%",
-                boxSizing: "border-box",
-                height: "32px",
-                padding: "0 15px",
-              },
-              "& .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input": {
-                padding: 0,
+            slots={{ textField: TextField }}
+            slotProps={{
+              textField: {
+                placeholder: field.fieldConfig.placeholder,
+                required: field.fieldConfig?.validation?.required,
+                sx: {
+                  '& .MuiInputBase-root': {
+                    padding: '0px 15px',
+                    height: '32px',
+                  },
+                  '& .MuiOutlinedInput-input': {
+                    padding: '0px',
+                    height: '32px',
+                    fontSize: '12px',
+                    fontFamily: 'Poppins, sans-serif',
+                    fontWeight: 500,
+                    color: '#7F7F7F',
+                  },
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    border: '1px solid #E3E3E3',
+                  },
+                },
               },
             }}
           />
@@ -188,25 +195,23 @@ const FormInput: React.FC<FormInputProps> = props => {
       );
       break;
 
-    case "checkbox":
+    case 'checkbox':
       inputElement = (
-        <FormGroup sx={{ display: "flex", flexDirection: "row", gap: "20px" }}>
+        <FormGroup sx={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
           {field.fieldConfig.options?.map((option, index) => (
             <FormControlLabel
               key={index}
               label={option.label}
-              control={
-                <Checkfield checked={value} onChange={e => handleChange(e)} />
-              }
+              control={<Checkfield checked={value} onChange={e => handleChange(e)} />}
               sx={{
                 margin: 0,
                 padding: 0,
-                "& .css-6pkdlj-MuiTypography-root": {
-                  color: "#7F7F7F",
-                  fontFamily: "Poppins",
-                  fontSize: "12px",
+                '& .css-6pkdlj-MuiTypography-root': {
+                  color: '#7F7F7F',
+                  fontFamily: 'Poppins',
+                  fontSize: '12px',
                   fontWeight: 400,
-                  lineHeight: "100%",
+                  lineHeight: '100%',
                 },
               }}
             />
@@ -224,8 +229,8 @@ const FormInput: React.FC<FormInputProps> = props => {
       className={styles.field}
       sx={{
         width: {
-          xs: field.fieldConfig.type === "checkbox" ? "100%" : "80%",
-          sm: field.fieldConfig.type === "checkbox" ? "100%" : "300px",
+          xs: field.fieldConfig.type === 'checkbox' ? '100%' : '80%',
+          sm: field.fieldConfig.type === 'checkbox' ? '100%' : '300px',
         },
         ...customStyle,
       }}
@@ -235,9 +240,7 @@ const FormInput: React.FC<FormInputProps> = props => {
           {field.fieldLabel}
         </InputLabel>
         {field.fieldConfig?.helpText && (
-          <Typography className={styles.smallText}>
-            ({field.fieldConfig?.helpText})
-          </Typography>
+          <Typography className={styles.smallText}>({field.fieldConfig?.helpText})</Typography>
         )}
         {field.fieldConfig?.link && (
           <Typography className={styles.link} onClick={handleLinkClick}>
